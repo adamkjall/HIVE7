@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
+
 import Page from 'compositions/Page';
 
 import H1 from 'components/UI/H1';
@@ -16,6 +18,7 @@ const LoginView = ({ location }) => {
     username: '',
     password: ''
   });
+
 
   if (isAuthenticated) {
     // If the user is already authenticated
@@ -30,16 +33,25 @@ const LoginView = ({ location }) => {
     }));
   };
 
-  const onSubmit = event => {
+  const onSubmit = async event => {
     event.preventDefault();
 
+    try {
+      await auth.signInWithEmailAndPassword(inputs.username, inputs.password);
+      setInputs({
+        username: '',
+        password: ''
+      });
+    } catch (error) {
+      console.log('Error while sign in', error.message);
+    }
     // You probably wish to implement some actions with the form values here :)
-    login({
-      user: {
-        username: inputs.username
-      },
-      token: 'a-fake-token-because-there-is-no-backend-to-call'
-    });
+    // login({
+    //   user: {
+    //     username: inputs.username
+    //   },
+    //   token: 'a-fake-token-because-there-is-no-backend-to-call'
+    // });
   };
 
   return (
@@ -68,8 +80,11 @@ const LoginView = ({ location }) => {
           value={inputs.password}
           onChange={event => onValueChange('password', event.target.value)}
         />
-        <Button nature="primary" stretch type="submit">
-          Submit
+        <Button nature="default" stretch type="submit">
+          SIGN IN WITH EMAIL
+        </Button>
+        <Button nature="primary" stretch onClick={signInWithGoogle}>
+          SIGN IN WITH GOOGLE
         </Button>
       </form>
     </Page>

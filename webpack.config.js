@@ -133,9 +133,9 @@ export default {
         'media-src': "'self'",
         'manifest-src': "'self'",
         'worker-src': "'self'",
-        'connect-src': "'self'",
+        'connect-src': ["'self'", 'https://www.googleapis.com/'],
         'object-src': "'none'",
-        'frame-src': "'self'",
+        'frame-src': ["'self'", 'https://hive7-fe724.firebaseapp.com/'],
         'base-uri': "'none'"
       },
       {

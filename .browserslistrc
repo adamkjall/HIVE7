@@ -1,0 +1,13 @@
+# Supported browsers: update it to your project needs!
+
+# browsers versions
+last 2 versions
+
+# minimal audience
+>= 1%
+
+# No target without official support or updates for the last 24 months
+not dead
+
+# we are not sorry
+not ie <= 11

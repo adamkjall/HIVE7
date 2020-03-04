@@ -1,0 +1,27 @@
+{
+  "editor.renderWhitespace": "none",
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": false,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "eslint.packageManager": "yarn",
+  "eslint.autoFixOnSave": true,
+  "prettier.eslintIntegration": true,
+  "prettier.stylelintIntegration": true,
+  "blankLine.keepOneEmptyLine": true,
+  "blankLine.triggerOnSave": true,
+  "blankLine.insertLineAfterBlock": true,
+  "blankLine.languageIds": [
+    "javascript",
+    "typescript",
+    "json",
+    "css",
+    "scss",
+    "html",
+    "jsx",
+    "mjs"
+  ],
+  "files.exclude": {
+    "node_modules/": true
+  }
+}

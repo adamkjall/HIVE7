@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>HIVE7</title>
+    <!--
+    IMPORTANT: make sure to carefully complete the following SEO and PWA meta tags
+    Or remove some if you do not wish to use them.
+    PS: the PWA specific manifests are in the assets subfolder.
+    You NEED TO update those with your project specific settings as well!
+    -->
+    <meta name="description" content="" />
+    <meta name="application-name" content="HIVE7" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="HIVE7" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+    <link rel="shortcut icon" href="/assets/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+    <link rel="manifest" href="/assets/manifest.webmanifest" />
+    <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#000000" />
+    <link rel="icon" type="image/png" sizes="228x228" href="/assets/coast-228x228.png" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="/assets/mstile-144x144.png" />
+    <meta name="msapplication-config" content="/assets/browserconfig.xml" />
+    <link rel="yandex-tableau-widget" href="/assets/yandex-browser-manifest.json" />
+    <!--
+    /**
+     * iOS splash screens: to be uncommented whenever we actually get the pictures
+     * <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)" href="/assets/apple-touch-startup-image-320x460.png">
+     * <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)" href="/assets/apple-touch-startup-image-640x920.png">
+     * <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="/assets/apple-touch-startup-image-640x1096.png">
+     * <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" href="/assets/apple-touch-startup-image-750x1294.png">
+     * <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3)" href="/assets/apple-touch-startup-image-1242x2148.png">
+     * <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)" href="/assets/apple-touch-startup-image-768x1004.png">
+     * <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" href="/assets/apple-touch-startup-image-1536x2008.png">
+     */
+    -->
+    <!-- Load critical CSS -->
+    <link rel="preload" as="style" crossorigin="anonymous" href="/assets/css/sanitize.min.css" />
+    <link rel="stylesheet" crossorigin="anonymous" href="/assets/css/sanitize.min.css" />
+    <!--
+    Load polyfill with features: ['default', 'es5', 'es6', 'es7', 'document.querySelector', 'fetch']
+    Update those according to your project needs: https://polyfill.io/v3/url-builder/
+    -->
+    <link rel="preconnect" crossorigin="anonymous" href="https://polyfill.io" />
+    <link
+      rel="preload"
+      as="script"
+      crossorigin="anonymous"
+      href="https://polyfill.io/v3/polyfill.min.js?features=default%2Ces5%2Ces6%2Ces7%2Cdocument.querySelector%2Cfetch"
+    />
+    <!-- Load boost script -->
+    <link rel="preload" as="script" crossorigin="anonymous" href="/assets/js/boost.min.js" />
+    <script async crossorigin="anonymous" src="/assets/js/boost.min.js"></script>
+    <!-- Preload fonts -->
+    <!--
+    <link rel="preload" as="font" crossorigin="anonymous" href="/assets/fonts/Roboto-Regular.woff2" type="font/woff2">
+    <link rel="preload" as="font" crossorigin="anonymous" href="/assets/fonts/Roboto-Medium.woff2" type="font/woff2">
+    -->
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      JavaScript seems disabled in your browser. We are deeply sorry to disturb your experience, but
+      this application require JavaScript to work properly. Please&nbsp;:&nbsp;<a
+        href="https://enable-javascript.com"
+        target="_blank"
+        rel="noreferrer"
+      >
+        enable JavaScript</a
+      >.
+    </noscript>
+    <script
+      crossorigin="anonymous"
+      src="https://polyfill.io/v3/polyfill.min.js?features=default%2Ces5%2Ces6%2Ces7%2Cdocument.querySelector%2Cfetch"
+    ></script>
+    <!--
+    # Defer scripts that are not essential
+    - Assume all JS to be non-essential and therefore deferred
+    - Should be a no-brainer since the project is set up to automatically insert these + defer them in your base HTML
+    - Go for async ("script async") for files that are least prioritized, for example analytics or interactions that happen post first-paint or after some time
+    # Example below:
+    <script defer src="/assets/js/site.js"></script>
+    <script async src="/assets/js/analytics.js"></script>
+    IMPORTANT: Never include any inline script!
+    It should be blocked by Content-Security-Policy as this is your only safeguard against XSS attacks
+    -->
+  </body>
+</html>

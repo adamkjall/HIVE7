@@ -34,7 +34,7 @@ const HomeView = () => {
   const [error, setError] = useState(null);
 
   // useEffect(() => {
-    //   const handleLoadingStatus = (data, error, isLoading) => {
+  //   const handleLoadingStatus = (data, error, isLoading) => {
   //     setData(data);
   //     setError(error);
   //     setIsLoading(isLoading);

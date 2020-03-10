@@ -4,6 +4,6 @@ export default React.createContext({
   isAuthenticated: false,
   login: () => {},
   logout: () => {},
-  token: undefined,
+  //token: undefined,
   user: undefined
 });

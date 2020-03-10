@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { LocalStorage as Storage } from 'helpers/storage';
+//import { LocalStorage as Storage } from 'helpers/storage';
 import AuthenticationContext from './context';
+
+import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
 export const TOKEN_STORAGE_KEY = 'authentication.token';
 
@@ -11,24 +13,48 @@ export const TOKEN_STORAGE_KEY = 'authentication.token';
  * Define authentication state, and persist required informations
  */
 const AuthenticationContextProvider = props => {
-  const [token, setToken] = useState(Storage.get(TOKEN_STORAGE_KEY));
+  //const [token, setToken] = useState(Storage.get(TOKEN_STORAGE_KEY));
   const [user, setUser] = useState({});
-  const [isAuthenticated, setIsAuthenticated] = useState(!!token);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const login = parameters => {
+  useEffect(() => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+        userRef.onSnapshot(snapshot => {
+          setUser({
+            id: snapshot.id,
+            ...snapshot.data()
+          });
+          setIsAuthenticated(true);
+        });
+      }
+    });
+
+    return () => unsubscribeFromAuth();
+  }, []);
+
+  const login = async (email, password) => {
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+    } catch (error) {
+      console.log('Error while sign in', error.message);
+    }
+
     // NOTE: do not save sensitive data such as user personal informations in localStorage!
-    Storage.set(TOKEN_STORAGE_KEY, parameters.token);
+    // Storage.set(TOKEN_STORAGE_KEY, parameters.token);
 
-    setIsAuthenticated(true);
-    setToken(parameters.token);
-    setUser(Object.assign({}, parameters.user, user));
+    // setIsAuthenticated(true);
+    // setToken(parameters.token);
+    // setUser(Object.assign({}, parameters.user, user));
   };
 
   const logout = () => {
-    Storage.remove(TOKEN_STORAGE_KEY);
+    auth.signOut();
+    //Storage.remove(TOKEN_STORAGE_KEY);
 
     setIsAuthenticated(false);
-    setToken(undefined);
+    //setToken(undefined);
     setUser(undefined);
   };
 
@@ -40,7 +66,7 @@ const AuthenticationContextProvider = props => {
         isAuthenticated,
         login,
         logout,
-        token,
+        //token,
         user
       }}
     />

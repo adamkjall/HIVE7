@@ -128,12 +128,16 @@ export default {
         'default-src': "'none'",
         'script-src': ["'self'", 'https://storage.googleapis.com/', 'https://polyfill.io/'],
         'style-src': ["'self'", "'unsafe-inline'"],
-        'img-src': ["'self'", 'data:'],
+        'img-src': ["'self'", 'data:', 'https://google.com/images'],
         'font-src': "'self'",
         'media-src': "'self'",
         'manifest-src': "'self'",
         'worker-src': "'self'",
-        'connect-src': ["'self'", 'https://www.googleapis.com/'],
+        'connect-src': [
+          "'self'",
+          'https://firestore.googleapis.com/',
+          'https://www.googleapis.com/'
+        ],
         'object-src': "'none'",
         'frame-src': ["'self'", 'https://hive7-fe724.firebaseapp.com/'],
         'base-uri': "'none'"

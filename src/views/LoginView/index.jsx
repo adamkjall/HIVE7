@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
-import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
+import { signInWithGoogle } from '../../firebase/firebase.utils';
 
 import Page from 'compositions/Page';
 
@@ -18,7 +18,6 @@ const LoginView = ({ location }) => {
     username: '',
     password: ''
   });
-
 
   if (isAuthenticated) {
     // If the user is already authenticated
@@ -36,15 +35,13 @@ const LoginView = ({ location }) => {
   const onSubmit = async event => {
     event.preventDefault();
 
-    try {
-      await auth.signInWithEmailAndPassword(inputs.username, inputs.password);
-      setInputs({
-        username: '',
-        password: ''
-      });
-    } catch (error) {
-      console.log('Error while sign in', error.message);
-    }
+    login(inputs.username, inputs.password);
+
+    setInputs({
+      username: '',
+      password: ''
+    });
+
     // You probably wish to implement some actions with the form values here :)
     // login({
     //   user: {

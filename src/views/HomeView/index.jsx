@@ -5,8 +5,14 @@ import Loader from 'compositions/Loader';
 import H1 from 'components/UI/H1';
 import Paragraph from 'components/UI/Paragraph';
 import Alert from 'components/UI/Alert';
+import PostForm from 'compositions/PostForm';
+import Feed from 'compositions/Feed';
 
 const HomePageContent = ({ error, isLoading }) => {
+  const posts = [
+    { displayName: 'Adam', title: 'Första post', text: 'Hello world! Min första post' },
+    { displayName: 'Åsa', title: 'Första post', text: 'Hello world! Min första post' }
+  ];
   if (isLoading) {
     return <Loader fullScreen />;
   } else if (error) {
@@ -15,14 +21,8 @@ const HomePageContent = ({ error, isLoading }) => {
     return (
       <React.Fragment>
         <H1>Home View</H1>
-        <Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-          sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
-        </Paragraph>
+        <Feed posts={posts} />
+        <PostForm />
       </React.Fragment>
     );
   }

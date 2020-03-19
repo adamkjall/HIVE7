@@ -12,13 +12,20 @@ const Feed = ({ posts }) => {
     <StyledFeed>
       <H1>Feed</H1>
       <StyledPostList>
-        {posts.map((post, index) => (
-          <StyledPost key={index}>
-            <H3 className="title">{post.title}</H3>
-            <p className="user">{post.displayName}</p>
-            <p className="post">{post.text}</p>
-          </StyledPost>
-        ))}
+        {posts.map((post, index) => {
+          const timeArr = post.createdAt.toLocaleTimeString().split(':');
+          const time = `${timeArr[0]}:${timeArr[1]}`;
+          return (
+            <StyledPost key={index}>
+              {console.log('post', post)}
+
+              <H3 className="title">{post.title}</H3>
+              <span>{`${time}  ${post.createdAt.toLocaleDateString()}`}</span>
+              <p className="user">{post.author}</p>
+              <p className="post">{post.text}</p>
+            </StyledPost>
+          );
+        })}
       </StyledPostList>
     </StyledFeed>
   );

@@ -51,4 +51,27 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+export const createPostDocument = async post => {
+  firestore
+    .collection('posts')
+    .add(post)
+    .then(docRef => console.log(`Post created with id: ${docRef.id}`))
+    .catch(error => console.log('Error creating post: ', error));
+};
+
+export const getAllPosts = async () => {
+  const posts = [];
+  const querySnapshot = await firestore.collection('posts').get();
+
+  querySnapshot.forEach(doc => {
+    const data = doc.data();
+    posts.push({
+      ...data,
+      createdAt: data.createdAt.toDate()
+    });
+  });
+
+  return posts;
+};
+
 export default firebase;

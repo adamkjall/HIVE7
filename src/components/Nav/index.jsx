@@ -10,7 +10,7 @@ const Nav = props => {
 
   return (
     <StyledNav {...props}>
-      <StyledNavLink as={RouterLink} to="/">
+      {/* <StyledNavLink as={RouterLink} to="/">
         Home
       </StyledNavLink>
       <StyledNavLink as={RouterLink} to="/form">
@@ -18,10 +18,19 @@ const Nav = props => {
       </StyledNavLink>
       <StyledNavLink as={RouterLink} to="/examples">
         Examples
+      </StyledNavLink> */}
+      <StyledNavLink as={RouterLink} to="/landing">
+        Landing
+      </StyledNavLink>
+      <StyledNavLink as={RouterLink} to="/create">
+        Starta ny
+      </StyledNavLink>
+      <StyledNavLink as={RouterLink} to="/feed">
+        Följ med
       </StyledNavLink>
       {isAuthenticated ? (
         <StyledNavLink as={RouterLink} to="/private">
-          Private
+          Logut
         </StyledNavLink>
       ) : (
         <StyledNavLink as={RouterLink} to="/login">

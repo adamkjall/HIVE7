@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
+import { createPostDocument } from '../../firebase/firebase.utils';
 
 import H1 from 'components/UI/H1';
 import Button from 'components/UI/Button';
@@ -11,23 +12,40 @@ import colors from 'tokens/colors.mjs';
 
 const PostForm = () => {
   const { user, isAuthenticated } = useContext(AuthenticationContext);
-  const [post, setPost] = useState({
+  const [inputs, setInputs] = useState({
     title: '',
     text: ''
   });
+
   const onValueChange = (name, value) => {
-    setPost(inputs => ({
+    setInputs(inputs => ({
       ...inputs,
       [name]: value
     }));
   };
 
-  const onSubmit = () => {
-    // callback
+  const onSubmit = event => {
+    event.preventDefault();
+
+    if (inputs.title.length && inputs.text.length) {
+      const post = {
+        createdAt: new Date(),
+        userId: user.id,
+        author: user.displayName,
+        title: inputs.title,
+        text: inputs.text
+      };
+      createPostDocument(post);
+
+      setInputs({
+        title: '',
+        text: ''
+      });
+    }
   };
 
   return (
-    <div className="post-form">
+    <div className="post-form" style={{ width: '100%' }}>
       {isAuthenticated ? (
         <>
           <H1>Formulär</H1>
@@ -38,13 +56,14 @@ const PostForm = () => {
               inline
               name="title"
               placeholder="title"
-              value={post.title}
+              value={inputs.title}
               onChange={event => onValueChange('title', event.target.value)}
             />
             <Textarea
               id="post-text"
               name="post-text"
-              value={post.text}
+              label="Add your post"
+              value={inputs.text}
               onChange={event => onValueChange('text', event.target.value)}
             />
             <Button nature="primary" stretch type="submit">

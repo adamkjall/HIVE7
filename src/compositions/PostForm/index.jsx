@@ -33,7 +33,8 @@ const PostForm = () => {
         userId: user.id,
         author: user.displayName,
         title: inputs.title,
-        text: inputs.text
+        text: inputs.text,
+        people: [user.id]
       };
       createPostDocument(post);
 

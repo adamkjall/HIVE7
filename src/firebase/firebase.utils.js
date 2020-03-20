@@ -52,11 +52,21 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 };
 
 export const createPostDocument = async post => {
+  const docRef = firestore.collection('posts').doc();
+
+  docRef
+    .set({ ...post, postId: docRef.id })
+    .then(() => console.log(`Post created with id: ${docRef.id}`))
+    .catch(error => console.log('Error creating post: ', error));
+};
+
+export const deletePostDocument = async postId => {
   firestore
     .collection('posts')
-    .add(post)
-    .then(docRef => console.log(`Post created with id: ${docRef.id}`))
-    .catch(error => console.log('Error creating post: ', error));
+    .doc(postId)
+    .delete()
+    .then(() => console.log('Deleted post: ', postId))
+    .catch(error => console.log('Error while deleting post: ', error));
 };
 
 export const getAllPosts = async () => {
@@ -65,13 +75,52 @@ export const getAllPosts = async () => {
 
   querySnapshot.forEach(doc => {
     const data = doc.data();
-    posts.push({
-      ...data,
-      createdAt: data.createdAt.toDate()
-    });
+    posts.push(data);
   });
 
   return posts;
+};
+
+export const bookAWalk = async (userId, postId) => {
+  firestore
+    .collection('users')
+    .doc(`${userId}`)
+    .collection('booked')
+    .doc(`${postId}`)
+    .set({ postId, userId })
+    .then(() => console.log(`${userId} booked ${postId}`));
+};
+
+export const joinAWalk = async (userId, postId) => {
+  firestore
+    .collection('posts')
+    .doc(`${postId}`)
+    .update({
+      people: firebase.firestore.FieldValue.arrayUnion(userId)
+    })
+    .then(() => console.log(`User: ${userId} booked walk: ${postId}`));
+};
+
+export const leaveAWalk = async (userId, postId) => {
+  firestore
+    .collection('posts')
+    .doc(`${postId}`)
+    .update({
+      people: firebase.firestore.FieldValue.arrayRemove(userId)
+    })
+    .then(() => console.log(`User: ${userId} left walk: ${postId}`));
+};
+
+export const getBookings = async userId => {
+  const bookings = [];
+  const snapshot = await firestore
+    .collection('users')
+    .doc(userId)
+    .collection('booked').get;
+
+  snapshot.forEach(doc => bookings.push(doc.data()));
+
+  return bookings;
 };
 
 export default firebase;

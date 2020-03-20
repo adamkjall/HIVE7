@@ -40,6 +40,41 @@ const AppRouter = () => (
       path="/private"
       render={props => <LoadableView {...props} view="PrivateView" />}
     />
+    <ProtectedRoute
+      exact
+      path="/landing"
+      render={props => <LoadableView {...props} view="LandingView" />}
+    />
+    <ProtectedRoute
+      exact
+      path="/create"
+      render={props => <LoadableView {...props} view="CreateView" />}
+    />
+    <ProtectedRoute
+      exact
+      path="/feed"
+      render={props => <LoadableView {...props} view="FeedView" />}
+    />
+    <ProtectedRoute
+      exact
+      path="/selected"
+      render={props => <LoadableView {...props} view="SelectedView" />}
+    />
+    <ProtectedRoute
+      exact
+      path="/matched"
+      render={props => <LoadableView {...props} view="MatchedView" />}
+    />
+    <ProtectedRoute
+      exact
+      path="/chat"
+      render={props => <LoadableView {...props} view="ChatView" />}
+    />
+    <ProtectedRoute
+      exact
+      path="/profile"
+      render={props => <LoadableView {...props} view="ProfileView" />}
+    />
     <Route render={props => <LoadableView {...props} view="NotFoundView" />} />
   </Switch>
 );

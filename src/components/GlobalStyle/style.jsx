@@ -37,4 +37,10 @@ export const StyledGlobalStyle = createGlobalStyle`
     position: relative;
     width: 100%;
   }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+  }
+
 `;

@@ -31,14 +31,17 @@ const Feed = ({ posts }) => {
                 <span>{`${time}  ${post.createdAt.toLocaleDateString()}`}</span>
                 <p className="user">{post.author}</p>
                 <p className="post">{post.text}</p>
+                {/* a conditional render that show cancel /delete walk if your the poster, also need confirmation and tell others that walk is canceled*/}
                 {user && user.id === post.userId ? (
-                  <Button onClick={() => deletePostDocument(post.postId)}>Delete</Button>
-                ) : !post.people.find(id => id === user.id) ? (
+                  <Button onClick={() => deletePostDocument(post.postId)}>Cancel/Delete</Button>
+                ) : /* a conditional render if your the attende that show join (this is for next page) or leave if you selected and confirmed this walk */
+                post.attendingPeople.length == 0 ? (
                   <Button onClick={() => joinAWalk(user.id, post.postId)}>JOIN</Button>
-                ) : (
+                ) : post.attendingPeople.find(id => id === user.id) ? (
                   <Button onClick={() => leaveAWalk(user.id, post.postId)}>LEAVE</Button>
+                ) : (
+                  <Button onClick={() => joinAWalk(user.id, post.postId)}>JOIN</Button>
                 )}
-                {console.log('post')}
               </StyledPost>
             );
           })}

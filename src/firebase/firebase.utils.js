@@ -96,7 +96,7 @@ export const joinAWalk = async (userId, postId) => {
     .collection('posts')
     .doc(`${postId}`)
     .update({
-      people: firebase.firestore.FieldValue.arrayUnion(userId)
+      attendingPeople: firebase.firestore.FieldValue.arrayUnion(userId)
     })
     .then(() => console.log(`User: ${userId} booked walk: ${postId}`));
 };
@@ -106,7 +106,7 @@ export const leaveAWalk = async (userId, postId) => {
     .collection('posts')
     .doc(`${postId}`)
     .update({
-      people: firebase.firestore.FieldValue.arrayRemove(userId)
+      attendingPeople: firebase.firestore.FieldValue.arrayRemove(userId)
     })
     .then(() => console.log(`User: ${userId} left walk: ${postId}`));
 };

@@ -51,22 +51,22 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-export const createWalkDocument = async post => {
+export const createWalkDocument = async walk => {
   const docRef = firestore.collection('walks').doc();
 
   docRef
-    .set({ ...post, postId: docRef.id })
-    .then(() => console.log(`Post created with id: ${docRef.id}`))
-    .catch(error => console.log('Error creating post: ', error));
+    .set({ ...walk, postId: docRef.id })
+    .then(() => console.log(`walk created with id: ${docRef.id}`))
+    .catch(error => console.log('Error creating walk: ', error));
 };
 
-export const deleteWalkDocument = async postId => {
+export const deleteWalkDocument = async walkId => {
   firestore
     .collection('walks')
-    .doc(postId)
+    .doc(walkId)
     .delete()
-    .then(() => console.log('Deleted post: ', postId))
-    .catch(error => console.log('Error while deleting post: ', error));
+    .then(() => console.log('Deleted walk: ', walkId))
+    .catch(error => console.log('Error while deleting walk: ', error));
 };
 
 export const getAllWalks = async () => {
@@ -81,34 +81,34 @@ export const getAllWalks = async () => {
   return walks;
 };
 
-export const bookAWalk = async (userId, postId) => {
+export const bookAWalk = async (userId, walkId) => {
   firestore
     .collection('users')
     .doc(`${userId}`)
     .collection('booked')
-    .doc(`${postId}`)
-    .set({ postId, userId })
-    .then(() => console.log(`${userId} booked ${postId}`));
+    .doc(`${walkId}`)
+    .set({ postId: walkId, userId })
+    .then(() => console.log(`${userId} booked ${walkId}`));
 };
 
-export const joinAWalk = async (userId, postId) => {
+export const joinAWalk = async (userId, walkId) => {
   firestore
     .collection('walks')
-    .doc(`${postId}`)
+    .doc(`${walkId}`)
     .update({
       attendingPeople: firebase.firestore.FieldValue.arrayUnion(userId)
     })
-    .then(() => console.log(`User: ${userId} booked walk: ${postId}`));
+    .then(() => console.log(`User: ${userId} booked walk: ${walkId}`));
 };
 
-export const leaveAWalk = async (userId, postId) => {
+export const leaveAWalk = async (userId, walkId) => {
   firestore
     .collection('walks')
-    .doc(`${postId}`)
+    .doc(`${walkId}`)
     .update({
       attendingPeople: firebase.firestore.FieldValue.arrayRemove(userId)
     })
-    .then(() => console.log(`User: ${userId} left walk: ${postId}`));
+    .then(() => console.log(`User: ${userId} left walk: ${walkId}`));
 };
 
 export const getBookings = async userId => {

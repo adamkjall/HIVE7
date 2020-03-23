@@ -5,6 +5,7 @@ import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 import Button from '../UI/Button';
 import H1 from '../UI/H1';
 import Input from '../UI/Input';
+import ExtendedUserInfo from '../ExtendedUserInfo';
 
 import { StyledContainer } from './style';
 
@@ -88,6 +89,7 @@ const SignUp = () => {
           value={inputs.confirmPassword}
           onChange={event => onValueChange('confirmPassword', event.target.value)}
         />
+        <ExtendedUserInfo />
         <Button nature="default" stretch type="submit">
           SUBMIT
         </Button>

@@ -51,8 +51,8 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-export const createPostDocument = async post => {
-  const docRef = firestore.collection('posts').doc();
+export const createWalkDocument = async post => {
+  const docRef = firestore.collection('walks').doc();
 
   docRef
     .set({ ...post, postId: docRef.id })
@@ -60,25 +60,25 @@ export const createPostDocument = async post => {
     .catch(error => console.log('Error creating post: ', error));
 };
 
-export const deletePostDocument = async postId => {
+export const deleteWalkDocument = async postId => {
   firestore
-    .collection('posts')
+    .collection('walks')
     .doc(postId)
     .delete()
     .then(() => console.log('Deleted post: ', postId))
     .catch(error => console.log('Error while deleting post: ', error));
 };
 
-export const getAllPosts = async () => {
-  const posts = [];
-  const querySnapshot = await firestore.collection('posts').get();
+export const getAllWalks = async () => {
+  const walks = [];
+  const querySnapshot = await firestore.collection('walks').get();
 
   querySnapshot.forEach(doc => {
     const data = doc.data();
-    posts.push(data);
+    walks.push(data);
   });
 
-  return posts;
+  return walks;
 };
 
 export const bookAWalk = async (userId, postId) => {
@@ -93,7 +93,7 @@ export const bookAWalk = async (userId, postId) => {
 
 export const joinAWalk = async (userId, postId) => {
   firestore
-    .collection('posts')
+    .collection('walks')
     .doc(`${postId}`)
     .update({
       attendingPeople: firebase.firestore.FieldValue.arrayUnion(userId)
@@ -103,7 +103,7 @@ export const joinAWalk = async (userId, postId) => {
 
 export const leaveAWalk = async (userId, postId) => {
   firestore
-    .collection('posts')
+    .collection('walks')
     .doc(`${postId}`)
     .update({
       attendingPeople: firebase.firestore.FieldValue.arrayRemove(userId)

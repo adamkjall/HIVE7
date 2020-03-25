@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
-import { createPostDocument } from '../../firebase/firebase.utils';
+import { createWalkDocument } from '../../firebase/firebase.utils';
 
 import Select from 'components/UI/Select';
 import Button from 'components/UI/Button';
@@ -47,7 +47,7 @@ const PostForm = () => {
       const post = {
         createdAt: new Date(),
         userId: user.id,
-        author: user.displayName,
+        author: user.displayName || user.email,
         date: inputs.date,
         time: inputs.time,
         where: inputs.where,
@@ -58,7 +58,8 @@ const PostForm = () => {
         pets: inputs.pets,
         introtext: inputs.introtext
       };
-      createPostDocument(post);
+
+      createWalkDocument(post);
 
       setInputs({
         date: '',

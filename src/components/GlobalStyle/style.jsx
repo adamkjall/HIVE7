@@ -43,4 +43,8 @@ export const StyledGlobalStyle = createGlobalStyle`
     flex-direction: column;
   }
 
+ a {
+   text-decoration:none;
+   color:black;
+ }
 `;

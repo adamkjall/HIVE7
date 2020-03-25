@@ -17,7 +17,7 @@ const FeedPageContent = ({ error, isLoading, walks }) => {
     return (
       <React.Fragment>
         <div>
-          <H3>Feed</H3>
+          <H3>Lediga Promenader</H3>
           <Feed walks={walks} />
         </div>
       </React.Fragment>

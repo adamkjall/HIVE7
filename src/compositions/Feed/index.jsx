@@ -1,54 +1,58 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { AuthenticationContext } from 'contexts/AuthenticationContext';
-import { deleteWalkDocument, leaveAWalk, joinAWalk } from '../../firebase/firebase.utils';
-
-import H3 from 'components/UI/H3';
-import Button from 'components/UI/Button';
-
+import location from '../../assets/icons/location.svg';
+import avatar from '../../assets/icons/profilepic.svg';
+import walking from '../../assets/icons/walking.svg';
+import clock from '../../assets/icons/time.svg';
 import colors from 'tokens/colors.mjs';
 
 import { StyledFeed, StyledPostList, StyledPost } from './style';
 
 const Feed = ({ walks }) => {
-  const { user, isAuthenticated } = useContext(AuthenticationContext);
-
   return (
     <StyledFeed>
       <StyledPostList>
-        {walks
-          .sort((walkA, walkB) => {
-            return walkA.createdAt - walkB.createdAt;
-          })
-          .map((walk, index) => {
-            const timeArr = walk.createdAt.toLocaleTimeString().split(':');
-            const time = `${timeArr[0]}:${timeArr[1]}`;
-            return (
-              <StyledPost key={index}>
-                <H3 className="title">{walk.title}</H3>
-                <span>{`${time}  ${walk.createdAt.toLocaleDateString()}`}</span>
-                <p className="user">{walk.author}</p>
-                <p className="post">{walk.text}</p>
-                <Link to="/selected">
-                  <Button>mer info</Button>
-                </Link>
-                {/* a conditional render that show cancel walk if your the poster, also need confirmation and tell others that walk is canceled*/}
-                {isAuthenticated ? (
-                  user.id === walk.userId ? (
-                    <Button onClick={() => deleteWalkDocument(walk.postId)}>Cancel</Button>
-                  ) : /* a conditional render if your the attende that show join (this is for next page) or leave if you selected and confirmed this walk */
-                  !walk.attendingPeople ? (
-                    <Button onClick={() => joinAWalk(user.id, walk.postId)}>JOIN</Button>
-                  ) : walk.attendingPeople.find(id => id === user.id) ? (
-                    <Button onClick={() => leaveAWalk(user.id, walk.postId)}>LEAVE</Button>
-                  ) : (
-                    <Button onClick={() => joinAWalk(user.id, walk.postId)}>JOIN</Button>
-                  )
-                ) : null}
-              </StyledPost>
-            );
-          })}
+        <Link to="/selected">
+          {walks
+            .sort((walkA, walkB) => {
+              return walkA.createdAt - walkB.createdAt;
+            })
+            .map((walk, index) => {
+              const timeArr = walk.createdAt.toLocaleTimeString().split(':');
+              const time = `${timeArr[0]}:${timeArr[1]}`;
+              return (
+                <StyledPost key={index}>
+                  <div className="box1">
+                    <img className="avatar" src={avatar} alt="avatar" />
+                    <h3 className="author">{walk.author}</h3>
+                    <span className="usersage">28 år{/*  {walk.authorage} */}</span>
+                  </div>
+                  <hr />
+                  <div className="box2">
+                    <div className="date">
+                      <img src={clock} alt="time" />
+                      <span>
+                        {walk.date} {walk.time}
+                      </span>
+                    </div>
+                    <div className="timeduration">
+                      <img src={walking} alt="walk" />
+                      <span>{walk.timeduration}</span>
+                    </div>
+                    <div className="where">
+                      <img src={location} alt="where" />
+                      <span>{walk.where}</span>
+                    </div>
+                  </div>
+                  <hr />
+                  <span className="posted">
+                    Posted at: {`${time}  ${walk.createdAt.toLocaleDateString()}`}
+                  </span>
+                </StyledPost>
+              );
+            })}
+        </Link>
       </StyledPostList>
     </StyledFeed>
   );

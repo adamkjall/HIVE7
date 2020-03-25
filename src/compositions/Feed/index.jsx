@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import { deleteWalkDocument, leaveAWalk, joinAWalk } from '../../firebase/firebase.utils';
 
-import H1 from 'components/UI/H1';
 import H3 from 'components/UI/H3';
 import Button from 'components/UI/Button';
 
@@ -16,7 +16,6 @@ const Feed = ({ walks }) => {
 
   return (
     <StyledFeed>
-      <H1>Feed</H1>
       <StyledPostList>
         {walks
           .sort((walkA, walkB) => {
@@ -31,10 +30,13 @@ const Feed = ({ walks }) => {
                 <span>{`${time}  ${walk.createdAt.toLocaleDateString()}`}</span>
                 <p className="user">{walk.author}</p>
                 <p className="post">{walk.text}</p>
-                {/* a conditional render that show cancel /delete walk if your the poster, also need confirmation and tell others that walk is canceled*/}
+                <Link to="/selected">
+                  <Button>mer info</Button>
+                </Link>
+                {/* a conditional render that show cancel walk if your the poster, also need confirmation and tell others that walk is canceled*/}
                 {isAuthenticated ? (
                   user.id === walk.userId ? (
-                    <Button onClick={() => deleteWalkDocument(walk.postId)}>Cancel/Delete</Button>
+                    <Button onClick={() => deleteWalkDocument(walk.postId)}>Cancel</Button>
                   ) : /* a conditional render if your the attende that show join (this is for next page) or leave if you selected and confirmed this walk */
                   !walk.attendingPeople ? (
                     <Button onClick={() => joinAWalk(user.id, walk.postId)}>JOIN</Button>

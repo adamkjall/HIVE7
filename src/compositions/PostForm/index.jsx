@@ -43,11 +43,11 @@ const PostForm = () => {
   const onSubmit = event => {
     event.preventDefault();
 
-    if (inputs.where.length && inputs.text.length) {
-      const post = {
+    if (inputs.where.length) {
+      const walk = {
         createdAt: new Date(),
         userId: user.id,
-        author: user.displayName || user.email,
+        author: user.displayName,
         date: inputs.date,
         time: inputs.time,
         where: inputs.where,
@@ -59,7 +59,7 @@ const PostForm = () => {
         introtext: inputs.introtext
       };
 
-      createWalkDocument(post);
+      createWalkDocument(walk);
 
       setInputs({
         date: '',
@@ -150,7 +150,7 @@ const PostForm = () => {
             <Select
               id="allowchildren"
               name="allowchildren"
-              label=""
+              label="allowchildren"
               value={inputs.friends}
               onChange={event => onValueChange('allowchildren', event.target.value)}
               style={{

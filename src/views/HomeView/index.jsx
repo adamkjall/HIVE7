@@ -5,16 +5,11 @@ import { firestore } from '../../firebase/firebase.utils';
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
 import H1 from 'components/UI/H1';
-import Paragraph from 'components/UI/Paragraph';
 import Alert from 'components/UI/Alert';
 import PostForm from 'compositions/PostForm';
 import Feed from 'compositions/Feed';
 
 const HomePageContent = ({ error, isLoading, walks }) => {
-  // const walks = [
-  //   { displayName: 'Adam', title: 'Första post', text: 'Hello world! Min första post' },
-  //   { displayName: 'Åsa', title: 'Första post', text: 'Hello world! Min första post' }
-  // ];
   if (isLoading) {
     return <Loader fullScreen />;
   } else if (error) {

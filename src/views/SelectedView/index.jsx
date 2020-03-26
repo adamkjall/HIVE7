@@ -33,8 +33,10 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
       <React.Fragment>
         <StyledSelectedWalk>
           <div className="box1">
-            <img className="avatar" src={avatar} alt="avatar" />
-            <h3 className="author">{walk.author}</h3>
+            <Link to={{ pathname: '/profile' + walk.author, state: { walk } }}>
+              <img className="avatar" src={avatar} alt="avatar" />
+              <h3 className="author">{walk.author}</h3>{' '}
+            </Link>
             {/* <span className="usersage">{walk.authorage}</span> */}
           </div>
           <span className="post">{walk.introtext}</span>
@@ -82,21 +84,14 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
             {user.id === walk.userId ? (
               <Button onClick={() => deleteWalkDocument(walk.postId)}>Ta bort din promenad</Button>
             ) : !walk.attendingPeople ? (
-              <Button onClick={() => joinAWalk(user.id, walk.postId)}>JOIN</Button>
+              <Button onClick={() => joinAWalk(user.id, walk.postId)}>JOIN2</Button>
             ) : walk.attendingPeople.find(id => id === user.id) ? (
-              <Button onClick={() => leaveAWalk(user.id, walk.postId)}>LEAVE</Button>
+              <Button onClick={() => leaveAWalk(user.id, walk.postId)}>Lämna promenad</Button>
             ) : (
-              <Button onClick={() => joinAWalk(user.id, walk.postId)}>JOIN</Button>
+              <Link to={{ pathname: '/matched' + walk.postId, state: { walk } }}>
+                <Button onClick={() => joinAWalk(user.id, walk.postId)}>Följ med</Button>
+              </Link>
             )}
-          </div>
-          <br />
-          <div>
-            <Link to="/profile">
-              <Button>profile</Button>
-            </Link>
-            <Link to="/matched">
-              <Button>Välj 1</Button>
-            </Link>
           </div>
         </StyledSelectedWalk>
       </React.Fragment>
@@ -108,6 +103,7 @@ const SelectedView = walk => {
   const [data, setData] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
   return (
     <Page>
       <SelectedPageContent

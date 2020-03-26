@@ -47,4 +47,17 @@ export const StyledGlobalStyle = createGlobalStyle`
    text-decoration:none;
    color:black;
  }
+
+ .box2 {
+    display: grid;
+    grid-auto-columns: 1fr 1fr;
+    margin: 1rem;
+    span {
+      padding: 1rem;
+    }
+  }
+  .plus {
+      padding: 0.5rem;
+    }
+    
 `;

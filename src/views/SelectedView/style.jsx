@@ -23,12 +23,4 @@ export const StyledSelectedWalk = styled.div`
       grid-area: usersage;
     }
   }
-  .box2 {
-    display: grid;
-    grid-auto-columns: 1fr 1fr;
-    margin: 1rem;
-    span {
-      padding: 1rem;
-    }
-  }
 `;

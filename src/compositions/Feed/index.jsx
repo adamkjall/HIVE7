@@ -22,7 +22,7 @@ const Feed = ({ walks }) => {
             const time = `${timeArr[0]}:${timeArr[1]}`;
             return (
               <StyledPost key={index}>
-                <Link to={{ pathname: '/selected' + index, state: { walk } }}>
+                <Link to={{ pathname: '/selected' + walk.postId, state: { walk } }}>
                   <div className="box1">
                     <img className="avatar" src={avatar} alt="avatar" />
                     <h3 className="author">{walk.author}</h3>

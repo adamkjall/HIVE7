@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import { createWalkDocument } from '../../firebase/firebase.utils';
@@ -24,6 +24,7 @@ import { StyledPostForm } from './style';
 
 const PostForm = () => {
   const { user } = useContext(AuthenticationContext);
+  const history = useHistory();
   const [inputs, setInputs] = useState({
     date: '',
     time: '',
@@ -65,7 +66,6 @@ const PostForm = () => {
       };
 
       createWalkDocument(walks);
-      console.log('funkar');
       setInputs({
         date: '',
         time: '',
@@ -78,7 +78,9 @@ const PostForm = () => {
         filterGender: '',
         introtext: ''
       });
-    } else console.log('funka inte');
+      alert('Promenaden är skapad');
+      history.push('/landing');
+    } else console.log('något fick fel');
   };
 
   return (
@@ -229,11 +231,8 @@ const PostForm = () => {
         />
 
         <Button nature="primary" type="submit">
-          Posta!{' '}
+          Skapa{' '}
         </Button>
-        <Link to="/feed">
-          <Button type="submit">Vidare till promenader</Button>
-        </Link>
       </form>
     </StyledPostForm>
   );

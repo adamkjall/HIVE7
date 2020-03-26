@@ -37,7 +37,7 @@ const SignIn = () => {
 
   return (
     <StyledContainer>
-      <H1>Login</H1>
+      <H1>Framåt!</H1>
       <form onSubmit={onSubmit}>
         <Input
           type="email"
@@ -61,16 +61,16 @@ const SignIn = () => {
           value={inputs.password}
           onChange={event => onValueChange('password', event.target.value)}
         />
-        <div>
-          <Button nature="default" type="submit">
-            Logga in
-          </Button>
+        <div className="buttons">
+          <Link to="/">
+            <Button nature="default">Skapa konto</Button>
+          </Link>{' '}
           <Button nature="primary" onClick={signInWithGoogle}>
             Logga in med Google
           </Button>
-          <Link to="/">
-            <Button>Registrera dig</Button>
-          </Link>
+          <Button nature="default" type="submit">
+            Logga in
+          </Button>
         </div>
       </form>
     </StyledContainer>

@@ -10,13 +10,13 @@ export const StyledNav = styled.nav`
   justify-content: space-around;
   align-items: center;
   padding: ${spacing.tiny};
-  background: ${colors.gray1};
+  background: ${colors.white};
 `;
 
 export const StyledNavLink = styled(Link)`
   display: inline-flex;
   padding: 0.25em ${spacing.tiny};
-  color: ${colors.gray5};
+  color: ${colors.black};
   text-decoration: none;
   cursor: pointer;
 `;

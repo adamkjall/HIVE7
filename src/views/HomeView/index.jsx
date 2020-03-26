@@ -9,7 +9,7 @@ import Alert from 'components/UI/Alert';
 
 import SignUp from '../../components/SignUp';
 
-const HomePageContent = ({ error, isLoading, walks }) => {
+const HomePageContent = ({ error, isLoading }) => {
   if (isLoading) {
     return <Loader fullScreen />;
   } else if (error) {
@@ -18,11 +18,7 @@ const HomePageContent = ({ error, isLoading, walks }) => {
     return (
       <React.Fragment>
         <H1>Home View</H1>
-        <div
-          style={{ display: 'grid', width: '100%', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}
-        >
-          <SignUp />
-        </div>
+        <SignUp />
       </React.Fragment>
     );
   }

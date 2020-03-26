@@ -56,8 +56,7 @@ const AppRouter = () => (
       render={props => <LoadableView {...props} view="FeedView" />}
     />
     <ProtectedRoute
-      exact
-      path="/selected"
+      path="/selected:index"
       render={props => <LoadableView {...props} view="SelectedView" />}
     />
     <ProtectedRoute

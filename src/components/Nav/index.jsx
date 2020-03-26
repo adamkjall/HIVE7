@@ -23,18 +23,18 @@ const Nav = props => {
         Landing
       </StyledNavLink>
       <StyledNavLink as={RouterLink} to="/create">
-        Starta ny
+        Skapa ny promenad
       </StyledNavLink>
       <StyledNavLink as={RouterLink} to="/feed">
-        Följ med
+        Lediga promenader
       </StyledNavLink>
       {isAuthenticated ? (
         <StyledNavLink as={RouterLink} to="/private">
-          Logut
+          Logga ut
         </StyledNavLink>
       ) : (
         <StyledNavLink as={RouterLink} to="/login">
-          Login
+          Logga in
         </StyledNavLink>
       )}
     </StyledNav>

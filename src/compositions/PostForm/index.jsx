@@ -30,6 +30,7 @@ const PostForm = () => {
     allowChildren: 'no',
     allowPets: 'no',
     bringPets: 'no',
+    filterGender: 'alla',
     introtext: ''
   });
 
@@ -56,6 +57,7 @@ const PostForm = () => {
         allowChildren: inputs.allowChildren,
         allowPets: inputs.allowPets,
         bringPets: inputs.bringPets,
+        filterGender: inputs.filterGender,
         introtext: inputs.introtext
       };
 
@@ -70,6 +72,7 @@ const PostForm = () => {
         allowChildren: '',
         allowPets: '',
         bringPets: '',
+        filterGender: '',
         introtext: ''
       });
     } else console.log('funka inte');
@@ -79,6 +82,7 @@ const PostForm = () => {
     <div className="post-form" style={{ width: '100%' }}>
       <form name="post-form" onSubmit={onSubmit}>
         <img src={time} alt="" />
+        När vill du gå?
         <input
           type="time"
           name="time"
@@ -120,13 +124,13 @@ const PostForm = () => {
         <Select
           id="allowFriends"
           name="allowFriends"
-          label="vänner"
+          label="Kan vänner följa med?"
           value={inputs.allowFriends}
           onChange={event => onValueChange('allowFriends', event.target.value)}
         >
-          <option value="no">Inga vänner.</option>
-          <option value="oneFriend">De får gärna ta med en vän.</option>
-          <option value="allFriends">
+          <option value="inga vänner">Inga vänner.</option>
+          <option value="en vän">De får gärna ta med en vän.</option>
+          <option value="gärna">
             De får gärna ta med dig fler vänner, det kanske jag gör med.
           </option>
         </Select>
@@ -134,18 +138,20 @@ const PostForm = () => {
         <Select
           id="allowChildren"
           name="allowChildren"
-          label="allowChildren"
+          label="Kan barn följa med?"
           value={inputs.allowChildren}
           onChange={event => onValueChange('allowChildren', event.target.value)}
         >
-          <option value="no">Inga barn.</option>
-          <option value="yes">De får gärna ta med dig dina barn, det kanske jag gör med.</option>
+          <option value="inga barn">Inga barn.</option>
+          <option value="gärna barn">
+            De får gärna ta med dig dina barn, det kanske jag gör med.
+          </option>
         </Select>
         <img src={bringPetsvg} alt="bring dog" />
         <Select
           id="allowPets"
           name="allowPets"
-          label="Får de ha med djur"
+          label="Får husdjur följa med?"
           value={inputs.allowPets}
           onChange={event => onValueChange('allowPets', event.target.value)}
           style={{
@@ -157,10 +163,10 @@ const PostForm = () => {
                 : undefined
           }}
         >
-          <option value="no" style={{ color: colors.blue }}>
+          <option value="inga husdjur" style={{ color: colors.blue }}>
             Jag vill inte gå med husdjur.
           </option>
-          <option value="yes" style={{ color: colors.red }}>
+          <option value="du får ta med husdjur" style={{ color: colors.red }}>
             Det går bra att gå med husdjur.
           </option>
           <option value="other" disabled>
@@ -171,15 +177,26 @@ const PostForm = () => {
         <Select
           id="formbringPets"
           name="bringPets"
-          label="kommer jag ha med djur"
+          label="Kommer du ta med husdjur??"
           value={inputs.bringPets}
           onChange={event => onValueChange('bringPets', event.target.value)}
         >
-          <option value="no">Jag kommer inte ha med husdjur.</option>
-          <option value="yes">Jag kommer ha med hund/hundar!</option>
+          <option value="Jag tar inte med djur">Jag kommer inte ha med husdjur.</option>
+          <option value="Jag har med hund">Jag kommer ha med hund/hundar!</option>
           <option value="other" disabled>
             Om du har med ett annat djur skriv det om din promenad.
           </option>
+        </Select>
+        <Select
+          id="filterGender"
+          name="filterGender"
+          label="Vem vill du gå med?"
+          value={inputs.filterGender}
+          onChange={event => onValueChange('filterGender', event.target.value)}
+        >
+          <option value="all">Alla</option>
+          <option value="women">Bara kvinnor</option>
+          <option value="men">Bara män</option>
         </Select>
         <hr />
         <img src={chat} alt="chat" />

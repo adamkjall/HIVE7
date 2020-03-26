@@ -21,8 +21,7 @@ const HomePageContent = ({ error, isLoading, walks }) => {
         <div
           style={{ display: 'grid', width: '100%', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}
         >
-          <Feed walks={walks} />
-          <PostForm />
+          Detta är Home!
         </div>
       </React.Fragment>
     );

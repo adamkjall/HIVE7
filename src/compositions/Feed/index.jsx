@@ -13,16 +13,16 @@ const Feed = ({ walks }) => {
   return (
     <StyledFeed>
       <StyledPostList>
-        <Link to="/selected">
-          {walks
-            .sort((walkA, walkB) => {
-              return walkA.createdAt - walkB.createdAt;
-            })
-            .map((walk, index) => {
-              const timeArr = walk.createdAt.toLocaleTimeString().split(':');
-              const time = `${timeArr[0]}:${timeArr[1]}`;
-              return (
-                <StyledPost key={index}>
+        {walks
+          .sort((walkA, walkB) => {
+            return walkA.createdAt - walkB.createdAt;
+          })
+          .map((walk, index) => {
+            const timeArr = walk.createdAt.toLocaleTimeString().split(':');
+            const time = `${timeArr[0]}:${timeArr[1]}`;
+            return (
+              <StyledPost key={index}>
+                <Link to={{ pathname: '/selected' + index, state: { walk } }}>
                   <div className="box1">
                     <img className="avatar" src={avatar} alt="avatar" />
                     <h3 className="author">{walk.author}</h3>
@@ -48,11 +48,11 @@ const Feed = ({ walks }) => {
                   <hr />
                   <span className="posted">
                     Posted at: {`${time}  ${walk.createdAt.toLocaleDateString()}`}
-                  </span>
-                </StyledPost>
-              );
-            })}
-        </Link>
+                  </span>{' '}
+                </Link>
+              </StyledPost>
+            );
+          })}
       </StyledPostList>
     </StyledFeed>
   );

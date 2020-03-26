@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 import { signInWithGoogle } from '../../firebase/firebase.utils';
@@ -52,20 +53,25 @@ const SignIn = () => {
         <Input
           type="password"
           autoComplete="current-password"
-          label="Password"
+          label="Lösenord"
           id="password"
           inline
           name="password"
-          placeholder="somethingsomething"
+          placeholder="lösenord"
           value={inputs.password}
           onChange={event => onValueChange('password', event.target.value)}
         />
-        <Button nature="default" stretch type="submit">
-          SIGN IN WITH EMAIL AND PASSWORD
-        </Button>
-        <Button nature="primary" stretch onClick={signInWithGoogle}>
-          SIGN IN WITH GOOGLE
-        </Button>
+        <div>
+          <Button nature="default" type="submit">
+            Logga in
+          </Button>
+          <Button nature="primary" onClick={signInWithGoogle}>
+            Logga in med Google
+          </Button>
+          <Link to="/">
+            <Button>Registrera dig</Button>
+          </Link>
+        </div>
       </form>
     </StyledContainer>
   );

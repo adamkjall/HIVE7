@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
 import SignIn from '../../components/SignIn';
-import SignUp from '../../components/SignUp';
 
 import Page from 'compositions/Page';
 
@@ -18,14 +17,13 @@ const LoginView = ({ location }) => {
   if (isAuthenticated) {
     // If the user is already authenticated
     // Redirect to whichever page makes sense
-    return <Redirect to={(location.state && location.state.from) || '/'} />;
+    return <Redirect to={(location.state && location.state.from) || '/landing'} />;
   }
 
   return (
     <Page metadata={{ title: 'Login' }}>
       <StyledContainer>
         <SignIn />
-        <SignUp />
       </StyledContainer>
     </Page>
   );

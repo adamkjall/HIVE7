@@ -6,8 +6,8 @@ import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
 import H1 from 'components/UI/H1';
 import Alert from 'components/UI/Alert';
-import PostForm from 'compositions/PostForm';
-import Feed from 'compositions/Feed';
+
+import SignUp from '../../components/SignUp';
 
 const HomePageContent = ({ error, isLoading, walks }) => {
   if (isLoading) {
@@ -21,7 +21,7 @@ const HomePageContent = ({ error, isLoading, walks }) => {
         <div
           style={{ display: 'grid', width: '100%', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}
         >
-          Detta är Home!
+          <SignUp />
         </div>
       </React.Fragment>
     );

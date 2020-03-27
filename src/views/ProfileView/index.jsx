@@ -5,7 +5,7 @@ import Loader from 'compositions/Loader';
 import H3 from 'components/UI/H3';
 import Alert from 'components/UI/Alert';
 
-const ProfilePageContent = ({ error, isLoading }) => {
+const ProfilePageContent = ({ error, isLoading, walk }) => {
   if (isLoading) {
     return <Loader fullScreen />;
   } else if (error) {
@@ -14,7 +14,7 @@ const ProfilePageContent = ({ error, isLoading }) => {
     return (
       <React.Fragment>
         <div>
-          <H3>Profile</H3>
+          <H3>Profile: {walk.author} </H3>
           <div>
             <p>Från:</p>
             <p>Svenska nivå: </p>
@@ -29,14 +29,19 @@ const ProfilePageContent = ({ error, isLoading }) => {
   }
 };
 
-const ProfileView = () => {
+const ProfileView = walk => {
   const [data, setData] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   return (
     <Page>
-      <ProfilePageContent data={data} error={error} isLoading={isLoading} />
+      <ProfilePageContent
+        walk={walk.location.state.walk}
+        data={data}
+        error={error}
+        isLoading={isLoading}
+      />
     </Page>
   );
 };

@@ -2,7 +2,9 @@ import React, { useContext } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
-
+import walking from '../../assets/icons/walking.svg';
+import plus from '../../assets/icons/plus.svg';
+import navprofile from '../../assets/icons/navprofile.svg';
 import { StyledNav, StyledNavLink } from './style';
 
 const Nav = props => {
@@ -10,31 +12,27 @@ const Nav = props => {
 
   return (
     <StyledNav {...props}>
-      {/* <StyledNavLink as={RouterLink} to="/">
-        Home
-      </StyledNavLink>
+      {/*
       <StyledNavLink as={RouterLink} to="/form">
         Form
       </StyledNavLink>
       <StyledNavLink as={RouterLink} to="/examples">
         Examples
       </StyledNavLink> */}
-      <StyledNavLink as={RouterLink} to="/landing">
-        Landing
-      </StyledNavLink>
       <StyledNavLink as={RouterLink} to="/create">
-        Starta ny
+        <img src={plus} alt="ny promenad" /> Ny promenad
       </StyledNavLink>
       <StyledNavLink as={RouterLink} to="/feed">
-        Följ med
+        <img src={walking} alt="promenad" /> Promenader
       </StyledNavLink>
+
       {isAuthenticated ? (
         <StyledNavLink as={RouterLink} to="/private">
-          Logut
+          <img src={navprofile} alt="profil" /> Profil
         </StyledNavLink>
       ) : (
         <StyledNavLink as={RouterLink} to="/login">
-          Login
+          Logga in
         </StyledNavLink>
       )}
     </StyledNav>

@@ -56,13 +56,12 @@ const AppRouter = () => (
       render={props => <LoadableView {...props} view="FeedView" />}
     />
     <ProtectedRoute
-      exact
-      path="/selected"
+      path="/selected:postId"
       render={props => <LoadableView {...props} view="SelectedView" />}
     />
     <ProtectedRoute
       exact
-      path="/matched"
+      path="/matched:postId"
       render={props => <LoadableView {...props} view="MatchedView" />}
     />
     <ProtectedRoute
@@ -72,7 +71,7 @@ const AppRouter = () => (
     />
     <ProtectedRoute
       exact
-      path="/profile"
+      path="/profile:author"
       render={props => <LoadableView {...props} view="ProfileView" />}
     />
     <Route render={props => <LoadableView {...props} view="NotFoundView" />} />

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
 import location from '../../assets/icons/location.svg';
 import avatar from '../../assets/icons/profilepic.svg';
@@ -7,15 +9,20 @@ import walking from '../../assets/icons/walking.svg';
 import clock from '../../assets/icons/time.svg';
 import colors from 'tokens/colors.mjs';
 
-import { StyledFeed, StyledPostList, StyledPost } from './style';
+import { StyledFeed, StyledPost, StyledPostList } from './style';
 
 const Feed = ({ walks }) => {
+  const { user } = useContext(AuthenticationContext);
+
   return (
     <StyledFeed>
       <StyledPostList>
         {walks
           .sort((walkA, walkB) => {
             return walkA.createdAt - walkB.createdAt;
+          })
+          .filter(walk => {
+            return walk.userId !== user.id;
           })
           .map((walk, index) => {
             const timeArr = walk.createdAt.toLocaleTimeString().split(':');

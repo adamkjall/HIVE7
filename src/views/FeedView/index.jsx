@@ -5,6 +5,7 @@ import { firestore } from '../../firebase/firebase.utils';
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
 import Feed from 'compositions/Feed';
+import Booked from 'compositions/Booked';
 import H3 from 'components/UI/H3';
 import Alert from 'components/UI/Alert';
 
@@ -18,7 +19,7 @@ const FeedPageContent = ({ error, isLoading, walks }) => {
       <React.Fragment>
         <div>
           <H3>Dina Promenader</H3>
-
+          <Booked walks={walks} />
           <H3>Tillgängliga Promenader</H3>
           <Feed walks={walks} />
         </div>

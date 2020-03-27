@@ -5,8 +5,14 @@ import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
 import Page from 'compositions/Page';
 
+import H3 from 'components/UI/H3';
 import Button from 'components/UI/Button';
 import Paragraph from 'components/UI/Paragraph';
+
+import avatar from '../../assets/icons/profilepic.svg';
+
+import colors from 'tokens/colors.mjs';
+import { StyledPrivate } from './style';
 
 const PrivateView = () => {
   const { user } = useContext(AuthenticationContext);
@@ -14,12 +20,21 @@ const PrivateView = () => {
 
   return (
     <Page metadata={{ title: 'Private view' }}>
-      <h3>{user.displayName}</h3>
-      {user.email}
-      <Paragraph>Vill du verkligen logga ut?</Paragraph>
-      <Button as={RouterLink} to="/logout">
-        Logout
-      </Button>
+      <StyledPrivate>
+        <div className="box1">
+          <img className="avatar" src={avatar} alt="avatar" />
+          <span className="changepic">Byt Bild</span>
+          <H3 className="user">{user.displayName}</H3>
+          <Paragraph className="usersage">{user.dateOfBirth}</Paragraph>
+        </div>
+        <hr />
+        <Paragraph>{user.email}</Paragraph>
+        <Paragraph>{user.lvlOfSwedish}</Paragraph>
+        <hr />
+        <Button as={RouterLink} to="/logout">
+          Logga ut
+        </Button>
+      </StyledPrivate>
     </Page>
   );
 };

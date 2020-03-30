@@ -62,7 +62,8 @@ const PostForm = () => {
         allowPets: inputs.allowPets,
         bringPets: inputs.bringPets,
         filterGender: inputs.filterGender,
-        introtext: inputs.introtext
+        introtext: inputs.introtext,
+        attendingPeople: []
       };
 
       createWalkDocument(walks);

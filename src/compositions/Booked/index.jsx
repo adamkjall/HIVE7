@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
@@ -31,7 +32,7 @@ const Booked = ({ walks }) => {
 
               return (
                 <StyledPost key={index}>
-                  <Link to={{ pathname: '/selected' + walk.postId, state: { walk } }}>
+                  <Link to={{ pathname: '/selected/' + walk.postId, state: { walk } }}>
                     <div className="box1">
                       <img className="avatar" src={avatar} alt="avatar" />
                       <h3 className="author">{walk.author}</h3>
@@ -68,6 +69,25 @@ const Booked = ({ walks }) => {
       </StyledPostList>
     </StyledBooked>
   );
+};
+
+Booked.propTypes = {
+  walks: PropTypes.arrayOf(
+    PropTypes.shape({
+      allowChildren: PropTypes.string,
+      allowPets: PropTypes.string,
+      author: PropTypes.string,
+      bringPets: PropTypes.string,
+      createdAt: PropTypes.instanceOf(Date),
+      date: PropTypes.string,
+      filterGender: PropTypes.string,
+      introText: PropTypes.string,
+      postId: PropTypes.string,
+      time: PropTypes.string,
+      userId: PropTypes.string,
+      where: PropTypes.string
+    })
+  )
 };
 
 export default Booked;

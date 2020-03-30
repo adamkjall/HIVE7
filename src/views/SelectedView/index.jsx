@@ -33,7 +33,7 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
       <React.Fragment>
         <StyledSelectedWalk>
           <div className="box1">
-            <Link to={{ pathname: '/profile' + walk.author, state: { walk } }}>
+            <Link to={{ pathname: '/profile/' + walk.author, state: { walk } }}>
               <img className="avatar" src={avatar} alt="avatar" />
               <h3 className="author">{walk.author}</h3>{' '}
             </Link>
@@ -84,13 +84,13 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
             {user.id === walk.userId ? (
               <Button onClick={() => deleteWalkDocument(walk.postId)}>Ta bort din promenad</Button>
             ) : !walk.attendingPeople ? (
-              <Link to={{ pathname: '/matched' + walk.postId, state: { walk } }}>
+              <Link to={{ pathname: '/matched/' + walk.postId, state: { walk } }}>
                 <Button onClick={() => joinAWalk(user.id, walk.postId)}>Följ med!</Button>
               </Link>
             ) : walk.attendingPeople.find(id => id === user.id) ? (
               <Button onClick={() => leaveAWalk(user.id, walk.postId)}>Lämna promenad</Button>
             ) : (
-              <Link to={{ pathname: '/matched' + walk.postId, state: { walk } }}>
+              <Link to={{ pathname: '/matched/' + walk.postId, state: { walk } }}>
                 <Button onClick={() => joinAWalk(user.id, walk.postId)}>Följ med</Button>
               </Link>
             )}

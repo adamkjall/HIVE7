@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { firestore } from '../../firebase/firebase.utils';
 
@@ -54,6 +55,26 @@ const FeedView = () => {
       <FeedPageContent walks={walks} data={data} error={error} isLoading={isLoading} />
     </Page>
   );
+};
+
+FeedView.propTypes = {
+  isLoading: PropTypes.bool,
+  walks: PropTypes.arrayOf(
+    PropTypes.shape({
+      allowChildren: PropTypes.string,
+      allowPets: PropTypes.string,
+      author: PropTypes.string,
+      bringPets: PropTypes.string,
+      createdAt: PropTypes.instanceOf(Date),
+      date: PropTypes.string,
+      filterGender: PropTypes.string,
+      introText: PropTypes.string,
+      postId: PropTypes.string,
+      time: PropTypes.string,
+      userId: PropTypes.string,
+      where: PropTypes.string
+    })
+  )
 };
 
 export default FeedView;

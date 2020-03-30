@@ -30,11 +30,11 @@ const MatchedPageContent = ({ error, isLoading, walk }) => {
           {user.displayName},<p>{walk.author}</p>
           <p>vill gå på promenad tillsammans med dig.</p>
           <div>
-            <Link to={{ pathname: '/profile' + user.displayName, state: { walk } }}>
+            <Link to={{ pathname: '/profile/' + user.displayName, state: { walk } }}>
               <img className="avatar" src={avatar} alt="avatar" />
             </Link>
             <img className="plus" src={plus} alt="plus" />
-            <Link to={{ pathname: '/profile' + walk.author, state: { walk } }}>
+            <Link to={{ pathname: '/profile/' + walk.author, state: { walk } }}>
               <img className="avatar" src={avatar} alt="avatar" />
             </Link>
           </div>

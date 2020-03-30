@@ -32,13 +32,11 @@ const SignUp = () => {
     try {
       const { user } = await auth.createUserWithEmailAndPassword(inputs.email, inputs.password);
 
-      await createUserProfileDocument(
-        user,
-        { displayName: inputs.username }
-        /* ,
-        { dateOfBirth: inputs.dateOfBirth },
-        { lvlOfSwedish: inputs.lvlOfSwedish } */
-      );
+      await createUserProfileDocument(user, {
+        displayName: inputs.username,
+        dateOfBirth: inputs.dateOfBirth,
+        lvlOfSwedish: inputs.lvlOfSwedish
+      });
       alert('Kontot är skapat');
       history.push('/landing');
     } catch (error) {

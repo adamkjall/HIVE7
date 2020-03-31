@@ -9,6 +9,9 @@ import Feed from 'compositions/Feed';
 import Booked from 'compositions/Booked';
 import H3 from 'components/UI/H3';
 import Alert from 'components/UI/Alert';
+import ButtonCreate from 'components/ButtonCreate';
+
+import { StyledFeed } from './style';
 
 const FeedPageContent = ({ error, isLoading, walks }) => {
   if (isLoading) {
@@ -18,12 +21,14 @@ const FeedPageContent = ({ error, isLoading, walks }) => {
   } else {
     return (
       <React.Fragment>
-        <div>
+        <StyledFeed>
+          <ButtonCreate />
+
           <H3>Dina Promenader</H3>
           <Booked walks={walks} />
           <H3>Tillgängliga Promenader</H3>
           <Feed walks={walks} />
-        </div>
+        </StyledFeed>
       </React.Fragment>
     );
   }

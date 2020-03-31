@@ -17,7 +17,7 @@ const LoginView = ({ location }) => {
   if (isAuthenticated) {
     // If the user is already authenticated
     // Redirect to whichever page makes sense
-    return <Redirect to={(location.state && location.state.from) || '/landing'} />;
+    return <Redirect to={(location.state && location.state.from) || '/feed'} />;
   }
 
   return (

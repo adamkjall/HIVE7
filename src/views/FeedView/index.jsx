@@ -50,6 +50,7 @@ const FeedView = () => {
           createdAt: data.createdAt.toDate()
         });
       });
+
       setWalks([...newWalks]);
     });
     return () => unsubscribe();

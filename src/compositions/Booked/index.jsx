@@ -24,7 +24,9 @@ const Booked = ({ walks }) => {
               return walkA.createdAt - walkB.createdAt;
             })
             .filter(walk => {
-              return walk.attendingPeople.find(id => id === user.id);
+              const isAttending = walk.attendingPeople.find(id => id === user.id);
+              const isUser = walk.userId === user.id;
+              return isAttending || isUser;
             })
             .map((walk, index) => {
               const timeArr = walk.createdAt.toLocaleTimeString().split(':');

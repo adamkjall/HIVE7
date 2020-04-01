@@ -1,19 +1,22 @@
 import styled from 'styled-components';
+import colors from 'tokens/colors.mjs';
+import spacing from 'tokens/spacing.mjs';
 
 export const StyledFeed = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
 `;
 
 export const StyledPost = styled.div`
-  max-width: 25rem;
-  border-radius: 1rem;
   padding: 1rem;
-  margin-bottom: 1rem;
+  width: 85vw;
+  max-width: 350px;
+  margin-bottom: ${spacing.tiny};
+  background: ${colors.white};
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
 
   &:hover {
     filter: brightness(1.1) grayscale(0);
@@ -44,7 +47,6 @@ export const StyledPost = styled.div`
   .box2 {
     display: grid;
     grid-auto-columns: 1fr 1fr;
-    margin: 1rem;
     span {
       padding: 1rem;
     }

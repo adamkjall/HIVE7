@@ -16,7 +16,7 @@ const SignUp = () => {
     username: '',
     email: '',
     dateOfBirth: '',
-    lvlOfSwedish: 'Pratar ingen svenska',
+    lvlOfSwedish: '',
     password: '',
     confirmPassword: ''
   });
@@ -78,13 +78,13 @@ const SignUp = () => {
           onChange={event => onValueChange('email', event.target.value)}
         />
         <Input
-          type="date"
+          type="number"
           autoComplete="dateOfBirth"
           label="Födelsedatum"
           id="dateOfBirth"
           inline
           name="dateOfBirth"
-          placeholder=""
+          placeholder="ÅÅÅÅMMDD"
           value={inputs.dateOfBirth}
           onChange={event => onValueChange('dateOfBirth', event.target.value)}
         />
@@ -95,6 +95,7 @@ const SignUp = () => {
           value={inputs.lvlOfSwedish}
           onChange={event => onValueChange('lvlOfSwedish', event.target.value)}
         >
+          <option value="ej svarat"></option>
           <option value="Pratar ingen svenska">Pratar ingen svenska</option>
           <option value="Pratar lite svenska">Pratar lite svenska</option>
           <option value="Pratar bra svenska">Pratar bra svenska</option>

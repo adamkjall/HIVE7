@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-
+import colors from 'tokens/colors.mjs';
 import fontFamilies from 'tokens/fontFamilies.mjs';
 import fontWeights from 'tokens/fontWeights.mjs';
 
@@ -45,7 +45,7 @@ export const StyledGlobalStyle = createGlobalStyle`
 
  a {
    text-decoration:none;
-   color:black;
+   color:${colors.black};
  }
 
  .box2 {
@@ -58,6 +58,9 @@ export const StyledGlobalStyle = createGlobalStyle`
   }
   .plus {
       padding: 0.5rem;
+    }
+    hr {
+      border: 1px solid ${colors.gray4};
     }
     
 `;

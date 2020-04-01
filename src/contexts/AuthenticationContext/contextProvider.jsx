@@ -28,6 +28,9 @@ const AuthenticationContextProvider = props => {
           });
           setIsAuthenticated(true);
         });
+      } else {
+        setUser(userAuth);
+        setIsAuthenticated(true);
       }
     });
 
@@ -57,6 +60,8 @@ const AuthenticationContextProvider = props => {
     //setToken(undefined);
     setUser(undefined);
   };
+
+  console.log('user', user);
 
   return (
     <AuthenticationContext.Provider

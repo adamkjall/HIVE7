@@ -84,9 +84,9 @@ export const getAllWalks = async () => {
 export const bookAWalk = async (userId, walkId) => {
   firestore
     .collection('users')
-    .doc(`${userId}`)
+    .doc(userId)
     .collection('booked')
-    .doc(`${walkId}`)
+    .doc(walkId)
     .set({ postId: walkId, userId })
     .then(() => console.log(`${userId} booked ${walkId}`));
 };
@@ -94,21 +94,35 @@ export const bookAWalk = async (userId, walkId) => {
 export const joinAWalk = async (userId, walkId) => {
   firestore
     .collection('walks')
-    .doc(`${walkId}`)
+    .doc(walkId)
     .update({
       attendingPeople: firebase.firestore.FieldValue.arrayUnion(userId)
     })
     .then(() => console.log(`User: ${userId} booked walk: ${walkId}`));
+
+  firestore
+    .collection('users')
+    .doc(userId)
+    .update({
+      bookedWalks: firebase.firestore.FieldValue.arrayUnion(walkId)
+    });
 };
 
 export const leaveAWalk = async (userId, walkId) => {
   firestore
     .collection('walks')
-    .doc(`${walkId}`)
+    .doc(walkId)
     .update({
       attendingPeople: firebase.firestore.FieldValue.arrayRemove(userId)
     })
     .then(() => console.log(`User: ${userId} left walk: ${walkId}`));
+
+  // firestore
+  //   .collection('users')
+  //   .doc(userId)
+  //   .update({
+  //     bookedWalks: firebase.firestore.FieldValue.arrayRemove(walkId)
+  //   });
 };
 
 export const getBookings = async userId => {
@@ -116,11 +130,15 @@ export const getBookings = async userId => {
   const snapshot = await firestore
     .collection('users')
     .doc(userId)
-    .collection('booked').get;
+    .get();
 
-  snapshot.forEach(doc => bookings.push(doc.data()));
+  // console.log('snap', snapshot.data());
+
+  // snapshot.forEach(doc => bookings.push(doc.data()));
 
   return bookings;
 };
+
+getBookings('oTOlnjy0U2TKi5z4v9nrwuAqVzJ3');
 
 export default firebase;

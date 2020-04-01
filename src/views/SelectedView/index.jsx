@@ -88,7 +88,9 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
                 <Button onClick={() => joinAWalk(user.id, walk.postId)}>Följ med!</Button>
               </Link>
             ) : walk.attendingPeople.find(id => id === user.id) ? (
-              <Button onClick={() => leaveAWalk(user.id, walk.postId)}>Lämna promenad</Button>
+              <Link to={{ pathname: '/feed/' }}>
+                <Button onClick={() => leaveAWalk(user.id, walk.postId)}>Lämna promenad</Button>
+              </Link>
             ) : (
               <Link to={{ pathname: '/matched/' + walk.postId, state: { walk } }}>
                 <Button onClick={() => joinAWalk(user.id, walk.postId)}>Följ med</Button>

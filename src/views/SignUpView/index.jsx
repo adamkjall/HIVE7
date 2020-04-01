@@ -1,38 +1,32 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { firestore } from '../../firebase/firebase.utils';
-
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
-import SignIn from '../../components/SignIn';
+import SignUp from '../../components/SignUp';
 
 import Page from 'compositions/Page';
 
-import { StyledContainer } from './style';
-
 import PropTypes from 'prop-types';
 
-const LoginView = ({ location }) => {
+const SignUpView = ({ location }) => {
   const { isAuthenticated } = useContext(AuthenticationContext);
 
   if (isAuthenticated) {
     // If the user is already authenticated
     // Redirect to whichever page makes sense
-    return <Redirect to={(location.state && location.state.from) || '/private'} />;
+    return <Redirect to={(location.state && location.state.from) || '/feed'} />;
   }
 
   return (
-    <Page metadata={{ title: 'Login' }}>
-      <StyledContainer>
-        <SignIn />
-      </StyledContainer>
+    <Page metadata={{ title: 'SignUp' }}>
+      <SignUp />
     </Page>
   );
 };
 
-LoginView.propTypes = {
+SignUpView.propTypes = {
   location: PropTypes.object
 };
 
-export default LoginView;
+export default SignUpView;

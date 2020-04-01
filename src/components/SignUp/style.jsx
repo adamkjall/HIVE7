@@ -4,4 +4,8 @@ export const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .red {
+    color: red;
+  }
 `;

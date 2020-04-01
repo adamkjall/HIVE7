@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { firestore, signInWithGoogle } from '../../firebase/firebase.utils';
 
 import Input from '../UI/Input';
 import Button from '../UI/Button';
@@ -62,15 +62,9 @@ const SignIn = () => {
           onChange={event => onValueChange('password', event.target.value)}
         />
         <div className="buttons">
-          <Link to="/">
-            <Button nature="default">Skapa konto</Button>
-          </Link>{' '}
-          <Button nature="primary" onClick={signInWithGoogle}>
-            Logga in med Google
-          </Button>
-          <Button nature="default" type="submit">
-            Logga in
-          </Button>
+          <Link to="/feed">
+            <Button nature="default">hejLogga in</Button>
+          </Link>
         </div>
       </form>
     </StyledContainer>

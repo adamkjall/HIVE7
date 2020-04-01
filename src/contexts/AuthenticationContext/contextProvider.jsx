@@ -58,8 +58,6 @@ const AuthenticationContextProvider = props => {
     setUser(undefined);
   };
 
-  console.log('user', user);
-
   return (
     <AuthenticationContext.Provider
       {...props}

@@ -51,11 +51,19 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+export const getUserData = async userId => {
+  const userRef = firestore.doc(`users/${userId}`);
+  const snapshot = await userRef.get();
+
+  if (snapshot.exists) return await snapshot.data();
+  return undefined;
+};
+
 export const createWalkDocument = async walk => {
   const docRef = firestore.collection('walks').doc();
 
   docRef
-    .set({ ...walk, postId: docRef.id })
+    .set({ ...walk, walkId: docRef.id })
     .then(() => console.log(`walk created with id: ${docRef.id}`))
     .catch(error => console.log('Error creating walk: ', error));
 };

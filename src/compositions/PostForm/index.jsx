@@ -49,10 +49,9 @@ const PostForm = () => {
     event.preventDefault();
 
     if (inputs.where.length) {
-      const walks = {
+      const walk = {
         createdAt: new Date(),
-        userId: user.id,
-        author: user.displayName,
+        user: user,
         date: inputs.date,
         time: inputs.time,
         where: inputs.where,
@@ -66,7 +65,7 @@ const PostForm = () => {
         attendingPeople: []
       };
 
-      createWalkDocument(walks);
+      createWalkDocument(walk);
       setInputs({
         date: '',
         time: '',

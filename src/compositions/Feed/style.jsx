@@ -13,7 +13,7 @@ export const StyledPost = styled.div`
   padding: 1rem;
   width: 85vw;
   max-width: 350px;
-  margin-bottom: ${spacing.tiny};
+  margin-bottom: ${spacing.small};
   background: ${colors.white};
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
   border-radius: 10px;

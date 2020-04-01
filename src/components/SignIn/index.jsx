@@ -1,12 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
 
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
-import { firestore, signInWithGoogle } from '../../firebase/firebase.utils';
 
 import Input from '../UI/Input';
 import Button from '../UI/Button';
-import H1 from '../UI/H1';
+import H3 from '../UI/H3';
 
 import { StyledContainer } from './style';
 
@@ -37,7 +35,7 @@ const SignIn = () => {
 
   return (
     <StyledContainer>
-      <H1>Framåt!</H1>
+      <H3>Logga in</H3>
       <form onSubmit={onSubmit}>
         <Input
           type="email"
@@ -62,9 +60,9 @@ const SignIn = () => {
           onChange={event => onValueChange('password', event.target.value)}
         />
         <div className="buttons">
-          <Link to="/feed">
-            <Button nature="default">hejLogga in</Button>
-          </Link>
+          <Button type="submit" nature="default">
+            Logga in
+          </Button>
         </div>
       </form>
     </StyledContainer>

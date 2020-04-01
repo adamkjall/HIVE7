@@ -14,6 +14,8 @@ export const StyledNav = styled.nav`
   background: linear-gradient(0deg, #ffffff, #ffffff);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   img {
+    align-self: center;
+    max-width: 30px;
     margin: 0 0 ${spacing.tiny} 0;
   }
 `;

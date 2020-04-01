@@ -20,21 +20,25 @@ const PrivateView = () => {
 
   return (
     <Page metadata={{ title: 'Private view' }}>
-      <StyledPrivate>
-        <div className="box1">
-          <img className="avatar" src={avatar} alt="avatar" />
-          <span className="changepic">Byt Bild</span>
-          <H3 className="user">{user.displayName}</H3>
-          <Paragraph className="usersage">{user.dateOfBirth}</Paragraph>
-        </div>
-        <hr />
-        <Paragraph>{user.email}</Paragraph>
-        <Paragraph>{user.lvlOfSwedish}</Paragraph>
-        <hr />
-        <Button as={RouterLink} to="/logout">
-          Logga ut
-        </Button>
-      </StyledPrivate>
+      {!user ? (
+        <div></div>
+      ) : (
+        <StyledPrivate>
+          <div className="box1">
+            <img className="avatar" src={avatar} alt="avatar" />
+            <span className="changepic">Byt Bild</span>
+            <H3 className="user">{user.displayName}</H3>
+            <Paragraph className="usersage">{user.dateOfBirth}</Paragraph>
+          </div>
+          <hr />
+          <Paragraph>{user.email}</Paragraph>
+          <Paragraph>{user.lvlOfSwedish}</Paragraph>
+          <hr />
+          <Button as={RouterLink} to="/logout">
+            Logga ut
+          </Button>
+        </StyledPrivate>
+      )}
     </Page>
   );
 };

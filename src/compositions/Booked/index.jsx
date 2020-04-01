@@ -18,13 +18,13 @@ const Booked = ({ walks }) => {
   return (
     <StyledBooked>
       <StyledPostList>
-        {walks.length !== 0 ? (
+        {walks && user && walks.length !== 0 ? (
           walks
             .sort((walkA, walkB) => {
               return walkA.createdAt - walkB.createdAt;
             })
             .filter(walk => {
-              return walk.userId === user.id;
+              return walk.attendingPeople.find(id => id === user.id);
             })
             .map((walk, index) => {
               const timeArr = walk.createdAt.toLocaleTimeString().split(':');

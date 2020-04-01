@@ -32,7 +32,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapshot = await userRef.get();
 
-  if (!snapshot.exist) {
+  if (!snapshot.exists) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
 
@@ -81,6 +81,17 @@ export const getAllWalks = async () => {
   return walks;
 };
 
+export const getWalk = async walkId => {
+  const walkRef = await firestore.collection('walks').doc(walkId);
+  const snapshot = await walkRef.get();
+
+  if (snapshot.exists) {
+    return snapshot.data();
+  }
+
+  return undefined;
+};
+
 export const bookAWalk = async (userId, walkId) => {
   firestore
     .collection('users')
@@ -117,12 +128,12 @@ export const leaveAWalk = async (userId, walkId) => {
     })
     .then(() => console.log(`User: ${userId} left walk: ${walkId}`));
 
-  // firestore
-  //   .collection('users')
-  //   .doc(userId)
-  //   .update({
-  //     bookedWalks: firebase.firestore.FieldValue.arrayRemove(walkId)
-  //   });
+  firestore
+    .collection('users')
+    .doc(userId)
+    .update({
+      bookedWalks: firebase.firestore.FieldValue.arrayRemove(walkId)
+    });
 };
 
 export const getBookings = async userId => {
@@ -132,13 +143,17 @@ export const getBookings = async userId => {
     .doc(userId)
     .get();
 
-  // console.log('snap', snapshot.data());
-
-  // snapshot.forEach(doc => bookings.push(doc.data()));
-
+  if (snapshot.exists) {
+    const bookedWalks = await snapshot.data().bookedWalks;
+    if (bookedWalks) {
+      bookedWalks.forEach(async walkId => {
+        const walk = await getWalk(walkId);
+        if (walk) bookings.push(walk);
+      });
+    }
+    return bookings;
+  }
   return bookings;
 };
-
-getBookings('oTOlnjy0U2TKi5z4v9nrwuAqVzJ3');
 
 export default firebase;

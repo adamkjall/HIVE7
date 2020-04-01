@@ -28,9 +28,6 @@ const AuthenticationContextProvider = props => {
           });
           setIsAuthenticated(true);
         });
-      } else {
-        setUser(userAuth);
-        setIsAuthenticated(true);
       }
     });
 

@@ -15,6 +15,27 @@ import { StyledBooked, StyledPostList, StyledPost } from './style';
 const Booked = ({ walks }) => {
   const { user } = useContext(AuthenticationContext);
 
+  const birthDateToAgeString = birthDateString => {
+    if (birthDateString) {
+      const year = birthDateString.slice(0, 4);
+      const month = birthDateString.slice(4, 6);
+      const day = birthDateString.slice(6, 8);
+
+      const thisDate = new Date().toLocaleDateString();
+      const [thisYear, thisMonth, thisDay] = thisDate.split('-');
+
+      let age = +thisYear - +year;
+      const monthDiff = +thisMonth - +month;
+      const dayDiff = +thisDay - +day;
+
+      if (monthDiff < 0) age--;
+      else if (monthDiff === 0 && dayDiff < 0) age--;
+
+      return age + ' år';
+    }
+    return '';
+  };
+
   return (
     <StyledBooked>
       <StyledPostList>
@@ -25,7 +46,7 @@ const Booked = ({ walks }) => {
             })
             .filter(walk => {
               const isAttending = walk.attendingPeople.find(id => id === user.id);
-              const isUser = walk.userId === user.id;
+              const isUser = walk.user.id === user.id;
               return isAttending || isUser;
             })
             .map((walk, index) => {
@@ -34,11 +55,13 @@ const Booked = ({ walks }) => {
 
               return (
                 <StyledPost key={index}>
-                  <Link to={{ pathname: '/selected/' + walk.postId, state: { walk } }}>
+                  <Link to={{ pathname: '/selected/' + walk.walkId, state: { walk } }}>
                     <div className="box1">
                       <img className="avatar" src={avatar} alt="avatar" />
-                      <h3 className="author">{walk.author}</h3>
-                      <span className="usersage">28 år{/*  {walk.authorage} */}</span>
+                      <h3 className="author">{walk.user.displayName}</h3>
+                      <span className="usersage">
+                        {birthDateToAgeString(walk.user.dateOfBirth)}
+                      </span>
                     </div>
                     <hr />
                     <div className="box2">
@@ -78,15 +101,19 @@ Booked.propTypes = {
     PropTypes.shape({
       allowChildren: PropTypes.string,
       allowPets: PropTypes.string,
-      author: PropTypes.string,
       bringPets: PropTypes.string,
       createdAt: PropTypes.instanceOf(Date),
       date: PropTypes.string,
       filterGender: PropTypes.string,
       introText: PropTypes.string,
-      postId: PropTypes.string,
+      walkId: PropTypes.string,
       time: PropTypes.string,
-      userId: PropTypes.string,
+      user: PropTypes.shape({
+        dateOfBirth: PropTypes.string,
+        displayName: PropTypes.string,
+        email: PropTypes.string,
+        lvlOfSwedish: PropTypes.string
+      }),
       where: PropTypes.string
     })
   )

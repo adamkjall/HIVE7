@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { firestore } from '../../firebase/firebase.utils';
+import { firestore, getUserData } from '../../firebase/firebase.utils';
 
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
@@ -42,17 +42,17 @@ const FeedView = () => {
 
   useEffect(() => {
     const unsubscribe = firestore.collection('walks').onSnapshot(querySnapshot => {
-      const newWalks = [];
+      const fetchedWalks = [];
       querySnapshot.forEach(doc => {
         const data = doc.data();
-        newWalks.push({
+        fetchedWalks.push({
           ...data,
           createdAt: data.createdAt.toDate()
         });
       });
-
-      setWalks([...newWalks]);
+      setWalks(fetchedWalks);
     });
+
     return () => unsubscribe();
   }, []);
 
@@ -69,15 +69,20 @@ FeedView.propTypes = {
     PropTypes.shape({
       allowChildren: PropTypes.string,
       allowPets: PropTypes.string,
-      author: PropTypes.string,
       bringPets: PropTypes.string,
       createdAt: PropTypes.instanceOf(Date),
       date: PropTypes.string,
       filterGender: PropTypes.string,
       introText: PropTypes.string,
-      postId: PropTypes.string,
+      walkId: PropTypes.string,
       time: PropTypes.string,
-      userId: PropTypes.string,
+      user: PropTypes.shape({
+        createdAt: PropTypes.instanceOf(Date),
+        dateOfBirth: PropTypes.string,
+        displayName: PropTypes.string,
+        email: PropTypes.string,
+        lvlOfSwedish: PropTypes.string
+      }),
       where: PropTypes.string
     })
   )

@@ -81,19 +81,19 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
             and tell others that walk is canceled a conditional render if your the attende that show
             join (this is for next page) or leave if you selected and confirmed this walk
              */}
-            {user.id === walk.userId ? (
-              <Button onClick={() => deleteWalkDocument(walk.postId)}>Ta bort din promenad</Button>
+            {user.id === walk.user.id ? (
+              <Button onClick={() => deleteWalkDocument(walk.walkId)}>Ta bort din promenad</Button>
             ) : !walk.attendingPeople ? (
-              <Link to={{ pathname: '/matched/' + walk.postId, state: { walk } }}>
-                <Button onClick={() => joinAWalk(user.id, walk.postId)}>Följ med!</Button>
+              <Link to={{ pathname: '/matched/' + walk.walkId, state: { walk } }}>
+                <Button onClick={() => joinAWalk(user.id, walk.walkId)}>Följ med!</Button>
               </Link>
             ) : walk.attendingPeople.find(id => id === user.id) ? (
               <Link to={{ pathname: '/feed/' }}>
-                <Button onClick={() => leaveAWalk(user.id, walk.postId)}>Lämna promenad</Button>
+                <Button onClick={() => leaveAWalk(user.id, walk.walkId)}>Lämna promenad</Button>
               </Link>
             ) : (
-              <Link to={{ pathname: '/matched/' + walk.postId, state: { walk } }}>
-                <Button onClick={() => joinAWalk(user.id, walk.postId)}>Följ med</Button>
+              <Link to={{ pathname: '/matched/' + walk.walkId, state: { walk } }}>
+                <Button onClick={() => joinAWalk(user.id, walk.walkId)}>Följ med</Button>
               </Link>
             )}
           </div>

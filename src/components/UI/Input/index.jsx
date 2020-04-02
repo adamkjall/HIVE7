@@ -16,7 +16,7 @@ const Input = ({ label, id, inline, wrapperProps, ...props }) => (
 Input.propTypes = {
   id: PropTypes.string.isRequired,
   inline: PropTypes.bool,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   type: PropTypes.string,
   wrapperProps: PropTypes.object
 };

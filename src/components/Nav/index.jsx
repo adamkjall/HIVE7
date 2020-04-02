@@ -11,20 +11,21 @@ const Nav = props => {
 
   return (
     <StyledNav {...props}>
-      <StyledNavLink as={RouterLink} to="/feed">
-        <img src={walking} alt="promenad" />
-        Promenader
-      </StyledNavLink>
-
+      {isAuthenticated ? (
+        <StyledNavLink as={RouterLink} to="/feed">
+          <img src={walking} alt="promenad" />
+          Promenader
+        </StyledNavLink>
+      ) : (
+        <StyledNavLink as={RouterLink} to="/">
+          Prommis
+        </StyledNavLink>
+      )}
       {isAuthenticated ? (
         <StyledNavLink as={RouterLink} to="/private">
           <img src={navprofile} alt="profil" /> Profil
         </StyledNavLink>
-      ) : (
-        <StyledNavLink as={RouterLink} to="/login">
-          Logga in
-        </StyledNavLink>
-      )}
+      ) : null}
     </StyledNav>
   );
 };

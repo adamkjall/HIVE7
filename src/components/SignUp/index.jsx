@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
 import Button from '../UI/Button';
-import H1 from '../UI/H1';
+import H3 from '../UI/H3';
 import Input from '../UI/Input';
 import Select from '../UI/Select';
 
@@ -12,6 +12,11 @@ import { StyledContainer } from './style';
 
 const SignUp = () => {
   const history = useHistory();
+  const [msgName, setMsgName] = useState('');
+  const [msgLvl, setMsglvl] = useState('');
+  const [msgBirth, setMsgBirth] = useState('');
+  const [msg, setMsg] = useState('');
+
   const [inputs, setInputs] = useState({
     username: '',
     email: '',
@@ -24,11 +29,22 @@ const SignUp = () => {
   const onSubmit = async event => {
     event.preventDefault();
 
+    if (inputs.username.length <= 1) {
+      setMsgName('Fyll i Ditt namn.');
+    }
+    if (inputs.dateOfBirth.length != 8 || inputs.dateOfBirth > 20200202) {
+      setMsgBirth('Fyll i det datum du är född.');
+    }
+    if (inputs.lvlOfSwedish.length < 4) {
+      setMsglvl('Var vänlig fyll i Svenska nivå.');
+    }
     if (inputs.password !== inputs.confirmPassword) {
-      alert("Passwords don't match!");
+      setMsg('Dina lösenord matchar inte');
       return;
     }
-
+    if (inputs.password.length < 6) {
+      setMsg('Ditt Lösenord behöver vara minst 6 tecken.');
+    }
     try {
       const { user } = await auth.createUserWithEmailAndPassword(inputs.email, inputs.password);
 
@@ -37,8 +53,9 @@ const SignUp = () => {
         dateOfBirth: inputs.dateOfBirth,
         lvlOfSwedish: inputs.lvlOfSwedish
       });
-      alert('Kontot är skapat');
-      history.push('/landing');
+      alert('Grattis, Kontot är skapat!');
+
+      history.push('/feed');
     } catch (error) {
       console.log('Error while sign up', error.message);
     }
@@ -53,8 +70,8 @@ const SignUp = () => {
 
   return (
     <StyledContainer>
-      <H1>Register</H1>
       <form onSubmit={onSubmit}>
+        <H3>Skapa konto</H3>
         <Input
           type="text"
           autoComplete="username"
@@ -62,10 +79,11 @@ const SignUp = () => {
           id="username"
           inline
           name="username"
-          placeholder="john.doe"
+          placeholder="Namn Efternamn"
           value={inputs.username}
           onChange={event => onValueChange('username', event.target.value)}
         />
+        <p className="red">{msgName}</p>
         <Input
           type="email"
           autoComplete="email"
@@ -73,7 +91,7 @@ const SignUp = () => {
           id="email"
           inline
           name="email"
-          placeholder="john.doe@gmail.com"
+          placeholder="namn.efternamn@gmail.com"
           value={inputs.email}
           onChange={event => onValueChange('email', event.target.value)}
         />
@@ -88,6 +106,7 @@ const SignUp = () => {
           value={inputs.dateOfBirth}
           onChange={event => onValueChange('dateOfBirth', event.target.value)}
         />
+        <p className="red">{msgBirth}</p>
         <Select
           id="lvlOfSwedish"
           name="lvlOfSwedish"
@@ -95,12 +114,13 @@ const SignUp = () => {
           value={inputs.lvlOfSwedish}
           onChange={event => onValueChange('lvlOfSwedish', event.target.value)}
         >
-          <option value="ej svarat"></option>
+          <option value="no"></option>
           <option value="Pratar ingen svenska">Pratar ingen svenska</option>
           <option value="Pratar lite svenska">Pratar lite svenska</option>
           <option value="Pratar bra svenska">Pratar bra svenska</option>
           <option value="Pratar flytande svenska">Pratar flytande svenska</option>
         </Select>
+        <p className="red">{msgLvl}</p>
         <Input
           type="password"
           autoComplete="current-password"
@@ -123,7 +143,8 @@ const SignUp = () => {
           value={inputs.confirmPassword}
           onChange={event => onValueChange('confirmPassword', event.target.value)}
         />
-        <Button nature="default" stretch type="submit">
+        <p className="red">{msg}</p>
+        <Button nature="default" type="submit">
           Skapa konto
         </Button>
       </form>

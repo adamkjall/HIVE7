@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { firestore } from '../../firebase/firebase.utils';
+import { firestore, signInWithGoogle } from '../../firebase/firebase.utils';
 
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
 import H1 from 'components/UI/H1';
 import Alert from 'components/UI/Alert';
+import Paragraph from 'components/UI/Paragraph';
+import Button from 'components/UI/Button';
 
-import SignUp from '../../components/SignUp';
+import { StyledContainer } from './style';
 
 const HomePageContent = ({ error, isLoading }) => {
   if (isLoading) {
@@ -17,8 +20,21 @@ const HomePageContent = ({ error, isLoading }) => {
   } else {
     return (
       <React.Fragment>
-        <H1>Home View</H1>
-        <SignUp />
+        <StyledContainer>
+          <H1>Prommis</H1>
+          <Paragraph>Detta är första sidan. Här kan man skriva om appen.</Paragraph>
+          <div className="buttons">
+            <Link to="/signup">
+              <Button nature="default">Skapa Konto</Button>
+            </Link>
+            <Button nature="primary" onClick={signInWithGoogle}>
+              Logga in med Google
+            </Button>{' '}
+            <Link to="/login">
+              <Button nature="default">Logga in med E-post</Button>
+            </Link>
+          </div>
+        </StyledContainer>
       </React.Fragment>
     );
   }

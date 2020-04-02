@@ -14,4 +14,10 @@ export const StyledPostForm = styled.div`
       padding: 1rem;
     }
   }
+
+  .formcheckbox {
+    margin: 1rem;
+    display: grid;
+    grid-template-columns: 50px auto 30px;
+  }
 `;

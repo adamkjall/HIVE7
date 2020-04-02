@@ -29,6 +29,8 @@ const AppRouter = () => (
     />
     <Route exact path="/form" render={props => <LoadableView {...props} view="FormView" />} />
     <Route exact path="/login" render={props => <LoadableView {...props} view="LoginView" />} />
+    <Route exact path="/signup" render={props => <LoadableView {...props} view="SignUpView" />} />
+
     <ProtectedRoute
       exact
       path="/logout"

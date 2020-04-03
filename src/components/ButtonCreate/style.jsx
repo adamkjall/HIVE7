@@ -20,4 +20,7 @@ export const StyledButtonCreate = styled.button`
   position: sticky;
   bottom: 1rem;
   align-self: flex-end;
+  .plus {
+    padding: 0.5rem;
+  }
 `;

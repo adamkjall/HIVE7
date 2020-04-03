@@ -11,13 +11,10 @@ import Paragraph from 'components/UI/Paragraph';
 
 import avatar from '../../assets/icons/profilepic.svg';
 
-import colors from 'tokens/colors.mjs';
 import { StyledPrivate } from './style';
 
 const PrivateView = () => {
   const { user } = useContext(AuthenticationContext);
-  console.log(user);
-
   return (
     <Page metadata={{ title: 'Private view' }}>
       {!user ? (

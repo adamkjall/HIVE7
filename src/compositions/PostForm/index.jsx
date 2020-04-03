@@ -18,7 +18,7 @@ import walking from '../../assets/icons/walking.svg';
 import time from '../../assets/icons/time.svg';
 import calender from '../../assets/icons/calender.svg';
 
-// import colors from 'tokens/colors.mjs';
+import colors from 'tokens/colors.mjs';
 
 import { StyledPostForm } from './style';
 import CheckBox from '../../components/UI/Checkbox';

@@ -70,9 +70,9 @@ const WalkCard = ({ walk }) => {
 
 WalkCard.propTypes = {
   walk: PropTypes.shape({
-    allowChildren: PropTypes.string,
-    allowPets: PropTypes.string,
-    bringPets: PropTypes.string,
+    allowChildren: PropTypes.boolean,
+    allowPets: PropTypes.boolean,
+    bringPets: PropTypes.boolean,
     createdAt: PropTypes.instanceOf(Date),
     date: PropTypes.string,
     filterGender: PropTypes.string,

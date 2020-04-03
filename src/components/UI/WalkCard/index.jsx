@@ -78,6 +78,7 @@ WalkCard.propTypes = {
     filterGender: PropTypes.string,
     introText: PropTypes.string,
     walkId: PropTypes.string,
+    timeduration: PropTypes.string,
     time: PropTypes.string,
     user: PropTypes.shape({
       dateOfBirth: PropTypes.string,

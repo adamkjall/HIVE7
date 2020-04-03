@@ -6,6 +6,7 @@ import { createWalkDocument } from '../../firebase/firebase.utils';
 
 import Select from 'components/UI/Select';
 import Button from 'components/UI/Button';
+import CheckBox from '../../components/UI/Checkbox';
 import Input from 'components/UI/Input';
 import Textarea from 'components/UI/Textarea';
 import chat from '../../assets/icons/chat.svg';
@@ -18,11 +19,7 @@ import walking from '../../assets/icons/walking.svg';
 import time from '../../assets/icons/time.svg';
 import calender from '../../assets/icons/calender.svg';
 
-import colors from 'tokens/colors.mjs';
-
 import { StyledPostForm } from './style';
-import CheckBox from '../../components/UI/Checkbox';
-
 const PostForm = () => {
   const { user } = useContext(AuthenticationContext);
   const history = useHistory();
@@ -31,10 +28,10 @@ const PostForm = () => {
     time: '',
     where: '',
     timeduration: '',
-    allowFriends: false,
-    allowChildren: false,
-    allowPets: false,
-    bringPets: false,
+    allowFriends: 'false',
+    allowChildren: 'false',
+    allowPets: 'false',
+    bringPets: 'false',
     filterGender: 'alla',
     introtext: ''
   });
@@ -72,14 +69,14 @@ const PostForm = () => {
         time: '',
         where: '',
         timeduration: '',
-        allowFriends: false,
-        allowChildren: false,
-        allowPets: false,
-        bringPets: false,
+        allowFriends: '',
+        allowChildren: '',
+        allowPets: '',
+        bringPets: '',
         filterGender: '',
         introtext: ''
       });
-      alert('Promenaden är skapad');
+
       history.push('/feed');
     } else console.log('Något fick fel, förök igen');
   };

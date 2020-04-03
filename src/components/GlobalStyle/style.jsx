@@ -23,6 +23,7 @@ export const StyledGlobalStyle = createGlobalStyle`
 
   #root {
     min-height: 100vh;
+    max-width: 700px;
   }
 
   img {
@@ -56,11 +57,10 @@ export const StyledGlobalStyle = createGlobalStyle`
       padding: 1rem;
     }
   }
-  .plus {
-      padding: 0.5rem;
-    }
-    hr {
-      border: 1px solid ${colors.gray4};
-    }
+
+  hr {
+    border: 1.2px solid ${colors.gray4};
+  }
     
+
 `;

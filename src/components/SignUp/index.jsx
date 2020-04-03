@@ -53,7 +53,6 @@ const SignUp = () => {
         dateOfBirth: inputs.dateOfBirth,
         lvlOfSwedish: inputs.lvlOfSwedish
       });
-      alert('Grattis, Kontot är skapat!');
 
       history.push('/feed');
     } catch (error) {

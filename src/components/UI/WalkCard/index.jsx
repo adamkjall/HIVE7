@@ -36,7 +36,7 @@ const WalkCard = ({ walk }) => {
 
   return (
     <StyledWalkCard>
-      <Link to={{ pathname: '/selected/' + walk.walkId, state: { walk } }}>
+      <Link to={{ pathname: '/selected/' + walk.walkId }}>
         <div className="box1">
           <img className="avatar" src={avatar} alt="avatar" />
           <h3 className="author">{walk.user.displayName}</h3>
@@ -70,9 +70,9 @@ const WalkCard = ({ walk }) => {
 
 WalkCard.propTypes = {
   walk: PropTypes.shape({
-    allowChildren: PropTypes.string,
-    allowPets: PropTypes.string,
-    bringPets: PropTypes.string,
+    allowChildren: PropTypes.boolean,
+    allowPets: PropTypes.boolean,
+    bringPets: PropTypes.boolean,
     createdAt: PropTypes.instanceOf(Date),
     date: PropTypes.string,
     filterGender: PropTypes.string,

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 
 import WalkCard from '../../components/UI/WalkCard';
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
@@ -33,6 +34,10 @@ const Booked = ({ walks }) => {
       </StyledPostList>
     </StyledBooked>
   );
+};
+
+Booked.propTypes = {
+  walks: PropTypes.arrayOf(PropTypes.instanceOf(WalkCard))
 };
 
 export default Booked;

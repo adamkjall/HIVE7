@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 
 import WalkCard from '../../components/UI/WalkCard';
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
@@ -29,6 +30,10 @@ const Feed = ({ walks }) => {
       </StyledPostList>
     </StyledFeed>
   );
+};
+
+Feed.propTypes = {
+  walks: PropTypes.arrayOf(PropTypes.instanceOf(WalkCard))
 };
 
 export default Feed;

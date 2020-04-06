@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
-import { deleteWalkDocument, leaveAWalk, joinAWalk } from '../../firebase/firebase.utils';
+import { deleteWalkDocument, leaveAWalk, joinAWalk, getWalk } from '../../firebase/firebase.utils';
 
 import Button from 'components/UI/Button';
 import Page from 'compositions/Page';
@@ -103,19 +103,28 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
   }
 };
 
-const SelectedView = walk => {
+const SelectedView = props => {
   const [data, setData] = useState(undefined);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [walk, setWalk] = useState(undefined);
+  const { postId: walkId } = useParams();
+
+  useEffect(() => {
+    if (walkId) {
+      setIsLoading(true);
+      getWalk(walkId).then(data => {
+        setWalk(data);
+        setIsLoading(false);
+      });
+    }
+  }, [walkId]);
+
+  console.log('walk', walk);
 
   return (
     <Page>
-      <SelectedPageContent
-        walk={walk.location.state.walk}
-        data={data}
-        error={error}
-        isLoading={isLoading}
-      />
+      <SelectedPageContent walk={walk} data={data} error={error} isLoading={isLoading} />
     </Page>
   );
 };

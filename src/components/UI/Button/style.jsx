@@ -12,8 +12,9 @@ export const NATURES = {
 const getNatureStyle = ({ nature }) =>
   ({
     default: css`
-      color: ${colors.white};
-      background-color: ${colors.black};
+      color: ${colors.black};
+      background-color: ${colors.gray4};
+      border: 1px solid ${colors.black};
     `,
     primary: css`
       color: ${colors.white};

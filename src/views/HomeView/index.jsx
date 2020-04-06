@@ -22,16 +22,24 @@ const HomePageContent = ({ error, isLoading }) => {
       <React.Fragment>
         <StyledContainer>
           <H1>Prommis</H1>
-          <Paragraph>Detta är första sidan. Här kan man skriva om appen.</Paragraph>
+          <Paragraph>
+            Detta är första sidan. Här kan man skriva om appen. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua.{' '}
+          </Paragraph>
           <div className="buttons">
             <Link to="/signup">
-              <Button nature="default">Skapa Konto</Button>
+              <Button nature="default" stretch>
+                Skapa Konto
+              </Button>
             </Link>
-            <Button nature="primary" onClick={signInWithGoogle}>
+            <Button nature="default" stretch onClick={signInWithGoogle}>
               Logga in med Google
-            </Button>{' '}
+            </Button>
             <Link to="/login">
-              <Button nature="default">Logga in med E-post</Button>
+              <Button nature="default" stretch>
+                Logga in med E-post
+              </Button>
             </Link>
           </div>
         </StyledContainer>

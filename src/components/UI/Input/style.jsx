@@ -14,10 +14,9 @@ export const StyledInput = styled.input`
   box-sizing: border-box;
   font-size: ${fontSizes.body1};
   line-height: 1;
-  border: 0;
+  border: 1px solid ${colors.black};
   border-radius: 5px;
-  border-bottom: 1px solid white;
-  background-color: ${colors.gray5};
+  background-color: ${colors.white};
 
   &:focus {
     outline: 0;

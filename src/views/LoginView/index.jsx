@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
 import SignIn from '../../components/SignIn';
-
+import BackButton from '../../components/UI/BackButton';
 import Page from 'compositions/Page';
 
 import { StyledContainer } from './style';
@@ -23,6 +23,7 @@ const LoginView = ({ location }) => {
   return (
     <Page metadata={{ title: 'Login' }}>
       <StyledContainer>
+        <BackButton />
         <SignIn />
       </StyledContainer>
     </Page>

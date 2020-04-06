@@ -9,25 +9,17 @@ import { StyledNav, StyledNavLink } from './style';
 const Nav = props => {
   const { isAuthenticated } = useContext(AuthenticationContext);
 
-  return (
+  return isAuthenticated ? (
     <StyledNav {...props}>
-      {isAuthenticated ? (
-        <StyledNavLink as={RouterLink} to="/feed">
-          <img src={walking} alt="promenad" />
-          Promenader
-        </StyledNavLink>
-      ) : (
-        <StyledNavLink as={RouterLink} to="/">
-          Prommis
-        </StyledNavLink>
-      )}
-      {isAuthenticated ? (
-        <StyledNavLink as={RouterLink} to="/private">
-          <img src={navprofile} alt="profil" /> Profil
-        </StyledNavLink>
-      ) : null}
+      <StyledNavLink as={RouterLink} to="/feed">
+        <img src={walking} alt="promenad" />
+        Promenader
+      </StyledNavLink>
+      <StyledNavLink as={RouterLink} to="/private">
+        <img src={navprofile} alt="profil" /> Profil
+      </StyledNavLink>
     </StyledNav>
-  );
+  ) : null;
 };
 
 export default Nav;

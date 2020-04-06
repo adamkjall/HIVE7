@@ -35,8 +35,8 @@ const SignIn = () => {
 
   return (
     <StyledContainer>
-      <H3>Logga in</H3>
       <form onSubmit={onSubmit}>
+        <H3>Logga in</H3>
         <Input
           type="email"
           autoComplete="email"
@@ -44,7 +44,7 @@ const SignIn = () => {
           id="email"
           inline
           name="email"
-          placeholder="john.doe"
+          placeholder="förnamn.efternamn@mail.com"
           value={inputs.email}
           onChange={event => onValueChange('email', event.target.value)}
         />
@@ -55,7 +55,7 @@ const SignIn = () => {
           id="password"
           inline
           name="password"
-          placeholder="lösenord"
+          placeholder="Lösenord"
           value={inputs.password}
           onChange={event => onValueChange('password', event.target.value)}
         />

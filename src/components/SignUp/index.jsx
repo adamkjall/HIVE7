@@ -6,14 +6,13 @@ import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 import Button from '../UI/Button';
 import H3 from '../UI/H3';
 import Input from '../UI/Input';
-import Select from '../UI/Select';
-
+import BackButton from '../UI/BackButton';
 import { StyledContainer } from './style';
 
 const SignUp = () => {
   const history = useHistory();
   const [msgName, setMsgName] = useState('');
-  const [msgLvl, setMsglvl] = useState('');
+  const [msgGender, setGender] = useState('');
   const [msgBirth, setMsgBirth] = useState('');
   const [msg, setMsg] = useState('');
 
@@ -22,6 +21,7 @@ const SignUp = () => {
     email: '',
     dateOfBirth: '',
     lvlOfSwedish: '',
+    gender: '',
     password: '',
     confirmPassword: ''
   });
@@ -35,8 +35,8 @@ const SignUp = () => {
     if (inputs.dateOfBirth.length != 8 || inputs.dateOfBirth > 20200202) {
       setMsgBirth('Fyll i det datum du är född.');
     }
-    if (inputs.lvlOfSwedish.length < 4) {
-      setMsglvl('Var vänlig fyll i Svenska nivå.');
+    if (inputs.gender.length < 1) {
+      setGender('Var vänlig fyll kön.');
     }
     if (inputs.password !== inputs.confirmPassword) {
       setMsg('Dina lösenord matchar inte');
@@ -51,8 +51,10 @@ const SignUp = () => {
       await createUserProfileDocument(user, {
         displayName: inputs.username,
         dateOfBirth: inputs.dateOfBirth,
-        lvlOfSwedish: inputs.lvlOfSwedish
+        lvlOfSwedish: inputs.lvlOfSwedish,
+        gender: inputs.gender
       });
+      console.log(user);
 
       history.push('/feed');
     } catch (error) {
@@ -69,12 +71,13 @@ const SignUp = () => {
 
   return (
     <StyledContainer>
+      <BackButton />
       <form onSubmit={onSubmit}>
         <H3>Skapa konto</H3>
         <Input
           type="text"
           autoComplete="username"
-          label="Namn"
+          label="Förnamn och efternamn *"
           id="username"
           inline
           name="username"
@@ -86,7 +89,7 @@ const SignUp = () => {
         <Input
           type="email"
           autoComplete="email"
-          label="E-Post"
+          label="E-Post *"
           id="email"
           inline
           name="email"
@@ -97,7 +100,7 @@ const SignUp = () => {
         <Input
           type="number"
           autoComplete="dateOfBirth"
-          label="Födelsedatum"
+          label="Födelsedatum *"
           id="dateOfBirth"
           inline
           name="dateOfBirth"
@@ -106,24 +109,69 @@ const SignUp = () => {
           onChange={event => onValueChange('dateOfBirth', event.target.value)}
         />
         <p className="red">{msgBirth}</p>
-        <Select
-          id="lvlOfSwedish"
-          name="lvlOfSwedish"
-          label="Svenska nivå"
-          value={inputs.lvlOfSwedish}
-          onChange={event => onValueChange('lvlOfSwedish', event.target.value)}
-        >
-          <option value="no"></option>
-          <option value="Pratar ingen svenska">Pratar ingen svenska</option>
-          <option value="Pratar lite svenska">Pratar lite svenska</option>
-          <option value="Pratar bra svenska">Pratar bra svenska</option>
-          <option value="Pratar flytande svenska">Pratar flytande svenska</option>
-        </Select>
-        <p className="red">{msgLvl}</p>
+        <div className="swedish">
+          <p>Är du ny eller etablerad? *</p>
+          <label htmlFor="newSwede">
+            <input
+              type="radio"
+              id="newSwede"
+              name="swedelvl"
+              value="newSwede"
+              onChange={event => onValueChange('lvlOfSwedish', event.target.value)}
+            />
+            Ny svensk - jag vill bli bättre på svenska
+          </label>
+          <br />
+          <label htmlFor="establish">
+            <input
+              type="radio"
+              id="establish"
+              name="swedelvl"
+              value="establishSwede"
+              onChange={event => onValueChange('lvlOfSwedish', event.target.value)}
+            />
+            Etablerad svensk - jag pratar flytande svenska.
+          </label>
+        </div>
+        <div className="gender">
+          <p>Kön? *</p>
+          <label htmlFor="female">
+            <input
+              type="radio"
+              id="female"
+              name="gender"
+              value="female"
+              onChange={event => onValueChange('gender', event.target.value)}
+            />
+            Kvinna
+          </label>
+          <label htmlFor="male">
+            <input
+              type="radio"
+              id="male"
+              name="gender"
+              value="male"
+              onChange={event => onValueChange('gender', event.target.value)}
+            />
+            Man
+          </label>
+          <label htmlFor="other">
+            <input
+              type="radio"
+              id="other"
+              name="gender"
+              value="other"
+              onChange={event => onValueChange('gender', event.target.value)}
+            />
+            Annat / vill inte svara
+          </label>
+        </div>
+
+        <p className="red">{msgGender}</p>
         <Input
           type="password"
           autoComplete="current-password"
-          label="Lösenord"
+          label="Lösenord*"
           id="password"
           inline
           name="password"
@@ -134,7 +182,7 @@ const SignUp = () => {
         <Input
           type="password"
           autoComplete="current-password"
-          label="Lösenord igen"
+          label="Lösenordet igen*"
           id="confirmPassword"
           inline
           name="confirmPassword"
@@ -143,7 +191,8 @@ const SignUp = () => {
           onChange={event => onValueChange('confirmPassword', event.target.value)}
         />
         <p className="red">{msg}</p>
-        <Button nature="default" type="submit">
+        <p>* Obligatoriska fält</p>
+        <Button nature="default" stretch type="submit">
           Skapa konto
         </Button>
       </form>

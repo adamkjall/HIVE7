@@ -36,7 +36,7 @@ const WalkCard = ({ walk }) => {
 
   return (
     <StyledWalkCard>
-      <Link to={{ pathname: '/selected/' + walk.walkId, state: { walk } }}>
+      <Link to={{ pathname: '/selected/' + walk.walkId }}>
         <div className="box1">
           <img className="avatar" src={avatar} alt="avatar" />
           <h3 className="author">{walk.user.displayName}</h3>

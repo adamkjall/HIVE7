@@ -35,7 +35,6 @@ const FeedPageContent = ({ error, isLoading, walks }) => {
 };
 
 const FeedView = () => {
-  const [data, setData] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [walks, setWalks] = useState([]);
@@ -58,7 +57,7 @@ const FeedView = () => {
 
   return (
     <Page>
-      <FeedPageContent walks={walks} data={data} error={error} isLoading={isLoading} />
+      <FeedPageContent walks={walks} error={error} isLoading={isLoading} />
     </Page>
   );
 };

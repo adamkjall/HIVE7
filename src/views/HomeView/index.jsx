@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import { firestore, signInWithGoogle } from '../../firebase/firebase.utils';
+import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
@@ -13,6 +14,17 @@ import Button from 'components/UI/Button';
 import { StyledContainer } from './style';
 
 const HomePageContent = ({ error, isLoading }) => {
+  const { user } = useContext(AuthenticationContext);
+  const history = useHistory();
+
+  // checkk if user logged in for the first time with google sign in
+  // and redirect user to a new page to add additional data
+  useEffect(() => {
+    if (user && user.isNewUser) {
+      history.push('/welcome');
+    }
+  }, [user, history]);
+
   if (isLoading) {
     return <Loader fullScreen />;
   } else if (error) {
@@ -49,7 +61,6 @@ const HomePageContent = ({ error, isLoading }) => {
 };
 
 const HomeView = () => {
-  const [data, setData] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [walks, setWalks] = useState([]);
@@ -114,7 +125,7 @@ const HomeView = () => {
         // }
       }}
     >
-      <HomePageContent data={data} error={error} isLoading={isLoading} walks={walks} />
+      <HomePageContent error={error} isLoading={isLoading} walks={walks} />
     </Page>
   );
 };

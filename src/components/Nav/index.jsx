@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import walking from '../../assets/icons/walking.svg';
@@ -11,12 +11,13 @@ const Nav = props => {
 
   return isAuthenticated ? (
     <StyledNav {...props}>
-      <StyledNavLink as={RouterLink} to="/feed">
+      <StyledNavLink as={NavLink} to="/feed">
         <img src={walking} alt="promenad" />
-        Promenader
+        <p>Promenader</p>
       </StyledNavLink>
-      <StyledNavLink as={RouterLink} to="/private">
-        <img src={navprofile} alt="profil" /> Profil
+      <StyledNavLink as={NavLink} to="/private">
+        <img src={navprofile} alt="profil" />
+        <p>Profil</p>
       </StyledNavLink>
     </StyledNav>
   ) : null;

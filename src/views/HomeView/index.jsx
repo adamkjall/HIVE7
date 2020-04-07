@@ -14,16 +14,18 @@ import Button from 'components/UI/Button';
 import { StyledContainer } from './style';
 
 const HomePageContent = ({ error, isLoading }) => {
-  const { user } = useContext(AuthenticationContext);
+  const { user, isAuthenticated } = useContext(AuthenticationContext);
   const history = useHistory();
 
   // checkk if user logged in for the first time with google sign in
   // and redirect user to a new page to add additional data
   useEffect(() => {
-    if (user && user.isNewGoogleUser) {
+    if (isAuthenticated && user && user.isNewGoogleUser) {
       history.push('/signup');
+    } else if (isAuthenticated) {
+      history.push('/feed');
     }
-  }, [user, history]);
+  }, [user, isAuthenticated, history]);
 
   if (isLoading) {
     return <Loader fullScreen />;

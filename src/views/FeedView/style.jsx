@@ -6,4 +6,5 @@ import spacing from 'tokens/spacing.mjs';
 export const StyledFeed = styled.div`
   display: 'flex';
   align-items: 'flex-start';
+  position: relative;
 `;

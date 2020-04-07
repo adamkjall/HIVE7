@@ -8,7 +8,7 @@ export const StyledButtonCreate = styled.button`
   width: 60px;
   height: 60px;
   padding: ${spacing.tiny};
-  background: ${colors.gray2};
+  background: ${colors.greenMid};
   border-radius: 999rem;
   font-size: ${fontSizes.m};
   text-align: 'center';
@@ -16,10 +16,11 @@ export const StyledButtonCreate = styled.button`
   cursor: pointer;
   transition: 0.1s;
   border: none;
-  position: -webkit-sticky;
-  position: sticky;
+  position: fixed;
   bottom: 1rem;
+  right: 1rem;
   align-self: flex-end;
+
   .plus {
     padding: 0.5rem;
   }

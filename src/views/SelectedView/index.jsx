@@ -124,8 +124,6 @@ const SelectedView = props => {
     }
   }, [walkId]);
 
-  console.log('walk', walk);
-
   return (
     <Page>
       <SelectedPageContent walk={walk} data={data} error={error} isLoading={isLoading} />

@@ -54,7 +54,6 @@ const SignUpWithGoogle = () => {
 
   return (
     <StyledContainer>
-      <BackButton />
       <form onSubmit={onSubmit}>
         <H3>Skapa konto</H3>
         <Input

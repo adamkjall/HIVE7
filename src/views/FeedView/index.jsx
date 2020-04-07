@@ -62,6 +62,7 @@ const FeedView = () => {
   const { user } = useContext(AuthenticationContext);
 
   useEffect(() => {
+    setIsLoading(true);
     const unsubscribe = firestore.collection('walks').onSnapshot(querySnapshot => {
       const fetchedWalks = [];
       querySnapshot.forEach(doc => {
@@ -72,6 +73,7 @@ const FeedView = () => {
         });
       });
       setWalks(fetchedWalks);
+      setIsLoading(false);
     });
 
     return () => unsubscribe();

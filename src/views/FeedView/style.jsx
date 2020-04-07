@@ -8,3 +8,25 @@ export const StyledFeed = styled.div`
   align-items: 'flex-start';
   position: relative;
 `;
+
+export const StyledBookedWalksHeader = styled.div`
+  display: flex;
+  align-items: center;
+
+  .container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 0.5rem;
+
+    .counter {
+      background-color: ${colors.greenMid};
+      padding: 0.2rem 0.5rem;
+      border-radius: 50%;
+
+      &.hide {
+        visibility: hidden;
+      }
+    }
+  }
+`;

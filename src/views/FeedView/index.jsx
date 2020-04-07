@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { firestore, getUserData } from '../../firebase/firebase.utils';
+import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
@@ -11,9 +12,21 @@ import H3 from 'components/UI/H3';
 import Alert from 'components/UI/Alert';
 import ButtonCreate from 'components/ButtonCreate';
 
-import { StyledFeed } from './style';
+import { StyledFeed, StyledBookedWalksHeader } from './style';
 
-const FeedPageContent = ({ error, isLoading, walks }) => {
+const FeedPageContent = ({ error, isLoading, walks, user }) => {
+  const [showBooked, setShowBooked] = useState(false);
+
+  const sortedWalks = walks.sort((walkA, walkB) => walkA.createdAt - walkB.createdAt);
+
+  const bookedWalks = sortedWalks.slice(0, showBooked ? walks.length : 1).filter(walk => {
+    const isAttending = walk.attendingPeople.find(id => id === user.id);
+    const isUser = walk.user.id === user.id;
+    return isAttending || isUser;
+  });
+
+  const availableWalks = walks.filter(walk => walk.user.id !== user.id);
+
   if (isLoading) {
     return <Loader fullScreen />;
   } else if (error) {
@@ -23,11 +36,19 @@ const FeedPageContent = ({ error, isLoading, walks }) => {
       <React.Fragment>
         <StyledFeed>
           <ButtonCreate />
-
-          <H3>Dina Promenader</H3>
-          <Booked walks={walks} />
+          <StyledBookedWalksHeader>
+            <H3 className="title">Dina Promenader</H3>
+            {sortedWalks.length >= 1 ? (
+              // TODO fix eslint warning
+              <div role="button" className="container" onClick={() => setShowBooked(!showBooked)}>
+                <span className={`counter ${showBooked ? 'hide' : ''}`}>{sortedWalks.length}</span>
+                <span className="down-arrow">{!showBooked ? '▼' : '▲'}</span>
+              </div>
+            ) : null}
+          </StyledBookedWalksHeader>
+          <Feed walks={bookedWalks} />
           <H3>Tillgängliga Promenader</H3>
-          <Feed walks={walks} />
+          <Feed walks={availableWalks} />
         </StyledFeed>
       </React.Fragment>
     );
@@ -38,6 +59,7 @@ const FeedView = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [walks, setWalks] = useState([]);
+  const { user } = useContext(AuthenticationContext);
 
   useEffect(() => {
     const unsubscribe = firestore.collection('walks').onSnapshot(querySnapshot => {
@@ -57,7 +79,7 @@ const FeedView = () => {
 
   return (
     <Page>
-      <FeedPageContent walks={walks} error={error} isLoading={isLoading} />
+      <FeedPageContent user={user} walks={walks} error={error} isLoading={isLoading} />
     </Page>
   );
 };

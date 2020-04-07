@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+import { auth, updateUserProfileDocument } from '../../firebase/firebase.utils';
+import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 
 import Button from '../UI/Button';
 import H3 from '../UI/H3';
@@ -9,21 +10,18 @@ import Input from '../UI/Input';
 import BackButton from '../UI/BackButton';
 import { StyledContainer } from './style';
 
-const SignUp = () => {
+const SignUpWithGoogle = () => {
+  const { user } = useContext(AuthenticationContext);
   const history = useHistory();
   const [msgName, setMsgName] = useState('');
   const [msgGender, setGender] = useState('');
   const [msgBirth, setMsgBirth] = useState('');
-  const [msg, setMsg] = useState('');
 
   const [inputs, setInputs] = useState({
     username: '',
-    email: '',
     dateOfBirth: '',
     lvlOfSwedish: '',
-    gender: '',
-    password: '',
-    confirmPassword: ''
+    gender: ''
   });
 
   const onSubmit = async event => {
@@ -38,22 +36,10 @@ const SignUp = () => {
     if (inputs.gender.length < 1) {
       setGender('Var vänlig fyll kön.');
     }
-    if (inputs.password !== inputs.confirmPassword) {
-      setMsg('Dina lösenord matchar inte');
-      return;
-    }
-    if (inputs.password.length < 6) {
-      setMsg('Ditt Lösenord behöver vara minst 6 tecken.');
-    }
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(inputs.email, inputs.password);
 
-      await createUserProfileDocument(user, {
-        displayName: inputs.username,
-        dateOfBirth: inputs.dateOfBirth,
-        lvlOfSwedish: inputs.lvlOfSwedish,
-        gender: inputs.gender
-      });
+    try {
+      updateUserProfileDocument(user.id, inputs);
+      history.push('/feed');
     } catch (error) {
       console.log('Error while sign up', error.message);
     }
@@ -83,17 +69,6 @@ const SignUp = () => {
           onChange={event => onValueChange('username', event.target.value)}
         />
         <p className="red">{msgName}</p>
-        <Input
-          type="email"
-          autoComplete="email"
-          label="E-Post *"
-          id="email"
-          inline
-          name="email"
-          placeholder="namn.efternamn@gmail.com"
-          value={inputs.email}
-          onChange={event => onValueChange('email', event.target.value)}
-        />
         <Input
           type="number"
           autoComplete="dateOfBirth"
@@ -165,29 +140,7 @@ const SignUp = () => {
         </div>
 
         <p className="red">{msgGender}</p>
-        <Input
-          type="password"
-          autoComplete="current-password"
-          label="Lösenord*"
-          id="password"
-          inline
-          name="password"
-          placeholder="********"
-          value={inputs.password}
-          onChange={event => onValueChange('password', event.target.value)}
-        />
-        <Input
-          type="password"
-          autoComplete="current-password"
-          label="Lösenordet igen*"
-          id="confirmPassword"
-          inline
-          name="confirmPassword"
-          placeholder="********"
-          value={inputs.confirmPassword}
-          onChange={event => onValueChange('confirmPassword', event.target.value)}
-        />
-        <p className="red">{msg}</p>
+
         <p>* Obligatoriska fält</p>
         <Button nature="default" stretch type="submit">
           Skapa konto
@@ -197,4 +150,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpWithGoogle;

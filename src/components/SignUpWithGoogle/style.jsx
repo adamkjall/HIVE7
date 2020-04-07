@@ -21,12 +21,12 @@ export const StyledContainer = styled.div`
   }
 
   p {
-    font-size: ${fontSizes.s};
-  }
-
-  .gender {
+    font-size: ${fontSizes.s}; 
+    }
+  
+  .gender {  
+    
     input[type='radio'] {
       margin: 0 0.5rem 0rem;
     }
-  }
 `;

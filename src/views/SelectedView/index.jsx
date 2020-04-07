@@ -82,7 +82,11 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
             join (this is for next page) or leave if you selected and confirmed this walk
              */}
             {user.id === walk.user.id ? (
-              <Button onClick={() => deleteWalkDocument(walk.walkId)}>Ta bort din promenad</Button>
+              <Link to={{ pathname: '/feed/' }}>
+                <Button onClick={() => deleteWalkDocument(walk.walkId)}>
+                  Ta bort din promenad
+                </Button>
+              </Link>
             ) : !walk.attendingPeople ? (
               <Link to={{ pathname: '/matched/' + walk.walkId, state: { walk } }}>
                 <Button onClick={() => joinAWalk(user.id, walk.walkId)}>Följ med!</Button>

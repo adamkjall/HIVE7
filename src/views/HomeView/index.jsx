@@ -20,8 +20,8 @@ const HomePageContent = ({ error, isLoading }) => {
   // checkk if user logged in for the first time with google sign in
   // and redirect user to a new page to add additional data
   useEffect(() => {
-    if (user && user.isNewUser) {
-      history.push('/welcome');
+    if (user && user.isNewGoogleUser) {
+      history.push('/signup');
     }
   }, [user, history]);
 

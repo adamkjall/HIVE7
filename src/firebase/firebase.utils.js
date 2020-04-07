@@ -26,6 +26,7 @@ provider.setCustomParameters({ prompt: 'select_account' });
 
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
+// USER
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
@@ -51,6 +52,24 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+export const updateUserProfileDocument = async (userId, additionalData) => {
+  const userRef = firestore.doc(`users/${userId}`);
+  const snapshot = await userRef.get();
+
+  if (snapshot.exists) {
+    const updatedUser = {
+      ...snapshot.data(),
+      ...additionalData
+    };
+
+    try {
+      await userRef.set(updatedUser);
+    } catch (error) {
+      console.log('Error while updating user', error.message);
+    }
+  }
+};
+
 export const getUserData = async userId => {
   const userRef = firestore.doc(`users/${userId}`);
   const snapshot = await userRef.get();
@@ -59,6 +78,7 @@ export const getUserData = async userId => {
   return undefined;
 };
 
+// WALK
 export const createWalkDocument = async walk => {
   const docRef = firestore.collection('walks').doc();
 

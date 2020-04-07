@@ -19,7 +19,7 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
 
   const sortedWalks = walks.sort((walkA, walkB) => walkA.createdAt - walkB.createdAt);
 
-  const bookedWalks = sortedWalks.slice(0, showBooked ? walks.length : 1).filter(walk => {
+  const bookedWalks = sortedWalks.filter(walk => {
     const isAttending = walk.attendingPeople.find(id => id === user.id);
     const isUser = walk.user.id === user.id;
     return isAttending || isUser;
@@ -38,15 +38,15 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
           <ButtonCreate />
           <StyledBookedWalksHeader>
             <H3 className="title">Dina Promenader</H3>
-            {sortedWalks.length >= 1 ? (
+            {bookedWalks.length > 1 ? (
               // TODO fix eslint warning
               <div role="button" className="container" onClick={() => setShowBooked(!showBooked)}>
-                <span className={`counter ${showBooked ? 'hide' : ''}`}>{sortedWalks.length}</span>
+                <span className={`counter ${showBooked ? 'hide' : ''}`}>{bookedWalks.length}</span>
                 <span className="down-arrow">{!showBooked ? '▼' : '▲'}</span>
               </div>
             ) : null}
           </StyledBookedWalksHeader>
-          <Feed walks={bookedWalks} />
+          <Feed walks={bookedWalks.slice(0, showBooked ? walks.length : 1)} />
           <H3>Tillgängliga Promenader</H3>
           <Feed walks={availableWalks} />
         </StyledFeed>

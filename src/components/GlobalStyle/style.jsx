@@ -23,7 +23,6 @@ export const StyledGlobalStyle = createGlobalStyle`
 
   #root {
     min-height: 100vh;
-    max-width: 700px;
   }
 
   img {

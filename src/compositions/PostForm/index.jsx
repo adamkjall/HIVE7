@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import { createWalkDocument } from '../../firebase/firebase.utils';
 
@@ -18,6 +17,7 @@ import bringPetsvg from '../../assets/icons/bringPets.svg';
 import walking from '../../assets/icons/walking.svg';
 import time from '../../assets/icons/time.svg';
 import calender from '../../assets/icons/calender.svg';
+import DatePickerIOS from '../../components/DatePickerIOS';
 
 import { StyledPostForm } from './style';
 const PostForm = () => {
@@ -25,7 +25,6 @@ const PostForm = () => {
   const history = useHistory();
   const [msg, setMsg] = useState('');
   const [wheremsg, setWhereMsg] = useState('');
-
   const [inputs, setInputs] = useState({
     date: '',
     time: '',
@@ -97,13 +96,14 @@ const PostForm = () => {
         <div>
           <img src={time} alt="time" />
           <p>När vill du gå?</p>
-          <input
+          <DatePickerIOS />
+          {/*   <input
             type="time"
             name="time"
             id="time"
             value={inputs.time}
             onChange={event => onValueChange('time', event.target.value)}
-          />
+          /> */}
           <img src={calender} alt="calender" />
           <input
             type="date"

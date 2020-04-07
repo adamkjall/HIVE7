@@ -61,5 +61,7 @@ export const StyledGlobalStyle = createGlobalStyle`
     border: 1.2px solid ${colors.gray4};
   }
     
-
+  .red {
+    color: ${colors.red};
+  }
 `;

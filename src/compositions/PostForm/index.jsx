@@ -23,6 +23,9 @@ import { StyledPostForm } from './style';
 const PostForm = () => {
   const { user } = useContext(AuthenticationContext);
   const history = useHistory();
+  const [msg, setMsg] = useState('');
+  const [wheremsg, setWhereMsg] = useState('');
+
   const [inputs, setInputs] = useState({
     date: '',
     time: '',
@@ -46,7 +49,14 @@ const PostForm = () => {
   const onSubmit = event => {
     event.preventDefault();
 
-    if (inputs.where.length) {
+    if (inputs.where.length <= 1) {
+      setWhereMsg('Glöm inte skriva var ni ska gå.');
+    }
+    if (inputs.introtext.length <= 1) {
+      setMsg('Skriv en rad!');
+    }
+
+    if (inputs.where.length > 1) {
       const walk = {
         createdAt: new Date(),
         user: user,
@@ -85,7 +95,7 @@ const PostForm = () => {
     <StyledPostForm>
       <form name="post-form" onSubmit={onSubmit}>
         <div>
-          <img src={time} alt="" />
+          <img src={time} alt="time" />
           <p>När vill du gå?</p>
           <input
             type="time"
@@ -115,6 +125,7 @@ const PostForm = () => {
             onChange={event => onValueChange('where', event.target.value)}
           />
         </div>
+        <p className="red">{wheremsg}</p>
         <div>
           <label htmlFor="timeduration">
             <img src={walking} alt="walk" />
@@ -176,6 +187,7 @@ const PostForm = () => {
           placeholder="Skriv en hälsning"
           onChange={event => onValueChange('introtext', event.target.value)}
         />
+        <p className="red">{msg}</p>
 
         <Button nature="primary" type="submit">
           Skapa{' '}

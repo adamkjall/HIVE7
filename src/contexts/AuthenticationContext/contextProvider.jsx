@@ -20,12 +20,10 @@ const AuthenticationContextProvider = props => {
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
-        const isNewGoogleUser = userAuth.metadata.creationTime === userAuth.metadata.lastSignInTime;
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot(snapshot => {
           setUser({
             id: snapshot.id,
-            isNewGoogleUser: isNewGoogleUser,
             ...snapshot.data()
           });
           setIsAuthenticated(true);

@@ -14,7 +14,7 @@ const SignUpView = ({ location }) => {
   const { isAuthenticated, user } = useContext(AuthenticationContext);
 
   if (isAuthenticated) {
-    if (user.isNewGoogleUser) {
+    if (!user.username) {
       return <SignUpWithGoogle />;
     }
     // If the user is already authenticated

@@ -14,19 +14,6 @@ import Button from 'components/UI/Button';
 import { StyledContainer } from './style';
 
 const HomePageContent = ({ error, isLoading }) => {
-  const { user, isAuthenticated } = useContext(AuthenticationContext);
-  const history = useHistory();
-
-  // checkk if user logged in for the first time with google sign in
-  // and redirect user to a new page to add additional data
-  useEffect(() => {
-    if (isAuthenticated && user && user.isNewGoogleUser) {
-      history.push('/signup');
-    } else if (isAuthenticated) {
-      history.push('/feed');
-    }
-  }, [user, isAuthenticated, history]);
-
   if (isLoading) {
     return <Loader fullScreen />;
   } else if (error) {
@@ -66,6 +53,19 @@ const HomeView = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [walks, setWalks] = useState([]);
+
+  const { user, isAuthenticated } = useContext(AuthenticationContext);
+  const history = useHistory();
+
+  // checkk if user logged in for the first time with google sign in
+  // and redirect user to a new page to add additional data
+  useEffect(() => {
+    if (isAuthenticated && user && !user.username) {
+      history.push('/signup');
+    } else if (isAuthenticated) {
+      history.push('/feed');
+    }
+  }, [user, isAuthenticated, history]);
 
   useEffect(() => {
     // const fetchPosts = async () => {

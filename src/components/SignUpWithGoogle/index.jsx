@@ -8,6 +8,9 @@ import Button from '../UI/Button';
 import H3 from '../UI/H3';
 import Input from '../UI/Input';
 import BackButton from '../UI/BackButton';
+import isValidDate from '../../hooks/validDate';
+import makeStringtoBirthDate from '../../hooks/makeStringtoBirthDate';
+
 import { StyledContainer } from './style';
 
 const SignUpWithGoogle = () => {
@@ -16,6 +19,7 @@ const SignUpWithGoogle = () => {
   const [msgName, setMsgName] = useState('');
   const [msgGender, setGender] = useState('');
   const [msgBirth, setMsgBirth] = useState('');
+  const [msg, setMsg] = useState('');
 
   const [inputs, setInputs] = useState({
     username: '',
@@ -30,7 +34,7 @@ const SignUpWithGoogle = () => {
     if (inputs.username.length <= 1) {
       setMsgName('Fyll i Ditt namn.');
     }
-    if (inputs.dateOfBirth.length != 8 || inputs.dateOfBirth > 20200202) {
+    if (isValidDate(inputs.dateOfBirth) == 'Not valid date') {
       setMsgBirth('Fyll i det datum du är född.');
     }
     if (inputs.gender.length < 1) {
@@ -38,9 +42,16 @@ const SignUpWithGoogle = () => {
     }
 
     try {
-      updateUserProfileDocument(user.id, inputs);
+      updateUserProfileDocument(user.id, {
+        displayName: inputs.username,
+        dateOfBirth: makeStringtoBirthDate(inputs.dateOfBirth),
+        lvlOfSwedish: inputs.lvlOfSwedish,
+        gender: inputs.gender
+      });
+
       history.push('/feed');
     } catch (error) {
+      setMsg('Fyll i fälten och försök igen');
       console.log('Error while sign up', error.message);
     }
   };
@@ -70,7 +81,7 @@ const SignUpWithGoogle = () => {
         />
         <p className="red">{msgName}</p>
         <Input
-          type="number"
+          type="text"
           autoComplete="dateOfBirth"
           label="Födelsedatum *"
           id="dateOfBirth"
@@ -140,7 +151,7 @@ const SignUpWithGoogle = () => {
         </div>
 
         <p className="red">{msgGender}</p>
-
+        <p className="red"> {msg} </p>
         <p>* Obligatoriska fält</p>
         <Button nature="default" stretch type="submit">
           Skapa konto

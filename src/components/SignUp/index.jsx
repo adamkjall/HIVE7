@@ -7,6 +7,9 @@ import Button from '../UI/Button';
 import H3 from '../UI/H3';
 import Input from '../UI/Input';
 import BackButton from '../UI/BackButton';
+import isValidDate from '../../hooks/validDate';
+import makeStringtoBirthDate from '../../hooks/makeStringtoBirthDate';
+
 import { StyledContainer } from './style';
 
 const SignUp = () => {
@@ -32,7 +35,7 @@ const SignUp = () => {
     if (inputs.username.length <= 1) {
       setMsgName('Fyll i Ditt namn.');
     }
-    if (inputs.dateOfBirth.length != 8 || inputs.dateOfBirth > 20200202) {
+    if (isValidDate(inputs.dateOfBirth) == 'Not valid date') {
       setMsgBirth('Fyll i det datum du är född.');
     }
     if (inputs.gender.length < 1) {
@@ -50,11 +53,13 @@ const SignUp = () => {
 
       await createUserProfileDocument(user, {
         displayName: inputs.username,
-        dateOfBirth: inputs.dateOfBirth,
+        dateOfBirth: makeStringtoBirthDate(inputs.dateOfBirth),
         lvlOfSwedish: inputs.lvlOfSwedish,
         gender: inputs.gender
       });
+      history.push('/feed');
     } catch (error) {
+      setMsg('Fyll i fälten och försök igen');
       console.log('Error while sign up', error.message);
     }
   };
@@ -95,7 +100,7 @@ const SignUp = () => {
           onChange={event => onValueChange('email', event.target.value)}
         />
         <Input
-          type="number"
+          type="string"
           autoComplete="dateOfBirth"
           label="Födelsedatum *"
           id="dateOfBirth"

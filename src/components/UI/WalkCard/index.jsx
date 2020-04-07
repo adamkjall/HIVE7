@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Age from '../../../hooks/calculateAge.jsx';
 
 import location from '../../../assets/icons/location.svg';
 import avatar from '../../../assets/icons/profilepic.svg';
@@ -10,59 +11,30 @@ import clock from '../../../assets/icons/time.svg';
 import { StyledWalkCard } from './style';
 
 const WalkCard = ({ walk }) => {
-  const timeArr = walk.createdAt.toLocaleTimeString().split(':');
-  const time = `${timeArr[0]}:${timeArr[1]}`;
-
-  const birthDateToAgeString = birthDateString => {
-    if (birthDateString) {
-      const year = birthDateString.slice(0, 4);
-      const month = birthDateString.slice(4, 6);
-      const day = birthDateString.slice(6, 8);
-
-      const thisDate = new Date().toLocaleDateString();
-      const [thisYear, thisMonth, thisDay] = thisDate.split('-');
-
-      let age = +thisYear - +year;
-      const monthDiff = +thisMonth - +month;
-      const dayDiff = +thisDay - +day;
-
-      if (monthDiff < 0) age--;
-      else if (monthDiff === 0 && dayDiff < 0) age--;
-
-      return age + ' år';
-    }
-    return '';
-  };
-
   return (
     <StyledWalkCard>
       <Link to={{ pathname: '/selected/' + walk.walkId }}>
-        <div className="box1">
+        <div className="author-data">
           <img className="avatar" src={avatar} alt="avatar" />
           <h3 className="author">{walk.user.displayName}</h3>
-          <span className="usersage"> {birthDateToAgeString(walk.user.dateOfBirth)}</span>
+          <span className="usersage"> {Age(walk.user.dateOfBirth)} år</span>
         </div>
-        <hr />
-        <div className="box2">
+        <div className="walk-data">
           <div className="date">
             <img src={clock} alt="time" />
             <span>
               {walk.date} {walk.time}
             </span>
           </div>
-          <div className="timeduration">
+          <div className="duration">
             <img src={walking} alt="walk" />
-            <span>{walk.timeduration}</span>
+            <span>{walk.timeduration} timmar</span>
           </div>
           <div className="where">
             <img src={location} alt="where" />
             <span>{walk.where}</span>
           </div>
         </div>
-        <hr />
-        <span className="posted">
-          Posted at: {`${time}  ${walk.createdAt.toLocaleDateString()}`}
-        </span>{' '}
       </Link>
     </StyledWalkCard>
   );

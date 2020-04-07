@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Age from '../../../hooks/calculateAge.jsx';
+import calculateAge from '../../../helpers/functions/calculateAge.jsx';
 
 import location from '../../../assets/icons/location.svg';
 import avatar from '../../../assets/icons/profilepic.svg';
@@ -17,7 +17,7 @@ const WalkCard = ({ walk }) => {
         <div className="author-data">
           <img className="avatar" src={avatar} alt="avatar" />
           <h3 className="author">{walk.user.displayName}</h3>
-          <span className="usersage"> {Age(walk.user.dateOfBirth)} år</span>
+          <span className="usersage"> {calculateAge(walk.user.dateOfBirth)} år</span>
         </div>
         <div className="walk-data">
           <div className="date">

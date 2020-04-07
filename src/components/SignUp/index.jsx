@@ -7,8 +7,8 @@ import Button from '../UI/Button';
 import H3 from '../UI/H3';
 import Input from '../UI/Input';
 import BackButton from '../UI/BackButton';
-import isValidDate from '../../hooks/validDate';
-import makeStringtoBirthDate from '../../hooks/makeStringtoBirthDate';
+import isValidDate from '../../helpers/functions/validDate';
+import makeStringtoBirthDate from '../../helpers/functions/makeStringtoBirthDate';
 
 import { StyledContainer } from './style';
 

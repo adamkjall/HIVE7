@@ -4,14 +4,14 @@ import { Link as RouterLink } from 'react-router-dom';
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
 import Page from 'compositions/Page';
-
 import H3 from 'components/UI/H3';
 import Button from 'components/UI/Button';
 import Paragraph from 'components/UI/Paragraph';
-
+import calculateAge from '../../helpers/functions/calculateAge';
 import avatar from '../../assets/icons/profilepic.svg';
 
 import { StyledPrivate } from './style';
+import Input from '../../components/UI/Input';
 
 const PrivateView = () => {
   const { user } = useContext(AuthenticationContext);
@@ -21,19 +21,29 @@ const PrivateView = () => {
         <div></div>
       ) : (
         <StyledPrivate>
-          <div className="box1">
+          <div className="profilebox-1">
             <img className="avatar" src={avatar} alt="avatar" />
             <span className="changepic">Byt Bild</span>
             <H3 className="user">{user.displayName}</H3>
-            <Paragraph className="usersage">{user.dateOfBirth}</Paragraph>
+            <span className="usersage">
+              {calculateAge(user.dateOfBirth)} år &#9679; {user.lvlOfSwedish}
+            </span>
           </div>
-          <hr />
-          <Paragraph>{user.email}</Paragraph>
-          <Paragraph>{user.lvlOfSwedish}</Paragraph>
-          <hr />
-          <Button as={RouterLink} to="/logout">
-            Logga ut
-          </Button>
+          <div>
+            <div>
+              E-postadress:
+              <br />
+              {user.email}
+            </div>
+            <div>
+              Lösenord:
+              <br /> *******
+            </div>
+            <hr />
+            <Button as={RouterLink} to="/logout">
+              Logga ut
+            </Button>
+          </div>
         </StyledPrivate>
       )}
     </Page>

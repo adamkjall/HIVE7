@@ -7,9 +7,8 @@ import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 import Button from '../UI/Button';
 import H3 from '../UI/H3';
 import Input from '../UI/Input';
-import BackButton from '../UI/BackButton';
-import isValidDate from '../../hooks/validDate';
-import makeStringtoBirthDate from '../../hooks/makeStringtoBirthDate';
+import isValidDate from '../../helpers/functions/validDate';
+import makeStringtoBirthDate from '../../helpers/functions/makeStringtoBirthDate';
 
 import { StyledContainer } from './style';
 
@@ -98,7 +97,7 @@ const SignUpWithGoogle = () => {
               type="radio"
               id="newSwede"
               name="swedelvl"
-              value="newSwede"
+              value="Ny Svensk"
               onChange={event => onValueChange('lvlOfSwedish', event.target.value)}
             />
             Ny svensk - jag vill bli bättre på svenska
@@ -109,7 +108,7 @@ const SignUpWithGoogle = () => {
               type="radio"
               id="establish"
               name="swedelvl"
-              value="establishSwede"
+              value="Etablerad svensk"
               onChange={event => onValueChange('lvlOfSwedish', event.target.value)}
             />
             Etablerad svensk - jag pratar flytande svenska.

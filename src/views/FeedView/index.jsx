@@ -7,7 +7,6 @@ import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
 import Feed from 'compositions/Feed';
-import Booked from 'compositions/Booked';
 import H3 from 'components/UI/H3';
 import Alert from 'components/UI/Alert';
 import ButtonCreate from 'components/ButtonCreate';
@@ -40,7 +39,14 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
             <H3 className="title">Dina Promenader</H3>
             {bookedWalks.length > 1 ? (
               // TODO fix eslint warning
-              <div role="button" className="container" onClick={() => setShowBooked(!showBooked)}>
+              <div
+                role="button"
+                aria="button"
+                tabIndex="0"
+                onKeyDown="0"
+                className="container"
+                onClick={() => setShowBooked(!showBooked)}
+              >
                 <span className={`counter ${showBooked ? 'hide' : ''}`}>{bookedWalks.length}</span>
                 <span className="down-arrow">{!showBooked ? '▼' : '▲'}</span>
               </div>

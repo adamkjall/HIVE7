@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/messaging';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
@@ -25,6 +26,20 @@ const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
 
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+// MESSAGING / NOTIFCATIONS
+export const messaging = firebase.messaging();
+
+messaging.usePublicVapidKey(process.env.REACT_APP_GOOGLE_MESSAGING_KEY);
+
+messaging
+  .requestPermission()
+  .then(() => {
+    console.log('Have permission');
+    return messaging.getToken();
+  })
+  .then(token => console.log('Token', token))
+  .catch(err => console.log('error occured', err));
 
 // USER
 export const createUserProfileDocument = async (userAuth, additionalData) => {

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 //import { LocalStorage as Storage } from 'helpers/storage';
 import AuthenticationContext from './context';
 
-import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+import { auth, messaging, createUserProfileDocument } from '../../firebase/firebase.utils';
 
 export const TOKEN_STORAGE_KEY = 'authentication.token';
 
@@ -32,6 +32,45 @@ const AuthenticationContextProvider = props => {
     });
 
     return () => unsubscribeFromAuth();
+  }, []);
+
+  useEffect(() => {
+    messaging
+      .requestPermission()
+      .then(async function() {
+        const token = await messaging.getToken();
+        console.log('token ****', token);
+      })
+      .catch(function(err) {
+        console.log('Unable to get permission to notify.', err);
+      });
+
+    messaging.onMessage(payload => console.log('Message received. ', payload));
+    navigator.serviceWorker.addEventListener('message', message => console.log(message));
+
+    // Callback fired if Instance ID token is updated.
+    // messaging.onTokenRefresh(() => {
+    //   messaging
+    //     .getToken()
+    //     .then(refreshedToken => {
+    //       console.log('Token refreshed.', refreshedToken);
+    //       // Indicate that the new Instance ID token has not yet been sent to the
+    //       // app server.
+    //       // setTokenSentToServer(false);
+    //       // Send Instance ID token to app server.
+    //       // sendTokenToServer(refreshedToken);
+    //       // ...
+    //     })
+    //     .catch(err => {
+    //       console.log('Unable to retrieve refreshed token ', err);
+    //       // showToken('Unable to retrieve refreshed token ', err);
+    //     });
+    // });
+
+    // messaging.onMessage(payload => {
+    //   console.log('Message received. ', payload);
+    //   // ...
+    // });
   }, []);
 
   const login = async (email, password) => {

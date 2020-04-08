@@ -137,7 +137,9 @@ export default {
           "'self'",
           'https://firestore.googleapis.com/',
           'https://www.googleapis.com/',
-          'https://securetoken.googleapis.com'
+          'https://securetoken.googleapis.com',
+          'https://firebaseinstallations.googleapis.com',
+          'https://fcmregistrations.googleapis.com'
         ],
         'object-src': "'none'",
         'frame-src': ["'self'", 'https://hive7-fe724.firebaseapp.com/'],

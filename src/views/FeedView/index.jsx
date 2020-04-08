@@ -25,7 +25,7 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
     return isAttending || isUser;
   });
 
-  const availableWalks = walks.filter(walk => walk.user.id !== user.id);
+  const availableWalks = sortedWalks.filter(walk => walk.user.id !== user.id);
 
   if (isLoading) {
     return <Loader fullScreen />;
@@ -46,7 +46,9 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
               </div>
             ) : null}
           </StyledBookedWalksHeader>
-          <Feed walks={bookedWalks.slice(0, showBooked ? walks.length : 1)} />
+          {console.log('booked slice', bookedWalks.slice(0, showBooked ? bookedWalks.length : 1))}
+
+          <Feed walks={bookedWalks.slice(0, showBooked ? bookedWalks.length : 1)} />
           <H3>Tillgängliga Promenader</H3>
           <Feed walks={availableWalks} />
         </StyledFeed>

@@ -13,20 +13,13 @@ const Feed = ({ walks }) => {
       <StyledPostList>
         {walks &&
           user &&
-          walks
-            .sort((walkA, walkB) => {
-              return walkA.createdAt - walkB.createdAt;
-            })
-            .filter(walk => {
-              return walk.user.id !== user.id;
-            })
-            .map((walk, index) => {
-              return (
-                <StyledPost key={index}>
-                  <WalkCard walk={walk} />
-                </StyledPost>
-              );
-            })}
+          walks.map((walk, index) => {
+            return (
+              <StyledPost key={index}>
+                <WalkCard walk={walk} />
+              </StyledPost>
+            );
+          })}
       </StyledPostList>
     </StyledFeed>
   );

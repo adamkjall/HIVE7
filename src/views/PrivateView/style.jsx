@@ -16,6 +16,8 @@ export const StyledPrivate = styled.div`
     padding: 1rem 0;
     .avatar {
       grid-area: avatar;
+      border-radius: 50%;
+      padding: 0.5rem;
       img {
         width: 92px;
         height: 92px;

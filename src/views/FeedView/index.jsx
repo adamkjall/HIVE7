@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { firestore, getUserData } from '../../firebase/firebase.utils';
+import { firestore } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 
 import Page from 'compositions/Page';
@@ -46,8 +46,6 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
               </div>
             ) : null}
           </StyledBookedWalksHeader>
-          {console.log('booked slice', bookedWalks.slice(0, showBooked ? bookedWalks.length : 1))}
-
           <Feed walks={bookedWalks.slice(0, showBooked ? bookedWalks.length : 1)} />
           <H3>Tillgängliga Promenader</H3>
           <Feed walks={availableWalks} />
@@ -61,7 +59,10 @@ const FeedView = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [walks, setWalks] = useState([]);
+
   const { user } = useContext(AuthenticationContext);
+
+  const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -80,6 +81,25 @@ const FeedView = () => {
 
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    const unsubscribe = firestore
+      .collection(`users/${user.id}/notifications`)
+      .onSnapshot(querySnapshot => {
+        const fetchedNotifications = [];
+        querySnapshot.forEach(doc => {
+          const data = doc.data();
+          fetchedNotifications.push({
+            ...data
+          });
+        });
+        setNotifications(fetchedNotifications);
+      });
+
+    return () => unsubscribe();
+  }, [user.id]);
+
+  console.log('notificatoins', notifications);
 
   return (
     <Page>

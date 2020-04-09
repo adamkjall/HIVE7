@@ -14,6 +14,13 @@ firebase.initializeApp({
 // messages.
 const messaging = firebase.messaging();
 
+self.addEventListener('notificationclick', event => {
+  if (event.action) {
+    clients.openWindow(event.action);
+  }
+  event.notification.close();
+});
+
 messaging.setBackgroundMessageHandler(payload => {
   console.log('Recieved background message', payload);
 

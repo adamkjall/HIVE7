@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { auth, updateUserProfileDocument } from '../../firebase/firebase.utils';
+import { updateUserProfileDocument } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 
 import Button from '../UI/Button';
@@ -21,7 +21,7 @@ const SignUpWithGoogle = () => {
   const [msg, setMsg] = useState('');
 
   const [inputs, setInputs] = useState({
-    username: '',
+    username: user.displayName || '',
     dateOfBirth: '',
     lvlOfSwedish: '',
     gender: ''

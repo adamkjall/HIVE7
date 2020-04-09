@@ -16,7 +16,14 @@ import { StyledFeed, StyledBookedWalksHeader } from './style';
 const FeedPageContent = ({ error, isLoading, walks, user }) => {
   const [showBooked, setShowBooked] = useState(false);
 
-  const sortedWalks = walks.sort((walkA, walkB) => walkA.createdAt - walkB.createdAt);
+  const sortWalks = walks =>
+    walks.sort((a, b) => {
+      const valueA = Number(a.date.replace(/-/gi, '')) + Number(a.time.replace(':', ''));
+      const valueB = Number(b.date.replace(/-/gi, '')) + Number(b.time.replace(':', ''));
+      return valueA - valueB;
+    });
+
+  const sortedWalks = sortWalks(walks);
 
   const bookedWalks = sortedWalks.filter(walk => {
     const isAttending = walk.attendingPeople.find(id => id === user.id);
@@ -24,7 +31,10 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
     return isAttending || isUser;
   });
 
-  const availableWalks = sortedWalks.filter(walk => walk.user.id !== user.id);
+  const availableWalks = sortedWalks.filter(walk => !bookedWalks.includes(walk));
+
+  console.log('booked', bookedWalks);
+  console.log('available', availableWalks);
 
   if (isLoading) {
     return <Loader fullScreen />;
@@ -38,12 +48,11 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
           <StyledBookedWalksHeader>
             <H3 className="title">Dina Promenader</H3>
             {bookedWalks.length > 1 ? (
-              // TODO fix eslint warning
               <div
                 role="button"
-                aria="button"
+                aria-expanded={showBooked} // is this correct ??
                 tabIndex="0"
-                onKeyDown="0"
+                onKeyDown={() => {}}
                 className="container"
                 onClick={() => setShowBooked(!showBooked)}
               >

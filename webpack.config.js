@@ -126,9 +126,14 @@ export default {
     new CspHtmlWebpackPlugin(
       {
         'default-src': "'self'",
-        'script-src': ["'self'", 'https://storage.googleapis.com/', 'https://polyfill.io/'],
+        'script-src': ["'self'", 'https://polyfill.io/'],
         'style-src': ["'self'", "'unsafe-inline'"],
-        'img-src': ["'self'", 'data:', 'https://google.com/images'],
+        'img-src': [
+          "'self'",
+          'data:',
+          'https://google.com/images',
+          'https://lh3.googleusercontent.com'
+        ],
         'font-src': "'self'",
         'media-src': "'self'",
         'manifest-src': "'self'",

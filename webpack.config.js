@@ -126,12 +126,18 @@ export default {
     new CspHtmlWebpackPlugin(
       {
         'default-src': "'self'",
-        'script-src': ["'self'", 'https://polyfill.io/'],
+        'script-src': [
+          "'self'",
+          'https://storage.googleapis.com/',
+          'https://fcm.googleapis.com/fcm/notification',
+          'https://polyfill.io/'
+        ],
         'style-src': ["'self'", "'unsafe-inline'"],
         'img-src': [
           "'self'",
           'data:',
           'https://google.com/images',
+          'http://localhost:3000/favicon.ico',
           'https://lh3.googleusercontent.com'
         ],
         'font-src': "'self'",
@@ -142,7 +148,10 @@ export default {
           "'self'",
           'https://firestore.googleapis.com/',
           'https://www.googleapis.com/',
-          'https://securetoken.googleapis.com'
+          'https://securetoken.googleapis.com',
+          'https://firebaseinstallations.googleapis.com',
+          'https://fcmregistrations.googleapis.com',
+          'https://fcm.googleapis.com/fcm/notification'
         ],
         'object-src': "'none'",
         'frame-src': ["'self'", 'https://hive7-fe724.firebaseapp.com/'],

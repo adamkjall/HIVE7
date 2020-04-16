@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/messaging';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_GOOGLE_API_KEY,

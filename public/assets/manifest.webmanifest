@@ -9,7 +9,6 @@
   "start_url": "/?utm_source=homescreen",
   "background_color": "#101820",
   "theme_color": "#000000",
-  "gcm_sender_id": "352967461305",
   "icons": [
     {
       "src": "/assets/android-chrome-36x36.png",

@@ -2,7 +2,7 @@ import { Workbox } from 'workbox-window';
 
 const registerServiceWorker = eventName => {
   if ('serviceWorker' in navigator) {
-    const wb = new Workbox('/firebase-messaging-sw.js');
+    const wb = new Workbox('/sw.js');
 
     wb.addEventListener('installed', event => {
       if (event.isUpdate) {

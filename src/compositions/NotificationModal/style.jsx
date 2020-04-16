@@ -19,6 +19,10 @@ export const StyledModalHeader = styled.div`
   width: 100%;
   font-size: ${fontSizes.h2};
   padding: 0 1rem;
+
+  .close {
+    cursor: pointer;
+  }
 `;
 
 export const StyledModalContent = styled.div`

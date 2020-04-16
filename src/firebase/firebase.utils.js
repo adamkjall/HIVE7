@@ -27,35 +27,6 @@ provider.setCustomParameters({ prompt: 'select_account' });
 
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
-// MESSAGING / NOTIFCATIONS
-export const messaging = firebase.messaging();
-
-messaging.usePublicVapidKey(process.env.REACT_APP_GOOGLE_MESSAGING_KEY);
-
-messaging
-  .requestPermission()
-  .then(() => {
-    console.log('Have permission');
-    return messaging.getToken();
-  })
-  .then(token => console.log('Token', token))
-  .catch(err => console.log('error occured', err));
-
-messaging.onMessage(payload => {
-  const title = payload.notification.title;
-  const options = {
-    body: payload.notification.body,
-    icon: payload.notification.icon,
-    actions: [
-      {
-        action: payload.fcmOptions.link,
-        title: 'Book Appointment'
-      }
-    ]
-  };
-  self.showNotification(title, options);
-});
-
 // USER
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
@@ -117,27 +88,6 @@ export const createWalkDocument = async walk => {
     .set({ ...walk, walkId: docRef.id })
     .then(() => console.log(`walk created with id: ${docRef.id}`))
     .catch(error => console.log('Error creating walk: ', error));
-
-  // const requestOptions = {
-  //   method: 'POST',
-  //   // mode: 'no-cors',
-  //   // 'Access-Control-Allow-Origin': '*',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     Authorization:
-  //       'key=AAAAUi6ACbk:APA91bHWUpf5Vrof6Y_nLMqvq2oqeck1qqL2ZpTcrAUdTuCd2_uHefa4C7qThff685nCQnTDSb0rkf9cySk_aQhqGHDL7AymC2_t0mzymjbUk1GwW9fw7fvUQGb_4d0s5_qfz1_Yue_e'
-  //   },
-  //   project_id: 352967461305,
-  //   body: JSON.stringify({
-  //     operation: 'create',
-  //     notification_key_name: `${docRef.id}`,
-  //     registration_ids: [`${walk.user.id}`]
-  //   })
-  // };
-
-  // fetch('https://fcm.googleapis.com/fcm/notification', requestOptions)
-  //   .then(response => response.json())
-  //   .then(console.log);
 };
 
 export const deleteWalkDocument = async walkId => {

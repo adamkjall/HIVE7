@@ -40,7 +40,7 @@ const NotificationModal = ({ notification, removeNotification }) => {
   return (
     <StyledModal>
       <StyledModalHeader onClick={() => removeNotification(notification.notificationId)}>
-        <img src={cross} alt="close window" />
+        <img className="close" src={cross} alt="close window" />
       </StyledModalHeader>
       {!userData || !walkData ? (
         <h1>Loading</h1>

@@ -11,8 +11,7 @@
 const config = {
   app: {
     // Enable SW only in production by default
-    // enableSW: ['production'].includes(process.env.NODE_ENV),
-    enableSW: true,
+    enableSW: ['production'].includes(process.env.NODE_ENV),
     // Applpication base url
     baseUrl: process.env.APP_BASE_URL
   }

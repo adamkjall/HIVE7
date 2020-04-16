@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 //import { LocalStorage as Storage } from 'helpers/storage';
 import AuthenticationContext from './context';
 
-import { auth, messaging, createUserProfileDocument } from '../../firebase/firebase.utils';
+import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
 export const TOKEN_STORAGE_KEY = 'authentication.token';
 

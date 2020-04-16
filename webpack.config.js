@@ -133,7 +133,12 @@ export default {
           'https://polyfill.io/'
         ],
         'style-src': ["'self'", "'unsafe-inline'"],
-        'img-src': ["'self'", 'data:', 'https://google.com/images'],
+        'img-src': [
+          "'self'",
+          'data:',
+          'https://google.com/images',
+          'http://localhost:3000/favicon.ico'
+        ],
         'font-src': "'self'",
         'media-src': "'self'",
         'manifest-src': "'self'",

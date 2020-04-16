@@ -117,26 +117,26 @@ export const createWalkDocument = async walk => {
     .then(() => console.log(`walk created with id: ${docRef.id}`))
     .catch(error => console.log('Error creating walk: ', error));
 
-  const requestOptions = {
-    method: 'POST',
-    // mode: 'no-cors',
-    // 'Access-Control-Allow-Origin': '*',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization:
-        'key=AAAAUi6ACbk:APA91bHWUpf5Vrof6Y_nLMqvq2oqeck1qqL2ZpTcrAUdTuCd2_uHefa4C7qThff685nCQnTDSb0rkf9cySk_aQhqGHDL7AymC2_t0mzymjbUk1GwW9fw7fvUQGb_4d0s5_qfz1_Yue_e'
-    },
-    project_id: 352967461305,
-    body: JSON.stringify({
-      operation: 'create',
-      notification_key_name: `${docRef.id}`,
-      registration_ids: [`${walk.user.id}`]
-    })
-  };
+  // const requestOptions = {
+  //   method: 'POST',
+  //   // mode: 'no-cors',
+  //   // 'Access-Control-Allow-Origin': '*',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     Authorization:
+  //       'key=AAAAUi6ACbk:APA91bHWUpf5Vrof6Y_nLMqvq2oqeck1qqL2ZpTcrAUdTuCd2_uHefa4C7qThff685nCQnTDSb0rkf9cySk_aQhqGHDL7AymC2_t0mzymjbUk1GwW9fw7fvUQGb_4d0s5_qfz1_Yue_e'
+  //   },
+  //   project_id: 352967461305,
+  //   body: JSON.stringify({
+  //     operation: 'create',
+  //     notification_key_name: `${docRef.id}`,
+  //     registration_ids: [`${walk.user.id}`]
+  //   })
+  // };
 
-  fetch('https://fcm.googleapis.com/fcm/notification', requestOptions)
-    .then(response => response.json())
-    .then(console.log);
+  // fetch('https://fcm.googleapis.com/fcm/notification', requestOptions)
+  //   .then(response => response.json())
+  //   .then(console.log);
 };
 
 export const deleteWalkDocument = async walkId => {

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { LegalContextProvider } from './LegalContext';
 import { AuthenticationContextProvider } from './AuthenticationContext';
+import { NotificationContextProvider } from './NotificationContext';
 
 /**
  * Implement all the different context providers here, they will be wrap the application
@@ -10,7 +11,9 @@ import { AuthenticationContextProvider } from './AuthenticationContext';
  */
 const ApplicationContextProvider = ({ children }) => (
   <LegalContextProvider>
-    <AuthenticationContextProvider>{children}</AuthenticationContextProvider>
+    <AuthenticationContextProvider>
+      <NotificationContextProvider>{children}</NotificationContextProvider>
+    </AuthenticationContextProvider>
   </LegalContextProvider>
 );
 

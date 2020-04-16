@@ -1,19 +1,21 @@
 import styled from 'styled-components';
 
-import Box from 'components/Box';
+import Box from 'components/UI/Box';
 
 import colors from 'tokens/colors.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
 
 export const StyledDialog = styled(Box)`
   position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  margin-bottom: 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 40rem;
+  z-index: 999;
   box-sizing: border-box;
   color: ${colors.black};
-  background-color: ${colors.white};
+  background-color: ${colors.greenLight};
 `;
 
 export const StyledDialogHeader = styled.div`

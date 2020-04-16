@@ -4,13 +4,17 @@ const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
 const createNotification = (notification, userId) => {
-  return admin
+  const docRef = admin
     .firestore()
     .collection('users')
     .doc(userId)
     .collection('notifications')
-    .add(notification)
-    .then(doc => console.log('notification added', doc));
+    .doc();
+
+  docRef
+    .set({ ...notification, notificationId: docRef.id })
+    .then(doc => console.log('notification added', doc))
+    .catch(error => console.log('Error creating notification', error));
 };
 
 exports.walkJoined = functions.firestore.document('walks/{walkId}').onUpdate((change, context) => {
@@ -23,21 +27,23 @@ exports.walkJoined = functions.firestore.document('walks/{walkId}').onUpdate((ch
   if (prevData.attendingPeople.length < newData.attendingPeople.length) {
     const joinedUserId = newData.attendingPeople.pop();
     notification = {
-      content: `Joined walk`,
-      user: `${joinedUserId}`,
+      type: `joined walk`,
+      walkId: `${newData.walkId}`,
+      userId: `${joinedUserId}`,
       time: admin.firestore.FieldValue.serverTimestamp()
     };
-    // notify all usrs attending the walk
-    newData.attendingPeople.forEach(id => createNotification(notification, id));
+    // // notify all users attending the walk
+    // newData.attendingPeople.forEach(id => createNotification(notification, id));
   } else if (prevData.attendingPeople.length > newData.attendingPeople.length) {
     const leftUserId = prevData.attendingPeople.find(id => !newData.attendingPeople.includes(id));
     notification = {
-      content: `Left walk`,
-      user: `${leftUserId}`,
+      type: `left walk`,
+      walkId: `${newData.walkId}`,
+      userId: `${leftUserId}`,
       time: admin.firestore.FieldValue.serverTimestamp()
     };
-    // notify all usrs attending the walk
-    newData.attendingPeople.forEach(id => createNotification(notification, id));
+    // notify all users attending the walk
+    // newData.attendingPeople.forEach(id => createNotification(notification, id));
   }
 
   return createNotification(notification, hostingUserId);

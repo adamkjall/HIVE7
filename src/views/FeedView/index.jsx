@@ -7,7 +7,6 @@ import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
 import Feed from 'compositions/Feed';
-import Booked from 'compositions/Booked';
 import H3 from 'components/UI/H3';
 import Alert from 'components/UI/Alert';
 import ButtonCreate from 'components/ButtonCreate';
@@ -62,8 +61,6 @@ const FeedView = () => {
 
   const { user } = useContext(AuthenticationContext);
 
-  const [notifications, setNotifications] = useState([]);
-
   useEffect(() => {
     setIsLoading(true);
     const unsubscribe = firestore.collection('walks').onSnapshot(querySnapshot => {
@@ -81,25 +78,6 @@ const FeedView = () => {
 
     return () => unsubscribe();
   }, []);
-
-  useEffect(() => {
-    const unsubscribe = firestore
-      .collection(`users/${user.id}/notifications`)
-      .onSnapshot(querySnapshot => {
-        const fetchedNotifications = [];
-        querySnapshot.forEach(doc => {
-          const data = doc.data();
-          fetchedNotifications.push({
-            ...data
-          });
-        });
-        setNotifications(fetchedNotifications);
-      });
-
-    return () => unsubscribe();
-  }, [user.id]);
-
-  console.log('notificatoins', notifications);
 
   return (
     <Page>

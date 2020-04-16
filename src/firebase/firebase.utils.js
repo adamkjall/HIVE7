@@ -186,4 +186,48 @@ export const getBookings = async userId => {
   return bookings;
 };
 
+// Account
+export const deleteAccount = () => {
+  auth.currentUser
+    .delete()
+    .then(() => 'Delete successful')
+    .catch(err => err.message);
+};
+
+export const resetPassword = async emailAddress => {
+  auth.languageCode = 'swe';
+  auth
+    .sendPasswordResetEmail(emailAddress)
+    .then(() => 'Email sent')
+    .catch(err => err.message);
+};
+
+export const updatePassword = async newPassword => {
+  return auth.currentUser
+    .updatePassword(newPassword)
+    .then(() => 'Update succesful')
+    .catch(err => err.message);
+};
+
+export const updateEmail = async newEmail => {
+  return auth.currentUser
+    .updateEmail(newEmail)
+    .then(() => 'Update succesful')
+    .catch(err => err.message);
+};
+
+export const updateProfilePicture = async newPhotoUrl => {
+  return auth.currentUser
+    .updateProfile({ photoURL: newPhotoUrl })
+    .then(() => 'Update succesful')
+    .catch(err => err.message);
+};
+
+export const updateDisplayName = async newName => {
+  return auth.currentUser
+    .updateProfile({ displayName: newName })
+    .then(() => 'Update succesful')
+    .catch(err => err.message);
+};
+
 export default firebase;

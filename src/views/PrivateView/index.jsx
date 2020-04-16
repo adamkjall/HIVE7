@@ -2,6 +2,14 @@ import React, { useContext } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
+import {
+  deleteAccount,
+  resetPassword,
+  updatePassword,
+  updateEmail,
+  updateDisplayName,
+  updateProfilePicture
+} from '../../firebase/firebase.utils';
 
 import Page from 'compositions/Page';
 import H3 from 'components/UI/H3';
@@ -43,6 +51,13 @@ const PrivateView = () => {
             <Button as={RouterLink} to="/logout">
               Logga ut
             </Button>
+            <Button onClick={deleteAccount}>Ta bort konto</Button>
+            <Button onClick={() => resetPassword('bottarn.botvidsson@gmail.com')}>
+              Återställ lösenord
+            </Button>
+            <Button onClick={() => updateDisplayName}>Nytt användarnamn -> Boris</Button>
+            <Button>Logga ut</Button>
+            <Button>Logga ut</Button>
           </div>
         </StyledPrivate>
       )}

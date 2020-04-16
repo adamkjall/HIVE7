@@ -22,7 +22,7 @@ const PrivateView = () => {
       ) : (
         <StyledPrivate>
           <div className="profilebox-1">
-            <img className="avatar" src={avatar} alt="avatar" />
+            <img className="avatar" src={user.photoUrl || avatar} alt="avatar" />
             <span className="changepic">Byt Bild</span>
             <H3 className="user">{user.displayName}</H3>
             <span className="usersage">

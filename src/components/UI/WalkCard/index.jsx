@@ -15,7 +15,7 @@ const WalkCard = ({ walk }) => {
     <StyledWalkCard>
       <Link to={{ pathname: '/selected/' + walk.walkId }}>
         <div className="author-data">
-          <img className="avatar" src={avatar} alt="avatar" />
+          <img className="avatar" src={walk.user.photoUrl || avatar} alt="avatar" />
           <h3 className="author">{walk.user.displayName}</h3>
           <span className="usersage"> {calculateAge(walk.user.dateOfBirth)} år</span>
         </div>

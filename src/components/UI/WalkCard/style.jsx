@@ -27,6 +27,8 @@ export const StyledWalkCard = styled.div`
     border-bottom: 1.5px solid ${colors.gray4};
     .avatar {
       grid-area: avatar;
+      border-radius: 50%;
+      padding: 0.5rem;
     }
     .author {
       grid-area: author;

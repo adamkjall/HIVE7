@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import {
-  deleteAccount,
+  auth,
+  deleteUserAccount,
   resetPassword,
   updatePassword,
   updateEmail,
@@ -23,6 +24,7 @@ import Input from '../../components/UI/Input';
 
 const PrivateView = () => {
   const { user } = useContext(AuthenticationContext);
+  const [oldName, setOldName] = useState(null);
   return (
     <Page metadata={{ title: 'Private view' }}>
       {!user ? (
@@ -48,16 +50,39 @@ const PrivateView = () => {
               <br /> *******
             </div>
             <hr />
-            <Button as={RouterLink} to="/logout">
-              Logga ut
-            </Button>
-            <Button onClick={deleteAccount}>Ta bort konto</Button>
-            <Button onClick={() => resetPassword('bottarn.botvidsson@gmail.com')}>
-              Återställ lösenord
-            </Button>
-            <Button onClick={() => updateDisplayName}>Nytt användarnamn -> Boris</Button>
-            <Button>Logga ut</Button>
-            <Button>Logga ut</Button>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' }}>
+              <Button as={RouterLink} to="/logout">
+                Logga ut
+              </Button>
+              <Button onClick={() => deleteUserAccount(user.id)}>Ta bort konto</Button>
+              <Button
+                onClick={() => {
+                  resetPassword(user.email);
+                  alert(
+                    `Ett mail med instruktioner för att återställa ditt lösenord är skickat till ${user.email}`
+                  );
+                }}
+              >
+                Återställ lösenord
+              </Button>
+              <Button
+                onClick={() => {
+                  console.log(user);
+
+                  if (!oldName) {
+                    setOldName(user.displayName);
+                    updateDisplayName('Boris');
+                  } else {
+                    updateDisplayName(oldName);
+                    setOldName(null);
+                  }
+                }}
+              >
+                {'Nytt användarnamn'}
+              </Button>
+              {/* <Button>Logga ut</Button>
+            <Button>Logga ut</Button> */}
+            </div>
           </div>
         </StyledPrivate>
       )}

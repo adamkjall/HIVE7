@@ -37,7 +37,7 @@ const SignUpWithGoogle = () => {
       setMsgBirth('Fyll i det datum du är född.');
     }
     if (inputs.gender.length < 1) {
-      setGender('Var vänlig fyll kön.');
+      setGender('Var vänlig fyll i kön.');
     }
 
     try {

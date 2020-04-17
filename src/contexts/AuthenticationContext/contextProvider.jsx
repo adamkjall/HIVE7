@@ -14,7 +14,7 @@ export const TOKEN_STORAGE_KEY = 'authentication.token';
  */
 const AuthenticationContextProvider = props => {
   //const [token, setToken] = useState(Storage.get(TOKEN_STORAGE_KEY));
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -28,6 +28,9 @@ const AuthenticationContextProvider = props => {
           });
           setIsAuthenticated(true);
         });
+      } else {
+        setIsAuthenticated(false);
+        setUser(null);
       }
     });
 

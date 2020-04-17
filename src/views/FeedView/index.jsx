@@ -33,9 +33,6 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
 
   const availableWalks = sortedWalks.filter(walk => !bookedWalks.includes(walk));
 
-  console.log('booked', bookedWalks);
-  console.log('available', availableWalks);
-
   if (isLoading) {
     return <Loader fullScreen />;
   } else if (error) {
@@ -76,6 +73,8 @@ const FeedView = () => {
   const [walks, setWalks] = useState([]);
 
   const { user } = useContext(AuthenticationContext);
+
+  console.log('user', user);
 
   useEffect(() => {
     setIsLoading(true);

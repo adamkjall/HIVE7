@@ -87,7 +87,7 @@ export const createWalkDocument = async walk => {
   docRef
     .set({ ...walk, walkId: docRef.id })
     .then(() => console.log(`walk created with id: ${docRef.id}`))
-    .catch(error => console.log('Error creating walk: ', error));
+    .catch(error => console.log('Error creating walk. ', error));
 };
 
 export const deleteWalkDocument = async walkId => {
@@ -187,11 +187,18 @@ export const getBookings = async userId => {
 };
 
 // Account
-export const deleteAccount = () => {
+export const deleteUserAccount = async () => {
   auth.currentUser
     .delete()
-    .then(() => 'Delete successful')
+    .then(() => {})
     .catch(err => err.message);
+
+  firestore
+    .collection('users')
+    .doc(auth.currentUser.uid)
+    .delete()
+    .then(() => console.log('Deleted user: ', auth.currentUser.uid))
+    .catch(error => console.log('Error while deleting.', error));
 };
 
 export const resetPassword = async emailAddress => {
@@ -224,10 +231,21 @@ export const updateProfilePicture = async newPhotoUrl => {
 };
 
 export const updateDisplayName = async newName => {
-  return auth.currentUser
-    .updateProfile({ displayName: newName })
-    .then(() => 'Update succesful')
-    .catch(err => err.message);
+  // auth.currentUser
+  //   .updateProfile({ displayName: newName })
+  //   .then(() => {
+  //     console.log('Update succesful', auth.currentUser);
+  //   })
+  //   .catch(err => err.message);
+
+  firestore
+    .collection('users')
+    .doc(auth.currentUser.uid)
+    .update({
+      displayName: newName
+    })
+    .then(() => console.log('Display name changed to ', newName))
+    .catch(error => console.log('Error while changing name.', error));
 };
 
 export default firebase;

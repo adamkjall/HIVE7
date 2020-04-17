@@ -138,7 +138,8 @@ export default {
           'data:',
           'https://google.com/images',
           'http://localhost:3000/favicon.ico',
-          'https://lh3.googleusercontent.com'
+          'https://lh3.googleusercontent.com',
+          'https://lh4.googleusercontent.com'
         ],
         'font-src': "'self'",
         'media-src': "'self'",

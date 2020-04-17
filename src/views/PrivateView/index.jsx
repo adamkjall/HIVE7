@@ -68,8 +68,6 @@ const PrivateView = () => {
               </Button>
               <Button
                 onClick={() => {
-                  console.log(user);
-
                   if (!oldName) {
                     setOldName(user.displayName);
                     updateDisplayName('Boris');
@@ -81,8 +79,15 @@ const PrivateView = () => {
               >
                 {'Nytt användarnamn'}
               </Button>
-              {/* <Button>Logga ut</Button>
-            <Button>Logga ut</Button> */}
+              <Button
+                onClick={() => {
+                  updatePassword('hiveseven');
+                  alert('Ditt lösenord är nu "hiveseven"');
+                }}
+              >
+                {'Byt lösenord till: "hiveseven"'}
+              </Button>
+              {/* <Button>Logga ut</Button> */}
             </div>
           </div>
         </StyledPrivate>

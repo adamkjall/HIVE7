@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/messaging';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
@@ -183,6 +184,67 @@ export const getBookings = async userId => {
     return bookings;
   }
   return bookings;
+};
+
+// Account
+
+export const deleteUserAccount = async () => {
+  auth.currentUser
+    .delete()
+    .then(() => 'Delete successful')
+    .then(() => {})
+    .catch(err => err.message);
+
+  firestore
+    .collection('users')
+    .doc(auth.currentUser.uid)
+    .delete()
+    .then(() => console.log('Deleted user: ', auth.currentUser.uid))
+    .catch(error => console.log('Error while deleting.', error));
+};
+
+export const resetPassword = async emailAddress => {
+  auth.languageCode = 'swe';
+  auth
+    .sendPasswordResetEmail(emailAddress)
+    .then(() => 'Email sent')
+    .catch(err => err.message);
+};
+export const updatePassword = async newPassword => {
+  return auth.currentUser
+    .updatePassword(newPassword)
+    .then(() => 'Update succesful')
+    .catch(err => err.message);
+};
+export const updateEmail = async newEmail => {
+  return auth.currentUser
+    .updateEmail(newEmail)
+    .then(() => 'Update succesful')
+    .catch(err => err.message);
+};
+export const updateProfilePicture = async newPhotoUrl => {
+  return auth.currentUser
+    .updateProfile({ photoURL: newPhotoUrl })
+    .then(() => 'Update succesful')
+    .catch(err => err.message);
+};
+
+export const updateDisplayName = async newName => {
+  // auth.currentUser
+  //   .updateProfile({ displayName: newName })
+  //   .then(() => {
+  //     console.log('Update succesful', auth.currentUser);
+  //   })
+  //   .catch(err => err.message);
+
+  firestore
+    .collection('users')
+    .doc(auth.currentUser.uid)
+    .update({
+      displayName: newName
+    })
+    .then(() => console.log('Display name changed to ', newName))
+    .catch(error => console.log('Error while changing name.', error));
 };
 
 export default firebase;

@@ -81,6 +81,8 @@ const HomeView = () => {
     const unsubscribe = firestore.collection('walks').onSnapshot(querySnapshot => {
       const newWalks = [];
       querySnapshot.forEach(doc => {
+        if (!doc.exists) return;
+
         const data = doc.data();
         newWalks.push({
           ...data,

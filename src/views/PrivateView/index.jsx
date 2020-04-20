@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
@@ -9,11 +9,18 @@ import Button from 'components/UI/Button';
 import Paragraph from 'components/UI/Paragraph';
 import calculateAge from '../../helpers/functions/calculateAge';
 import avatar from '../../assets/icons/profilepic.svg';
+import UploadFile from '../../components/UploadFile';
 
 import { StyledPrivate } from './style';
 import Input from '../../components/UI/Input';
 
 const PrivateView = () => {
+  const [toogle, setToogle] = useState(true);
+
+  const toogleChangepic = e => {
+    setToogle(!toogle);
+  };
+
   const { user } = useContext(AuthenticationContext);
   return (
     <Page metadata={{ title: 'Private view' }}>
@@ -23,12 +30,22 @@ const PrivateView = () => {
         <StyledPrivate>
           <div className="profilebox-1">
             <img className="avatar" src={user.photoUrl || avatar} alt="avatar" />
-            <span className="changepic">Byt Bild</span>
+            <span
+              className="changepic"
+              tabIndex="-5"
+              role="button"
+              aria-label="toogle"
+              onClick={toogleChangepic}
+              onKeyDown={toogleChangepic}
+            >
+              Byt bild
+            </span>
             <H3 className="user">{user.displayName}</H3>
             <span className="usersage">
               {calculateAge(user.dateOfBirth)} år &#9679; {user.lvlOfSwedish}
             </span>
           </div>
+          {toogle ? <UploadFile /> : null}
           <div>
             <div>
               E-postadress:

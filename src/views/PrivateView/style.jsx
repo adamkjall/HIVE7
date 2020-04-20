@@ -7,25 +7,30 @@ import fontSizes from 'tokens/fontSizes.mjs';
 export const StyledPrivate = styled.div`
   max-width: 25rem;
   border-radius: 1rem;
-  padding: 1rem;
 
   .profilebox-1 {
     display: grid;
     grid-template-areas: 'avatar user' 'changepic usersage';
     grid-auto-columns: 1fr 2fr;
-    padding: 1rem 0;
+    padding: 0;
+    gap: 15px;
+    margin: 2rem 0;
+
     .avatar {
       grid-area: avatar;
       border-radius: 50%;
-      padding: 0.5rem;
+
       img {
         width: 92px;
         height: 92px;
       }
     }
     .changepic {
+      text-align: center;
+      font-size: ${fontSizes.s};
+      color: ${colors.gray2};
       grid-area: changepic;
-      margin: 0;
+      cursor: pointer;
     }
     .user {
       grid-area: user;

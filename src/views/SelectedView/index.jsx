@@ -3,12 +3,13 @@ import { Link, useParams } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import { deleteWalkDocument, leaveAWalk, joinAWalk, getWalk } from '../../firebase/firebase.utils';
+import calculateAge from '../../helpers/functions/calculateAge.jsx';
 
 import Button from 'components/UI/Button';
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
 import Alert from 'components/UI/Alert';
-
+import quote from '../../assets/icons/quote.svg';
 import location from '../../assets/icons/location.svg';
 import avatar from '../../assets/icons/profilepic.svg';
 import walking from '../../assets/icons/walking.svg';
@@ -18,7 +19,6 @@ import friends from '../../assets/icons/friends.svg';
 import pets from '../../assets/icons/pets.svg';
 import bringPetsvg from '../../assets/icons/bringPets.svg';
 
-import colors from 'tokens/colors.mjs';
 import { StyledSelectedWalk } from './style';
 
 const SelectedPageContent = ({ error, isLoading, walk }) => {
@@ -32,49 +32,51 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
     return (
       <React.Fragment>
         <StyledSelectedWalk>
-          <div className="box1">
-            <Link to={{ pathname: '/profile/' + walk.author, state: { walk } }}>
-              <img className="avatar" src={avatar} alt="avatar" />
-              <h3 className="author">{walk.author}</h3>{' '}
-            </Link>
-            {/* <span className="usersage">{walk.authorage}</span> */}
+          <Link to={{ pathname: '/profile/' + walk.author, state: { walk } }}>
+            <img className="avatar" src={walk.user.photoUrl || avatar} alt="avatar" />
+          </Link>
+          <div className="authordata">
+            <span className="author">{walk.user.displayName}</span>
+            <div className="dott" />
+            <span className="usersage"> {calculateAge(walk.user.dateOfBirth)} år</span>
           </div>
-          <span className="post">{walk.introtext}</span>
-          <hr />
-          <div className="box2">
+          <div className="quote">
+            <img src={quote} alt="intro" />
+            <span>{walk.introtext}</span>
+          </div>
+          <div className="walk-data">
             <div className="date">
               <img src={clock} alt="time" />
-              <span>
+              <p>
                 {walk.date} {walk.time}
-              </span>
+              </p>
             </div>
-            <div className="timeduration">
+            <div className="duration">
               <img src={walking} alt="walk" />
-              <span>{walk.timeduration}</span>
+              <p>{walk.timeduration} timmar</p>
             </div>
             <div className="where">
               <img src={location} alt="where" />
-              <span>{walk.where}</span>
+              <p>{walk.where}</p>
             </div>
           </div>
           <hr />
-          <div className="box2">
-            <div>
-              <img src={friends} alt="bringfriend" />
-              <span className="post">{walk.allowFriends}</span>
-            </div>
-            <div>
-              <img src={family} alt="bring children" />
-              <span className="user">{walk.allowChildren}</span>
-            </div>
-            <div>
-              <img src={bringPetsvg} alt="bring dog" />
-              <span className="user">{walk.bringPets}</span>
-            </div>
-            <div>
-              <img src={pets} alt="bring pet" />
-              <span className="post">{walk.allowPets}</span>
-            </div>
+          <div className="walk-data2">
+            <img src={friends} alt="bringfriend" />
+            <span>Kan vänner följa med?</span>
+            <span className="post">{walk.allowFriends == 'on' ? 'Ja' : 'Nej'} </span>
+
+            <img src={family} alt="bring children" />
+            <span>Kan barn följa med?</span>
+            <span className="user">{walk.allowChildren == 'on' ? 'Ja' : 'Nej'}</span>
+
+            <img src={bringPetsvg} alt="bring dog" />
+            <span>Finns det husdjur?</span>
+            <span className="user">{walk.bringPets == 'on' ? 'Ja' : 'Nej'} </span>
+
+            <img src={pets} alt="bring pet" />
+            <span>Kan husdjur följa med?</span>
+            <span className="post">{walk.allowPets == 'on' ? 'Ja' : 'Nej'} </span>
           </div>
           <div className="buttons">
             {/*  a conditional render that show cancel walk if your the poster, also need confirmation
@@ -93,7 +95,7 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
               </Link>
             ) : walk.attendingPeople.find(id => id === user.id) ? (
               <Link to={{ pathname: '/feed/' }}>
-                <Button onClick={() => leaveAWalk(user.id, walk.walkId)}>Lämna promenad</Button>
+                <Button onClick={() => leaveAWalk(user.id, walk.walkId)}>Avboka promenad</Button>
               </Link>
             ) : (
               <Link to={{ pathname: '/matched/' + walk.walkId, state: { walk } }}>

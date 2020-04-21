@@ -1,7 +1,7 @@
 const fontFamilies = {
-  fontLight: 'HelveticaNeue',
-  fontMedium: 'HelveticaNeue',
-  fontRegular: 'HelveticaNeue'
+  fontLight: 'Verdana',
+  fontMedium: 'Verdana',
+  fontRegular: 'Londrina Solid'
 };
 
 export default fontFamilies;

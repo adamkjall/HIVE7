@@ -22,11 +22,10 @@ const HomePageContent = ({ error, isLoading }) => {
     return (
       <React.Fragment>
         <StyledContainer>
-          <H1>Prommis</H1>
+          <H1>Välkomen till GÅ MAMA!</H1>
           <Paragraph>
-            Detta är första sidan. Här kan man skriva om appen. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-            aliqua.{' '}
+            En plats där mammor från olika bakgrunder kan mötas och tillsammans upptäcka nya
+            platser, stötta varandras språkutveckling och hitta nya vänskaper.
           </Paragraph>
           <div className="buttons">
             <Link to="/signup">
@@ -38,9 +37,7 @@ const HomePageContent = ({ error, isLoading }) => {
               Logga in med Google
             </Button>
             <Link to="/login">
-              <Button nature="default" stretch>
-                Logga in med E-post
-              </Button>
+              <h3>Har du redan ett konto? Logga in</h3>
             </Link>
           </div>
         </StyledContainer>

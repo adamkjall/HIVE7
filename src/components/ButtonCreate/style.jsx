@@ -5,10 +5,10 @@ import spacing from 'tokens/spacing.mjs';
 import colors from 'tokens/colors.mjs';
 
 export const StyledButtonCreate = styled.button`
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
   padding: ${spacing.tiny};
-  background: ${colors.greenMid};
+  background: ${colors.red};
   border-radius: 999rem;
   font-size: ${fontSizes.m};
   text-align: 'center';

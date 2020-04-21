@@ -5,7 +5,7 @@ import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
-import H3 from 'components/UI/H3';
+import H1 from 'components/UI/H1';
 import Button from 'components/UI/Button';
 import Alert from 'components/UI/Alert';
 
@@ -14,6 +14,8 @@ import avatar from '../../assets/icons/profilepic.svg';
 import walking from '../../assets/icons/walking.svg';
 import clock from '../../assets/icons/time.svg';
 import plus from '../../assets/icons/plus.svg';
+
+import { StyledMatchedwalk } from './style';
 
 const MatchedPageContent = ({ error, isLoading, walk }) => {
   const { user } = useContext(AuthenticationContext);
@@ -25,40 +27,37 @@ const MatchedPageContent = ({ error, isLoading, walk }) => {
   } else {
     return (
       <React.Fragment>
-        <div>
-          <H3>Full fart framåt!</H3>
-          {user.displayName},<p>{walk.author}</p>
-          <p>vill gå på promenad tillsammans med dig.</p>
-          <div>
-            <Link to={{ pathname: '/profile/' + user.displayName, state: { walk } }}>
-              <img className="avatar" src={avatar} alt="avatar" />
-            </Link>
-            <img className="plus" src={plus} alt="plus" />
+        <StyledMatchedwalk>
+          <H1>Full fart framåt!</H1>
+          <p className="gray">
+            Du och<span>{walk.user.displayName}</span>
+            ska gå på promenad tillsammans.
+          </p>
+          <div className="matched-avatars">
             <Link to={{ pathname: '/profile/' + walk.author, state: { walk } }}>
-              <img className="avatar" src={avatar} alt="avatar" />
+              <img className="avatar" src={walk.user.photoUrl || avatar} alt="avatar" />
+            </Link>
+            <div className="dott" />
+            <Link to={{ pathname: '/profile/' + user.displayName, state: { walk } }}>
+              <img className="avatar" src={user.photoUrl || avatar} alt="avatar" />
             </Link>
           </div>
           <hr />
-          <div className="box2">
-            <div className="date">
-              <img src={clock} alt="time" />
-              <span>
-                {walk.date} {walk.time}
-              </span>
-            </div>
-            <div className="timeduration">
-              <img src={walking} alt="walk" />
-              <span>{walk.timeduration}</span>
-            </div>
-            <div className="where">
-              <img src={location} alt="where" />
-              <span>{walk.where}</span>
-            </div>
+          <div className="date-time">
+            <img src={clock} alt="time" />
+            <span>
+              {walk.date}, {walk.time}
+            </span>
+            <hr />
+            <img src={location} alt="where" />
+            <span>{walk.where}</span>
           </div>
-          <Link to="/chat">
-            <Button>Säj Hej</Button>
-          </Link>
-        </div>
+          <div className="wrapp-button">
+            <Link to="/chat">
+              <Button>Säj Hej</Button>
+            </Link>
+          </div>
+        </StyledMatchedwalk>
       </React.Fragment>
     );
   }

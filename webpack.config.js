@@ -141,7 +141,10 @@ export default {
           'https://lh3.googleusercontent.com',
           'https://lh4.googleusercontent.com'
         ],
-        'font-src': "'self'",
+        'font-src': [
+          "'self'",
+          'https://fonts.googleapis.com/css2?family=Londrina+Solid&display=swap'
+        ],
         'media-src': "'self'",
         'manifest-src': "'self'",
         'worker-src': "'self'",

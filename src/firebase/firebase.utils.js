@@ -185,4 +185,17 @@ export const getBookings = async userId => {
   return bookings;
 };
 
+export const storage = () => {
+  firebase.storage();
+};
+/* 
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+ */
+
 export default firebase;

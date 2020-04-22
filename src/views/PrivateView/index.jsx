@@ -16,13 +16,11 @@ import {
 import Page from 'compositions/Page';
 import H3 from 'components/UI/H3';
 import Button from 'components/UI/Button';
-import Paragraph from 'components/UI/Paragraph';
 import calculateAge from '../../helpers/functions/calculateAge';
 import avatar from '../../assets/icons/profilepic.svg';
 import UploadFile from '../../components/UploadFile';
 
 import { StyledPrivate } from './style';
-import Input from '../../components/UI/Input';
 
 const PrivateView = () => {
   const [toogle, setToogle] = useState(true);
@@ -59,52 +57,74 @@ const PrivateView = () => {
           {toogle ? <UploadFile /> : null}
           <div>
             <div>
-              E-postadress:
-              <br />
-              {user.email}
+              <p className="bold">E-postadress:</p>
+              <div className="changecontainer">
+                <span className="display">{user.email}</span>
+                <button aria-label="ändra e-post" className="change">
+                  Ändra
+                </button>
+              </div>
             </div>
             <div>
-              Lösenord:
-              <br /> *******
+              <p className="bold">Användarnamn:</p>
+              <div className="changecontainer">
+                <span className="display"> {user.displayName}</span>
+                <button
+                  aria-label="ändra namn"
+                  className="change"
+                  onClick={() => {
+                    if (!oldName) {
+                      setOldName(user.displayName);
+                      updateDisplayName('Boris');
+                    } else {
+                      updateDisplayName(oldName);
+                      setOldName(null);
+                    }
+                  }}
+                >
+                  Ändra
+                </button>
+              </div>
+              <div>
+                <p className="bold">Lösenord:</p>
+                <div className="changecontainer">
+                  <span className="display"> *******</span>
+                  <button
+                    aria-label="ändra lösenord"
+                    className="change"
+                    onClick={() => {
+                      updatePassword('hiveseven');
+                      alert('Ditt lösenord är nu "hiveseven"');
+                    }}
+                  >
+                    Ändra till hiveseven
+                  </button>
+
+                  <button
+                    className="change"
+                    onClick={() => {
+                      resetPassword(user.email);
+                      alert(
+                        `Ett mail med instruktioner för att återställa ditt lösenord är skickat till ${user.email}`
+                      );
+                    }}
+                  >
+                    Återställ lösenord
+                  </button>
+                </div>
+              </div>
             </div>
-            <hr />
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' }}>
-              <Button as={RouterLink} to="/logout">
+            <p className="bold">Logga ut:</p>
+            <div className="changecontainer">
+              <button className="change toleft" aria-label="logga ut" as={RouterLink} to="/logout">
                 Logga ut
-              </Button>
-              <Button onClick={() => deleteUserAccount(user.id)}>Ta bort konto</Button>
-              <Button
-                onClick={() => {
-                  resetPassword(user.email);
-                  alert(
-                    `Ett mail med instruktioner för att återställa ditt lösenord är skickat till ${user.email}`
-                  );
-                }}
-              >
-                Återställ lösenord
-              </Button>
-              <Button
-                onClick={() => {
-                  if (!oldName) {
-                    setOldName(user.displayName);
-                    updateDisplayName('Boris');
-                  } else {
-                    updateDisplayName(oldName);
-                    setOldName(null);
-                  }
-                }}
-              >
-                {'Nytt användarnamn'}
-              </Button>
-              <Button
-                onClick={() => {
-                  updatePassword('hiveseven');
-                  alert('Ditt lösenord är nu "hiveseven"');
-                }}
-              >
-                {'Byt lösenord till: "hiveseven"'}
-              </Button>
-              {/* <Button>Logga ut</Button> */}
+              </button>
+            </div>
+            <p className="bold">Ta bort konto</p>
+            <div className="changecontainer">
+              <button className="change" onClick={() => deleteUserAccount(user.id)}>
+                Ta bort konto
+              </button>
             </div>
           </div>
         </StyledPrivate>

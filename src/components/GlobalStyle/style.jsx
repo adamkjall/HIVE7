@@ -4,6 +4,13 @@ import fontFamilies from 'tokens/fontFamilies.mjs';
 import fontWeights from 'tokens/fontWeights.mjs';
 
 export const StyledGlobalStyle = createGlobalStyle`
+  @font-face {
+    font-display: ${({ fontDisplay }) => fontDisplay};
+    font-family: "${fontFamilies.light}";
+    font-weight: ${fontWeights.regular};
+    src: url('https://fonts.googleapis.com/css2?family=Londrina+Solid&display=swap');
+  }
+  
   html {
     font-size: 16px;
     min-height: 100vh;
@@ -17,7 +24,7 @@ export const StyledGlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: ${fontFamilies.fontRegular}, sans-serif;
+    font-family: ${fontFamilies.fontRegular}, 'Verdana';
     font-weight: ${fontWeights.fontRegular};
   }
 
@@ -63,5 +70,10 @@ export const StyledGlobalStyle = createGlobalStyle`
     
   .red {
     color: ${colors.red};
+  }
+
+  .avatar {
+    border-radius: 50%;
+    padding: 0.5rem;
   }
 `;

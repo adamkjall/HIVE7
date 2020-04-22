@@ -42,7 +42,7 @@ const UploadFile = () => {
       <StyledUpload>
         <form onSubmit={onSubmit}>
           <div className="uploadfile-wrapper">
-            <input type="file" id="file" onChange={onChange} />
+            <input type="file" id="file" onChange={onChange} size="10000000" />
             <label className="file-upload" htmlFor="file">
               {filename.length > 0 ? 'Tryck här för att ändra' : 'Välj fil'}
             </label>

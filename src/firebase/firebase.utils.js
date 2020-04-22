@@ -247,4 +247,17 @@ export const updateDisplayName = async newName => {
     .catch(error => console.log('Error while changing name.', error));
 };
 
+export const storage = () => {
+  firebase.storage();
+};
+/* 
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+ */
+
 export default firebase;

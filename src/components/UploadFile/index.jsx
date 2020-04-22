@@ -1,12 +1,15 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
+
+import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 
 import { StyledUpload } from './style';
-import { storage } from '../../firebase/firebase.utils';
+import { storage, updateUserProfileDocument } from '../../firebase/firebase.utils';
 import placeholder from '../../assets/images/placeholder.jpg';
 
 const UploadFile = () => {
   const [file, setFile] = useState('');
   const [filename, setFilename] = useState('');
+  const { user } = useContext(AuthenticationContext);
 
   const onChange = e => {
     setFile(e.target.files[0]);
@@ -14,7 +17,7 @@ const UploadFile = () => {
   };
   const onSubmit = e => {
     e.preventDefault();
-    const uploadTask = storage.ref(`images/${filename}`).put(file);
+    const uploadTask = storage.ref(`profile-pictures/${user.id}`).put(file); // set unique path
 
     uploadTask.on(
       'state_changed',
@@ -25,14 +28,10 @@ const UploadFile = () => {
         console.log(error);
       },
       () => {
-        //complete function
-        storage
-          .ref('images')
-          .child(filename)
-          .getDowloadURL()
-          .then(url => {
-            console.log(url);
-          });
+        uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+          console.log('File available at', downloadURL);
+          updateUserProfileDocument(user.id, { photoUrl: downloadURL });
+        });
       }
     );
   };

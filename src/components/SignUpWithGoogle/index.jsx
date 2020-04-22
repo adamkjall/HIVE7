@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { updateUserProfileDocument } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
+import UploadFile from '../../components/UploadFile';
 
 import Button from '../UI/Button';
 import H3 from '../UI/H3';
@@ -19,6 +20,12 @@ const SignUpWithGoogle = () => {
   const [msgGender, setGender] = useState('');
   const [msgBirth, setMsgBirth] = useState('');
   const [msg, setMsg] = useState('');
+  const [msglvl, setMsglvl] = useState('');
+  const [toogle, setToogle] = useState(false);
+
+  const toogleChangepic = e => {
+    setToogle(!toogle);
+  };
 
   const [inputs, setInputs] = useState({
     username: user.displayName || '',
@@ -36,22 +43,25 @@ const SignUpWithGoogle = () => {
     if (isValidDate(inputs.dateOfBirth) == 'Not valid date') {
       setMsgBirth('Fyll i det datum du är född.');
     }
+    if (inputs.lvlOfSwedish.length <= 1) {
+      setMsglvl('Klicka i någon av alternativen');
+    }
     if (inputs.gender.length < 1) {
       setGender('Var vänlig fyll kön.');
-    }
+    } else {
+      try {
+        updateUserProfileDocument(user.id, {
+          displayName: inputs.username,
+          dateOfBirth: makeStringtoBirthDate(inputs.dateOfBirth),
+          lvlOfSwedish: inputs.lvlOfSwedish,
+          gender: inputs.gender
+        });
 
-    try {
-      updateUserProfileDocument(user.id, {
-        displayName: inputs.username,
-        dateOfBirth: makeStringtoBirthDate(inputs.dateOfBirth),
-        lvlOfSwedish: inputs.lvlOfSwedish,
-        gender: inputs.gender
-      });
-
-      history.push('/feed');
-    } catch (error) {
-      setMsg('Fyll i fälten och försök igen');
-      console.log('Error while sign up', error.message);
+        history.push('/feed');
+      } catch (error) {
+        setMsg('Fyll i fälten och försök igen');
+        console.log('Error while sign up', error.message);
+      }
     }
   };
 
@@ -66,6 +76,7 @@ const SignUpWithGoogle = () => {
     <StyledContainer>
       <form onSubmit={onSubmit}>
         <H3>Skapa konto</H3>
+        <p className="red">{msgName}</p>
         <Input
           type="text"
           autoComplete="username"
@@ -77,7 +88,8 @@ const SignUpWithGoogle = () => {
           value={inputs.username}
           onChange={event => onValueChange('username', event.target.value)}
         />
-        <p className="red">{msgName}</p>
+
+        <p className="red">{msgBirth}</p>
         <Input
           type="text"
           autoComplete="dateOfBirth"
@@ -89,7 +101,7 @@ const SignUpWithGoogle = () => {
           value={inputs.dateOfBirth}
           onChange={event => onValueChange('dateOfBirth', event.target.value)}
         />
-        <p className="red">{msgBirth}</p>
+        <p className="red">{msglvl}</p>
         <div className="swedish">
           <p>Är du ny eller etablerad? *</p>
           <label htmlFor="newSwede">
@@ -114,6 +126,7 @@ const SignUpWithGoogle = () => {
             Etablerad svensk - jag pratar flytande svenska.
           </label>
         </div>
+        <p className="red">{msgGender}</p>
         <div className="gender">
           <p>Kön? *</p>
           <label htmlFor="female">
@@ -147,14 +160,30 @@ const SignUpWithGoogle = () => {
             Annat / vill inte svara
           </label>
         </div>
-
-        <p className="red">{msgGender}</p>
+        <div className="profilebox-1">
+          <img className="avatar" src={user.photoUrl} alt="avatar" />
+          <span
+            className="changepic"
+            tabIndex="-5"
+            role="button"
+            aria-label="toogle"
+            onClick={toogleChangepic}
+            onKeyDown={toogleChangepic}
+          >
+            {toogle ? 'Klicka här efter laddat upp din nya bild' : 'Byt bild'}
+          </span>
+        </div>
         <p className="red"> {msg} </p>
+
         <p>* Obligatoriska fält</p>
-        <Button nature="default" stretch type="submit">
-          Skapa konto
-        </Button>
+        {toogle ? null : (
+          <Button nature="default" stretch type="submit">
+            Skapa konto
+          </Button>
+        )}
       </form>
+
+      {toogle ? <UploadFile /> : null}
     </StyledContainer>
   );
 };

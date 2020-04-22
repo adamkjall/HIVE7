@@ -23,7 +23,7 @@ import UploadFile from '../../components/UploadFile';
 import { StyledPrivate } from './style';
 
 const PrivateView = () => {
-  const [toogle, setToogle] = useState(true);
+  const [toogle, setToogle] = useState(false);
 
   const toogleChangepic = e => {
     setToogle(!toogle);

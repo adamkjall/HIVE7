@@ -3,6 +3,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/messaging';
+import 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
@@ -247,17 +248,10 @@ export const updateDisplayName = async newName => {
     .catch(error => console.log('Error while changing name.', error));
 };
 
-export const storage = () => {
-  firebase.storage();
-};
-/* 
-service firebase.storage {
-  match /b/{bucket}/o {
-    match /{allPaths=**} {
-      allow read, write: if request.auth != null;
-    }
-  }
-}
- */
+/// profile-pictures
+
+export const storage = firebase.storage();
+var storageRef = storage.ref();
+var imagesRef = storageRef.child('profile-pictures');
 
 export default firebase;

@@ -14,16 +14,15 @@ export const StyledPrivate = styled.div`
     grid-template-areas: 'avatar user' 'avatar  usersage' 'changepic .';
     grid-auto-columns: 1fr 2fr;
     grid-auto-rows: 0.8fr 0.2fr 0.3fr;
-
     margin: 2rem 0;
 
     .avatar {
       grid-area: avatar;
-      border-radius: 50%;
 
       img {
         width: 92px;
         height: 92px;
+        border-radius: 999rem;
       }
     }
     .changepic {

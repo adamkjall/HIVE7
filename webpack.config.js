@@ -139,7 +139,9 @@ export default {
           'https://google.com/images',
           'http://localhost:3000/favicon.ico',
           'https://lh3.googleusercontent.com',
-          'https://lh4.googleusercontent.com'
+          'https://lh4.googleusercontent.com',
+          'https://firestore.googleapis.com',
+          'https://firebasestorage.googleapis.com'
         ],
         'font-src': [
           "'self'",
@@ -149,8 +151,10 @@ export default {
         'manifest-src': "'self'",
         'worker-src': "'self'",
         'connect-src': [
-          "'self'",
+          "'self'", 
           'https://firestore.googleapis.com/',
+          'https://firebasestorage.googleapis.com',
+          'https://firestore.googleapis.com/v0/b/hive7-fe724.appspot.com/o',
           'https://www.googleapis.com/',
           'https://securetoken.googleapis.com',
           'https://firebaseinstallations.googleapis.com',

@@ -29,7 +29,6 @@ const UploadFile = () => {
       },
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-          console.log('File available at', downloadURL);
           updateUserProfileDocument(user.id, { photoUrl: downloadURL });
         });
       }

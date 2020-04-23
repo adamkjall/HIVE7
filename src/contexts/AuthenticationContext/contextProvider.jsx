@@ -17,8 +17,6 @@ const AuthenticationContextProvider = props => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  console.log('user', user);
-
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
@@ -31,7 +29,7 @@ const AuthenticationContextProvider = props => {
           setIsAuthenticated(true);
         });
       } else {
-        console.log('hello');
+        //console.log('You are not Authenticated.');
 
         setIsAuthenticated(false);
         setUser(null);

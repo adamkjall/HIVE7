@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import calculateAge from '../../../helpers/functions/calculateAge.jsx';
+import H1 from '../H1';
 
 import location from '../../../assets/icons/location.svg';
 import avatar from '../../../assets/icons/profilepic.svg';
@@ -16,8 +17,12 @@ const WalkCard = ({ walk }) => {
       <Link to={{ pathname: '/selected/' + walk.walkId }}>
         <div className="author-data">
           <img className="avatar" src={walk.user.photoUrl || avatar} alt="avatar" />
-          <h3 className="author">{walk.user.displayName}</h3>
-          <span className="usersage"> {calculateAge(walk.user.dateOfBirth)} år</span>
+          <H1 className="author">{walk.user.displayName}</H1>
+          <div className="userinfo">
+            <span>{calculateAge(walk.user.dateOfBirth)} år</span>
+            <div className="dott" />
+            <span>{walk.user.lvlOfSwedish}</span>
+          </div>
         </div>
         <div className="walk-data">
           <div className="date">

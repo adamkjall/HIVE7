@@ -143,10 +143,7 @@ export default {
           'https://firestore.googleapis.com',
           'https://firebasestorage.googleapis.com'
         ],
-        'font-src': [
-          "'self'",
-          'https://fonts.googleapis.com/css2?family=Londrina+Solid&display=swap'
-        ],
+        'font-src': ["'self'", 'https://fonts.googleapis.com/'],
         'media-src': "'self'",
         'manifest-src': "'self'",
         'worker-src': "'self'",

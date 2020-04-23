@@ -14,8 +14,8 @@ export const StyledInput = styled.input`
   box-sizing: border-box;
   font-size: ${fontSizes.body1};
   line-height: 1;
-  border: 1px solid ${colors.black};
-  border-radius: 5px;
+  border: 1px solid ${colors.gray3};
+  border-radius: 10px;
   background-color: ${colors.white};
 
   &:focus {

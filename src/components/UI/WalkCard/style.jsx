@@ -6,37 +6,43 @@ import fontSizes from 'tokens/fontSizes.mjs';
 
 export const StyledWalkCard = styled.div`
   padding: 1rem;
-  max-width: 350px;
+  max-width: 366px;
   margin-bottom: ${spacing.small};
   background: ${colors.white};
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 
-  &:hover {
-    filter: brightness(1.1) grayscale(0);
-    transform: scale(1.06);
-  }
-
   .author-data {
     display: grid;
-    grid-template-areas: 'avatar author' 'avatar usersage';
+    grid-template-areas: 'avatar author' 'avatar userinfo';
     grid-auto-columns: 1fr 3fr;
+    grid-auto-rows: 1.4fr 1fr;
     color: ${colors.black};
     padding-bottom: 1rem;
     margin-bottom: 1rem;
     border-bottom: 1.5px solid ${colors.gray4};
     .avatar {
       grid-area: avatar;
-      border-radius: 50%;
-      padding: 0.5rem;
+      border-radius: 999rem;
+      width: 69px;
+      padding: 0.5rem 0.8rem;
     }
     .author {
       grid-area: author;
+      padding-top: 0.5rem;
       margin: 0;
     }
-    .usersage {
-      grid-area: usersage;
+    .userinfo {
+      grid-area: userinfo;
       font-size: ${fontSizes.s};
+      .dott {
+        display: inline-block;
+        width: 5px;
+        height: 5px;
+        border-radius: 999rem;
+        background-color: ${colors.greenLight};
+        margin: 0 0.5rem;
+      }
     }
   }
 
@@ -44,12 +50,15 @@ export const StyledWalkCard = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     color: ${colors.gray2};
-    font-size: ${fontSizes.m};
+    font-size: ${fontSizes.s};
     div {
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 0 0.5rem 0 0.5rem;
+      img {
+        padding-bottom: 0.5rem;
+      }
     }
     .duration {
       border-left: 1.5px solid ${colors.gray4};

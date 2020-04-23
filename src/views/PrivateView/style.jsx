@@ -40,7 +40,9 @@ export const StyledPrivate = styled.div`
     }
     .user {
       grid-area: user;
-      margin: 8px;
+      display: flex;
+      align-items: flex-end;
+      margin: ${spacing.tiny} 10px;
     }
     .usersage {
       margin: 0 10px;

@@ -7,9 +7,10 @@ import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
 import Feed from 'compositions/Feed';
-import H3 from 'components/UI/H3';
+import H1 from 'components/UI/H1';
 import Alert from 'components/UI/Alert';
 import ButtonCreate from 'components/ButtonCreate';
+import up from '../../assets/icons/updown.svg';
 
 import { StyledFeed, StyledBookedWalksHeader } from './style';
 
@@ -32,9 +33,8 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
   });
 
   const availableWalks = sortedWalks.filter(walk => !bookedWalks.includes(walk));
-
-  console.log('booked', bookedWalks);
-  console.log('available', availableWalks);
+  //console.log('booked', bookedWalks);
+  //console.log('available', availableWalks);
 
   if (isLoading) {
     return <Loader fullScreen />;
@@ -46,23 +46,38 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
         <StyledFeed>
           <ButtonCreate />
           <StyledBookedWalksHeader>
-            <H3 className="title">Dina Promenader</H3>
+            {bookedWalks.length > 0 ? <H1 className="title">Dina Promenader</H1> : null}
             {bookedWalks.length > 1 ? (
-              <div
-                role="button"
-                aria-expanded={showBooked} // is this correct ??
-                tabIndex="0"
-                onKeyDown={() => {}}
-                className="container"
-                onClick={() => setShowBooked(!showBooked)}
-              >
-                <span className={`counter ${showBooked ? 'hide' : ''}`}>{bookedWalks.length}</span>
-                <span className="down-arrow">{!showBooked ? '▼' : '▲'}</span>
+              <div className="container">
+                <H1 className="title">Dina Promenader</H1>
+                <div
+                  role="button"
+                  aria-expanded={showBooked} // is this correct ??
+                  tabIndex="0"
+                  onKeyDown={() => {}}
+                  className="arrow-container"
+                  onClick={() => setShowBooked(!showBooked)}
+                >
+                  <span className={`counter ${showBooked ? 'hide' : ''}`}>
+                    {bookedWalks.length}
+                  </span>
+                  <div className="down-arrow">
+                    {!showBooked ? (
+                      <div className="down">
+                        <img src={up} alt="show more" />
+                      </div>
+                    ) : (
+                      <div className="up">
+                        <img src={up} alt="show less" />
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             ) : null}
           </StyledBookedWalksHeader>
           <Feed walks={bookedWalks.slice(0, showBooked ? bookedWalks.length : 1)} />
-          <H3>Tillgängliga Promenader</H3>
+          <H1>Tillgängliga Promenader</H1>
           <Feed walks={availableWalks} />
         </StyledFeed>
       </React.Fragment>
@@ -74,7 +89,6 @@ const FeedView = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [walks, setWalks] = useState([]);
-
   const { user } = useContext(AuthenticationContext);
 
   useEffect(() => {

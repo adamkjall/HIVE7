@@ -6,7 +6,7 @@ import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 import UploadFile from '../../components/UploadFile';
 
 import Button from '../UI/Button';
-import H3 from '../UI/H3';
+import H1 from '../UI/H1';
 import Input from '../UI/Input';
 import isValidDate from '../../helpers/functions/validDate';
 import makeStringtoBirthDate from '../../helpers/functions/makeStringtoBirthDate';
@@ -75,11 +75,11 @@ const SignUpWithGoogle = () => {
   return (
     <StyledContainer>
       <form onSubmit={onSubmit}>
-        <H3>Skapa konto</H3>
+        <H1>Skapa konto</H1>
         <p className="red">{msgName}</p>
         <Input
           type="text"
-          autoComplete="username"
+          autoComplete="name"
           label="Förnamn och efternamn *"
           id="username"
           inline
@@ -92,7 +92,7 @@ const SignUpWithGoogle = () => {
         <p className="red">{msgBirth}</p>
         <Input
           type="text"
-          autoComplete="dateOfBirth"
+          autoComplete="bday"
           label="Födelsedatum *"
           id="dateOfBirth"
           inline

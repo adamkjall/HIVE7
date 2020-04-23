@@ -4,9 +4,9 @@ const fontSizes = {
   m: '1rem',
   l: '1.25rem',
   h4: '1.25rem',
-  h3: '2rem',
-  h2: '2.5rem',
-  h1: '3rem'
+  h3: '1.25rem',
+  h2: '1.5rem',
+  h1: '1.25rem'
 };
 
 export default fontSizes;

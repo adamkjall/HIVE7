@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { useHistory, Link as RouterLink } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import {
@@ -24,13 +24,19 @@ import { StyledPrivate } from './style';
 
 const PrivateView = () => {
   const [toogle, setToogle] = useState(false);
+  const history = useHistory();
+  const { user } = useContext(AuthenticationContext);
+  const [oldName, setOldName] = useState(null);
 
   const toogleChangepic = e => {
     setToogle(!toogle);
   };
 
-  const { user } = useContext(AuthenticationContext);
-  const [oldName, setOldName] = useState(null);
+  const handleDeleteAccount = () => {
+    () => deleteUserAccount(user.id);
+    history.push('/logout');
+  };
+
   return (
     <Page metadata={{ title: 'Private view' }}>
       {!user ? (
@@ -116,13 +122,17 @@ const PrivateView = () => {
             </div>
             <p className="bold">Logga ut:</p>
             <div className="changecontainer">
-              <button className="change toleft" aria-label="logga ut" as={RouterLink} to="/logout">
+              <button
+                className="change toleft"
+                aria-label="logga ut"
+                onClick={() => history.push('/logout')}
+              >
                 Logga ut
               </button>
             </div>
             <p className="bold">Ta bort konto</p>
             <div className="changecontainer">
-              <button className="change" onClick={() => deleteUserAccount(user.id)}>
+              <button className="change" onClick={handleDeleteAccount}>
                 Ta bort konto
               </button>
             </div>

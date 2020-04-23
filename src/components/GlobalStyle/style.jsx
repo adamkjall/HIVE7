@@ -7,7 +7,7 @@ export const StyledGlobalStyle = createGlobalStyle`
   @font-face {
     font-display: ${({ fontDisplay }) => fontDisplay};
     font-family: "${fontFamilies.light}";
-    font-weight: ${fontWeights.regular};
+    font-weight: ${fontWeights.fontLight};
     src: url('https://fonts.googleapis.com/css2?family=Londrina+Solid&display=swap');
   }
   
@@ -25,7 +25,7 @@ export const StyledGlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: ${fontFamilies.fontRegular}, 'Verdana';
-    font-weight: ${fontWeights.fontRegular};
+    font-weight: ${fontWeights.fontLight};
   }
 
   #root {
@@ -55,15 +55,6 @@ export const StyledGlobalStyle = createGlobalStyle`
    color:${colors.black};
  }
 
- .box2 {
-    display: grid;
-    grid-auto-columns: 1fr 1fr;
-    margin: 1rem;
-    span {
-      padding: 1rem;
-    }
-  }
-
   hr {
     border: 1.2px solid ${colors.gray4};
   }
@@ -75,5 +66,11 @@ export const StyledGlobalStyle = createGlobalStyle`
   .avatar {
     border-radius: 50%;
     padding: 0.5rem;
+  }
+
+    
+  ::placeholder {
+    color: black;
+    opacity: 1;
   }
 `;

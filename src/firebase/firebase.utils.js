@@ -129,8 +129,8 @@ export const bookAWalk = async (userId, walkId) => {
     .doc(userId)
     .collection('booked')
     .doc(walkId)
-    .set({ postId: walkId, userId })
-    .then(() => console.log(`${userId} booked ${walkId}`));
+    .set({ postId: walkId, userId });
+  //.then(() => console.log(`${userId} booked ${walkId}`));
 };
 
 export const joinAWalk = async (userId, walkId) => {

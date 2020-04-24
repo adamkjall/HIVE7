@@ -17,7 +17,9 @@ const WalkCard = ({ walk }) => {
       <Link to={{ pathname: '/selected/' + walk.walkId }}>
         <div className="author-data">
           <img className="avatar" src={walk.user.photoUrl || avatar} alt="avatar" />
-          <H1 className="author">{walk.user.displayName}</H1>
+          <H1 className="author">
+            {walk.user.displayName} {walk.user.username}
+          </H1>
           <div className="userinfo">
             <span>{calculateAge(walk.user.dateOfBirth)} år</span>
             <div className="dott" />

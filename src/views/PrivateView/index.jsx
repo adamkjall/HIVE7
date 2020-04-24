@@ -15,7 +15,6 @@ import {
 
 import Page from 'compositions/Page';
 import H3 from 'components/UI/H3';
-import Button from 'components/UI/Button';
 import calculateAge from '../../helpers/functions/calculateAge';
 import avatar from '../../assets/icons/profilepic.svg';
 import UploadFile from '../../components/UploadFile';
@@ -55,7 +54,10 @@ const PrivateView = () => {
             >
               Byt bild
             </span>
-            <H3 className="user">{user.displayName}</H3>
+            <H3 className="user">
+              {user.displayName}
+              {user.username}
+            </H3>
             <span className="usersage">
               {calculateAge(user.dateOfBirth)} år &#9679; {user.lvlOfSwedish}
             </span>
@@ -74,7 +76,10 @@ const PrivateView = () => {
             <div>
               <p className="bold">Användarnamn:</p>
               <div className="changecontainer">
-                <span className="display"> {user.displayName}</span>
+                <span className="display">
+                  {user.displayName}
+                  {user.username}
+                </span>
                 <button
                   aria-label="ändra namn"
                   className="change"
@@ -94,7 +99,7 @@ const PrivateView = () => {
               <div>
                 <p className="bold">Lösenord:</p>
                 <div className="changecontainer">
-                  <span className="display"> *******</span>
+                  <span className="display"> ******</span>
                   <button
                     aria-label="ändra lösenord"
                     className="change"

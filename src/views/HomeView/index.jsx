@@ -7,6 +7,7 @@ import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
 import H1 from 'components/UI/H1';
+import H3 from 'components/UI/H3';
 import Alert from 'components/UI/Alert';
 import Paragraph from 'components/UI/Paragraph';
 import Button from 'components/UI/Button';
@@ -37,7 +38,7 @@ const HomePageContent = ({ error, isLoading }) => {
               Logga in med Google
             </Button>
             <Link to="/login">
-              <h3>Har du redan ett konto? Logga in</h3>
+              <H3>Har du redan ett konto? Logga in</H3>
             </Link>
           </div>
         </StyledContainer>

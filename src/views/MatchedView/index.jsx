@@ -11,9 +11,7 @@ import Alert from 'components/UI/Alert';
 
 import location from '../../assets/icons/location.svg';
 import avatar from '../../assets/icons/profilepic.svg';
-import walking from '../../assets/icons/walking.svg';
 import clock from '../../assets/icons/time.svg';
-import plus from '../../assets/icons/plus.svg';
 
 import { StyledMatchedwalk } from './style';
 
@@ -30,7 +28,11 @@ const MatchedPageContent = ({ error, isLoading, walk }) => {
         <StyledMatchedwalk>
           <H1>Full fart framåt!</H1>
           <p className="gray">
-            Du och<span>{walk.user.displayName}</span>
+            Du och
+            <span>
+              {walk.user.displayName}
+              {walk.user.username}
+            </span>
             ska gå på promenad tillsammans.
           </p>
           <div className="matched-avatars">
@@ -53,7 +55,14 @@ const MatchedPageContent = ({ error, isLoading, walk }) => {
             <span>{walk.where}</span>
           </div>
           <div className="wrapp-button">
-            <Link to="/chat">
+            <Link
+              to={{
+                pathname: '/chat',
+                state: {
+                  userToChatWith: walk.user
+                }
+              }}
+            >
               <Button>Säj Hej</Button>
             </Link>
           </div>

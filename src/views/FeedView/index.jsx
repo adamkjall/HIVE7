@@ -49,7 +49,6 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
             {bookedWalks.length > 0 ? <H1 className="title">Dina Promenader</H1> : null}
             {bookedWalks.length > 1 ? (
               <div className="container">
-                <H1 className="title">Dina Promenader</H1>
                 <div
                   role="button"
                   aria-expanded={showBooked} // is this correct ??

@@ -30,7 +30,6 @@ export const StyledGlobalStyle = createGlobalStyle`
   }
 
   #root {
-    min-height: 100vh;
   }
 
   img {

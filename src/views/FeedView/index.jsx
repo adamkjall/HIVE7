@@ -11,6 +11,7 @@ import H1 from 'components/UI/H1';
 import Alert from 'components/UI/Alert';
 import ButtonCreate from 'components/ButtonCreate';
 import up from '../../assets/icons/updown.svg';
+import NavBottom from 'components/NavBottom';
 
 import { StyledFeed, StyledBookedWalksHeader } from './style';
 
@@ -45,6 +46,7 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
       <React.Fragment>
         <StyledFeed>
           <ButtonCreate />
+          <NavBottom />
           <StyledBookedWalksHeader>
             {bookedWalks.length > 0 ? <H1 className="title">Dina Promenader</H1> : null}
             {bookedWalks.length > 1 ? (

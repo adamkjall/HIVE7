@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import spacing from 'tokens/spacing.mjs';
 
 export const StyledContentWrapper = styled.div`
-  padding: ${spacing.tiny};
+  padding: 0;
 
   @media (min-width: 1440px) {
     width: 100%;

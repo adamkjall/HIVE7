@@ -7,8 +7,8 @@ export const StyledModal = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 90vw;
+  height: 90vh;
   z-index: 999;
   overflow: hidden;
   color: ${colors.black};
@@ -40,7 +40,7 @@ export const StyledModalContent = styled.div`
 
   .waves {
     margin-left: calc(50% - 50vw);
-    width: 100vw;
+    width: 100%;
     max-width: none;
     overflow: hidden;
   }

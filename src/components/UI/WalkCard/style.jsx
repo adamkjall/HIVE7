@@ -6,7 +6,7 @@ import fontSizes from 'tokens/fontSizes.mjs';
 
 export const StyledWalkCard = styled.div`
   padding: 1rem;
-  max-width: 366px;
+  max-width: 355px;
   margin-bottom: ${spacing.small};
   background: ${colors.white};
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);

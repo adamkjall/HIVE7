@@ -84,19 +84,44 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
             join (this is for next page) or leave if you selected and confirmed this walk
              */}
             {user.id === walk.user.id ? (
-              <Link to={{ pathname: '/feed/' }}>
-                <Button onClick={() => deleteWalkDocument(walk.walkId)}>
-                  Ta bort din promenad
-                </Button>
-              </Link>
+              <div>
+                <Link
+                  to={{
+                    pathname: '/chat',
+                    state: {
+                      userToChatWith: walk.user
+                    }
+                  }}
+                >
+                  <Button>Säj Hej</Button>
+                </Link>
+
+                <Link to={{ pathname: '/feed/' }}>
+                  <Button onClick={() => deleteWalkDocument(walk.walkId)}>
+                    Ta bort din promenad
+                  </Button>
+                </Link>
+              </div>
             ) : !walk.attendingPeople ? (
               <Link to={{ pathname: '/matched/' + walk.walkId, state: { walk } }}>
                 <Button onClick={() => joinAWalk(user.id, walk.walkId)}>Följ med!</Button>
               </Link>
             ) : walk.attendingPeople.find(id => id === user.id) ? (
-              <Link to={{ pathname: '/feed/' }}>
-                <Button onClick={() => leaveAWalk(user.id, walk.walkId)}>Avboka promenad</Button>
-              </Link>
+              <div>
+                <Link
+                  to={{
+                    pathname: '/chat',
+                    state: {
+                      userToChatWith: walk.user
+                    }
+                  }}
+                >
+                  <Button>Säj Hej</Button>
+                </Link>
+                <Link to={{ pathname: '/feed/' }}>
+                  <Button onClick={() => leaveAWalk(user.id, walk.walkId)}>Avboka promenad</Button>
+                </Link>
+              </div>
             ) : (
               <Link to={{ pathname: '/matched/' + walk.walkId, state: { walk } }}>
                 <Button onClick={() => joinAWalk(user.id, walk.walkId)}>Följ med</Button>

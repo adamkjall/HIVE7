@@ -17,7 +17,6 @@ const SignIn = () => {
 
   const onSubmit = event => {
     event.preventDefault();
-
     login(inputs.email, inputs.password);
 
     setInputs({
@@ -64,6 +63,7 @@ const SignIn = () => {
             Logga in
           </Button>
         </div>
+        <H3></H3>
       </form>
     </StyledContainer>
   );

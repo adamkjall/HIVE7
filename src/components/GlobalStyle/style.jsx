@@ -4,16 +4,17 @@ import fontFamilies from 'tokens/fontFamilies.mjs';
 import fontWeights from 'tokens/fontWeights.mjs';
 
 export const StyledGlobalStyle = createGlobalStyle`
+ html {
+    min-height: 100vh;
+    width: 100vw;
+    font-size: 16px;
+  }
+
   @font-face {
     font-display: ${({ fontDisplay }) => fontDisplay};
     font-family: "${fontFamilies.light}";
     font-weight: ${fontWeights.fontLight};
     src: url('https://fonts.googleapis.com/css2?family=Londrina+Solid&display=swap');
-  }
-  
-  html {
-    font-size: 16px;
-    min-height: 100vh;
   }
 
   body {

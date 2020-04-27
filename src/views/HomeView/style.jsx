@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
-  height: 100vh;
+  height: 97vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,6 +10,7 @@ export const StyledContainer = styled.div`
   .buttons {
     display: flex;
     flex-direction: column;
+    margin: 0 36px;
 
     button {
       margin: 0.8rem 0;

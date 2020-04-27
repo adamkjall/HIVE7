@@ -47,12 +47,12 @@ const UploadFile = () => {
             <input type="submit" value="Ladda upp" />
             <br />
           </div>
-          {filename}
+          <span>{filename}</span>
         </form>
         <div className="placeholder-wrapper">
           <img className="placeholder" src={filename.url || placeholder} alt="uploaded" />
           <br />
-          {file.length > 0 ? <button>Byt till denna profilbild</button> : 'Här är en exempel bild'}
+          {file.length > 0 ? <button>Byt till denna profilbild</button> : 'exempel bild'}
         </div>
       </StyledUpload>
     </Fragment>

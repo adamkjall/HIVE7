@@ -8,11 +8,14 @@ import fontSizes from 'tokens/fontSizes.mjs';
 const activeClassName = 'nav-item-active';
 
 export const StyledNav = styled.nav`
+  position: fixed;
+  bottom: 0rem;
+  right: 0rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
-  background: ${colors.white};
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: ${colors.gray5};
+  border-top: ${colors.gray4} 0.2px solid;
   margin: 0;
 `;
 
@@ -28,14 +31,15 @@ export const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
   p {
     margin: 0 0 0.5rem 0;
     font-size: ${fontSizes.s};
-    color: ${colors.red};
   }
   img {
     align-self: center;
     max-width: 30px;
+    max-height: 30px;
     margin: 0 0 ${spacing.tiny} 0;
   }
   &.${activeClassName} {
-    border-bottom: 1px ${colors.red} solid;
+    border-bottom: 1px ${colors.black} solid;
+    background: ${colors.red};
   }
 `;

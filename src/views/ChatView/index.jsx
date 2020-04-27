@@ -7,19 +7,21 @@ import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
-import H3 from 'components/UI/H3';
 import Alert from 'components/UI/Alert';
 import Input from 'components/UI/Input';
 import Button from 'components/UI/Button';
+import avatar from '../../assets/icons/profilepic.svg';
 
 import { StyledChatview } from './style';
 
-const ChatPageContent = ({ error, isLoading, messages, sendMessage }) => {
+const ChatPageContent = ({ error, isLoading, messages, sendMessage, userToChatWith }) => {
   const [input, setInput] = useState('');
 
   const submitMessage = () => {
-    sendMessage(input);
-    setInput('');
+    if (input.length > 0) {
+      sendMessage(input);
+      setInput('');
+    } else return;
   };
 
   if (isLoading) {
@@ -30,23 +32,37 @@ const ChatPageContent = ({ error, isLoading, messages, sendMessage }) => {
     return (
       <React.Fragment>
         <StyledChatview>
-          <H3>Chat</H3>
-          <Input
-            type="text"
-            id="mess"
-            name="mess"
-            value={input}
-            onChange={event => setInput(event.target.value)}
-          />
-          <Button onClick={submitMessage}>Send</Button>
-          {messages &&
-            messages.map((message, index) => (
-              <div className="chattbox" key={index}>
-                <p className="timeposted">{Date(message.createdAt)}</p>
-                <p className="author">{message.name}</p>
-                <p className="mess">{message.text}</p>
-              </div>
-            ))}
+          <div className="heigth-countainer">
+            <div className="to-this-user">
+              <img className="avatar" src={userToChatWith.photoUrl || avatar} alt="avatar" />
+              {userToChatWith.displayName}
+            </div>
+
+            {messages &&
+              messages.map((message, index) => (
+                <div className="chattcountainer" key={index}>
+                  <p className="timeposted">{Date(message.createdAt)}</p>
+                  <div className="chattbox">
+                    <p className="author">{message.name}</p>
+                    <p className="mess">{message.text}</p>
+                  </div>
+                </div>
+              ))}
+          </div>
+          <div className="sendbox">
+            <Input
+              className="inputmess"
+              type="text"
+              id="mess"
+              inline
+              name="mess"
+              value={input}
+              onChange={event => setInput(event.target.value)}
+            />
+            <Button type="submit" onClick={submitMessage}>
+              Send
+            </Button>
+          </div>
         </StyledChatview>
       </React.Fragment>
     );
@@ -94,6 +110,7 @@ const ChatView = () => {
   return (
     <Page>
       <ChatPageContent
+        userToChatWith={userToChatWith}
         error={error}
         isLoading={isLoading}
         messages={messages}

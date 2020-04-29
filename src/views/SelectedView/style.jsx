@@ -4,7 +4,8 @@ import spacing from 'tokens/spacing.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
 
 export const StyledSelectedWalk = styled.div`
-  max-width: 25rem;
+  padding: ${spacing.small};
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,5 +63,9 @@ export const StyledSelectedWalk = styled.div`
     border-top: 1.5px solid ${colors.gray4};
     padding: 1rem 0;
     margin-bottom: 1.6rem;
+  }
+
+  .buttons-wrapper {
+    display: grid;
   }
 `;

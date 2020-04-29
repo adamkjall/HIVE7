@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import backbutton from '../../../assets/icons/back.svg';
+import backbutton from '../../assets/icons/back.svg';
 import { StyledBack } from './style';
 
 const BackButton = () => {

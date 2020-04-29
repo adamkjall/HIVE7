@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
-import H3 from 'components/UI/H3';
+import H1 from 'components/UI/H1';
 import Alert from 'components/UI/Alert';
 import Input from 'components/UI/Input';
 
+import NavBottom from 'components/NavBottom';
+
+import waves from '../../assets/icons/waves.svg';
 import avatar from '../../assets/icons/profilepic.svg';
 
 import { StyledcChooseChatview } from './style';
@@ -22,18 +25,22 @@ const ChooseChatPageContent = ({ error, isLoading }) => {
     return (
       <React.Fragment>
         <StyledcChooseChatview>
-          <div>
-            <H3>Meddelanden</H3>
+          <NavBottom />
+          <div className="message-head-container">
+            <H1>Meddelanden</H1>
+            <img src={waves} alt="wave" className="waves" />
           </div>
-          <Input
-            type="text"
-            id="mess"
-            placeholder="Sök"
-            inline
-            name="mess"
-            value={input}
-            onChange={event => setInput(event.target.value)}
-          />
+          <div className="search">
+            <Input
+              type="text"
+              id="mess"
+              placeholder="Sök"
+              inline
+              name="mess"
+              value={input}
+              onChange={event => setInput(event.target.value)}
+            />
+          </div>
           <div className="list-mess">
             {/* map */}
             <div className="comp-mess">

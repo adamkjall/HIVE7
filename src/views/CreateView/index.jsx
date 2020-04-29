@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
 import PostForm from 'compositions/PostForm';
-import H3 from 'components/UI/H3';
 import Alert from 'components/UI/Alert';
 
 const CreatePageContent = ({ error, isLoading }) => {
@@ -14,10 +13,7 @@ const CreatePageContent = ({ error, isLoading }) => {
   } else {
     return (
       <React.Fragment>
-        <div>
-          <H3>Skapa ny promenad</H3>
-          <PostForm />
-        </div>
+        <PostForm />
       </React.Fragment>
     );
   }

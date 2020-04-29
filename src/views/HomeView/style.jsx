@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
+import spacing from 'tokens/spacing.mjs';
+
 export const StyledContainer = styled.div`
+  padding: ${spacing.small};
   height: 97vh;
   display: flex;
   flex-direction: column;

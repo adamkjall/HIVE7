@@ -36,6 +36,6 @@ export const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
     margin: 0 0 ${spacing.tiny} 0;
   }
   &.${activeClassName} {
-    border-bottom: 1px ${colors.red} solid;
+    border-bottom: 2px ${colors.red} solid;
   }
 `;

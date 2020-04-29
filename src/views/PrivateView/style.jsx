@@ -6,16 +6,12 @@ import fontWeights from 'tokens/fontWeights.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
 
 export const StyledPrivate = styled.div`
-  max-width: 25rem;
-  border-radius: 1rem;
-
   .profilebox-1 {
     display: grid;
     grid-template-areas: 'avatar user' 'avatar  usersage' 'changepic .';
     grid-auto-columns: 1fr 2fr;
-    grid-auto-rows: 0.8fr 0.2fr 0.3fr;
-    margin: 2rem 0;
-
+    grid-auto-rows: 0.8fr 0.2fr 0.2fr;
+    padding: ${spacing.tiny} ${spacing.small} 0;
     .avatar {
       grid-area: avatar;
 
@@ -51,30 +47,39 @@ export const StyledPrivate = styled.div`
       color: ${colors.gray2};
     }
   }
-  .bold {
-    font-size: ${fontSizes.m};
-    font-weight: bold;
+
+  .waves {
+    width: 100%;
   }
-  .changecontainer {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid ${colors.gray4};
-    .display {
-      font-size: ${fontSizes.s};
+
+  .change-allinfo-wrapper {
+    padding: ${spacing.tiny} ${spacing.small};
+
+    .bold {
+      font-size: ${fontSizes.m};
+      font-weight: bold;
     }
-    .change {
-      color: ${colors.red};
-      font-size: ${fontSizes.s};
-      border: none;
-      background-color: none;
-      background-color: ${colors.white};
+    .changecontainer {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid ${colors.gray4};
+      .display {
+        font-size: ${fontSizes.s};
+      }
+      .change {
+        color: ${colors.red};
+        font-size: ${fontSizes.s};
+        border: none;
+        background-color: none;
+        background-color: ${colors.white};
+      }
     }
-  }
-  .container-logout {
-    height: 250px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-evenly;
+    .container-logout {
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-evenly;
+    }
   }
 `;

@@ -3,8 +3,7 @@ import colors from 'tokens/colors.mjs';
 import spacing from 'tokens/spacing.mjs';
 
 export const StyledFeed = styled.div`
-  margin: 0;
-  width: 98vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

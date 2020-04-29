@@ -3,6 +3,7 @@ import colors from 'tokens/colors.mjs';
 import spacing from 'tokens/spacing.mjs';
 
 export const StyledMatchedwalk = styled.div`
+  padding: ${spacing.tiny} ${spacing.small} 0;
   .gray {
     color: ${colors.gray2};
     text-align: center;

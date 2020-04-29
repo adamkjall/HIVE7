@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import { createWalkDocument } from '../../firebase/firebase.utils';
 
+import H1 from 'components/UI/H1';
+import BackButton from 'components/BackButton';
 import Select from 'components/UI/Select';
 import Button from 'components/UI/Button';
 import CheckBox from '../../components/UI/Checkbox';
@@ -18,6 +20,8 @@ import bringPetsvg from '../../assets/icons/bringPets.svg';
 import walking from '../../assets/icons/walking.svg';
 import time from '../../assets/icons/time.svg';
 import calender from '../../assets/icons/calender.svg';
+import waves from '../../assets/icons/waves.svg';
+import graywaves from '../../assets/icons/graywaves.svg';
 
 import { StyledPostForm } from './style';
 const PostForm = () => {
@@ -94,104 +98,116 @@ const PostForm = () => {
   return (
     <StyledPostForm>
       <form name="post-form" onSubmit={onSubmit}>
-        <div>
-          <img src={time} alt="time" />
-          <p>När vill du gå?</p>
-          <input
-            type="time"
-            name="time"
-            id="time"
-            value={inputs.time}
-            onChange={event => onValueChange('time', event.target.value)}
-          />
-          <img src={calender} alt="calender" />
-          <input
-            type="date"
-            name="date"
-            id="date"
-            value={inputs.date}
-            onChange={event => onValueChange('date', event.target.value)}
-          />
+        {' '}
+        <div className="headcontainer">
+          <BackButton />
+          <H1>Ny promenad</H1>
         </div>
-        <hr />
-        <div className="textinput">
-          <img src={location} alt="where" />
-          <Input
-            id="where"
-            inline
-            name="where"
-            placeholder="Var vill du gå?"
-            value={inputs.where}
-            onChange={event => onValueChange('where', event.target.value)}
-          />
-        </div>
-        <p className="red">{wheremsg}</p>
-        <div>
-          <label htmlFor="timeduration">
-            <img src={walking} alt="walk" />
-            <span>Hur länge tänker du gå?</span>
-          </label>
-          <input
-            type="number"
-            id="timeduration"
-            name="timeduration"
-            value={inputs.timeduration}
-            onChange={event => onValueChange('timeduration', event.target.value)}
-          />
-        </div>
-        <hr />
-        <CheckBox
-          icon={friends}
-          id="allowFriends"
-          label="Kan vänner följa med?"
-          clickHandler={event => onValueChange('allowFriends', event.target.value)}
-        />
-        <CheckBox
-          icon={family}
-          id="allowChildren"
-          label="Kan barn följa med?"
-          clickHandler={event => onValueChange('allowChildren', event.target.value)}
-        />
-        <CheckBox
-          icon={bringPetsvg}
-          id="allowPets"
-          label="Får husdjur följa med?"
-          clickHandler={event => onValueChange('allowPets', event.target.value)}
-        />
-        <CheckBox
-          icon={pets}
-          id="bringPets"
-          label="Kommer du ta med husdjur?"
-          clickHandler={event => onValueChange('bringPets', event.target.value)}
-        />
+        <img src={waves} className="waves green" alt="wave" />
+        <img src={graywaves} className="waves gray" alt="wave" />
+        <div className="create-new-container">
+          <div className="form-box1">
+            <img src={time} alt="time" />
+            <p>När vill du gå?</p>
+            <input
+              type="time"
+              name="time"
+              id="time"
+              value={inputs.time}
+              onChange={event => onValueChange('time', event.target.value)}
+            />
+            <img src={calender} alt="calender" />
+            <input
+              type="date"
+              name="date"
+              id="date"
+              value={inputs.date}
+              onChange={event => onValueChange('date', event.target.value)}
+            />
+          </div>
+          <hr />
+          <div className="textinput">
+            <img src={location} alt="where" />
+            <Input
+              id="where"
+              inline
+              name="where"
+              placeholder="Var vill du gå?"
+              value={inputs.where}
+              onChange={event => onValueChange('where', event.target.value)}
+            />
+          </div>
+          <p className="red">{wheremsg}</p>
+          <div>
+            <label htmlFor="timeduration">
+              <img src={walking} alt="walk" />
+              <span>Hur länge tänker du gå?</span>
+            </label>
+            <input
+              type="number"
+              id="timeduration"
+              name="timeduration"
+              value={inputs.timeduration}
+              onChange={event => onValueChange('timeduration', event.target.value)}
+            />
+          </div>
+          <hr />
+          <div className="form-box2">
+            <CheckBox
+              icon={friends}
+              id="allowFriends"
+              label="Kan vänner följa med?"
+              clickHandler={event => onValueChange('allowFriends', event.target.value)}
+            />
+            <CheckBox
+              icon={family}
+              id="allowChildren"
+              label="Kan barn följa med?"
+              clickHandler={event => onValueChange('allowChildren', event.target.value)}
+            />
+            <CheckBox
+              icon={bringPetsvg}
+              id="allowPets"
+              label="Får husdjur följa med?"
+              clickHandler={event => onValueChange('allowPets', event.target.value)}
+            />
+            <CheckBox
+              icon={pets}
+              id="bringPets"
+              label="Kommer du ta med husdjur?"
+              clickHandler={event => onValueChange('bringPets', event.target.value)}
+            />
+            <div>
+              <Select
+                id="filterGender"
+                name="filterGender"
+                label="Vem vill du gå med?"
+                value={inputs.filterGender}
+                onChange={event => onValueChange('filterGender', event.target.value)}
+              >
+                <option value="all">Alla</option>
+                <option value="women">Bara kvinnor</option>
+              </Select>
+            </div>
+          </div>
+          <hr />
+          <div className="form-box3">
+            <img src={chat} alt="chat" />
+            <Textarea
+              id="introtext"
+              name="introtext"
+              label="Hälsning"
+              value={inputs.introtext}
+              placeholder="Skriv en hälsning"
+              onChange={event => onValueChange('introtext', event.target.value)}
+            />
 
-        <div>
-          <Select
-            id="filterGender"
-            name="filterGender"
-            label="Vem vill du gå med?"
-            value={inputs.filterGender}
-            onChange={event => onValueChange('filterGender', event.target.value)}
-          >
-            <option value="all">Alla</option>
-            <option value="women">Bara kvinnor</option>
-          </Select>
+            <p className="red">{msg}</p>
+          </div>
+          <Button nature="primary" type="submit">
+            Skapa{' '}
+          </Button>
         </div>
-        <hr />
-        <img src={chat} alt="chat" />
-        <Textarea
-          id="introtext"
-          name="introtext"
-          label="Hälsning"
-          value={inputs.introtext}
-          placeholder="Skriv en hälsning"
-          onChange={event => onValueChange('introtext', event.target.value)}
-        />
-        <p className="red">{msg}</p>
-
-        <Button nature="primary" type="submit">
-          Skapa{' '}
-        </Button>
       </form>
     </StyledPostForm>
   );

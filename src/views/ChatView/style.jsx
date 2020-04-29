@@ -5,16 +5,21 @@ import spacing from 'tokens/spacing.mjs';
 
 export const StyledChatview = styled.div`
   .heigth-countainer {
-    height: 70vh;
-    .to-this-user {
-      border-bottom: 2px ${colors.red} solid;
+    .head-chat-info {
+      padding-top: ${spacing.small};
+      .backbutton {
+        padding: ${spacing.small};
+      }
       .avatar {
         max-width: 34px;
         max-height: 34px;
       }
+      img.waves {
+        width: 100%;
+      }
     }
-
     .chattcountainer {
+      padding: ${spacing.tiny} ${spacing.small} 0;
       .timeposted {
         font-size: ${fontSize.microcopy};
         margin: ${spacing.tiny};
@@ -40,11 +45,22 @@ export const StyledChatview = styled.div`
         }
       }
     }
-    .sendbox {
-      position: fixed;
-      bottom: 0;
-      display: grid;
-      grid-template-rows: 3fr 1fr;
+  }
+  .sendbox {
+    width: 100%;
+    padding: ${spacing.tiny} ${spacing.small} 0;
+    background: ${colors.gray4};
+    position: fixed;
+    bottom: -5px;
+    display: grid;
+    grid-template-columns: 2fr 0.2fr;
+
+    button {
+      border: none;
+      background: none;
+      padding: 0;
+      height: 3rem;
+      width: 3rem;
     }
   }
 `;

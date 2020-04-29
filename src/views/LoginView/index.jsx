@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
 import SignIn from '../../components/SignIn';
-import BackButton from '../../components/UI/BackButton';
+import BackButton from '../../components/BackButton';
 import Page from 'compositions/Page';
 
 import { StyledContainer } from './style';

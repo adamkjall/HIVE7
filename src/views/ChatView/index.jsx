@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { BrowserRouter, Switch, Route, useLocation } from 'react-router-dom';
+import { Link, BrowserRouter, Switch, Route, useLocation } from 'react-router-dom';
 
 import { firestore } from '../../firebase/firebase.utils';
 
@@ -9,8 +9,10 @@ import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
 import Alert from 'components/UI/Alert';
 import Input from 'components/UI/Input';
-import Button from 'components/UI/Button';
 import avatar from '../../assets/icons/profilepic.svg';
+import back from '../../assets/icons/back.svg';
+import waves from '../../assets/icons/waves.svg';
+import sendMessageIcon from '../../assets/icons/sendmess.svg';
 
 import { StyledChatview } from './style';
 
@@ -33,11 +35,14 @@ const ChatPageContent = ({ error, isLoading, messages, sendMessage, userToChatWi
       <React.Fragment>
         <StyledChatview>
           <div className="heigth-countainer">
-            <div className="to-this-user">
+            <div className="head-chat-info">
+              <Link to="/feed" className="backbutton">
+                <img src={back} alt="back" />
+              </Link>
               <img className="avatar" src={userToChatWith.photoUrl || avatar} alt="avatar" />
               {userToChatWith.displayName}
+              <img src={waves} alt="waves" className="waves" />
             </div>
-
             {messages &&
               messages.map((message, index) => (
                 <div className="chattcountainer" key={index}>
@@ -59,9 +64,9 @@ const ChatPageContent = ({ error, isLoading, messages, sendMessage, userToChatWi
               value={input}
               onChange={event => setInput(event.target.value)}
             />
-            <Button type="submit" onClick={submitMessage}>
-              Send
-            </Button>
+            <button type="submit" onClick={submitMessage}>
+              <img src={sendMessageIcon} alt="send" />
+            </button>
           </div>
         </StyledChatview>
       </React.Fragment>

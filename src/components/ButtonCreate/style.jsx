@@ -17,8 +17,8 @@ export const StyledButtonCreate = styled.button`
   transition: 0.1s;
   border: none;
   position: fixed;
-  bottom: 7rem;
-  right: 1rem;
+  bottom: 4.8rem;
+  right: ${spacing.small};
   align-self: flex-end;
 
   .plus {

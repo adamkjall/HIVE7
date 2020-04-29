@@ -5,6 +5,7 @@ import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import { deleteWalkDocument, leaveAWalk, joinAWalk, getWalk } from '../../firebase/firebase.utils';
 import calculateAge from '../../helpers/functions/calculateAge.jsx';
 
+import BackButton from 'components/BackButton';
 import Button from 'components/UI/Button';
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
@@ -32,6 +33,7 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
     return (
       <React.Fragment>
         <StyledSelectedWalk>
+          <BackButton />
           <Link to={{ pathname: '/profile/' + walk.author, state: { walk } }}>
             <img className="avatar" src={walk.user.photoUrl || avatar} alt="avatar" />
           </Link>
@@ -95,7 +97,6 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
                 >
                   <Button>Säj Hej</Button>
                 </Link>
-
                 <Link to={{ pathname: '/feed/' }}>
                   <Button onClick={() => deleteWalkDocument(walk.walkId)}>
                     Ta bort din promenad

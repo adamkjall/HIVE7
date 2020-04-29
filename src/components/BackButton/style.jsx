@@ -4,15 +4,15 @@ import spacing from 'tokens/spacing.mjs';
 import colors from 'tokens/colors.mjs';
 
 export const StyledBack = styled.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: flex-start;
   border: none;
-  background-color: ${colors.white};
+  background: none;
 
   .back {
     padding: ${spacing.small} ${spacing.small} 0;
-    background-color: ${colors.white};
     border: none;
+    background: none;
   }
 `;

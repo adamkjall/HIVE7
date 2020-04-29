@@ -5,7 +5,6 @@ import { NotificationContext } from 'contexts/NotificationContext';
 import ErrorBoundary from 'components/ErrorBoundary';
 import GlobalStyle from 'components/GlobalStyle';
 import ScrollToTop from 'components/ScrollToTop';
-import Nav from 'components/Nav';
 import Dialog from 'components/UI/Dialog';
 import NotificationModal from 'compositions/NotificationModal';
 
@@ -23,9 +22,6 @@ const App = () => {
   return (
     <ErrorBoundary>
       <GlobalStyle fontDisplay="swap" />
-      <ErrorBoundary>
-        <Nav />
-      </ErrorBoundary>
       <ErrorBoundary>
         <ScrollToTop>
           {notifications.length ? (

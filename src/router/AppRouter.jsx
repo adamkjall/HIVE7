@@ -57,6 +57,11 @@ const AppRouter = () => (
       render={props => <LoadableView {...props} view="FeedView" />}
     />
     <ProtectedRoute
+      exact
+      path="/booked"
+      render={props => <LoadableView {...props} view="BookedView" />}
+    />
+    <ProtectedRoute
       path="/selected/:postId"
       render={props => <LoadableView {...props} view="SelectedView" />}
     />

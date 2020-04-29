@@ -20,6 +20,7 @@ import avatar from '../../assets/icons/profilepic.svg';
 import waves from '../../assets/icons/waves.svg';
 import UploadFile from '../../components/UploadFile';
 
+import NavBottom from 'components/NavBottom';
 import { StyledPrivate } from './style';
 
 const PrivateView = () => {
@@ -43,6 +44,7 @@ const PrivateView = () => {
         <div></div>
       ) : (
         <StyledPrivate>
+          <NavBottom />
           <div className="profilebox-1">
             <img className="avatar" src={user.photoUrl || avatar} alt="avatar" />
             <span
@@ -63,9 +65,9 @@ const PrivateView = () => {
               {calculateAge(user.dateOfBirth)} år &#9679; {user.lvlOfSwedish}
             </span>
           </div>
-          <img src={waves} alt="wave" />
+          <img src={waves} alt="wave" className="waves" />
           {toogle ? <UploadFile /> : null}
-          <div>
+          <div className="change-allinfo-wrapper">
             <div>
               <p className="bold">E-postadress:</p>
               <div className="changecontainer">

@@ -15,7 +15,7 @@ const Nav = props => {
           <br /> Promenader
         </p>
       </StyledNavLink>
-      <StyledNavLink as={NavLink} to="/private">
+      <StyledNavLink as={NavLink} to="/booked">
         <p>
           Mina <br /> Promenader
         </p>

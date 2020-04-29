@@ -7,7 +7,7 @@ import fontSizes from 'tokens/fontSizes.mjs';
 
 const activeClassName = 'nav-item-active';
 
-export const StyledNav = styled.nav`
+export const StyledNavBottom = styled.nav`
   position: fixed;
   bottom: 0rem;
   right: 0rem;
@@ -17,6 +17,7 @@ export const StyledNav = styled.nav`
   background: ${colors.gray5};
   border-top: ${colors.gray4} 0.2px solid;
   margin: 0;
+  z-index: 1;
 `;
 
 export const StyledNavLink = styled(NavLink).attrs({ activeClassName })`

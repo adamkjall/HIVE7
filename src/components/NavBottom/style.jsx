@@ -14,7 +14,7 @@ export const StyledNavBottom = styled.nav`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
-  background: ${colors.gray5};
+  background: ${colors.white};
   border-top: ${colors.gray4} 0.2px solid;
   margin: 0;
   z-index: 1;
@@ -40,7 +40,7 @@ export const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
     margin: 0 0 ${spacing.tiny} 0;
   }
   &.${activeClassName} {
-    border-bottom: 1px ${colors.black} solid;
+    border-top: 1px ${colors.black} solid;
     background: ${colors.red};
   }
 `;

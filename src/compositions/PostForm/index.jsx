@@ -30,6 +30,22 @@ const PostForm = () => {
   const [msg, setMsg] = useState('');
   const [wheremsg, setWhereMsg] = useState('');
 
+  const [toogleWhen, setToogleWhen] = useState(false);
+  const [toogleWhere, setToogleWhere] = useState(false);
+  const [toogleDuration, setToogleDuration] = useState(false);
+
+  const handleToogleWhen = e => {
+    setToogleWhen(!toogleWhen);
+  };
+
+  const handleToogleWhere = e => {
+    setToogleWhere(!toogleWhere);
+  };
+
+  const handleToogleDuration = e => {
+    setToogleDuration(!toogleDuration);
+  };
+
   const [inputs, setInputs] = useState({
     date: '',
     time: '',
@@ -107,51 +123,63 @@ const PostForm = () => {
         <img src={graywaves} className="waves gray" alt="wave" />
         <div className="create-new-container">
           <div className="form-box1">
-            <img src={time} alt="time" />
-            <p>När vill du gå?</p>
-            <input
-              type="time"
-              name="time"
-              id="time"
-              value={inputs.time}
-              onChange={event => onValueChange('time', event.target.value)}
-            />
-            <img src={calender} alt="calender" />
-            <input
-              type="date"
-              name="date"
-              id="date"
-              value={inputs.date}
-              onChange={event => onValueChange('date', event.target.value)}
-            />
-          </div>
-          <hr />
-          <div className="textinput">
-            <img src={location} alt="where" />
-            <Input
-              id="where"
-              inline
-              name="where"
-              placeholder="Var vill du gå?"
-              value={inputs.where}
-              onChange={event => onValueChange('where', event.target.value)}
-            />
-          </div>
-          <p className="red">{wheremsg}</p>
-          <div>
-            <label htmlFor="timeduration">
+            <label className="when" onClick={handleToogleWhen}>
+              <img src={time} alt="time" />
+              <span>När vill du gå?</span>
+            </label>
+            {toogleWhen ? (
+              <div>
+                <input
+                  type="time"
+                  name="time"
+                  id="time"
+                  value={inputs.time}
+                  onChange={event => onValueChange('time', event.target.value)}
+                />
+                <img src={calender} alt="calender" />
+                <input
+                  type="date"
+                  name="date"
+                  id="date"
+                  value={inputs.date}
+                  onChange={event => onValueChange('date', event.target.value)}
+                />
+              </div>
+            ) : null}
+
+            <label className="where" onClick={handleToogleWhere}>
+              <img src={location} alt="where" />
+              <span>Var vill du gå?</span>
+            </label>
+            {toogleWhere ? (
+              <div>
+                <Input
+                  id="where"
+                  inline
+                  name="where"
+                  placeholder="Var vill du gå?"
+                  value={inputs.where}
+                  onChange={event => onValueChange('where', event.target.value)}
+                />
+
+                <p className="red">{wheremsg}</p>
+              </div>
+            ) : null}
+
+            <label className="duration" htmlFor="timeduration" onClick={handleToogleDuration}>
               <img src={walking} alt="walk" />
               <span>Hur länge tänker du gå?</span>
             </label>
-            <input
-              type="number"
-              id="timeduration"
-              name="timeduration"
-              value={inputs.timeduration}
-              onChange={event => onValueChange('timeduration', event.target.value)}
-            />
+            {toogleDuration ? (
+              <input
+                type="number"
+                id="timeduration"
+                name="timeduration"
+                value={inputs.timeduration}
+                onChange={event => onValueChange('timeduration', event.target.value)}
+              />
+            ) : null}
           </div>
-          <hr />
           <div className="form-box2">
             <CheckBox
               icon={friends}
@@ -190,7 +218,6 @@ const PostForm = () => {
               </Select>
             </div>
           </div>
-          <hr />
           <div className="form-box3">
             <img src={chat} alt="chat" />
             <Textarea

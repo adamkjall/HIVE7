@@ -64,11 +64,9 @@ export const StyledGlobalStyle = createGlobalStyle`
   }
 
   .avatar {
-    border-radius: 50%;
-    padding: 0.5rem;
+    border-radius: 999rem;
   }
 
-    
   ::placeholder {
     color: black;
     opacity: 1;

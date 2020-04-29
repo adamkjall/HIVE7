@@ -5,13 +5,12 @@ import colors from 'tokens/colors.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
 
 export const StyledCheckBox = styled.div`
-  margin: ${spacing.tiny};
-  font-size: ${fontSizes.p};
+  font-size: ${fontSizes.m};
   color: ${colors.gray1};
-
   .container {
     display: grid;
-    grid-template-columns: 40px auto 25px;
+    grid-template-columns: 50px auto 25px;
+    grid-template-rows: 50px;
   }
 
   .checkbox-styled {

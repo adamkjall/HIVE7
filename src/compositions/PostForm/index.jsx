@@ -34,18 +34,6 @@ const PostForm = () => {
   const [toogleWhere, setToogleWhere] = useState(false);
   const [toogleDuration, setToogleDuration] = useState(false);
 
-  const handleToogleWhen = e => {
-    setToogleWhen(!toogleWhen);
-  };
-
-  const handleToogleWhere = e => {
-    setToogleWhere(!toogleWhere);
-  };
-
-  const handleToogleDuration = e => {
-    setToogleDuration(!toogleDuration);
-  };
-
   const [inputs, setInputs] = useState({
     date: '',
     time: '',
@@ -123,10 +111,17 @@ const PostForm = () => {
         <img src={graywaves} className="waves gray" alt="wave" />
         <div className="create-new-container">
           <div className="form-box1">
-            <label className="when" onClick={handleToogleWhen}>
+            <div
+              className="when"
+              onClick={() => {
+                setToogleWhen(!toogleWhen);
+              }}
+              role="button"
+              tabIndex="0"
+            >
               <img src={time} alt="time" />
               <span>När vill du gå?</span>
-            </label>
+            </div>
             {toogleWhen ? (
               <div>
                 <input
@@ -146,11 +141,17 @@ const PostForm = () => {
                 />
               </div>
             ) : null}
-
-            <label className="where" onClick={handleToogleWhere}>
+            <div
+              className="where"
+              onClick={() => {
+                setToogleWhere(!toogleWhere);
+              }}
+              role="button"
+              tabIndex="-1"
+            >
               <img src={location} alt="where" />
               <span>Var vill du gå?</span>
-            </label>
+            </div>
             {toogleWhere ? (
               <div>
                 <Input
@@ -165,11 +166,17 @@ const PostForm = () => {
                 <p className="red">{wheremsg}</p>
               </div>
             ) : null}
-
-            <label className="duration" htmlFor="timeduration" onClick={handleToogleDuration}>
+            <div
+              className="duration"
+              onClick={() => {
+                setToogleDuration(!toogleDuration);
+              }}
+              role="button"
+              tabIndex="-2"
+            >
               <img src={walking} alt="walk" />
               <span>Hur länge tänker du gå?</span>
-            </label>
+            </div>
             {toogleDuration ? (
               <input
                 type="number"

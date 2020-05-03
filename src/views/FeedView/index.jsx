@@ -41,8 +41,6 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
   } else {
     return (
       <React.Fragment>
-        <Nav />
-        <NavBottom />
         <StyledFeed>
           <ButtonCreate />
           <Feed walks={availableWalks} />

@@ -20,7 +20,6 @@ import avatar from '../../assets/icons/profilepic.svg';
 import waves from '../../assets/icons/waves.svg';
 import UploadFile from '../../components/UploadFile';
 
-import NavBottom from 'components/NavBottom';
 import { StyledPrivate } from './style';
 
 const PrivateView = () => {
@@ -28,10 +27,6 @@ const PrivateView = () => {
   const history = useHistory();
   const { user } = useContext(AuthenticationContext);
   const [oldName, setOldName] = useState(null);
-
-  const toogleChangepic = e => {
-    setToogle(!toogle);
-  };
 
   const handleDeleteAccount = () => {
     () => deleteUserAccount(user.id);
@@ -44,7 +39,6 @@ const PrivateView = () => {
         <div></div>
       ) : (
         <StyledPrivate>
-          <NavBottom />
           <div className="profilebox-1">
             <img className="avatar" src={user.photoUrl || avatar} alt="avatar" />
             <span
@@ -52,8 +46,12 @@ const PrivateView = () => {
               tabIndex="-5"
               role="button"
               aria-label="toogle"
-              onClick={toogleChangepic}
-              onKeyDown={toogleChangepic}
+              onClick={() => {
+                setToogle(!toogle);
+              }}
+              onKeyDown={() => {
+                setToogle(!toogle);
+              }}
             >
               Byt bild
             </span>

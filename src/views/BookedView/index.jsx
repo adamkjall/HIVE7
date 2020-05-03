@@ -6,19 +6,13 @@ import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
-import H1 from 'components/UI/H1';
 import Feed from 'compositions/Feed';
 import Alert from 'components/UI/Alert';
 import ButtonCreate from 'components/ButtonCreate';
-import up from '../../assets/icons/updown.svg';
-import Nav from 'components/Nav';
-import NavBottom from 'components/NavBottom';
 
-import { StyledFeed, StyledBookedWalksHeader } from './style';
+import { StyledFeed } from './style';
 
 const FeedPageContent = ({ error, isLoading, walks, user }) => {
-  const [showBooked, setShowBooked] = useState(false);
-
   const sortWalks = walks =>
     walks.sort((a, b) => {
       const valueA = Number(a.date.replace(/-/gi, '')) + Number(a.time.replace(':', ''));
@@ -41,8 +35,6 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
   } else {
     return (
       <React.Fragment>
-        <Nav />
-        <NavBottom />
         <StyledFeed>
           <ButtonCreate />
           <Feed walks={bookedWalks} />

@@ -7,8 +7,6 @@ import H1 from 'components/UI/H1';
 import Alert from 'components/UI/Alert';
 import Input from 'components/UI/Input';
 
-import NavBottom from 'components/NavBottom';
-
 import waves from '../../assets/icons/waves.svg';
 import avatar from '../../assets/icons/profilepic.svg';
 
@@ -25,7 +23,6 @@ const ChooseChatPageContent = ({ error, isLoading }) => {
     return (
       <React.Fragment>
         <StyledcChooseChatview>
-          <NavBottom />
           <div className="message-head-container">
             <H1>Meddelanden</H1>
             <img src={waves} alt="wave" className="waves" />

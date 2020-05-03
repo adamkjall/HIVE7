@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, BrowserRouter, Switch, Route, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { format, formatDistance, compareAsc, parse, toDate } from 'date-fns';
 
 import { firestore } from '../../firebase/firebase.utils';
 
@@ -44,15 +45,17 @@ const ChatPageContent = ({ error, isLoading, messages, sendMessage, userToChatWi
               <img src={waves} alt="waves" className="waves" />
             </div>
             {messages &&
-              messages.map((message, index) => (
-                <div className="chattcountainer" key={index}>
-                  <p className="timeposted">{Date(message.createdAt)}</p>
-                  <div className="chattbox">
-                    <p className="author">{message.name}</p>
-                    <p className="mess">{message.text}</p>
+              messages
+                .sort((a, b) => a.createdAt - b.createdAt)
+                .map((message, index) => (
+                  <div className="chattcountainer" key={index}>
+                    <p className="timeposted">{format(message.createdAt, 'H:m d MMMM')}</p>
+                    <div className="chattbox">
+                      <p className="author">{message.name}</p>
+                      <p className="mess">{message.text}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
           </div>
           <div className="sendbox">
             <Input
@@ -82,10 +85,8 @@ const ChatView = () => {
   const { userToChatWith } = useLocation().state;
 
   useEffect(() => {
-    const chatSessionId =
-      user.id < userToChatWith.id
-        ? user.id + '-' + userToChatWith.id
-        : userToChatWith.id + '-' + user.id;
+    // find chat session id
+    const chatSessionId = calcChatSessionId(user.id, userToChatWith.id);
     const unsubscribe = firestore
       .collection('chat')
       .doc(chatSessionId)
@@ -94,27 +95,49 @@ const ChatView = () => {
         setIsLoading(true);
         const fetchedMessages = [];
         snapshot.forEach(doc => {
-          const message = doc.data();
-          fetchedMessages.push(message);
+          const data = doc.data();
+          fetchedMessages.push({ ...data, createdAt: data.createdAt.toDate() });
         });
         setMessages(fetchedMessages);
-        console.log('fetchedMessages', fetchedMessages);
+
+        firestore
+          .collection('chat')
+          .doc(chatSessionId)
+          .get()
+          .then(res => res.data())
+          .then(data => {
+            // if user to notify is this user
+            if (data.lastMessage.userToNotify === user.id) {
+              // ... mark conversation as read
+              firestore
+                .collection('chat')
+                .doc(chatSessionId)
+                .update({ 'lastMessage.userToNotify': null });
+            }
+          });
 
         setIsLoading(false);
       });
 
     return () => unsubscribe();
-  }, []);
+  }, [user, userToChatWith]);
+
+  // return chat session id with format "lowestIdHere-highestIdHere"
+  const calcChatSessionId = (id1, id2) => (id1 < id2 ? id1 + '-' + id2 : id2 + '-' + id1);
 
   const sendMessage = message => {
-    const chatSessionId =
-      user.id < userToChatWith.id
-        ? user.id + '-' + userToChatWith.id
-        : userToChatWith.id + '-' + user.id;
+    const chatSessionId = calcChatSessionId(user.id, userToChatWith.id);
     firestore
       .collection('chat')
       .doc(chatSessionId)
-      .set({ ids: [user.id, userToChatWith.id] });
+      .set({
+        ids: [user.id, userToChatWith.id],
+        lastMessage: {
+          message,
+          date: format(new Date(), 'd MMMM'),
+          userToNotify: userToChatWith.id
+        }
+      });
 
     firestore
       .collection('chat')

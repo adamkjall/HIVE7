@@ -23,6 +23,7 @@ export const StyledcChooseChatview = styled.div`
       grid-auto-columns: 0.7fr 3fr 1fr;
       grid-auto-rows: 0.8fr 0.3fr;
       margin: 1rem 0;
+      cursor: pointer;
 
       .avatar {
         grid-area: avatar;

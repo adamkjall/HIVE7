@@ -82,7 +82,10 @@ const ChatView = () => {
   const { userToChatWith } = useLocation().state;
 
   useEffect(() => {
-    const chatSessionId = user.id + '-' + userToChatWith.id;
+    const chatSessionId =
+      user.id < userToChatWith.id
+        ? user.id + '-' + userToChatWith.id
+        : userToChatWith.id + '-' + user.id;
     const unsubscribe = firestore
       .collection('chat')
       .doc(chatSessionId)
@@ -104,7 +107,15 @@ const ChatView = () => {
   }, []);
 
   const sendMessage = message => {
-    const chatSessionId = user.id + '-' + userToChatWith.id;
+    const chatSessionId =
+      user.id < userToChatWith.id
+        ? user.id + '-' + userToChatWith.id
+        : userToChatWith.id + '-' + user.id;
+    firestore
+      .collection('chat')
+      .doc(chatSessionId)
+      .set({ ids: [user.id, userToChatWith.id] });
+
     firestore
       .collection('chat')
       .doc(chatSessionId)

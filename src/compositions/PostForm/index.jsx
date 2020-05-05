@@ -110,12 +110,10 @@ const PostForm = () => {
       history.push('/feed');
     } else console.log('Något fick fel, förök igen');
   };
-  console.log('inputs', inputs);
 
   return (
     <StyledPostForm>
       <form name="post-form" onSubmit={onSubmit}>
-        {' '}
         <div className="headcontainer">
           <BackButton />
           <H1>Ny promenad</H1>

@@ -6,6 +6,7 @@ import { deleteWalkDocument, leaveAWalk, joinAWalk, getWalk } from '../../fireba
 import calculateAge from '../../helpers/functions/calculateAge.jsx';
 
 import BackButton from 'components/BackButton';
+import GoogleMap from 'components/GoogleMap';
 import Button from 'components/UI/Button';
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
@@ -62,6 +63,7 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
               <p>{walk.where}</p>
             </div>
           </div>
+          <GoogleMap />
           <hr />
           <div className="walk-data2">
             <img src={friends} alt="bringfriend" />

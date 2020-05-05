@@ -22,6 +22,12 @@ import { StyledcChooseChatview } from './style';
 const ChooseChatPageContent = ({ user, error, isLoading, conversations }) => {
   const [input, setInput] = useState('');
 
+  const filterConversations = conversations => {
+    return conversations.filter(conversation =>
+      conversation.userToChatWith.displayName.toLowerCase().includes(input.trim().toLowerCase())
+    );
+  };
+
   if (isLoading) {
     return <Loader fullScreen />;
   } else if (error) {
@@ -47,7 +53,7 @@ const ChooseChatPageContent = ({ user, error, isLoading, conversations }) => {
             />
           </div>
           <div className="list-mess">
-            {conversations.map(conversation => {
+            {filterConversations(conversations).map(conversation => {
               const isMessageViewed = conversation.lastMessage.userToNotify !== user.id;
               return (
                 <Link

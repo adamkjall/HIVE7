@@ -139,7 +139,6 @@ const PostForm = () => {
                     onValueChange('date', date);
                     setToogleWhen(true);
                   }}
-                  on
                 />
               </span>
             </label>

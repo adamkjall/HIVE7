@@ -4,6 +4,8 @@ import fontSize from 'tokens/fontSizes.mjs';
 import spacing from 'tokens/spacing.mjs';
 
 export const StyledChatview = styled.div`
+  margin-bottom: 7rem; /* temporärt för att se meddelande längst ner på skärmen bakom "input boxen" */
+
   .heigth-countainer {
     .head-chat-info {
       padding-top: ${spacing.small};

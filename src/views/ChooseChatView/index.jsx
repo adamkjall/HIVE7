@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { format } from 'date-fns';
+
+import { firestore, getUserData } from '../../firebase/firebase.utils';
+
+import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
@@ -12,7 +17,7 @@ import avatar from '../../assets/icons/profilepic.svg';
 
 import { StyledcChooseChatview } from './style';
 
-const ChooseChatPageContent = ({ error, isLoading }) => {
+const ChooseChatPageContent = ({ user, error, isLoading, conversations }) => {
   const [input, setInput] = useState('');
 
   if (isLoading) {
@@ -39,13 +44,34 @@ const ChooseChatPageContent = ({ error, isLoading }) => {
             />
           </div>
           <div className="list-mess">
-            {/* map */}
-            <div className="comp-mess">
-              <img className="avatar" src={avatar} alt="avatar" />
-              <span className="name">Name</span>
-              <span className="date">Date</span>
-              <span className="mess">Message</span>
-            </div>
+            {conversations.map(conversation => {
+              const isMessageViewed = conversation.lastMessage.userToNotify !== user.id;
+              return (
+                <Link
+                  key={conversation.userToChatWith.id}
+                  to={{ pathname: '/chat', state: { userToChatWith: conversation.userToChatWith } }}
+                >
+                  <div className="comp-mess">
+                    <img
+                      className={`avatar ${isMessageViewed ? '' : 'border'}`}
+                      src={conversation.userToChatWith.photoUrl || avatar}
+                      alt="avatar"
+                    />
+                    <span className={`name  ${isMessageViewed ? '' : 'bold'}`}>
+                      {conversation.userToChatWith.displayName}
+                    </span>
+                    <span className={`date ${isMessageViewed ? '' : 'bold'}`}>
+                      {conversation.lastMessage.date}
+                    </span>
+                    <span className={`mess ${isMessageViewed ? '' : 'bold'}`}>
+                      {conversation.lastMessage.message.length < 28
+                        ? conversation.lastMessage.message
+                        : conversation.lastMessage.message.slice(0, 28) + '...'}
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </StyledcChooseChatview>
       </React.Fragment>
@@ -54,13 +80,56 @@ const ChooseChatPageContent = ({ error, isLoading }) => {
 };
 
 const ChooseChatView = () => {
-  const [data, setData] = useState(undefined);
+  const [conversations, setConversations] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { user } = useContext(AuthenticationContext);
+
+  useEffect(() => {
+    if (!user) return;
+
+    const unsubscribe = firestore
+      .collection('chat')
+      // filter out our conversations
+      .where('ids', 'array-contains-any', [user.id])
+      .onSnapshot(snapshot => {
+        const conversationsData = [];
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const ids = data.ids;
+          // find the id of the user we have a conversation with
+          const id = ids[0] !== user.id ? ids[0] : ids[1];
+
+          conversationsData.push({ toUserId: id, lastMessage: data.lastMessage }); // .. and store it in an array
+        });
+
+        // fetch all users we have a conversation with
+        // .. and map the conversation data with the user
+        Promise.all(
+          conversationsData.map(conversationData =>
+            getUserData(conversationData.toUserId).then(user => ({
+              userToChatWith: { ...user, id: conversationData.toUserId },
+              ...conversationData
+            }))
+          )
+        )
+          .then(data => {
+            setConversations(data);
+          })
+          .catch(error => console.log('Error', error.message));
+      });
+
+    return () => unsubscribe();
+  }, [user]);
 
   return (
     <Page>
-      <ChooseChatPageContent data={data} error={error} isLoading={isLoading} />
+      <ChooseChatPageContent
+        user={user}
+        conversations={conversations}
+        error={error}
+        isLoading={isLoading}
+      />
     </Page>
   );
 };

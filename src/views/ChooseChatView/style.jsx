@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import colors from 'tokens/colors.mjs';
 import fontSize from 'tokens/fontSizes.mjs';
 import spacing from 'tokens/spacing.mjs';
+import fontWeights from 'tokens/fontWeights';
 
 export const StyledcChooseChatview = styled.div`
   .message-head-container {
@@ -23,18 +24,30 @@ export const StyledcChooseChatview = styled.div`
       grid-auto-columns: 0.7fr 3fr 1fr;
       grid-auto-rows: 0.8fr 0.3fr;
       margin: 1rem 0;
+      cursor: pointer;
 
       .avatar {
         grid-area: avatar;
-        width: 50px;
-        height: 50px;
+        height: 100%;
+        width: 45px;
+
+        &.border {
+          border: 3px solid ${colors.orange};
+        }
       }
+
       .name {
         grid-area: user;
         font-size: ${fontSize.m};
+        margin-left: .5rem;
+
+        &.bold {
+          font-weight: bold; /* ${fontWeights.bold}; finns ingen bold */
+        }
       }
       .date {
         grid-area: date;
+        justify-self: end;
         font-size: ${fontSize.s};
         color: ${colors.gray2};
       }
@@ -42,6 +55,13 @@ export const StyledcChooseChatview = styled.div`
         grid-area: mess;
         font-size: ${fontSize.s};
         color: ${colors.gray2};
+        margin-left: .5rem;
+        margin-top: .1rem;
+
+        &.bold {
+          font-weight: bold; /* ${fontWeights.bold}; finns ingen bold */
+          color: ${colors.black};
+        }
       }
     }
   }

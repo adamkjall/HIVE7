@@ -47,8 +47,8 @@ const PostForm = () => {
   };
 
   const [inputs, setInputs] = useState({
-    date: '',
-    time: '',
+    date: '2020-05-03',
+    time: '12:30',
     where: '',
     timeduration: '',
     allowFriends: 'false',
@@ -124,9 +124,24 @@ const PostForm = () => {
         <img src={graywaves} className="waves gray" alt="wave" />
         <div className="create-new-container">
           <div className="form-box1">
-            <label className="when" onClick={handleToogleWhen}>
+            <label htmlFor="time-and-date" className="when" onClick={handleToogleWhen}>
               <img src={time} alt="time" />
-              <span>När vill du gå?</span>
+              <span className="container">
+                <span className="title">När vill du gå?</span>
+                <input
+                  type="datetime-local"
+                  name="time"
+                  id="time-and-date"
+                  value={inputs.date + 'T' + inputs.time}
+                  onChange={event => {
+                    const [date, time] = event.target.value.split('T');
+                    onValueChange('time', time);
+                    onValueChange('date', date);
+                    setToogleWhen(true);
+                  }}
+                  on
+                />
+              </span>
             </label>
             {toogleWhen ? (
               <div>
@@ -137,18 +152,8 @@ const PostForm = () => {
                   value={inputs.time}
                   onChange={event => onValueChange('time', event.target.value)}
                 /> */}
-                <img src={calender} alt="calender" />
-                <input
-                  type="datetime-local"
-                  name="time"
-                  id="time-and-date"
-                  // value={inputs.time}
-                  onChange={event => {
-                    const [date, time] = event.target.value.split('T');
-                    onValueChange('time', time);
-                    onValueChange('date', date);
-                  }}
-                />
+                {/* <img src={calender} alt="calender" /> */}
+                {inputs.time + ' ' + inputs.date}
                 {/* <input
                   type="date"
                   name="date"

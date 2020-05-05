@@ -35,6 +35,7 @@ export const StyledPostForm = styled.div`
     font-size: ${fontSizes.m};
 
     .form-box1 {
+      position: relative;
       padding: 0 0 ${spacing.tiny} 0;
       display: grid;
       grid-template-columns: 1fr;
@@ -43,6 +44,42 @@ export const StyledPostForm = styled.div`
         display: grid;
         grid-template-columns: 50px 1fr;
         margin: ${spacing.tiny} 0;
+      }
+
+      .when {
+        .container {
+          position: relative;
+          pointer-events: none;
+
+          /* make the native arrow invisible and stretch it over the whole field so you can click anywhere in the input field to trigger the native datepicker*/
+          input[type='datetime-local']::-webkit-calendar-picker-indicator,
+          input[type='datetime-local']::-webkit-calendar-picker-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: auto;
+            height: auto;
+            color: transparent;
+            background: transparent;
+          }
+
+          .title {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            pointer-events: none;
+            background-color: white;
+          }
+        }
+
+        #time-and-date {
+          // visibility: hidden;
+          border: none;
+          outline: none;
+        }
       }
     }
     .form-box2 {

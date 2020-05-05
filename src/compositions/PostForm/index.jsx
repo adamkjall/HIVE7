@@ -110,6 +110,7 @@ const PostForm = () => {
       history.push('/feed');
     } else console.log('Något fick fel, förök igen');
   };
+  console.log('inputs', inputs);
 
   return (
     <StyledPostForm>
@@ -129,21 +130,32 @@ const PostForm = () => {
             </label>
             {toogleWhen ? (
               <div>
-                <input
+                {/* <input
                   type="time"
                   name="time"
                   id="time"
                   value={inputs.time}
                   onChange={event => onValueChange('time', event.target.value)}
-                />
+                /> */}
                 <img src={calender} alt="calender" />
                 <input
+                  type="datetime-local"
+                  name="time"
+                  id="time-and-date"
+                  // value={inputs.time}
+                  onChange={event => {
+                    const [date, time] = event.target.value.split('T');
+                    onValueChange('time', time);
+                    onValueChange('date', date);
+                  }}
+                />
+                {/* <input
                   type="date"
                   name="date"
                   id="date"
                   value={inputs.date}
                   onChange={event => onValueChange('date', event.target.value)}
-                />
+                /> */}
               </div>
             ) : null}
 

@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { format, distanceInWordsStrict } from 'date-fns';
+// import { format, distanceInWordsStrict } from 'date-fns';
+import format from 'date-fns/format';
+import formatDistanceStrict from 'date-fns/formatDistanceStrict';
 import svLocale from 'date-fns/locale/sv';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
@@ -49,7 +51,7 @@ const PostForm = () => {
   };
 
   const [inputs, setInputs] = useState({
-    date: format(new Date(), 'YYYY-MM-DD'),
+    date: format(new Date(), 'yyyy-MM-dd'),
     time: format(new Date(), 'HH:mm'),
     where: '',
     timeduration: '',
@@ -114,22 +116,22 @@ const PostForm = () => {
   };
 
   const createDateTimeString = () => {
-    const [year_now, month_now, day_now] = format(new Date(), 'YYYY-MM-DD').split('-');
+    const [year_now, month_now, day_now] = format(new Date(), 'yyyy-MM-dd').split('-');
     const [year, month, day] = inputs.date.split('-');
 
-    const distanceString = distanceInWordsStrict(
-      new Date(year_now, month_now, day_now),
-      new Date(year, month, day)
+    const distanceString = formatDistanceStrict(
+      new Date(year_now, month_now - 1, day_now),
+      new Date(year, month - 1, day),
+      { unit: 'day' }
     );
 
     const distanceInDays = Number(distanceString.split(' ')[0]);
-
     const todayOrTomorrowString =
       distanceInDays === 0 ? 'Idag, ' : distanceInDays === 1 ? 'Imorgon, ' : '';
 
     return (
       todayOrTomorrowString +
-      format(inputs.date, 'dddd d MMMM', { locale: svLocale }) +
+      format(new Date(year, month - 1, day), 'EEEE d MMMM', { locale: svLocale }) +
       ', ' +
       inputs.time
     );
@@ -158,7 +160,7 @@ const PostForm = () => {
                   type="datetime-local"
                   name="time"
                   id="time-and-date"
-                  min={format(new Date(), 'YYYY-MM-DDTHH:mm')}
+                  min={format(new Date(), "yyyy-MM-dd'T'HH:mm")}
                   value={inputs.date + 'T' + inputs.time}
                   onChange={event => {
                     const [date, time] = event.target.value.split('T');

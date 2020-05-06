@@ -76,7 +76,6 @@ export const StyledPostForm = styled.div`
         }
 
         #time-and-date {
-          // visibility: hidden;
           border: none;
           outline: none;
         }

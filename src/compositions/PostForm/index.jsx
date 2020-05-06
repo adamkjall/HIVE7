@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { format, distanceInWordsStrict } from 'date-fns';
+import svLocale from 'date-fns/locale/sv';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import { createWalkDocument } from '../../firebase/firebase.utils';
@@ -47,8 +49,8 @@ const PostForm = () => {
   };
 
   const [inputs, setInputs] = useState({
-    date: '2020-05-03',
-    time: '12:30',
+    date: format(new Date(), 'YYYY-MM-DD'),
+    time: format(new Date(), 'HH:mm'),
     where: '',
     timeduration: '',
     allowFriends: 'false',
@@ -111,6 +113,28 @@ const PostForm = () => {
     } else console.log('Något fick fel, förök igen');
   };
 
+  const createDateTimeString = () => {
+    const [year_now, month_now, day_now] = format(new Date(), 'YYYY-MM-DD').split('-');
+    const [year, month, day] = inputs.date.split('-');
+
+    const distanceString = distanceInWordsStrict(
+      new Date(year_now, month_now, day_now),
+      new Date(year, month, day)
+    );
+
+    const distanceInDays = Number(distanceString.split(' ')[0]);
+
+    const todayOrTomorrowString =
+      distanceInDays === 0 ? 'Idag, ' : distanceInDays === 1 ? 'Imorgon, ' : '';
+
+    return (
+      todayOrTomorrowString +
+      format(inputs.date, 'dddd d MMMM', { locale: svLocale }) +
+      ', ' +
+      inputs.time
+    );
+  };
+
   return (
     <StyledPostForm>
       <form name="post-form" onSubmit={onSubmit}>
@@ -125,11 +149,16 @@ const PostForm = () => {
             <label htmlFor="time-and-date" className="when" onClick={handleToogleWhen}>
               <img src={time} alt="time" />
               <span className="container">
-                <span className="title">När vill du gå?</span>
+                {toogleWhen ? (
+                  <span className="title">{createDateTimeString()}</span>
+                ) : (
+                  <span className="title">När vill du gå?</span>
+                )}
                 <input
                   type="datetime-local"
                   name="time"
                   id="time-and-date"
+                  min={format(new Date(), 'YYYY-MM-DDTHH:mm')}
                   value={inputs.date + 'T' + inputs.time}
                   onChange={event => {
                     const [date, time] = event.target.value.split('T');
@@ -140,27 +169,6 @@ const PostForm = () => {
                 />
               </span>
             </label>
-            {toogleWhen ? (
-              <div>
-                {/* <input
-                  type="time"
-                  name="time"
-                  id="time"
-                  value={inputs.time}
-                  onChange={event => onValueChange('time', event.target.value)}
-                /> */}
-                {/* <img src={calender} alt="calender" /> */}
-                {inputs.time + ' ' + inputs.date}
-                {/* <input
-                  type="date"
-                  name="date"
-                  id="date"
-                  value={inputs.date}
-                  onChange={event => onValueChange('date', event.target.value)}
-                /> */}
-              </div>
-            ) : null}
-
             <label className="where" onClick={handleToogleWhere}>
               <img src={location} alt="where" />
               <span>Var vill du gå?</span>

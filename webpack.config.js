@@ -138,7 +138,7 @@ export default {
           'data:',
           'https://google.com/images',
           'http://localhost:3000/favicon.ico',
-          'https://lh3.googleusercontent.com',
+          'https://*.googleusercontent.com',
           'https://lh4.googleusercontent.com',
           'https://firestore.googleapis.com',
           'https://firebasestorage.googleapis.com'

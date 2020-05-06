@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { NotificationContext } from 'contexts/NotificationContext';
 
@@ -20,13 +20,15 @@ export const SW_UPDATE_EVENT = 'sw.updated';
 
 const App = () => {
   const { notifications, removeNotification } = useContext(NotificationContext);
+  const [showTopNavBar, setShowTopNavBar] = useState(true);
+  const [showBottomNavBar, setShowBottomNavBar] = useState(true);
 
   return (
     <ErrorBoundary>
       <GlobalStyle fontDisplay="swap" />
       <ErrorBoundary>
-        <Nav />
-        <NavBottom />
+        {showTopNavBar ? <Nav /> : null}
+        {showBottomNavBar ? <NavBottom /> : null}
       </ErrorBoundary>
       <ErrorBoundary>
         <ScrollToTop>

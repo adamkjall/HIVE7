@@ -6,11 +6,9 @@ import { createWalkDocument } from '../../firebase/firebase.utils';
 
 import H1 from 'components/UI/H1';
 import BackButton from 'components/BackButton';
-import Select from 'components/UI/Select';
 import Button from 'components/UI/Button';
 import CheckBox from '../../components/UI/Checkbox';
 import Input from 'components/UI/Input';
-import Textarea from 'components/UI/Textarea';
 import chat from '../../assets/icons/chat.svg';
 import family from '../../assets/icons/family.svg';
 import friends from '../../assets/icons/friends.svg';
@@ -19,8 +17,6 @@ import pets from '../../assets/icons/pets.svg';
 import bringPetsvg from '../../assets/icons/bringPets.svg';
 import walking from '../../assets/icons/walking.svg';
 import time from '../../assets/icons/time.svg';
-import calender from '../../assets/icons/calender.svg';
-import waves from '../../assets/icons/waves.svg';
 import gendericon from '../../assets/icons/gender-icon.svg';
 import graywaves from '../../assets/icons/graywaves.svg';
 
@@ -36,8 +32,8 @@ const PostForm = () => {
   const [toogleDuration, setToogleDuration] = useState(false);
 
   const [inputs, setInputs] = useState({
-    date: '',
-    time: '',
+    date: '2020-05-03',
+    time: '12:30',
     where: '',
     timeduration: '',
     allowFriends: 'false',
@@ -97,7 +93,7 @@ const PostForm = () => {
       });
 
       history.push('/feed');
-    } else console.log('Något fick fel, förök igen');
+    } else console.log('Något fick fel, försök igen');
   };
 
   return (
@@ -108,43 +104,47 @@ const PostForm = () => {
           <BackButton />
           <H1>Ny promenad</H1>
         </div>
-        <img src={waves} className="waves green" alt="wave" />
         <img src={graywaves} className="waves gray" alt="wave" />
         <div className="create-new-container">
-          <div className="form-box1">
-            <div
-              className="when form-box1-div"
-              onClick={() => {
-                setToogleWhen(!toogleWhen);
-              }}
-              role="button"
-              tabIndex="0"
-              onKeyDown={() => {
-                setToogleWhen(!toogleWhen);
-              }}
-            >
-              <img src={time} alt="time" />
-              <span>När vill du gå?</span>
-            </div>
+          <div className="form-box1-div">
+            <img src={time} alt="time" />
+
+            <span className="container">
+              <span className="title">När vill du gå?</span>
+              <input
+                type="datetime-local"
+                name="time"
+                id="time-and-date"
+                value={inputs.date + 'T' + inputs.time}
+                onChange={event => {
+                  const [date, time] = event.target.value.split('T');
+                  onValueChange('time', time);
+                  onValueChange('date', date);
+                  setToogleWhen(true);
+                }}
+              />
+            </span>
             {toogleWhen ? (
               <div>
-                <input
+                {/* <input
                   type="time"
                   name="time"
                   id="time"
                   value={inputs.time}
                   onChange={event => onValueChange('time', event.target.value)}
-                />
-                <img src={calender} alt="calender" />
-                <input
+                /> */}
+                {/* <img src={calender} alt="calender" /> */}
+                {inputs.time + ' ' + inputs.date}
+                {/* <input
                   type="date"
                   name="date"
                   id="date"
                   value={inputs.date}
                   onChange={event => onValueChange('date', event.target.value)}
-                />
+                /> */}
               </div>
             ) : null}
+
             <div
               className="where form-box1-div"
               onClick={() => {
@@ -186,6 +186,7 @@ const PostForm = () => {
               <img src={walking} alt="walk" />
               <span>Hur länge tänker du gå?</span>
             </div>
+
             {toogleDuration ? (
               <div className="timeduration">
                 <label htmlFor="30min">
@@ -198,7 +199,6 @@ const PostForm = () => {
                   />
                   <span> cirka 30 minuter</span>
                 </label>
-
                 <label htmlFor="cirka 1 timme">
                   <input
                     type="radio"

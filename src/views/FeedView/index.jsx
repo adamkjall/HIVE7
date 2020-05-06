@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 import { firestore } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 
+import Nav from 'components/Nav';
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
 import Feed from 'compositions/Feed';
 import Alert from 'components/UI/Alert';
 import ButtonCreate from 'components/ButtonCreate';
-import Nav from 'components/Nav';
-import NavBottom from 'components/NavBottom';
 
 import { StyledFeed } from './style';
 
@@ -31,8 +30,6 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
   });
 
   const availableWalks = sortedWalks.filter(walk => !bookedWalks.includes(walk));
-  //console.log('booked', bookedWalks);
-  //console.log('available', availableWalks);
 
   if (isLoading) {
     return <Loader fullScreen />;
@@ -42,6 +39,7 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
     return (
       <React.Fragment>
         <StyledFeed>
+          <Nav />
           <ButtonCreate />
           <Feed walks={availableWalks} />
         </StyledFeed>
@@ -75,7 +73,7 @@ const FeedView = () => {
   }, []);
 
   return (
-    <Page>
+    <Page metadata={{ title: 'Feed' }} displayNavTop displayNavBottom>
       <FeedPageContent user={user} walks={walks} error={error} isLoading={isLoading} />
     </Page>
   );

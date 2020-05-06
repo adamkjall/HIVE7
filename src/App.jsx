@@ -20,16 +20,9 @@ export const SW_UPDATE_EVENT = 'sw.updated';
 
 const App = () => {
   const { notifications, removeNotification } = useContext(NotificationContext);
-  const [showTopNavBar, setShowTopNavBar] = useState(true);
-  const [showBottomNavBar, setShowBottomNavBar] = useState(true);
-
   return (
     <ErrorBoundary>
       <GlobalStyle fontDisplay="swap" />
-      <ErrorBoundary>
-        {showTopNavBar ? <Nav /> : null}
-        {showBottomNavBar ? <NavBottom /> : null}
-      </ErrorBoundary>
       <ErrorBoundary>
         <ScrollToTop>
           {notifications.length ? (

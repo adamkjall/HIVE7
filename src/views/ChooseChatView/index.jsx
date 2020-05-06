@@ -129,7 +129,7 @@ const ChooseChatView = () => {
   }, [user]);
 
   return (
-    <Page>
+    <Page metadata={{ title: 'Chat' }} displayNavBottom>
       <ChooseChatPageContent
         user={user}
         conversations={conversations}

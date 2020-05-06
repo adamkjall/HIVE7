@@ -4,16 +4,18 @@ import PropTypes from 'prop-types';
 import { firestore } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 
-import Nav from 'components/Nav';
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
 import Feed from 'compositions/Feed';
 import Alert from 'components/UI/Alert';
 import ButtonCreate from 'components/ButtonCreate';
 
-import { StyledFeed } from './style';
+import { StyledFeed, StyledNav } from './style';
 
 const FeedPageContent = ({ error, isLoading, walks, user }) => {
+  const [showFeed, setShowFeed] = useState(true);
+  const [showBooked, setShowBooked] = useState(false);
+
   const sortWalks = walks =>
     walks.sort((a, b) => {
       const valueA = Number(a.date.replace(/-/gi, '')) + Number(a.time.replace(':', ''));
@@ -39,9 +41,28 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
     return (
       <React.Fragment>
         <StyledFeed>
-          <Nav />
+          <StyledNav>
+            <button
+              onClick={() => (setShowFeed(true), setShowBooked(false))}
+              className={showFeed ? 'active' : null}
+            >
+              <p>
+                Tillgängliga
+                <br /> Promenader
+              </p>
+            </button>
+            <button
+              onClick={() => (setShowFeed(false), setShowBooked(true))}
+              className={showBooked ? 'active' : null}
+            >
+              <p>
+                Mina <br /> Promenader
+              </p>
+            </button>
+          </StyledNav>
           <ButtonCreate />
-          <Feed walks={availableWalks} />
+          {showFeed && <Feed walks={availableWalks} />}
+          {showBooked && <Feed walks={bookedWalks} />}
         </StyledFeed>
       </React.Fragment>
     );
@@ -73,7 +94,7 @@ const FeedView = () => {
   }, []);
 
   return (
-    <Page metadata={{ title: 'Feed' }} displayNavTop displayNavBottom>
+    <Page metadata={{ title: 'Feed' }} displayNavBottom>
       <FeedPageContent user={user} walks={walks} error={error} isLoading={isLoading} />
     </Page>
   );

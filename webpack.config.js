@@ -139,7 +139,11 @@ export default {
           'https://google.com/images',
           'http://localhost:3000/favicon.ico',
           'https://*.googleusercontent.com',
+          'https://lh1.googleusercontent.com',
+          'https://lh2.googleusercontent.com',
+          'https://lh3.googleusercontent.com',
           'https://lh4.googleusercontent.com',
+          'https://lh5.googleusercontent.com',
           'https://firestore.googleapis.com',
           'https://firebasestorage.googleapis.com'
         ],

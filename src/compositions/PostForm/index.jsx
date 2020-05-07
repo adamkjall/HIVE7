@@ -1,5 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+// import { format, distanceInWordsStrict } from 'date-fns';
+import format from 'date-fns/format';
+import formatDistanceStrict from 'date-fns/formatDistanceStrict';
+import svLocale from 'date-fns/locale/sv';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import { createWalkDocument } from '../../firebase/firebase.utils';
@@ -32,8 +36,8 @@ const PostForm = () => {
   const [toogleDuration, setToogleDuration] = useState(false);
 
   const [inputs, setInputs] = useState({
-    date: '2020-05-03',
-    time: '12:30',
+    date: format(new Date(), 'yyyy-MM-dd'),
+    time: format(new Date(), 'HH:mm'),
     where: '',
     timeduration: '',
     allowFriends: 'false',
@@ -96,55 +100,68 @@ const PostForm = () => {
     } else console.log('Något fick fel, försök igen');
   };
 
+  const createDateTimeString = () => {
+    const [year_now, month_now, day_now] = format(new Date(), 'yyyy-MM-dd').split('-');
+    const [year, month, day] = inputs.date.split('-');
+
+    const distanceString = formatDistanceStrict(
+      new Date(year_now, month_now - 1, day_now),
+      new Date(year, month - 1, day),
+      { unit: 'day' }
+    );
+
+    const distanceInDays = Number(distanceString.split(' ')[0]);
+    const todayOrTomorrowString =
+      distanceInDays === 0 ? 'Idag, ' : distanceInDays === 1 ? 'Imorgon, ' : '';
+
+    return (
+      todayOrTomorrowString +
+      format(new Date(year, month - 1, day), 'EEEE d MMMM', { locale: svLocale }) +
+      ', ' +
+      inputs.time
+    );
+  };
+
   return (
     <StyledPostForm>
       <form name="post-form" onSubmit={onSubmit}>
-        {' '}
         <div className="headcontainer">
           <BackButton />
           <H1>Ny promenad</H1>
         </div>
         <img src={graywaves} className="waves gray" alt="wave" />
         <div className="create-new-container">
-          <div className="form-box1-div">
-            <img src={time} alt="time" />
-
-            <span className="container">
-              <span className="title">När vill du gå?</span>
-              <input
-                type="datetime-local"
-                name="time"
-                id="time-and-date"
-                value={inputs.date + 'T' + inputs.time}
-                onChange={event => {
-                  const [date, time] = event.target.value.split('T');
-                  onValueChange('time', time);
-                  onValueChange('date', date);
-                  setToogleWhen(true);
-                }}
-              />
-            </span>
-            {toogleWhen ? (
-              <div>
-                {/* <input
-                  type="time"
+          <div className="form-box1">
+            <label
+              htmlFor="time-and-date"
+              className="when form-box1-div"
+              onClick={() => setToogleWhen(!toogleWhen)}
+              onKeyDown={() => setToogleWhen(!toogleWhen)}
+              role="button"
+              tabIndex="0"
+            >
+              <img src={time} alt="time" />
+              <span className="container">
+                {toogleWhen ? (
+                  <span className="title">{createDateTimeString()}</span>
+                ) : (
+                  <span className="title">När vill du gå?</span>
+                )}
+                <input
+                  type="datetime-local"
                   name="time"
-                  id="time"
-                  value={inputs.time}
-                  onChange={event => onValueChange('time', event.target.value)}
-                /> */}
-                {/* <img src={calender} alt="calender" /> */}
-                {inputs.time + ' ' + inputs.date}
-                {/* <input
-                  type="date"
-                  name="date"
-                  id="date"
-                  value={inputs.date}
-                  onChange={event => onValueChange('date', event.target.value)}
-                /> */}
-              </div>
-            ) : null}
-
+                  id="time-and-date"
+                  min={format(new Date(), "yyyy-MM-dd'T'HH:mm")}
+                  value={inputs.date + 'T' + inputs.time}
+                  onChange={event => {
+                    const [date, time] = event.target.value.split('T');
+                    onValueChange('time', time);
+                    onValueChange('date', date);
+                    setToogleWhen(true);
+                  }}
+                />
+              </span>
+            </label>
             <div
               className="where form-box1-div"
               onClick={() => {
@@ -268,7 +285,7 @@ const PostForm = () => {
 
             <p className="red">{msg}</p>
           </div>
-          <Button nature="primary" type="submit">
+          <Button nature="primary" type="submit" className="button-create">
             Skapa{' '}
           </Button>
         </div>

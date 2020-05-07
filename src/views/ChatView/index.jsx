@@ -37,7 +37,7 @@ const ChatPageContent = ({ error, isLoading, messages, sendMessage, userToChatWi
         <StyledChatview>
           <div className="heigth-countainer">
             <div className="head-chat-info">
-              <Link to="/feed" className="backbutton">
+              <Link to="/choosechat" className="backbutton">
                 <img src={back} alt="back" />
               </Link>
               <img className="avatar" src={userToChatWith.photoUrl || avatar} alt="avatar" />

@@ -12,12 +12,12 @@ import Alert from 'components/UI/Alert';
 import Input from 'components/UI/Input';
 import avatar from '../../assets/icons/profilepic.svg';
 import back from '../../assets/icons/back.svg';
-import waves from '../../assets/icons/waves.svg';
+import waves from '../../assets/icons/graywaves.svg';
 import sendMessageIcon from '../../assets/icons/sendmess.svg';
 
-import { StyledChatview } from './style';
+import { StyledChatview, StyledMessage, StyledHeader, StyledMessageList } from './style';
 
-const ChatPageContent = ({ error, isLoading, messages, sendMessage, userToChatWith }) => {
+const ChatPageContent = ({ error, isLoading, messages, sendMessage, user, userToChatWith }) => {
   const [input, setInput] = useState('');
 
   const submitMessage = () => {
@@ -35,41 +35,51 @@ const ChatPageContent = ({ error, isLoading, messages, sendMessage, userToChatWi
     return (
       <React.Fragment>
         <StyledChatview>
-          <div className="heigth-countainer">
+          <StyledHeader>
             <div className="head-chat-info">
               <Link to="/choosechat" className="backbutton">
                 <img src={back} alt="back" />
               </Link>
               <img className="avatar" src={userToChatWith.photoUrl || avatar} alt="avatar" />
               {userToChatWith.displayName}
-              <img src={waves} alt="waves" className="waves" />
             </div>
-            {messages &&
-              messages
-                .sort((a, b) => a.createdAt - b.createdAt)
-                .map((message, index) => (
-                  <div className="chattcountainer" key={index}>
-                    <p className="timeposted">{format(message.createdAt, 'H:m d MMMM')}</p>
-                    <div className="chattbox">
-                      <p className="author">{message.name}</p>
-                      <p className="mess">{message.text}</p>
-                    </div>
-                  </div>
-                ))}
-          </div>
-          <div className="sendbox">
-            <Input
-              className="inputmess"
-              type="text"
-              id="mess"
-              inline
-              name="mess"
-              value={input}
-              onChange={event => setInput(event.target.value)}
-            />
-            <button type="submit" onClick={submitMessage}>
-              <img src={sendMessageIcon} alt="send" />
-            </button>
+            <img src={waves} alt="waves" className="waves" />
+          </StyledHeader>
+          {messages && (
+            <StyledMessageList>
+              <div className="messages-container">
+                {messages
+                  .sort((a, b) => a.createdAt - b.createdAt)
+                  .map((message, index) => {
+                    const isUserMessage = user.id === message.id;
+                    return (
+                      <StyledMessage isUserMessage={isUserMessage} key={index}>
+                        {/* <p className="timeposted">{format(message.createdAt, 'H:m d MMMM')}</p> */}
+                        <div className="chat-box">
+                          {/* <p className="author">{message.name}</p> */}
+                          <span className="mess">{message.text}</span>
+                        </div>
+                      </StyledMessage>
+                    );
+                  })}
+              </div>
+            </StyledMessageList>
+          )}
+
+          <div className="sendbox-wrapper">
+            <div className="sendbox">
+              <input
+                className="input-mess"
+                type="text"
+                id="mess"
+                name="mess"
+                value={input}
+                onChange={event => setInput(event.target.value)}
+              />
+              <button type="submit" onClick={submitMessage}>
+                <img src={sendMessageIcon} alt="send" />
+              </button>
+            </div>
           </div>
         </StyledChatview>
       </React.Fragment>
@@ -100,21 +110,24 @@ const ChatView = () => {
         });
         setMessages(fetchedMessages);
 
-        firestore
-          .collection('chat')
-          .doc(chatSessionId)
-          .get()
-          .then(res => res.data())
-          .then(data => {
-            // if user to notify is this user
-            if (data.lastMessage.userToNotify === user.id) {
-              // ... mark conversation as read
-              firestore
-                .collection('chat')
-                .doc(chatSessionId)
-                .update({ 'lastMessage.userToNotify': null });
-            }
-          });
+        if (fetchedMessages.length !== 0) {
+          //  mark conversation as read
+          firestore
+            .collection('chat')
+            .doc(chatSessionId)
+            .get()
+            .then(res => res.data())
+            .then(data => {
+              // if user to notify is this user
+              if (data.lastMessage.userToNotify === user.id) {
+                // ... mark conversation as read
+                firestore
+                  .collection('chat')
+                  .doc(chatSessionId)
+                  .update({ 'lastMessage.userToNotify': null });
+              }
+            });
+        }
 
         setIsLoading(false);
       });
@@ -143,12 +156,13 @@ const ChatView = () => {
       .collection('chat')
       .doc(chatSessionId)
       .collection(chatSessionId)
-      .add({ name: user.displayName, text: message, createdAt: new Date() });
+      .add({ id: user.id, name: user.displayName, text: message, createdAt: new Date() });
   };
 
   return (
     <Page>
       <ChatPageContent
+        user={user}
         userToChatWith={userToChatWith}
         error={error}
         isLoading={isLoading}

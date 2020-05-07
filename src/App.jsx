@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { NotificationContext } from 'contexts/NotificationContext';
 
@@ -7,6 +7,8 @@ import GlobalStyle from 'components/GlobalStyle';
 import ScrollToTop from 'components/ScrollToTop';
 import Dialog from 'components/UI/Dialog';
 import NotificationModal from 'compositions/NotificationModal';
+import Nav from 'components/Nav';
+import NavBottom from 'components/NavBottom';
 
 // import InstallBanner from 'compositions/InstallBanner';
 // import CookiesConsentBanner from 'compositions/CookiesConsentBanner';
@@ -18,7 +20,6 @@ export const SW_UPDATE_EVENT = 'sw.updated';
 
 const App = () => {
   const { notifications, removeNotification } = useContext(NotificationContext);
-
   return (
     <ErrorBoundary>
       <GlobalStyle fontDisplay="swap" />

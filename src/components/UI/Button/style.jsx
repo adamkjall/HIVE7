@@ -28,7 +28,7 @@ export const StyledButton = styled.button`
   padding: ${spacing.tiny} ${spacing.small};
   min-height: 3rem;
   border: 0;
-  border-radius: 0.5rem;
+  border-radius: 999rem;
   font-size: ${fontSizes.m};
   text-align: ${({ stretch }) => (stretch ? 'center' : 'initial')};
   text-decoration: none;

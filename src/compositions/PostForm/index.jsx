@@ -10,11 +10,9 @@ import { createWalkDocument } from '../../firebase/firebase.utils';
 
 import H1 from 'components/UI/H1';
 import BackButton from 'components/BackButton';
-import Select from 'components/UI/Select';
 import Button from 'components/UI/Button';
 import CheckBox from '../../components/UI/Checkbox';
 import Input from 'components/UI/Input';
-import Textarea from 'components/UI/Textarea';
 import chat from '../../assets/icons/chat.svg';
 import family from '../../assets/icons/family.svg';
 import friends from '../../assets/icons/friends.svg';
@@ -23,8 +21,7 @@ import pets from '../../assets/icons/pets.svg';
 import bringPetsvg from '../../assets/icons/bringPets.svg';
 import walking from '../../assets/icons/walking.svg';
 import time from '../../assets/icons/time.svg';
-import calender from '../../assets/icons/calender.svg';
-import waves from '../../assets/icons/waves.svg';
+import gendericon from '../../assets/icons/gender-icon.svg';
 import graywaves from '../../assets/icons/graywaves.svg';
 
 import { StyledPostForm } from './style';
@@ -37,18 +34,6 @@ const PostForm = () => {
   const [toogleWhen, setToogleWhen] = useState(false);
   const [toogleWhere, setToogleWhere] = useState(false);
   const [toogleDuration, setToogleDuration] = useState(false);
-
-  const handleToogleWhen = e => {
-    setToogleWhen(!toogleWhen);
-  };
-
-  const handleToogleWhere = e => {
-    setToogleWhere(!toogleWhere);
-  };
-
-  const handleToogleDuration = e => {
-    setToogleDuration(!toogleDuration);
-  };
 
   const [inputs, setInputs] = useState({
     date: format(new Date(), 'yyyy-MM-dd'),
@@ -112,7 +97,7 @@ const PostForm = () => {
       });
 
       history.push('/feed');
-    } else console.log('Något fick fel, förök igen');
+    } else console.log('Något fick fel, försök igen');
   };
 
   const createDateTimeString = () => {
@@ -144,11 +129,17 @@ const PostForm = () => {
           <BackButton />
           <H1>Ny promenad</H1>
         </div>
-        <img src={waves} className="waves green" alt="wave" />
         <img src={graywaves} className="waves gray" alt="wave" />
         <div className="create-new-container">
           <div className="form-box1">
-            <label htmlFor="time-and-date" className="when" onClick={handleToogleWhen}>
+            <label
+              htmlFor="time-and-date"
+              className="when form-box1-div"
+              onClick={() => setToogleWhen(!toogleWhen)}
+              onKeyDown={() => setToogleWhen(!toogleWhen)}
+              role="button"
+              tabIndex="0"
+            >
               <img src={time} alt="time" />
               <span className="container">
                 {toogleWhen ? (
@@ -171,10 +162,20 @@ const PostForm = () => {
                 />
               </span>
             </label>
-            <label className="where" onClick={handleToogleWhere}>
+            <div
+              className="where form-box1-div"
+              onClick={() => {
+                setToogleWhere(!toogleWhere);
+              }}
+              role="button"
+              tabIndex="-1"
+              onKeyDown={() => {
+                setToogleWhere(!toogleWhere);
+              }}
+            >
               <img src={location} alt="where" />
               <span>Var vill du gå?</span>
-            </label>
+            </div>
             {toogleWhere ? (
               <div>
                 <Input
@@ -185,23 +186,57 @@ const PostForm = () => {
                   value={inputs.where}
                   onChange={event => onValueChange('where', event.target.value)}
                 />
-
                 <p className="red">{wheremsg}</p>
               </div>
             ) : null}
-
-            <label className="duration" htmlFor="timeduration" onClick={handleToogleDuration}>
+            <div
+              className="duration form-box1-div"
+              onClick={() => {
+                setToogleDuration(!toogleDuration);
+              }}
+              role="button"
+              tabIndex="-2"
+              onKeyDown={() => {
+                setToogleDuration(!toogleDuration);
+              }}
+            >
               <img src={walking} alt="walk" />
               <span>Hur länge tänker du gå?</span>
-            </label>
+            </div>
+
             {toogleDuration ? (
-              <input
-                type="number"
-                id="timeduration"
-                name="timeduration"
-                value={inputs.timeduration}
-                onChange={event => onValueChange('timeduration', event.target.value)}
-              />
+              <div className="timeduration">
+                <label htmlFor="30min">
+                  <input
+                    type="radio"
+                    id="30min"
+                    name="timeduration"
+                    value="cirka 30 minuter"
+                    onChange={event => onValueChange('timeduration', event.target.value)}
+                  />
+                  <span> cirka 30 minuter</span>
+                </label>
+                <label htmlFor="cirka 1 timme">
+                  <input
+                    type="radio"
+                    id="cirka 1 timme"
+                    name="timeduration"
+                    value="cirka 1 timme"
+                    onChange={event => onValueChange('timeduration', event.target.value)}
+                  />
+                  <span> cirka 1 timme</span>
+                </label>
+                <label htmlFor="cirka 2 timme">
+                  <input
+                    type="radio"
+                    id="cirka 2 timme"
+                    name="timeduration"
+                    value="cirka 2 timme"
+                    onChange={event => onValueChange('timeduration', event.target.value)}
+                  />
+                  <span> cirka 2 timme</span>
+                </label>
+              </div>
             ) : null}
           </div>
           <div className="form-box2">
@@ -229,25 +264,20 @@ const PostForm = () => {
               label="Kommer du ta med husdjur?"
               clickHandler={event => onValueChange('bringPets', event.target.value)}
             />
-            <div>
-              <Select
-                id="filterGender"
-                name="filterGender"
-                label="Vem vill du gå med?"
-                value={inputs.filterGender}
-                onChange={event => onValueChange('filterGender', event.target.value)}
-              >
-                <option value="all">Alla</option>
-                <option value="women">Bara kvinnor</option>
-              </Select>
-            </div>
+            <CheckBox
+              icon={gendericon}
+              id="filterGender"
+              label="Bara promenera med kvinnor?"
+              clickHandler={event => onValueChange('filterGender', event.target.value)}
+            />
           </div>
           <div className="form-box3">
             <img src={chat} alt="chat" />
-            <Textarea
+            <textarea
+              className="greeting"
+              type="text"
               id="introtext"
               name="introtext"
-              label="Hälsning"
               value={inputs.introtext}
               placeholder="Skriv en hälsning"
               onChange={event => onValueChange('introtext', event.target.value)}
@@ -255,7 +285,7 @@ const PostForm = () => {
 
             <p className="red">{msg}</p>
           </div>
-          <Button nature="primary" type="submit">
+          <Button nature="primary" type="submit" className="button-create">
             Skapa{' '}
           </Button>
         </div>

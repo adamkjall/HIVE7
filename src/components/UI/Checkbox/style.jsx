@@ -25,11 +25,12 @@ export const StyledCheckBox = styled.div`
     height: 20px;
     width: 20px;
     appearance: none;
+    content: '';
   }
 
   .checkbox:checked {
-    background-color: ${colors.blue};
-    /* background-image: url(../../../assets/icons/check.svg); */
+    background-color: ${colors.red};
+    content: '\f096';
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;

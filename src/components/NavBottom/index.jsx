@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
-import chat from '../../assets/icons/chat.svg';
+import chatred from '../../assets/icons/chatred.svg';
 import walking from '../../assets/icons/walking.svg';
 import { StyledNavBottom, StyledNavLink } from './style';
 import avatar from '../../assets/icons/profilepic.svg';
@@ -14,10 +14,13 @@ const Nav = props => {
   return isAuthenticated ? (
     <StyledNavBottom {...props}>
       <StyledNavLink as={NavLink} to="/choosechat">
-        <img src={chat} alt="Chosechat" />
+        <div className="chat-square" />
+        <img src={chatred} alt="Chosechat" />
       </StyledNavLink>
       <StyledNavLink as={NavLink} to="/feed">
-        <img src={walking} alt="promenad" />
+        <div className="promenad">
+          <img src={walking} alt="promenad" />
+        </div>
       </StyledNavLink>
       <StyledNavLink as={NavLink} to="/private">
         <img className="avatar" src={user.photoUrl || avatar} alt="avatar" />

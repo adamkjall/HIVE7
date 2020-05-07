@@ -8,13 +8,14 @@ import location from '../../../assets/icons/location.svg';
 import avatar from '../../../assets/icons/profilepic.svg';
 import walking from '../../../assets/icons/walking.svg';
 import clock from '../../../assets/icons/time.svg';
+import citat from '../../../assets/icons/quote.svg';
 
 import { StyledWalkCard } from './style';
 
 const WalkCard = ({ walk }) => {
   return (
-    <StyledWalkCard>
-      <Link to={{ pathname: '/selected/' + walk.walkId }}>
+    <Link to={{ pathname: '/selected/' + walk.walkId }}>
+      <StyledWalkCard>
         <div className="author-data">
           <img className="avatar" src={walk.user.photoUrl || avatar} alt="avatar" />
           <H1 className="author">
@@ -27,23 +28,19 @@ const WalkCard = ({ walk }) => {
           </div>
         </div>
         <div className="walk-data">
-          <div className="date">
-            <img src={clock} alt="time" />
-            <span>
-              {walk.date} {walk.time}
-            </span>
-          </div>
-          <div className="duration">
-            <img src={walking} alt="walk" />
-            <span>{walk.timeduration} timmar</span>
-          </div>
-          <div className="where">
-            <img src={location} alt="where" />
-            <span>{walk.where}</span>
-          </div>
+          <img src={clock} alt="time" />
+          <span>
+            {walk.date} {walk.time}
+          </span>
+          <img src={walking} alt="walk" />
+          <span>{walk.timeduration} timmar</span>
+          <img src={location} alt="where" />
+          <span>{walk.where}</span>
+          <img src={citat} alt="where" />
+          <span>{walk.introtext}</span>
         </div>
-      </Link>
-    </StyledWalkCard>
+      </StyledWalkCard>
+    </Link>
   );
 };
 
@@ -55,7 +52,7 @@ WalkCard.propTypes = {
     createdAt: PropTypes.instanceOf(Date),
     date: PropTypes.string,
     filterGender: PropTypes.string,
-    introText: PropTypes.string,
+    introtext: PropTypes.string,
     walkId: PropTypes.string,
     timeduration: PropTypes.string,
     time: PropTypes.string,

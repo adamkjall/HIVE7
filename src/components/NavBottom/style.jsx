@@ -28,19 +28,56 @@ export const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
   color: ${colors.black};
   text-decoration: none;
   text-align: center;
+  height: 48px;
   cursor: pointer;
+
   p {
     margin: 0 0 0.5rem 0;
     font-size: ${fontSizes.s};
   }
-  img {
+
+  .avatar {
     align-self: center;
-    max-width: 30px;
-    max-height: 30px;
+    max-width: 31px;
+    max-height: 31px;
     margin: 0 0 ${spacing.tiny} 0;
   }
+
+  img {
+    margin: 0 0 ${spacing.tiny} 0;
+    align-self: center;
+  }
+
+  .promenad {
+    position: fixed;
+    bottom: -1rem;
+    left: 43%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 999rem;
+    height: 68px;
+    width: 68px;
+    background: ${colors.gray4};
+  }
+
   &.${activeClassName} {
-    border-top: 1px ${colors.black} solid;
-    background: ${colors.red};
+    .chat-square {
+      position: fixed;
+      align-self: center;
+      bottom: 19.4px;
+      height: 13px;
+      width: 19px;
+      border-radius: 3px;
+      background: ${colors.red};
+    }
+    .promenad {
+      background: ${colors.red};
+      border: 2px ${colors.red} solid;
+    }
+    .avatar {
+      padding: 1px;
+      border: 2px ${colors.red} solid;
+    }
   }
 `;

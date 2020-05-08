@@ -153,6 +153,7 @@ const PostForm = () => {
                   id="time-and-date"
                   min={format(new Date(), "yyyy-MM-dd'T'HH:mm")}
                   value={inputs.date + 'T' + inputs.time}
+                  step="300"
                   onChange={event => {
                     const [date, time] = event.target.value.split('T');
                     onValueChange('time', time);

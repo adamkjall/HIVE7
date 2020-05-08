@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
@@ -12,13 +12,11 @@ import Alert from 'components/UI/Alert';
 import location from '../../assets/icons/location.svg';
 import avatar from '../../assets/icons/profilepic.svg';
 import clock from '../../assets/icons/time.svg';
-import cross from '../../assets/icons/cross.png';
 
 import { StyledMatchedwalk } from './style';
 
 const MatchedPageContent = ({ error, isLoading, walk }) => {
   const { user } = useContext(AuthenticationContext);
-  const history = useHistory();
 
   if (isLoading) {
     return <Loader fullScreen />;
@@ -28,7 +26,9 @@ const MatchedPageContent = ({ error, isLoading, walk }) => {
     return (
       <React.Fragment>
         <StyledMatchedwalk>
-          <img onClick={() => history.goBack()} className="close" src={cross} alt="close window" />
+          <Link to="/feed">
+            <img className="close" src={cross} alt="close window" />
+          </Link>
           <H1>Full fart framåt!</H1>
           <p className="gray">
             Du och

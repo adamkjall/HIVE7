@@ -91,11 +91,12 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
                   to={{
                     pathname: '/chat',
                     state: {
-                      userToChatWith: walk.user
+                      userToChatWith: walk.user,
+                      walkDateTime: walk.date + 'T' + walk.time
                     }
                   }}
                 >
-                  <Button>Säj Hej</Button>
+                  <Button>SÄG HEJ</Button>
                 </Link>
                 <Link to={{ pathname: '/feed/' }}>
                   <Button onClick={() => deleteWalkDocument(walk.walkId)}>

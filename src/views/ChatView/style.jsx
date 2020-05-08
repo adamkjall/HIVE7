@@ -7,7 +7,7 @@ export const StyledHeader = styled.div`
   position: sticky;
   top: -1px;
   z-index: 10;
-  height: 98px;
+  height: 65px;
 
   .head-chat-info {
     background: ${colors.gray5};
@@ -19,6 +19,7 @@ export const StyledHeader = styled.div`
       width: 34px;
       height: 34px;
       margin-right: 1rem;
+      object-fit: cover;
     }
   }
   img.waves {
@@ -43,10 +44,11 @@ export const StyledChatview = styled.div`
     .sendbox {
       width: 100%;
       display: grid;
-      grid-template-columns: 2fr 40px;
+      grid-template-columns: 1fr 60px;
       grid-template-rows: 28px;
 
       .input-mess {
+        padding: 0 0.8rem;
         background: ${colors.gray4};
         border-radius: 999rem;
         border: none;
@@ -72,8 +74,9 @@ export const StyledMessage = styled.div`
 
   .chat-box {
     width: fit-content;
+    min-width: 20%;
     max-width: 60%;
-    background: ${({ isUserMessage }) => (isUserMessage ? 'green' : 'white')};
+    background: ${({ isUserMessage }) => (isUserMessage ? colors.green : colors.gray5)};
     color: ${({ isUserMessage }) => (isUserMessage ? 'white' : 'black')};
     border-radius: 10px;
     padding: ${spacing.tiny};
@@ -93,12 +96,33 @@ export const StyledMessage = styled.div`
 `;
 
 export const StyledMessageList = styled.div`
-  height: calc(100vh - 98px - 56px);
+  height: calc(100vh - 65px - 56px);
   position: relative;
   overflow-y: hidden;
 
   .messages-container {
     height: inherit;
     overflow-y: scroll;
+  }
+`;
+
+export const StyledFirstPresentation = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 70%;
+  margin: 2rem auto;
+  text-align: center;
+
+  img {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+  }
+
+  p {
+    color: ${colors.gray3};
+    font-size: ${fontSize.s};
+    line-height: 1rem;
   }
 `;

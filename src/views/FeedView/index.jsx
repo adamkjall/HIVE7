@@ -10,7 +10,7 @@ import Feed from 'compositions/Feed';
 import Alert from 'components/UI/Alert';
 import ButtonCreate from 'components/ButtonCreate';
 
-import { StyledFeed, StyledNav } from './style';
+import { StyledFeedView, StyledNav, StyledFeedContainer } from './style';
 
 const FeedPageContent = ({ error, isLoading, walks, user }) => {
   const [showFeed, setShowFeed] = useState(true);
@@ -39,32 +39,34 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
     return <Alert status="error"></Alert>;
   } else {
     return (
-      <React.Fragment>
-        <StyledFeed>
-          <StyledNav>
-            <button
-              onClick={() => (setShowFeed(true), setShowBooked(false))}
-              className={showFeed ? 'active' : null}
-            >
-              <p>
-                Tillgängliga
-                <br /> Promenader
-              </p>
-            </button>
-            <button
-              onClick={() => (setShowFeed(false), setShowBooked(true))}
-              className={showBooked ? 'active' : null}
-            >
-              <p>
-                Mina <br /> Promenader
-              </p>
-            </button>
-          </StyledNav>
-          <ButtonCreate />
+      <StyledFeedView>
+        <StyledNav>
+          <button
+            onClick={() => (setShowFeed(true), setShowBooked(false))}
+            className={showFeed ? 'active' : null}
+          >
+            <p>
+              Tillgängliga
+              <br /> Promenader
+            </p>
+          </button>
+          <button
+            onClick={() => (setShowFeed(false), setShowBooked(true))}
+            className={showBooked ? 'active' : null}
+          >
+            <p>
+              Mina <br /> Promenader
+            </p>
+          </button>
+        </StyledNav>
+
+        <ButtonCreate />
+
+        <StyledFeedContainer>
           {showFeed && <Feed walks={availableWalks} />}
           {showBooked && <Feed walks={bookedWalks} />}
-        </StyledFeed>
-      </React.Fragment>
+        </StyledFeedContainer>
+      </StyledFeedView>
     );
   }
 };

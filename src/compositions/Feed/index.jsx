@@ -6,16 +6,10 @@ import { StyledFeed, StyledPost, StyledPostList } from './style';
 
 const Feed = ({ walks }) => (
   <StyledFeed>
-    <StyledPostList>
-      {walks &&
-        walks.map((walk, index) => {
-          return (
-            <StyledPost key={index}>
-              <WalkCard walk={walk} />
-            </StyledPost>
-          );
-        })}
-    </StyledPostList>
+    {walks &&
+      walks.map((walk, index) => {
+        return <WalkCard key={index} walk={walk} />;
+      })}
   </StyledFeed>
 );
 

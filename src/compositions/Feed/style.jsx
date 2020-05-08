@@ -3,12 +3,10 @@ import colors from 'tokens/colors.mjs';
 import spacing from 'tokens/spacing.mjs';
 
 export const StyledFeed = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  overflow-y: scroll;
 `;
-
-export const StyledPost = styled.div``;
-
-export const StyledPostList = styled.div``;

@@ -4,9 +4,6 @@ import fontSize from 'tokens/fontSizes.mjs';
 import spacing from 'tokens/spacing.mjs';
 
 export const StyledHeader = styled.div`
-  position: sticky;
-  top: -1px;
-  z-index: 10;
   height: 65px;
 
   .head-chat-info {
@@ -23,6 +20,7 @@ export const StyledHeader = styled.div`
     }
   }
   img.waves {
+    z-index: 999;
     position: relative;
     top: -8px;
     width: 100%;

@@ -44,7 +44,8 @@ export const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
 
   .promenad {
     position: fixed;
-    left: 43%;
+    left: 50%;
+    transform: translate(-50%);
     display: flex;
     justify-content: center;
     align-items: center;

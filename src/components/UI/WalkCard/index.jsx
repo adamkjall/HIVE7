@@ -29,7 +29,7 @@ const WalkCard = ({ walk }) => {
   };
 
   return (
-    <Link to={{ pathname: '/selected/' + walk.walkId }}>
+    <Link to={{ pathname: '/selected/' + walk.walkId }} className="walk-card">
       <StyledWalkCard>
         <div className="author-data">
           <H1 className="author">{walk.user.displayName.split(' ')[0]}</H1>

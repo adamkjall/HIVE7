@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import WalkCard from '../../components/UI/WalkCard';
-import { StyledFeed, StyledPost, StyledPostList } from './style';
+import { StyledFeed } from './style';
 
 const Feed = ({ walks }) => (
   <StyledFeed>

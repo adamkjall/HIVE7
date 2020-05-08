@@ -24,7 +24,7 @@ export const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding-top: ${spacing.tiny};
+  align-items: center;
   color: ${colors.black};
   text-decoration: none;
   text-align: center;
@@ -40,18 +40,12 @@ export const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
     align-self: center;
     max-width: 31px;
     max-height: 31px;
-    margin: 0 0 ${spacing.tiny} 0;
-  }
-
-  img {
-    margin: 0 0 ${spacing.tiny} 0;
-    align-self: center;
   }
 
   .promenad {
     position: fixed;
-    bottom: -1rem;
-    left: 43%;
+    left: 50%;
+    transform: translate(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,17 +56,8 @@ export const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
   }
 
   &.${activeClassName} {
-    .chat-square {
-      position: fixed;
-      align-self: center;
-      bottom: 19.4px;
-      height: 13px;
-      width: 19px;
-      border-radius: 3px;
-      background: ${colors.red};
-    }
     .promenad {
-      background: ${colors.red};
+      background: ${colors.gray5};
       border: 2px ${colors.red} solid;
     }
     .avatar {
@@ -80,4 +65,18 @@ export const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
       border: 2px ${colors.red} solid;
     }
   }
+
+  .unactive-chat-container {
+    position: relative;
+  }
+`;
+
+export const StyledMessageNotification = styled.span`
+  position: absolute;
+  top: -5px;
+  right: -6px;
+  height: 13px;
+  width: 13px;
+  border-radius: 999rem;
+  background: ${colors.red};
 `;

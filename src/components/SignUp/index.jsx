@@ -82,7 +82,7 @@ const SignUp = () => {
       const { user } = await auth.createUserWithEmailAndPassword(inputs.email, inputs.password);
 
       await createUserProfileDocument(user, {
-        username: inputs.username,
+        displayName: inputs.username,
         dateOfBirth: makeStringtoBirthDate(inputs.dateOfBirth),
         lvlOfSwedish: inputs.lvlOfSwedish,
         gender: inputs.gender

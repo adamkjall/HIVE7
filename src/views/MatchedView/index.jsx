@@ -12,6 +12,7 @@ import Alert from 'components/UI/Alert';
 import location from '../../assets/icons/location.svg';
 import avatar from '../../assets/icons/profilepic.svg';
 import clock from '../../assets/icons/time.svg';
+import cross from '../../assets/icons/cross.svg';
 
 import { StyledMatchedwalk } from './style';
 
@@ -26,6 +27,9 @@ const MatchedPageContent = ({ error, isLoading, walk }) => {
     return (
       <React.Fragment>
         <StyledMatchedwalk>
+          <Link to="/feed">
+            <img className="close" src={cross} alt="close window" />
+          </Link>
           <H1>Full fart framåt!</H1>
           <p className="gray">
             Du och
@@ -59,11 +63,12 @@ const MatchedPageContent = ({ error, isLoading, walk }) => {
               to={{
                 pathname: '/chat',
                 state: {
-                  userToChatWith: walk.user
+                  userToChatWith: walk.user,
+                  walkDateTime: walk.date + 'T' + walk.time
                 }
               }}
             >
-              <Button>Säj Hej</Button>
+              <Button>SÄG HEJ</Button>
             </Link>
           </div>
         </StyledMatchedwalk>

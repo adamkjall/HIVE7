@@ -12,6 +12,7 @@ import Alert from 'components/UI/Alert';
 import location from '../../assets/icons/location.svg';
 import avatar from '../../assets/icons/profilepic.svg';
 import clock from '../../assets/icons/time.svg';
+import cross from '../../assets/icons/cross.svg';
 
 import { StyledMatchedwalk } from './style';
 

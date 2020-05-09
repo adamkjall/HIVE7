@@ -35,7 +35,6 @@ const NotificationModal = ({ notification, removeNotification }) => {
     getUserData(notification.userId).then(data => setUserData(data));
     getWalk(notification.walkId).then(data => setWalkData(data));
   }, [notification]);
-  console.log('walkData', walkData);
 
   return (
     <StyledModal>

@@ -2,20 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import WalkCard from '../../components/UI/WalkCard';
-import { StyledFeed, StyledPost, StyledPostList } from './style';
+import H1 from '../../components/UI/H1';
+
+import shortWaves from '../../assets/icons/short-waves.svg';
+
+import { StyledFeed, StyledGreetingsBox } from './style';
 
 const Feed = ({ walks }) => (
   <StyledFeed>
-    <StyledPostList>
-      {walks &&
-        walks.map((walk, index) => {
-          return (
-            <StyledPost key={index}>
-              <WalkCard walk={walk} />
-            </StyledPost>
-          );
-        })}
-    </StyledPostList>
+    <StyledGreetingsBox>
+      <H1 className="title">Välkommen till GÅ MAMA!</H1>
+      <p className="text">Här kan du se tillgängliga promenader att hänga med på.</p>
+      <img className="waves" src={shortWaves} />
+    </StyledGreetingsBox>
+    {walks &&
+      walks.map((walk, index) => {
+        return <WalkCard key={index} walk={walk} />;
+      })}
   </StyledFeed>
 );
 

@@ -9,9 +9,11 @@ export const StyledHeader = styled.div`
   .head-chat-info {
     background: ${colors.gray5};
     padding: ${spacing.tiny} 0;
+
     .backbutton {
       padding: ${spacing.small};
     }
+
     .avatar {
       width: 34px;
       height: 34px;
@@ -19,8 +21,9 @@ export const StyledHeader = styled.div`
       object-fit: cover;
     }
   }
+
   img.waves {
-    z-index: 999;
+    z-index: 3;
     position: relative;
     top: -8px;
     width: 100%;
@@ -29,6 +32,7 @@ export const StyledHeader = styled.div`
 
 export const StyledChatview = styled.div`
   height: 100%;
+
   .sendbox-wrapper {
     width: 100%;
     padding: ${spacing.tiny};
@@ -38,7 +42,6 @@ export const StyledChatview = styled.div`
     height: 56px;
     background: ${colors.gray5};
 
-    /* position: fixed; */
     .sendbox {
       width: 100%;
       display: grid;
@@ -65,6 +68,7 @@ export const StyledChatview = styled.div`
 
 export const StyledMessage = styled.div`
   padding: ${spacing.tiny} ${spacing.small} 0;
+
   .timeposted {
     font-size: ${fontSize.microcopy};
     margin: ${spacing.tiny};
@@ -81,12 +85,14 @@ export const StyledMessage = styled.div`
     margin: ${spacing.tiny};
     margin-left: ${({ isUserMessage }) => (isUserMessage ? 'auto' : '0')};
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
     .author {
       margin: 0.1rem 0;
       color: ${colors.red};
       font-size: ${fontSize.s};
     }
-    .mess {
+
+    .text {
       margin: 0.3rem 0;
       font-size: ${fontSize.s};
     }

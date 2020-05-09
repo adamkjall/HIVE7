@@ -14,7 +14,7 @@ export const StyledFeedContainer = styled.div`
 
 export const StyledNav = styled.nav`
   position: relative;
-  z-index: 999;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;

@@ -4,8 +4,8 @@ import format from 'date-fns/format';
 import formatDistanceStrict from 'date-fns/formatDistanceStrict';
 import svLocale from 'date-fns/locale/sv';
 
+import getDateTimeString from '../../helpers/functions/getDateTimeString';
 import { firestore } from '../../firebase/firebase.utils';
-
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
 import Page from 'compositions/Page';
@@ -48,29 +48,6 @@ const ChatPageContent = ({ messages, sendMessage, user, userToChatWith, walkDate
     } else return;
   };
 
-  const createDateTimeString = () => {
-    const [year_now, month_now, day_now] = format(new Date(), 'yyyy-MM-dd').split('-');
-    const [year, month, day] = walkDateTime.split('T')[0].split('-');
-    const time = walkDateTime.split('T')[1];
-
-    const distanceString = formatDistanceStrict(
-      new Date(year_now, month_now - 1, day_now),
-      new Date(year, month - 1, day),
-      { unit: 'day' }
-    );
-
-    const distanceInDays = Number(distanceString.split(' ')[0]);
-    const todayOrTomorrowString =
-      distanceInDays === 0 ? 'Idag, ' : distanceInDays === 1 ? 'Imorgon, ' : '';
-
-    return (
-      todayOrTomorrowString +
-      format(new Date(year, month - 1, day), 'EEEE d MMMM', { locale: svLocale }) +
-      ', ' +
-      time
-    );
-  };
-
   return (
     <React.Fragment>
       <StyledChatview>
@@ -96,7 +73,7 @@ const ChatPageContent = ({ messages, sendMessage, user, userToChatWith, walkDate
                       {/* <p className="timeposted">{format(message.createdAt, 'H:m d MMMM')}</p> */}
                       <div className="chat-box">
                         {/* <p className="author">{message.name}</p> */}
-                        <span className="mess">{message.text}</span>
+                        <span className="text">{message.text}</span>
                       </div>
                     </StyledMessage>
                   );
@@ -105,7 +82,7 @@ const ChatPageContent = ({ messages, sendMessage, user, userToChatWith, walkDate
               <StyledFirstPresentation>
                 <img className="avatar" src={userToChatWith.photoUrl || avatar} alt="avatar" />
                 <p>
-                  Bokad promenad tillsammans <br /> {createDateTimeString()}
+                  Bokad promenad tillsammans <br /> {getDateTimeString(...walkDateTime.split('T'))}
                 </p>
               </StyledFirstPresentation>
             ) : null}

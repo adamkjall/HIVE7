@@ -5,7 +5,7 @@ import spacing from 'tokens/spacing.mjs';
 export const StyledFeed = styled.div`
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr;
+  align-content: start;
   gap: 1rem;
   padding: 1rem;
   overflow-y: scroll;

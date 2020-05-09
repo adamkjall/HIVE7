@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { firestore } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
+import { NavContext } from '../../contexts/NavContext';
 
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
@@ -13,8 +14,9 @@ import ButtonCreate from 'components/ButtonCreate';
 import { StyledFeedView, StyledNav, StyledFeedContainer } from './style';
 
 const FeedPageContent = ({ error, isLoading, walks, user }) => {
-  const [showFeed, setShowFeed] = useState(true);
-  const [showBooked, setShowBooked] = useState(false);
+  const { activeTab, setActiveTab } = useContext(NavContext);
+  // const [showFeed, setShowFeed] = useState(true);
+  // const [showBooked, setShowBooked] = useState(false);
 
   const sortWalks = walks =>
     walks.sort((a, b) => {
@@ -31,7 +33,9 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
     return isAttending || isUser;
   });
 
-  const availableWalks = sortedWalks.filter(walk => !bookedWalks.includes(walk));
+  const availableWalks = sortedWalks
+    .filter(walk => !bookedWalks.includes(walk))
+    .filter(walk => walk.attendingPeople.length === 0);
 
   if (isLoading) {
     return <Loader fullScreen />;
@@ -41,19 +45,13 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
     return (
       <StyledFeedView>
         <StyledNav>
-          <button
-            onClick={() => (setShowFeed(true), setShowBooked(false))}
-            className={showFeed ? 'active' : null}
-          >
+          <button onClick={() => setActiveTab(0)} className={activeTab === 0 ? 'active' : null}>
             <p>
               Tillgängliga
               <br /> Promenader
             </p>
           </button>
-          <button
-            onClick={() => (setShowFeed(false), setShowBooked(true))}
-            className={showBooked ? 'active' : null}
-          >
+          <button onClick={() => setActiveTab(1)} className={activeTab === 1 ? 'active' : null}>
             <p>
               Mina <br /> Promenader
             </p>
@@ -63,8 +61,7 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
         <ButtonCreate />
 
         <StyledFeedContainer>
-          {showFeed && <Feed walks={availableWalks} />}
-          {showBooked && <Feed walks={bookedWalks} />}
+          {activeTab === 0 ? <Feed walks={availableWalks} /> : <Feed walks={bookedWalks} />}
         </StyledFeedContainer>
       </StyledFeedView>
     );

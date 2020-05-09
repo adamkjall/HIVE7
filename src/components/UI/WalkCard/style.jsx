@@ -30,6 +30,7 @@ export const StyledWalkCard = styled.div`
         justify-content: space-between;
         margin-top: 1rem;
         margin-bottom: 0.3rem;
+        padding: 0 0.3rem;
         &:first-child {
           margin-right: 1rem;
         }

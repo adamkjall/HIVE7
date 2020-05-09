@@ -36,8 +36,6 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
     .filter(walk => walk.attendingPeople.length === 0)
     .filter(walk => walk.time >= new Date().toLocaleTimeString());
 
-  console.table('walks', walks);
-
   if (isLoading) {
     return <Loader fullScreen />;
   } else if (error) {

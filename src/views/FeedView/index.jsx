@@ -15,8 +15,6 @@ import { StyledFeedView, StyledNav, StyledFeedContainer } from './style';
 
 const FeedPageContent = ({ error, isLoading, walks, user }) => {
   const { activeTab, setActiveTab } = useContext(NavContext);
-  // const [showFeed, setShowFeed] = useState(true);
-  // const [showBooked, setShowBooked] = useState(false);
 
   const sortWalks = walks =>
     walks.sort((a, b) => {

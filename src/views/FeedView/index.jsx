@@ -33,7 +33,10 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
 
   const availableWalks = sortedWalks
     .filter(walk => !bookedWalks.includes(walk))
-    .filter(walk => walk.attendingPeople.length === 0);
+    .filter(walk => walk.attendingPeople.length === 0)
+    .filter(walk => walk.time >= new Date().toLocaleTimeString());
+
+  console.table('walks', walks);
 
   if (isLoading) {
     return <Loader fullScreen />;
@@ -74,18 +77,23 @@ const FeedView = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    const unsubscribe = firestore.collection('walks').onSnapshot(querySnapshot => {
-      const fetchedWalks = [];
-      querySnapshot.forEach(doc => {
-        const data = doc.data();
-        fetchedWalks.push({
-          ...data,
-          createdAt: data.createdAt.toDate()
+    const [date, time] = new Date().toISOString().split('T');
+
+    const unsubscribe = firestore
+      .collection('walks')
+      .where('date', '>=', date)
+      .onSnapshot(querySnapshot => {
+        const fetchedWalks = [];
+        querySnapshot.forEach(doc => {
+          const data = doc.data();
+          fetchedWalks.push({
+            ...data,
+            createdAt: data.createdAt.toDate()
+          });
         });
+        setWalks(fetchedWalks);
+        setIsLoading(false);
       });
-      setWalks(fetchedWalks);
-      setIsLoading(false);
-    });
 
     return () => unsubscribe();
   }, []);

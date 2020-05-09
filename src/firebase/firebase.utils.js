@@ -106,7 +106,10 @@ export const getAllWalks = async () => {
 
   querySnapshot.forEach(doc => {
     const data = doc.data();
-    walks.push(data);
+    walks.push({
+      ...data,
+      createdAt: data.createdAt.toDate()
+    });
   });
 
   return walks;

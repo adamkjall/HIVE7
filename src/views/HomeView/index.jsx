@@ -32,7 +32,8 @@ const HomePageContent = ({ error, isLoading }) => {
           {pagenr == '1' && (
             <div className="content page1">
               <div className="blobb">
-                <img src={blob1} alt="text" />
+                <img src={blob1} alt="text" className="blobb-img" />
+
                 <div className="insindeblob">
                   <H1>Gå Mamma!</H1>
                   <p>
@@ -41,6 +42,7 @@ const HomePageContent = ({ error, isLoading }) => {
                   </p>
                 </div>
               </div>
+              <div />
               <Link to="/login" className="link-login">
                 <H2>Har du redan ett konto? Logga in</H2>
               </Link>
@@ -57,9 +59,15 @@ const HomePageContent = ({ error, isLoading }) => {
           {pagenr == '2' && (
             <div className="content page2">
               <div className="blobb">
-                <img src={blob2} alt="text" />
-                <p className="insindeblob">text sida 2</p>
+                <img src={blob2} alt="text" className="blobb-img" />
+                <div className="insindeblob">
+                  <p>
+                    GÅ MAMA! hjälper dig att upptäcka nya platser tillsammans med andra mammor på
+                    promenader
+                  </p>
+                </div>
               </div>
+              <div />
               <Link to="/login" className="link-login">
                 <H2>Har du redan ett konto? Logga in</H2>
               </Link>
@@ -76,9 +84,15 @@ const HomePageContent = ({ error, isLoading }) => {
           {pagenr == '3' && (
             <div className="content page3">
               <div className="blobb">
-                <img src={blob3} alt="text" />
-                <p className="insindeblob">text sida 3</p>
+                <img src={blob3} alt="text" className="blobb-img" />
+                <div className="insindeblob">
+                  <p>
+                    Med GÅ MAMA! får du ett utbyte av språk, erfarenheter och kultur genom att
+                    promenera med mammor från hela världen
+                  </p>
+                </div>
               </div>
+              <div />
               <Link to="/login" className="link-login">
                 <H2>Har du redan ett konto? Logga in</H2>
               </Link>
@@ -95,17 +109,24 @@ const HomePageContent = ({ error, isLoading }) => {
           {pagenr == '4' && (
             <div className="content page4">
               <div className="blobb">
-                <img src={blob4} alt="text" />
-                <p className="insindeblob">Välkomen till GÅ MAMA!</p>
+                <img src={blob4} alt="text" className="blobb-img" />
+                <div className="insindeblob">
+                  <p>Hitta nya vänner med GÅ MAMA! Allt blir roligare tillsammans!</p>
+                </div>
               </div>
 
               <div className="buttons">
                 <Link to="/signup">
-                  <Button nature="default" stretch>
+                  <Button nature="default" stretch className="landingbutton">
                     Skapa Konto
                   </Button>
                 </Link>
-                <Button nature="default" stretch onClick={signInWithGoogle}>
+                <Button
+                  nature="default"
+                  stretch
+                  onClick={signInWithGoogle}
+                  className="landingbutton"
+                >
                   Logga in med Google
                 </Button>
               </div>

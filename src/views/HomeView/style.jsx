@@ -61,11 +61,11 @@ export const StyledContainer = styled.div`
           justify-content: center;
           margin-bottom: 0.8rem;
           .landingbutton {
-            width: 80%;
+            width: 90%;
           }
         }
         .landingbutton {
-          width: 80%;
+          width: 90%;
         }
       }
 

@@ -18,13 +18,8 @@ export const StyledContainer = styled.div`
     width: 100%;
     margin: 0;
     padding: 0;
-  }
-  .waves.green {
-    background-color: ${colors.gray5};
-  }
-  .waves.gray {
     position: relative;
-    top: -7px;
+    top: -5px;
   }
 
   .h1-in-center {
@@ -36,7 +31,7 @@ export const StyledContainer = styled.div`
     max-width: 315px;
     display: grid;
     grid-template-columns: 50px 8fr;
-    grid-template-rows: 1fr 8px 1fr 8px 1fr 8px 1fr 8px 70px 10px;
+    grid-template-rows: 1fr 1px 1fr 1px 1fr 1px 1fr 1px 70px 40px;
   }
 
   .signup-form-container2 {
@@ -44,7 +39,7 @@ export const StyledContainer = styled.div`
     max-width: 315px;
     display: grid;
     grid-template-columns: 50px 8fr;
-    grid-template-rows: 1fr 12px 1fr 12px 1fr 12px;
+    grid-template-rows: 1fr 12px 1fr 12px 1fr 0.6fr;
   }
 
   .red {
@@ -102,6 +97,9 @@ export const StyledContainer = styled.div`
     border-radius: 999rem;
     border: 3px ${colors.red} solid;
     background-color: white;
+    &.nr2 {
+      top: 15px;
+    }
   }
 
   .donedott {
@@ -113,28 +111,57 @@ export const StyledContainer = styled.div`
     border-radius: 999rem;
     border: 3px ${colors.red} solid;
     background-color: ${colors.red};
+    &.nr2 {
+      top: 15px;
+    }
   }
 
-  .nextbutton {
-    position: relative;
-    top: 30px;
+  .buttondiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .nextbutton {
+      margin: 0 1rem;
+    }
   }
 
   .redline {
-    width: 2px;
+    width: 1px;
     height: 50px;
     background-color: ${colors.red};
     position: relative;
     left: 21px;
-    top: -22px;
+    top: -24px;
   }
 
   .redline2 {
-    width: 2px;
+    width: 1px;
     height: 83px;
     background-color: ${colors.red};
     position: relative;
     left: 21px;
-    top: -52px;
+    top: -75px;
+  }
+
+  .uploadfile-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 33px;
+
+    input[type='file'] {
+      display: none;
+    }
+
+    .file-upload {
+      border: none;
+      cursor: pointer;
+      max-width: 135px;
+    }
+  }
+  .the-bottom-line {
+    position: relative;
+    top: -40px;
+    left: 80px;
   }
 `;

@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
-import UploadFile from '../UploadFile';
+import { storage, auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 import Button from '../UI/Button';
 import H1 from '../UI/H1';
 import Input from '../UI/Input';
 import BackButton from '../BackButton';
 import isValidDate from '../../helpers/functions/validDate';
 import makeStringtoBirthDate from '../../helpers/functions/makeStringtoBirthDate';
-import waves from '../../assets/icons/waves.svg';
 import graywaves from '../../assets/icons/graywaves.svg';
-
+import chooseprofilepic from '../../assets/icons/chooseprofilepic.svg';
 import { StyledContainer } from './style';
 
 const SignUp = () => {
@@ -25,6 +23,13 @@ const SignUp = () => {
   const [passwordMsg, setPasswordMsg] = useState('');
   const [confirmPasswordMsg, setConfirmPasswordMsg] = useState('');
   const [msg, setMsg] = useState('');
+  const [file, setFile] = useState('');
+  const [filename, setFilename] = useState('');
+
+  const onFileChange = e => {
+    setFile(e.target.files[0]);
+    setFilename(e.target.files[0].name);
+  };
 
   const [inputs, setInputs] = useState({
     username: '',
@@ -35,11 +40,6 @@ const SignUp = () => {
     password: '',
     confirmPassword: ''
   });
-
-  const [toogle, setToogle] = useState(false);
-  const toogleChangepic = e => {
-    setToogle(!toogle);
-  };
 
   const validateEmail = () => {
     console.log('validateemail function to server, before submit!');
@@ -87,6 +87,24 @@ const SignUp = () => {
         lvlOfSwedish: inputs.lvlOfSwedish,
         gender: inputs.gender
       });
+
+      const uploadTask = await storage.ref(`profile-pictures/${user.id}`).put(file); // set unique path
+      console.log(uploadTask);
+
+      await uploadTask.on(
+        'state_changed',
+        snapshot => {
+          //progress function
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+            createUserProfileDocument(user.id, { photoUrl: downloadURL });
+          });
+        }
+      );
       history.push('/feed');
     } catch (error) {
       setMsg('Något gick fel. Fyll i fälten och försök igen');
@@ -107,8 +125,7 @@ const SignUp = () => {
         <BackButton />
         <H1>Skapa konto</H1>
       </div>
-      <img src={waves} className="waves green" alt="wave" />
-      <img src={graywaves} className="waves gray" alt="wave" />
+      <img src={graywaves} className="waves" alt="wave" />
       <form onSubmit={onSubmit}>
         {!nextquestionens ? (
           <div>
@@ -208,6 +225,8 @@ const SignUp = () => {
               <p className="red">{confirmPasswordMsg}</p>
               <p>* Obligatoriska fält</p>
               <div />
+            </div>
+            <div className="buttondiv">
               <Button className="nextbutton" stretch onClick={onNext}>
                 Nästa
               </Button>
@@ -218,21 +237,21 @@ const SignUp = () => {
             <H1 className="h1-in-center">2/2</H1>
             <div className="signup-form-container2">
               {inputs.lvlOfSwedish.length <= 1 ? (
-                <div className="reddott" />
+                <div className="reddott nr2" />
               ) : (
-                <div className="donedott" />
+                <div className="donedott nr2" />
               )}
               <div className="swedish">
-                <p>Är du ny eller etablerad? *</p>
+                <p>Hur är din svenskanivå? *</p>
                 <label htmlFor="newSwede">
                   <input
                     type="radio"
                     id="newSwede"
                     name="swedelvl"
-                    value="Ny Svensk"
+                    value="Jag vill lära mig mer svenska"
                     onChange={event => onValueChange('lvlOfSwedish', event.target.value)}
                   />
-                  Ny svensk - jag vill bli bättre på svenska
+                  Jag vill lära mig mer svenska
                 </label>
                 <br />
                 <label htmlFor="establish">
@@ -240,18 +259,18 @@ const SignUp = () => {
                     type="radio"
                     id="establish"
                     name="swedelvl"
-                    value="Etablerad svensk"
+                    value="Jag pratar flytande svenska"
                     onChange={event => onValueChange('lvlOfSwedish', event.target.value)}
                   />
-                  Etablerad svensk - jag pratar flytande svenska.
+                  Jag pratar flytande svenska
                 </label>
               </div>
               <div className="redline2" />
               <p className="redlvl">{msglvl}</p>
               {inputs.gender.length <= 0 ? (
-                <div className="reddott" />
+                <div className="reddott nr2" />
               ) : (
-                <div className="donedott" />
+                <div className="donedott nr2" />
               )}
               <div className="gender">
                 <p>Kön? *</p>
@@ -285,42 +304,36 @@ const SignUp = () => {
                     value="other"
                     onChange={event => onValueChange('gender', event.target.value)}
                   />
-                  Annat / vill inte svara
+                  Vill inte ange
                 </label>
               </div>
               <div className="redline2" />
               <p className="red">{msgGender}</p>
-              {inputs.email.length <= 4 ? (
-                <div className="reddott" />
-              ) : (
-                <div className="donedott" />
-              )}
+              {filename.length == 0 ? <div className="reddott" /> : <div className="donedott" />}
               {/* funkar inte då man inte har ett id förren skapa knappen. */}
-              <div className="profilebox-1">
-                <span
-                  className="changepic"
-                  tabIndex="-5"
-                  role="button"
-                  aria-label="toogle"
-                  onClick={toogleChangepic}
-                  onKeyDown={toogleChangepic}
-                >
-                  {toogle ? 'Klicka här efter laddat upp din nya bild' : 'Lägg till en bild'}
-                </span>
+              <div className="uploadfile-wrapper">
+                <input type="file" id="file" onChange={onFileChange} size="10000000" />
+                <label className="file-upload" htmlFor="file">
+                  Byt profilbild *
+                  {filename.length > 0 ? (
+                    <img src={chooseprofilepic} alt="chooseprofilepic" />
+                  ) : (
+                    <img src={chooseprofilepic} alt="chooseprofilepic" />
+                  )}
+                </label>
               </div>
-              <div /> <p className="red">{msg}</p>
               <div />
-              {toogle ? null : (
-                <Button nature="default" stretch type="submit">
-                  Skapa konto
-                </Button>
-              )}
+            </div>
+            <p className="red the-bottom-line">{msg}</p>
+            <div />
+            <div className="buttondiv">
+              <Button className="nextbutton" nature="default" stretch type="submit">
+                Skapa konto
+              </Button>
             </div>
           </div>
         )}
       </form>
-
-      {toogle ? <UploadFile /> : null}
     </StyledContainer>
   );
 };

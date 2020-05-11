@@ -30,12 +30,18 @@ const HomePageContent = ({ error, isLoading }) => {
       <React.Fragment>
         <StyledContainer>
           {pagenr == '1' && (
-            <div className="content1">
+            <div className="content page1">
               <div className="blobb">
                 <img src={blob1} alt="text" />
-                <p className="insindeblob">text sida 1</p>
+                <div className="insindeblob">
+                  <H1>Gå Mamma!</H1>
+                  <p>
+                    Promenera med mammor från hela världen för att upptäcka, lära och utvecklas
+                    tillsammans.
+                  </p>
+                </div>
               </div>
-              <Link to="/login">
+              <Link to="/login" className="link-login">
                 <H2>Har du redan ett konto? Logga in</H2>
               </Link>
               {pagenr == 1 && (
@@ -49,12 +55,12 @@ const HomePageContent = ({ error, isLoading }) => {
             </div>
           )}
           {pagenr == '2' && (
-            <div className="content2">
+            <div className="content page2">
               <div className="blobb">
                 <img src={blob2} alt="text" />
                 <p className="insindeblob">text sida 2</p>
               </div>
-              <Link to="/login">
+              <Link to="/login" className="link-login">
                 <H2>Har du redan ett konto? Logga in</H2>
               </Link>
               {pagenr == 2 && (
@@ -68,12 +74,12 @@ const HomePageContent = ({ error, isLoading }) => {
             </div>
           )}
           {pagenr == '3' && (
-            <div className="content3">
+            <div className="content page3">
               <div className="blobb">
                 <img src={blob3} alt="text" />
                 <p className="insindeblob">text sida 3</p>
               </div>
-              <Link to="/login">
+              <Link to="/login" className="link-login">
                 <H2>Har du redan ett konto? Logga in</H2>
               </Link>
               {pagenr == 3 && (
@@ -87,7 +93,7 @@ const HomePageContent = ({ error, isLoading }) => {
             </div>
           )}
           {pagenr == '4' && (
-            <div className="content4">
+            <div className="content page4">
               <div className="blobb">
                 <img src={blob4} alt="text" />
                 <p className="insindeblob">Välkomen till GÅ MAMA!</p>
@@ -102,18 +108,20 @@ const HomePageContent = ({ error, isLoading }) => {
                 <Button nature="default" stretch onClick={signInWithGoogle}>
                   Logga in med Google
                 </Button>
-                <Link to="/login">
-                  <H2>Har du redan ett konto? Logga in</H2>
-                </Link>
-                {pagenr == 4 && (
-                  <div className="pagnation">
-                    <div className="dott" onClick={() => setPagenr(1)} />
-                    <div className="dott" onClick={() => setPagenr(2)} />
-                    <div className="dott" onClick={() => setPagenr(3)} />
-                    <div className="reddot" />
-                  </div>
-                )}
               </div>
+
+              <Link to="/login" className="link-login">
+                <H2>Har du redan ett konto? Logga in</H2>
+              </Link>
+
+              {pagenr == 4 && (
+                <div className="pagnation">
+                  <div className="dott" onClick={() => setPagenr(1)} />
+                  <div className="dott" onClick={() => setPagenr(2)} />
+                  <div className="dott" onClick={() => setPagenr(3)} />
+                  <div className="reddot" />
+                </div>
+              )}
             </div>
           )}
         </StyledContainer>

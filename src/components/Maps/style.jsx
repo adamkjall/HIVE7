@@ -4,7 +4,7 @@ import fontSizes from 'tokens/fontSizes.mjs';
 import spacing from 'tokens/spacing.mjs';
 import colors from 'tokens/colors.mjs';
 
-export const StyledGoogleMap = styled.div`
+export const StyledMap = styled.div`
   margin-top: 1rem;
   width: 100%;
   height: 146px;

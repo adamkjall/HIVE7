@@ -79,7 +79,6 @@ const FeedView = () => {
   const [error, setError] = useState(null);
   const [walks, setWalks] = useState([]);
   const { user } = useContext(AuthenticationContext);
-  console.log('walks', walks);
 
   useEffect(() => {
     setIsLoading(true);

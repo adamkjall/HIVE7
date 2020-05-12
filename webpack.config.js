@@ -145,7 +145,8 @@ export default {
           'https://lh4.googleusercontent.com',
           'https://lh5.googleusercontent.com',
           'https://firestore.googleapis.com',
-          'https://firebasestorage.googleapis.com'
+          'https://firebasestorage.googleapis.com',
+          'https://www.openstreetmap.org/'
         ],
         'font-src': ["'self'", 'https://fonts.googleapis.com/'],
         'media-src': "'self'",
@@ -160,7 +161,8 @@ export default {
           'https://securetoken.googleapis.com',
           'https://firebaseinstallations.googleapis.com',
           'https://fcmregistrations.googleapis.com',
-          'https://fcm.googleapis.com/fcm/notification'
+          'https://fcm.googleapis.com/fcm/notification', 
+          'https://www.openstreetmap.org/'
         ],
         'object-src': "'none'",
         'frame-src': ["'self'", 'https://hive7-fe724.firebaseapp.com/'],

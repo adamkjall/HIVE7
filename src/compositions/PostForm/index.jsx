@@ -8,6 +8,7 @@ import svLocale from 'date-fns/locale/sv';
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import { createWalkDocument } from '../../firebase/firebase.utils';
 
+import MapComponent from 'components/Maps';
 import H1 from 'components/UI/H1';
 import BackButton from 'components/BackButton';
 import Button from 'components/UI/Button';
@@ -32,7 +33,7 @@ const PostForm = () => {
   const [wheremsg, setWhereMsg] = useState('');
 
   const [toogleWhen, setToogleWhen] = useState(false);
-  const [toogleWhere, setToogleWhere] = useState(false);
+  const [toogleWhere, setToogleWhere] = useState(true);
   const [toogleDuration, setToogleDuration] = useState(false);
 
   const [inputs, setInputs] = useState({
@@ -186,6 +187,7 @@ const PostForm = () => {
                   value={inputs.where}
                   onChange={event => onValueChange('where', event.target.value)}
                 />
+                <MapComponent />
                 <p className="red">{wheremsg}</p>
               </div>
             ) : null}

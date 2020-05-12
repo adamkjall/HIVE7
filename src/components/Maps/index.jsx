@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { StyledGoogleMap } from './style';
+import { StyledMap } from './style';
 
-const GoogleMap = () => {
+const Map = () => {
   const [messege, setMessege] = useState();
   const [imgUrl, setImgUrl] = useState();
   const [mapping, setMapping] = useState(false);
@@ -34,27 +34,25 @@ const GoogleMap = () => {
   }
 
   const showPosition = position => {
-    let latlong = position.coords.latitude + ',' + position.coords.longitude;
-    let api = 'hejhallo';
+    let latlong = position.coords.latitude + '/' + position.coords.longitude;
+    console.log(latlong);
+
     if (latlong.length > 2) {
       setMapping(true);
-
-      setImgUrl(
-        'https://maps.googleapis.com/maps/api/staticmap?center=+' +
-          latlong +
-          '+&zoom=14&size=400x300&sensor=false&key=AIzaSyAr7FnSuYSV435K8DSap32MlKg6fF4cmTIä' +
-          api
-      );
+      console.log(`https://www.openstreetmap.org/#map=16/` + latlong);
+      setImgUrl(`https://www.openstreetmap.org/#map=16/` + latlong);
     }
   };
 
   return (
-    <StyledGoogleMap>
+    <StyledMap>
       <button onClick={() => getLocation()}>Ange din Position</button>
-      {mapping ? console.log(imgUrl) : null}
+      {mapping ? <img src={imgUrl} alt="karta" /> : null}
       {messege}
-      <Link to="/create"></Link>
-    </StyledGoogleMap>
+      <a href="https://www.openstreetmap.org/">
+        <p className="openstreetmap">© OpenStreetMaps bidragsgivare ♥ Donera. </p>
+      </a>
+    </StyledMap>
   );
 };
-export default GoogleMap;
+export default Map;

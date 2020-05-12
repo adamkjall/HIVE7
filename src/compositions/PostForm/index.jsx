@@ -14,7 +14,6 @@ import Button from 'components/UI/Button';
 import CheckBox from '../../components/UI/Checkbox';
 import Input from 'components/UI/Input';
 import chat from '../../assets/icons/chat.svg';
-import family from '../../assets/icons/family.svg';
 import friends from '../../assets/icons/friends.svg';
 import location from '../../assets/icons/location.svg';
 import pets from '../../assets/icons/pets.svg';
@@ -41,7 +40,6 @@ const PostForm = () => {
     where: '',
     timeduration: '',
     allowFriends: 'false',
-    allowChildren: 'false',
     allowPets: 'false',
     bringPets: 'false',
     filterGender: 'alla',
@@ -74,7 +72,6 @@ const PostForm = () => {
         where: inputs.where,
         timeduration: inputs.timeduration,
         allowFriends: inputs.allowFriends,
-        allowChildren: inputs.allowChildren,
         allowPets: inputs.allowPets,
         bringPets: inputs.bringPets,
         filterGender: inputs.filterGender,
@@ -89,7 +86,6 @@ const PostForm = () => {
         where: '',
         timeduration: '',
         allowFriends: '',
-        allowChildren: '',
         allowPets: '',
         bringPets: '',
         filterGender: '',
@@ -245,12 +241,6 @@ const PostForm = () => {
               id="allowFriends"
               label="Kan vänner följa med?"
               clickHandler={event => onValueChange('allowFriends', event.target.value)}
-            />
-            <CheckBox
-              icon={family}
-              id="allowChildren"
-              label="Kan barn följa med?"
-              clickHandler={event => onValueChange('allowChildren', event.target.value)}
             />
             <CheckBox
               icon={bringPetsvg}

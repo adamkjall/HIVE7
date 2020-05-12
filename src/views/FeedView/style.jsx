@@ -43,6 +43,7 @@ export const StyledNav = styled.nav`
     }
     &.active {
       border-bottom: 2px ${colors.red} solid;
+      font-weight: bold;
     }
     :focus {
       outline: none;

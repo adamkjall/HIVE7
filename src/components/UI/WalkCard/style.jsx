@@ -5,9 +5,9 @@ import colors from 'tokens/colors.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
 
 export const StyledWalkCard = styled.div`
-  height: 10.5rem;
+  max-height: 12rem;
   background: ${colors.white};
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   overflow: hidden;
   display: grid;
@@ -17,10 +17,9 @@ export const StyledWalkCard = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
     text-align: center;
     background: ${colors.gray5};
-    padding: 1rem 0.5rem 0;
+    padding: 1rem 0.5rem 1rem;
     font-size: ${fontSizes.s};
 
     .matched {

@@ -15,10 +15,10 @@ import location from '../../assets/icons/location.svg';
 import avatar from '../../assets/icons/profilepic.svg';
 import walking from '../../assets/icons/walking.svg';
 import clock from '../../assets/icons/time.svg';
-import family from '../../assets/icons/family.svg';
 import friends from '../../assets/icons/friends.svg';
 import pets from '../../assets/icons/pets.svg';
 import bringPetsvg from '../../assets/icons/bringPets.svg';
+import chatbox from '../../assets/icons/chatbox.svg';
 
 import { StyledSelectedWalk } from './style';
 
@@ -33,44 +33,51 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
     return (
       <React.Fragment>
         <StyledSelectedWalk>
-          <BackButton />
-          <Link to={{ pathname: '/profile/' + walk.author, state: { walk } }}>
+          <div className="gray-wrapper">
+            <div className="head-wrapper">
+              <BackButton />
+              {walk.attendingPeople.find(id => id === user.id) && (
+                <Link
+                  className="chatbox"
+                  to={{
+                    pathname: '/chat',
+                    state: {
+                      userToChatWith: walk.user,
+                      walkDateTime: walk.date + 'T' + walk.time
+                    }
+                  }}
+                >
+                  <img src={chatbox} alt="Säg hej" />
+                </Link>
+              )}
+            </div>
             <img className="avatar" src={walk.user.photoUrl || avatar} alt="avatar" />
-          </Link>
-          <div className="authordata">
-            <span className="author">{walk.user.displayName}</span>
-            <div className="dott" />
-            <span className="usersage"> {calculateAge(walk.user.dateOfBirth)} år</span>
-          </div>
-          <div className="quote">
-            <img src={quote} alt="intro" />
-            <span>{walk.introtext}</span>
+
+            <div className="authordata">
+              <span className="author">{walk.user.displayName}</span>
+              <div className="dott" />
+              <span className="usersage"> {calculateAge(walk.user.dateOfBirth)} år</span>
+            </div>
+            <div className="quote">
+              <img src={quote} alt="intro" />
+              <span>{walk.introtext}</span>
+            </div>
           </div>
           <div className="walk-data">
-            <div className="date">
-              <img src={clock} alt="time" />
-              <p>
-                {walk.date} {walk.time}
-              </p>
-            </div>
-            <div className="duration">
-              <img src={walking} alt="walk" />
-              <p>{walk.timeduration} timmar</p>
-            </div>
-            <div className="where">
-              <img src={location} alt="where" />
-              <p>{walk.where}</p>
-            </div>
+            <img src={clock} alt="time" />
+            <p>
+              {walk.date} {walk.time}
+            </p>
+            <img src={walking} alt="walk" />
+            <p>{walk.timeduration}</p>
+            <img src={location} alt="where" />
+            <p>{walk.where}</p>
           </div>
           <hr />
           <div className="walk-data2">
             <img src={friends} alt="bringfriend" />
             <span>Kan vänner följa med?</span>
             <span className="post">{walk.allowFriends == 'on' ? 'Ja' : 'Nej'} </span>
-
-            <img src={family} alt="bring children" />
-            <span>Kan barn följa med?</span>
-            <span className="user">{walk.allowChildren == 'on' ? 'Ja' : 'Nej'}</span>
 
             <img src={bringPetsvg} alt="bring dog" />
             <span>Finns det husdjur?</span>
@@ -98,22 +105,9 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
                 <Button onClick={() => joinAWalk(user.id, walk.walkId)}>Följ med!</Button>
               </Link>
             ) : walk.attendingPeople.find(id => id === user.id) ? (
-              <div>
-                <Link
-                  to={{
-                    pathname: '/chat',
-                    state: {
-                      userToChatWith: walk.user,
-                      walkDateTime: walk.date + 'T' + walk.time
-                    }
-                  }}
-                >
-                  <Button>SÄG HEJ</Button>
-                </Link>
-                <Link to={{ pathname: '/feed/' }}>
-                  <Button onClick={() => leaveAWalk(user.id, walk.walkId)}>Avboka promenad</Button>
-                </Link>
-              </div>
+              <Link to={{ pathname: '/feed/' }}>
+                <Button onClick={() => leaveAWalk(user.id, walk.walkId)}>Avboka promenad</Button>
+              </Link>
             ) : (
               <Link to={{ pathname: '/matched/' + walk.walkId, state: { walk } }}>
                 <Button onClick={() => joinAWalk(user.id, walk.walkId)}>Följ med</Button>

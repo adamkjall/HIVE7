@@ -12,8 +12,9 @@ import H1 from 'components/UI/H1';
 import Alert from 'components/UI/Alert';
 import Input from 'components/UI/Input';
 
-import waves from '../../assets/icons/waves.svg';
+import waves from '../../assets/icons/graywaves.svg';
 import avatar from '../../assets/icons/profilepic.svg';
+import searchicon from '../../assets/icons/search.svg';
 
 import { StyledcChooseChatview } from './style';
 
@@ -38,12 +39,13 @@ const ChooseChatPageContent = ({ user, error, isLoading, conversations }) => {
             <H1>Meddelanden</H1>
             <img src={waves} alt="wave" className="waves" />
           </div>
-          <div className="search">
-            <Input
+          <div className="search-div">
+            <img src={searchicon} alt="sök" />
+            <input
               type="text"
               id="mess"
               placeholder="Sök"
-              inline
+              prop={searchicon}
               name="mess"
               value={input}
               onChange={event => setInput(event.target.value)}

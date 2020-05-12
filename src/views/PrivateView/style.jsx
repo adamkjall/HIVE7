@@ -7,15 +7,13 @@ import fontSizes from 'tokens/fontSizes.mjs';
 
 export const StyledPrivate = styled.div`
   .profilebox-1 {
-    display: grid;
-    grid-template-areas: 'avatar user' 'avatar  usersage' 'changepic .';
-    grid-auto-columns: 1fr 2fr;
-    grid-auto-rows: 0.8fr 0.2fr 0.2fr;
-    padding: ${spacing.tiny} ${spacing.small} 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: ${spacing.small};
     .avatar {
-      grid-area: avatar;
-      padding: 0.5rem;
-
+      width: 100%;
       img {
         width: 92px;
         height: 92px;
@@ -49,12 +47,8 @@ export const StyledPrivate = styled.div`
     }
   }
 
-  .waves {
-    width: 100%;
-  }
-
   .change-allinfo-wrapper {
-    padding: ${spacing.tiny} ${spacing.small};
+    padding: 0 ${spacing.small};
 
     .bold {
       font-size: ${fontSizes.m};

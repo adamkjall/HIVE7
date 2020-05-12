@@ -17,7 +17,6 @@ import Page from 'compositions/Page';
 import H3 from 'components/UI/H3';
 import calculateAge from '../../helpers/functions/calculateAge';
 import avatar from '../../assets/icons/profilepic.svg';
-import waves from '../../assets/icons/waves.svg';
 import UploadFile from '../../components/UploadFile';
 
 import { StyledPrivate } from './style';
@@ -56,14 +55,10 @@ const PrivateView = () => {
               Byt bild
             </span>
             <H3 className="user">
-              {user.displayName}
-              {user.username}
+              {user.displayName} &#9679; {calculateAge(user.dateOfBirth)} år{' '}
             </H3>
-            <span className="usersage">
-              {calculateAge(user.dateOfBirth)} år &#9679; {user.lvlOfSwedish}
-            </span>
+            <p className="usersage">{user.lvlOfSwedish}</p>
           </div>
-          <img src={waves} alt="wave" className="waves" />
           {toogle ? <UploadFile /> : null}
           <div className="change-allinfo-wrapper">
             <div>

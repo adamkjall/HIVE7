@@ -5,41 +5,88 @@ import colors from 'tokens/colors.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
 
 export const StyledWalkCard = styled.div`
-  margin: 1rem;
+  height: 10.5rem;
   background: ${colors.white};
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1.8fr;
 
-  .author-data {
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     text-align: center;
     background: ${colors.gray5};
-    padding: 1rem;
+    padding: 1rem 0.5rem 0;
+    font-size: ${fontSizes.s};
+
+    .matched {
+      .avatars {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+        margin-bottom: 0.3rem;
+        padding: 0 0.3rem;
+        &:first-child {
+          margin-right: 1rem;
+        }
+      }
+
+      .title {
+        display: block;
+        font-size: ${fontSizes.m};
+        line-height: 1.3rem;
+        margin-bottom: 0.3rem;
+      }
+    }
+
+    & > span {
+      padding: 0.2rem 0;
+    }
+
     .avatar {
       border-radius: 999rem;
-      width: 48px;
-      height: 48px;
-      padding: 2px;
-      border: 1px solid ${colors.greenDark};
+      width: 60px;
+      height: 60px;
+      padding: 3px;
+      margin-bottom: 0.2rem;
+
+      &.border {
+        border: 1px solid ${colors.greenDark};
+      }
+
+      &.small {
+        width: 50px;
+        height: 50px;
+      }
     }
+
     .author {
       text-align: center;
+      font-size: ${fontSizes.m};
+      margin-top: 0;
     }
-    .userinfo {
-      font-size: ${fontSizes.s};
-      .dott {
-        display: inline-block;
-        width: 5px;
-        height: 5px;
-        border-radius: 999rem;
-        background-color: ${colors.greenLight};
-        margin: 0 0.5rem;
-      }
+
+    .small-text {
+      font-size: ${fontSizes.microcopy};
+    }
+
+    .dott {
+      display: block;
+      flex-shrink: 1;
+      width: 4px;
+      height: 4px;
+      border-radius: 999rem;
+      background-color: ${colors.green};
     }
   }
 
   .walk-data {
+    font-size: ${fontSizes.s};
     padding: 1rem;
     display: grid;
     grid-template-columns: 30px 3fr;

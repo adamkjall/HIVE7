@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { firestore } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
+import { NavContext } from '../../contexts/NavContext';
 
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
@@ -10,11 +11,10 @@ import Feed from 'compositions/Feed';
 import Alert from 'components/UI/Alert';
 import ButtonCreate from 'components/ButtonCreate';
 
-import { StyledFeed, StyledNav } from './style';
+import { StyledFeedView, StyledNav, StyledFeedContainer } from './style';
 
 const FeedPageContent = ({ error, isLoading, walks, user }) => {
-  const [showFeed, setShowFeed] = useState(true);
-  const [showBooked, setShowBooked] = useState(false);
+  const { activeTab, setActiveTab } = useContext(NavContext);
 
   const sortWalks = walks =>
     walks.sort((a, b) => {
@@ -31,7 +31,17 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
     return isAttending || isUser;
   });
 
-  const availableWalks = sortedWalks.filter(walk => !bookedWalks.includes(walk));
+  const availableWalks = sortedWalks
+    .filter(walk => !bookedWalks.includes(walk))
+    .filter(walk => walk.attendingPeople.length === 0)
+    .filter(walk => {
+      const d = new Date();
+      const [timeNow, dateNow] = d.toISOString().split('T');
+      if (walk.date === dateNow) {
+        return walk.time >= timeNow;
+      }
+      return true;
+    });
 
   if (isLoading) {
     return <Loader fullScreen />;
@@ -39,32 +49,27 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
     return <Alert status="error"></Alert>;
   } else {
     return (
-      <React.Fragment>
-        <StyledFeed>
-          <StyledNav>
-            <button
-              onClick={() => (setShowFeed(true), setShowBooked(false))}
-              className={showFeed ? 'active' : null}
-            >
-              <p>
-                Tillgängliga
-                <br /> Promenader
-              </p>
-            </button>
-            <button
-              onClick={() => (setShowFeed(false), setShowBooked(true))}
-              className={showBooked ? 'active' : null}
-            >
-              <p>
-                Mina <br /> Promenader
-              </p>
-            </button>
-          </StyledNav>
-          <ButtonCreate />
-          {showFeed && <Feed walks={availableWalks} />}
-          {showBooked && <Feed walks={bookedWalks} />}
-        </StyledFeed>
-      </React.Fragment>
+      <StyledFeedView>
+        <StyledNav>
+          <button onClick={() => setActiveTab(0)} className={activeTab === 0 ? 'active' : null}>
+            <p>
+              Tillgängliga
+              <br /> Promenader
+            </p>
+          </button>
+          <button onClick={() => setActiveTab(1)} className={activeTab === 1 ? 'active' : null}>
+            <p>
+              Mina <br /> Promenader
+            </p>
+          </button>
+        </StyledNav>
+
+        <ButtonCreate />
+
+        <StyledFeedContainer>
+          {activeTab === 0 ? <Feed walks={availableWalks} /> : <Feed walks={bookedWalks} />}
+        </StyledFeedContainer>
+      </StyledFeedView>
     );
   }
 };
@@ -74,21 +79,27 @@ const FeedView = () => {
   const [error, setError] = useState(null);
   const [walks, setWalks] = useState([]);
   const { user } = useContext(AuthenticationContext);
+  console.log('walks', walks);
 
   useEffect(() => {
     setIsLoading(true);
-    const unsubscribe = firestore.collection('walks').onSnapshot(querySnapshot => {
-      const fetchedWalks = [];
-      querySnapshot.forEach(doc => {
-        const data = doc.data();
-        fetchedWalks.push({
-          ...data,
-          createdAt: data.createdAt.toDate()
+    const [date, time] = new Date().toISOString().split('T');
+
+    const unsubscribe = firestore
+      .collection('walks')
+      .where('date', '>=', date)
+      .onSnapshot(querySnapshot => {
+        const fetchedWalks = [];
+        querySnapshot.forEach(doc => {
+          const data = doc.data();
+          fetchedWalks.push({
+            ...data,
+            createdAt: data.createdAt.toDate()
+          });
         });
+        setWalks(fetchedWalks);
+        setIsLoading(false);
       });
-      setWalks(fetchedWalks);
-      setIsLoading(false);
-    });
 
     return () => unsubscribe();
   }, []);

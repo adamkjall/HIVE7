@@ -4,15 +4,24 @@ import colors from 'tokens/colors.mjs';
 import spacing from 'tokens/spacing.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
 
-export const StyledFeed = styled.div``;
+export const StyledFeedView = styled.div`
+  height: calc(100vh - 48px);
+`;
+
+export const StyledFeedContainer = styled.div`
+  height: calc(100% - 49px);
+`;
 
 export const StyledNav = styled.nav`
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
   background: ${colors.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   margin: 0;
+  height: 49px;
 
   button {
     display: flex;

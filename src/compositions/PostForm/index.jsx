@@ -211,7 +211,7 @@ const PostForm = () => {
                     type="radio"
                     id="30min"
                     name="timeduration"
-                    value="cirka 30 minuter"
+                    value="Ungefär 30 minuter"
                     onChange={event => onValueChange('timeduration', event.target.value)}
                   />
                   <span> cirka 30 minuter</span>
@@ -221,7 +221,7 @@ const PostForm = () => {
                     type="radio"
                     id="cirka 1 timme"
                     name="timeduration"
-                    value="cirka 1 timme"
+                    value="Ungefär 1 timme"
                     onChange={event => onValueChange('timeduration', event.target.value)}
                   />
                   <span> cirka 1 timme</span>
@@ -231,7 +231,7 @@ const PostForm = () => {
                     type="radio"
                     id="cirka 2 timme"
                     name="timeduration"
-                    value="cirka 2 timme"
+                    value="Ungefär 2 timme"
                     onChange={event => onValueChange('timeduration', event.target.value)}
                   />
                   <span> cirka 2 timme</span>

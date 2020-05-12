@@ -5,7 +5,8 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import chatactive from '../../assets/icons/chatactive.svg';
-import walking from '../../assets/icons/walking.svg';
+import walkingred from '../../assets/icons/walkerred.svg';
+import walkingwhite from '../../assets/icons/walkerwhite.svg';
 import chatunactive from '../../assets/icons/chatunactive.svg';
 import { StyledNavBottom, StyledNavLink, StyledMessageNotification } from './style';
 import avatar from '../../assets/icons/profilepic.svg';
@@ -59,7 +60,11 @@ const Nav = props => {
       </StyledNavLink>
       <StyledNavLink as={NavLink} to="/feed">
         <div className="promenad">
-          <img src={walking} alt="promenad" />
+          {location.pathname === '/feed' ? (
+            <img src={walkingwhite} alt="promenad" />
+          ) : (
+            <img src={walkingred} alt="promenad" />
+          )}
         </div>
       </StyledNavLink>
       <StyledNavLink as={NavLink} to="/private">

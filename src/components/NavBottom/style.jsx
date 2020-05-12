@@ -52,13 +52,13 @@ export const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
     border-radius: 999rem;
     height: 68px;
     width: 68px;
-    background: ${colors.gray4};
+    background: ${colors.white};
+    border: 2px ${colors.red} solid;
   }
 
   &.${activeClassName} {
     .promenad {
-      background: ${colors.gray5};
-      border: 2px ${colors.red} solid;
+      background: ${colors.red};
     }
     .avatar {
       padding: 1px;

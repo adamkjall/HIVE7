@@ -21,7 +21,7 @@ export const StyledNav = styled.nav`
   background: ${colors.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   margin: 0;
-  height: 49px;
+  height: 86px;
 
   button {
     display: flex;
@@ -33,21 +33,19 @@ export const StyledNav = styled.nav`
     text-decoration: none;
     text-align: center;
     cursor: pointer;
-
     border: none;
     background: none;
+
     p {
-      margin: 0 0 0.5rem 0;
+      margin: 1.2rem 0 0 0;
       font-size: ${fontSizes.s};
       color: ${colors.red};
     }
-    img {
-      align-self: center;
-      max-width: 30px;
-      margin: 0 0 ${spacing.tiny} 0;
-    }
     &.active {
       border-bottom: 2px ${colors.red} solid;
+    }
+    :focus {
+      outline: none;
     }
   }
 `;

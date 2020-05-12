@@ -17,7 +17,6 @@ import Page from 'compositions/Page';
 import H3 from 'components/UI/H3';
 import calculateAge from '../../helpers/functions/calculateAge';
 import avatar from '../../assets/icons/profilepic.svg';
-import waves from '../../assets/icons/waves.svg';
 import UploadFile from '../../components/UploadFile';
 
 import { StyledPrivate } from './style';
@@ -54,17 +53,14 @@ const PrivateView = () => {
               }}
             >
               Byt bild
-            </span>
+            </span>{' '}
+            {toogle ? <UploadFile /> : null}
             <H3 className="user">
-              {user.displayName}
-              {user.username}
+              {user.displayName} &#9679; {calculateAge(user.dateOfBirth)} år{' '}
             </H3>
-            <span className="usersage">
-              {calculateAge(user.dateOfBirth)} år &#9679; {user.lvlOfSwedish}
-            </span>
+            <p className="usersage">{user.lvlOfSwedish}</p>
           </div>
-          <img src={waves} alt="wave" className="waves" />
-          {toogle ? <UploadFile /> : null}
+
           <div className="change-allinfo-wrapper">
             <div>
               <p className="bold">E-postadress:</p>
@@ -78,10 +74,7 @@ const PrivateView = () => {
             <div>
               <p className="bold">Användarnamn:</p>
               <div className="changecontainer">
-                <span className="display">
-                  {user.displayName}
-                  {user.username}
-                </span>
+                <span className="display">{user.displayName}</span>
                 <button
                   aria-label="ändra namn"
                   className="change"
@@ -127,20 +120,16 @@ const PrivateView = () => {
                 </div>
               </div>
             </div>
-            <p className="bold">Logga ut:</p>
-            <div className="changecontainer">
+            <div className="logut-container">
               <button
-                className="change toleft"
+                className="logut"
                 aria-label="logga ut"
                 onClick={() => history.push('/logout')}
               >
-                Logga ut
+                <p className="bold">Logga ut</p>
               </button>
-            </div>
-            <p className="bold">Ta bort konto</p>
-            <div className="changecontainer">
-              <button className="change" onClick={handleDeleteAccount}>
-                Ta bort konto
+              <button className="logut delete" onClick={handleDeleteAccount}>
+                <p className="bold">Ta bort konto</p>
               </button>
             </div>
           </div>

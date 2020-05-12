@@ -32,25 +32,4 @@ export const StyledUpload = styled.div`
       cursor: pointer;
     }
   }
-  .placeholder-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    .placeholder {
-      max-width: 120px;
-      border-radius: 999rem;
-      padding-top: 10px;
-    }
-    button {
-      border: 1px solid ${colors.gray3};
-      background: ${colors.white};
-      padding: 9px;
-      font-size: ${fontSizes.m};
-    }
-  }
-  span {
-    padding: 0 2rem;
-  }
 `;

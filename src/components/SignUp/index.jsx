@@ -89,7 +89,6 @@ const SignUp = () => {
       });
 
       const uploadTask = await storage.ref(`profile-pictures/${user.id}`).put(file); // set unique path
-      console.log(uploadTask);
 
       await uploadTask.on(
         'state_changed',

@@ -44,5 +44,8 @@ export const StyledNav = styled.nav`
     &.active {
       border-bottom: 2px ${colors.red} solid;
     }
+    :focus {
+      outline: none;
+    }
   }
 `;

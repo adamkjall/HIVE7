@@ -11,9 +11,10 @@ export const StyledPrivate = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: ${spacing.small};
+    padding: 3.5rem ${spacing.small} 1rem;
     .avatar {
       width: 100%;
+      margin-bottom: 1rem;
       img {
         width: 92px;
         height: 92px;
@@ -24,7 +25,6 @@ export const StyledPrivate = styled.div`
       text-align: center;
       font-size: ${fontSizes.s};
       color: ${colors.gray2};
-      grid-area: changepic;
       cursor: pointer;
       color: ${colors.red};
       text-decoration: underline;
@@ -34,14 +34,12 @@ export const StyledPrivate = styled.div`
       background-color: ${colors.white};
     }
     .user {
-      grid-area: user;
       display: flex;
       align-items: flex-end;
       margin: ${spacing.tiny} 10px;
     }
     .usersage {
       margin: 0 10px;
-      grid-area: usersage;
       font-size: ${fontSizes.s};
       color: ${colors.gray2};
     }
@@ -51,13 +49,13 @@ export const StyledPrivate = styled.div`
     padding: 0 ${spacing.small};
 
     .bold {
-      font-size: ${fontSizes.m};
+      font-size: ${fontSizes.s};
       font-weight: bold;
     }
     .changecontainer {
       display: flex;
       justify-content: space-between;
-      border-bottom: 1px solid ${colors.gray4};
+      border-bottom: 1px solid ${colors.gray3};
       .display {
         font-size: ${fontSizes.s};
       }
@@ -69,12 +67,18 @@ export const StyledPrivate = styled.div`
         background-color: ${colors.white};
       }
     }
-    .container-logout {
-      height: 250px;
+    .logut-container {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: space-evenly;
+      .logut {
+        padding: 0;
+        font-size: ${fontSizes.s};
+        border: none;
+        background-color: none;
+        background-color: ${colors.white};
+      }
     }
   }
 `;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import ReactSwipe from 'react-swipe';
 
 import { firestore, signInWithGoogle } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
@@ -19,8 +20,15 @@ import blob4 from '../../assets/icons/blob4.svg';
 import { StyledContainer } from './style';
 
 const HomePageContent = ({ error, isLoading }) => {
-  const [pagenr, setPagenr] = useState(1);
-
+  var reactSwipeEl;
+  const startSlide = 0;
+  const count = 4;
+  const swipeOptions = {
+    startSlide: startSlide < count && startSlide >= 0 ? startSlide : 0,
+    disableScroll: false,
+    continuous: true,
+    stopPropagation: false
+  };
   if (isLoading) {
     return <Loader fullScreen />;
   } else if (error) {
@@ -29,10 +37,17 @@ const HomePageContent = ({ error, isLoading }) => {
     return (
       <React.Fragment>
         <StyledContainer>
-          {pagenr == '1' && (
+          <ReactSwipe
+            className="carousel"
+            swipeOptions={swipeOptions}
+            ref={el => (reactSwipeEl = el)}
+            ReactSwipe
+            childCount={count}
+          >
             <div className="content page1">
               <div className="blobb">
-                <img src={blob1} alt="text" />
+                <img src={blob1} alt="text" className="blobb-img" />
+
                 <div className="insindeblob">
                   <H1>Gå Mamma!</H1>
                   <p>
@@ -41,71 +56,83 @@ const HomePageContent = ({ error, isLoading }) => {
                   </p>
                 </div>
               </div>
+              <div />
               <Link to="/login" className="link-login">
                 <H2>Har du redan ett konto? Logga in</H2>
               </Link>
-              {pagenr == 1 && (
-                <div className="pagnation">
-                  <div className="reddot" />
-                  <div className="dott" onClick={() => setPagenr(2)} />
-                  <div className="dott" onClick={() => setPagenr(3)} />
-                  <div className="dott" onClick={() => setPagenr(4)} />
-                </div>
-              )}
+
+              <div className="pagnation">
+                <div className="reddot" />
+                <div className="dott" onClick={() => reactSwipeEl.next()} />
+                <div className="dott" onClick={() => reactSwipeEl.slide(2, 300)} />
+                <div className="dott" onClick={() => reactSwipeEl.slide(3, 300)} />
+              </div>
             </div>
-          )}
-          {pagenr == '2' && (
+
             <div className="content page2">
               <div className="blobb">
-                <img src={blob2} alt="text" />
-                <p className="insindeblob">text sida 2</p>
+                <img src={blob2} alt="text" className="blobb-img" />
+                <div className="insindeblob">
+                  <p>
+                    GÅ MAMA! hjälper dig att upptäcka nya platser tillsammans med andra mammor på
+                    promenader
+                  </p>
+                </div>
               </div>
+              <div />
               <Link to="/login" className="link-login">
                 <H2>Har du redan ett konto? Logga in</H2>
-              </Link>
-              {pagenr == 2 && (
-                <div className="pagnation">
-                  <div className="dott" onClick={() => setPagenr(1)} />
-                  <div className="reddot" />
-                  <div className="dott" onClick={() => setPagenr(3)} />
-                  <div className="dott" onClick={() => setPagenr(4)} />
-                </div>
-              )}
+              </Link>{' '}
+              <div className="pagnation">
+                <div className="dott" onClick={() => reactSwipeEl.prev()} />
+                <div className="reddot" />
+                <div className="dott" onClick={() => reactSwipeEl.slide(2, 300)} />
+                <div className="dott" onClick={() => reactSwipeEl.slide(3, 300)} />
+              </div>
             </div>
-          )}
-          {pagenr == '3' && (
             <div className="content page3">
               <div className="blobb">
-                <img src={blob3} alt="text" />
-                <p className="insindeblob">text sida 3</p>
+                <img src={blob3} alt="text" className="blobb-img" />
+                <div className="insindeblob">
+                  <p>
+                    Med GÅ MAMA! får du ett utbyte av språk, erfarenheter och kultur genom att
+                    promenera med mammor från hela världen
+                  </p>
+                </div>
               </div>
+              <div />
               <Link to="/login" className="link-login">
                 <H2>Har du redan ett konto? Logga in</H2>
               </Link>
-              {pagenr == 3 && (
-                <div className="pagnation">
-                  <div className="dott" onClick={() => setPagenr(1)} />
-                  <div className="dott" onClick={() => setPagenr(2)} />
-                  <div className="reddot" />
-                  <div className="dott" onClick={() => setPagenr(4)} />
-                </div>
-              )}
+
+              <div className="pagnation">
+                <div className="dott" onClick={() => reactSwipeEl.slide(0, 300)} />
+                <div className="dott" onClick={() => reactSwipeEl.prev()} />
+                <div className="reddot" />
+                <div className="dott" onClick={() => reactSwipeEl.next()} />
+              </div>
             </div>
-          )}
-          {pagenr == '4' && (
+
             <div className="content page4">
               <div className="blobb">
-                <img src={blob4} alt="text" />
-                <p className="insindeblob">Välkomen till GÅ MAMA!</p>
+                <img src={blob4} alt="text" className="blobb-img" />
+                <div className="insindeblob">
+                  <p>Hitta nya vänner med GÅ MAMA! Allt blir roligare tillsammans!</p>
+                </div>
               </div>
 
               <div className="buttons">
                 <Link to="/signup">
-                  <Button nature="default" stretch>
+                  <Button nature="default" stretch className="landingbutton">
                     Skapa Konto
                   </Button>
                 </Link>
-                <Button nature="default" stretch onClick={signInWithGoogle}>
+                <Button
+                  nature="default"
+                  stretch
+                  onClick={signInWithGoogle}
+                  className="landingbutton"
+                >
                   Logga in med Google
                 </Button>
               </div>
@@ -114,16 +141,14 @@ const HomePageContent = ({ error, isLoading }) => {
                 <H2>Har du redan ett konto? Logga in</H2>
               </Link>
 
-              {pagenr == 4 && (
-                <div className="pagnation">
-                  <div className="dott" onClick={() => setPagenr(1)} />
-                  <div className="dott" onClick={() => setPagenr(2)} />
-                  <div className="dott" onClick={() => setPagenr(3)} />
-                  <div className="reddot" />
-                </div>
-              )}
+              <div className="pagnation">
+                <div className="dott" onClick={() => reactSwipeEl.slide(0, 300)} />
+                <div className="dott" onClick={() => reactSwipeEl.slide(1, 300)} />
+                <div className="dott" onClick={() => reactSwipeEl.prev()} />
+                <div className="reddot" />
+              </div>
             </div>
-          )}
+          </ReactSwipe>
         </StyledContainer>
       </React.Fragment>
     );

@@ -14,7 +14,7 @@ export const StyledContainer = styled.div`
       height: 100vh;
       width: 100vw;
       display: grid;
-      background-size: contain;
+      background-size: cover;
       grid-template-rows: 6fr 2fr 0.8fr 1fr;
 
       &.page1 {

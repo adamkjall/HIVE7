@@ -7,8 +7,8 @@ export const StyledModal = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 90vw;
-  height: 90vh;
+  width: 100vw;
+  height: 100vh;
   z-index: 999;
   overflow: hidden;
   color: ${colors.black};

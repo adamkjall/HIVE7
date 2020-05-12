@@ -24,23 +24,59 @@ export const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding-top: ${spacing.tiny};
+  align-items: center;
   color: ${colors.black};
   text-decoration: none;
   text-align: center;
+  height: 48px;
   cursor: pointer;
+
   p {
     margin: 0 0 0.5rem 0;
     font-size: ${fontSizes.s};
   }
-  img {
+
+  .avatar {
     align-self: center;
-    max-width: 30px;
-    max-height: 30px;
-    margin: 0 0 ${spacing.tiny} 0;
+    max-width: 31px;
+    max-height: 31px;
   }
+
+  .promenad {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 999rem;
+    height: 68px;
+    width: 68px;
+    background: ${colors.white};
+    border: 2px ${colors.red} solid;
+  }
+
   &.${activeClassName} {
-    border-top: 1px ${colors.black} solid;
-    background: ${colors.red};
+    .promenad {
+      background: ${colors.red};
+    }
+    .avatar {
+      padding: 1px;
+      border: 2px ${colors.red} solid;
+    }
   }
+
+  .unactive-chat-container {
+    position: relative;
+  }
+`;
+
+export const StyledMessageNotification = styled.span`
+  position: absolute;
+  top: -5px;
+  right: -6px;
+  height: 13px;
+  width: 13px;
+  border-radius: 999rem;
+  background: ${colors.red};
 `;

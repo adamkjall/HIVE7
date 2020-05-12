@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "name": "HIVE7",
+  "name": "Gå Mamas!",
   "description": "",
   "icons": {
     "60": "/assets/firefox_app_60x60.png",
@@ -8,7 +8,7 @@
     "512": "/assets/firefox_app_512x512.png"
   },
   "developer": {
-    "name": "Humblebee",
-    "url": "https://www.humblebee.se"
+    "name": "Humblebee, Hive7",
+    "url": "https://www.hive.humblebee.se/"
   }
 }

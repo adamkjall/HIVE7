@@ -4,7 +4,6 @@ import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 
 import { StyledUpload } from './style';
 import { storage, updateUserProfileDocument } from '../../firebase/firebase.utils';
-import placeholder from '../../assets/images/placeholder.jpg';
 
 const UploadFile = () => {
   const [file, setFile] = useState('');
@@ -47,13 +46,7 @@ const UploadFile = () => {
             <input type="submit" value="Ladda upp" />
             <br />
           </div>
-          <span>{filename}</span>
         </form>
-        <div className="placeholder-wrapper">
-          <img className="placeholder" src={filename.url || placeholder} alt="uploaded" />
-          <br />
-          {file.length > 0 ? <button>Byt till denna profilbild</button> : 'exempel bild'}
-        </div>
       </StyledUpload>
     </Fragment>
   );

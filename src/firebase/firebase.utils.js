@@ -26,7 +26,7 @@ const provider = new firebase.auth.GoogleAuthProvider();
 
 provider.setCustomParameters({ prompt: 'select_account' });
 
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const signInWithGoogle = () => auth.signInWithRedirect(provider);
 
 // USER
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -106,7 +106,10 @@ export const getAllWalks = async () => {
 
   querySnapshot.forEach(doc => {
     const data = doc.data();
-    walks.push(data);
+    walks.push({
+      ...data,
+      createdAt: data.createdAt.toDate()
+    });
   });
 
   return walks;

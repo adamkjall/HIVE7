@@ -1,14 +1,43 @@
 import styled from 'styled-components';
 import colors from 'tokens/colors.mjs';
 import spacing from 'tokens/spacing.mjs';
+import fontSizes from 'tokens/fontSizes.mjs';
 
 export const StyledFeed = styled.div`
-  width: 100%;
+  height: 100%;
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  padding: 1rem;
+  overflow-y: scroll;
+
+  .walk-card:last-child {
+    margin-bottom: 5.5rem;
+  }
+`;
+
+export const StyledGreetingsBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  padding: 0 ${spacing.small};
+
+  .title {
+    color: ${colors.red};
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    letter-spacing: -1px;
+  }
+
+  .text {
+    font-size: ${fontSizes.s};
+    margin-bottom: 1rem;
+  }
+
+  .waves {
+    margin-bottom: 0.4rem;
+  }
 `;
-
-export const StyledPost = styled.div``;
-
-export const StyledPostList = styled.div``;

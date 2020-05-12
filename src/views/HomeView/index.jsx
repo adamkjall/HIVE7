@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import ReactSwipe from 'react-swipe';
 
 import { firestore, signInWithGoogle } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
@@ -7,14 +8,27 @@ import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
 import H1 from 'components/UI/H1';
-import H3 from 'components/UI/H3';
+import H2 from 'components/UI/H2';
 import Alert from 'components/UI/Alert';
 import Paragraph from 'components/UI/Paragraph';
 import Button from 'components/UI/Button';
+import blob1 from '../../assets/icons/blob1.svg';
+import blob2 from '../../assets/icons/blob2.svg';
+import blob3 from '../../assets/icons/blob3.svg';
+import blob4 from '../../assets/icons/blob4.svg';
 
 import { StyledContainer } from './style';
 
 const HomePageContent = ({ error, isLoading }) => {
+  var reactSwipeEl;
+  const startSlide = 0;
+  const count = 4;
+  const swipeOptions = {
+    startSlide: startSlide < count && startSlide >= 0 ? startSlide : 0,
+    disableScroll: false,
+    continuous: true,
+    stopPropagation: false
+  };
   if (isLoading) {
     return <Loader fullScreen />;
   } else if (error) {
@@ -23,24 +37,118 @@ const HomePageContent = ({ error, isLoading }) => {
     return (
       <React.Fragment>
         <StyledContainer>
-          <H1>Välkomen till GÅ MAMA!</H1>
-          <Paragraph>
-            En plats där mammor från olika bakgrunder kan mötas och tillsammans upptäcka nya
-            platser, stötta varandras språkutveckling och hitta nya vänskaper.
-          </Paragraph>
-          <div className="buttons">
-            <Link to="/signup">
-              <Button nature="default" stretch>
-                Skapa Konto
-              </Button>
-            </Link>
-            <Button nature="default" stretch onClick={signInWithGoogle}>
-              Logga in med Google
-            </Button>
-            <Link to="/login">
-              <H3>Har du redan ett konto? Logga in</H3>
-            </Link>
-          </div>
+          <ReactSwipe
+            className="carousel"
+            swipeOptions={swipeOptions}
+            ref={el => (reactSwipeEl = el)}
+            ReactSwipe
+            childCount={count}
+          >
+            <div className="content page1">
+              <div className="blobb">
+                <img src={blob1} alt="text" className="blobb-img" />
+
+                <div className="insindeblob">
+                  <H1>Gå Mamma!</H1>
+                  <p>
+                    Promenera med mammor från hela världen för att upptäcka, lära och utvecklas
+                    tillsammans.
+                  </p>
+                </div>
+              </div>
+              <div />
+              <Link to="/login" className="link-login">
+                <H2>Har du redan ett konto? Logga in</H2>
+              </Link>
+
+              <div className="pagnation">
+                <div className="reddot" />
+                <div className="dott" onClick={() => reactSwipeEl.next()} />
+                <div className="dott" onClick={() => reactSwipeEl.slide(2, 300)} />
+                <div className="dott" onClick={() => reactSwipeEl.slide(3, 300)} />
+              </div>
+            </div>
+
+            <div className="content page2">
+              <div className="blobb">
+                <img src={blob2} alt="text" className="blobb-img" />
+                <div className="insindeblob">
+                  <p>
+                    GÅ MAMA! hjälper dig att upptäcka nya platser tillsammans med andra mammor på
+                    promenader
+                  </p>
+                </div>
+              </div>
+              <div />
+              <Link to="/login" className="link-login">
+                <H2>Har du redan ett konto? Logga in</H2>
+              </Link>{' '}
+              <div className="pagnation">
+                <div className="dott" onClick={() => reactSwipeEl.prev()} />
+                <div className="reddot" />
+                <div className="dott" onClick={() => reactSwipeEl.slide(2, 300)} />
+                <div className="dott" onClick={() => reactSwipeEl.slide(3, 300)} />
+              </div>
+            </div>
+            <div className="content page3">
+              <div className="blobb">
+                <img src={blob3} alt="text" className="blobb-img" />
+                <div className="insindeblob">
+                  <p>
+                    Med GÅ MAMA! får du ett utbyte av språk, erfarenheter och kultur genom att
+                    promenera med mammor från hela världen
+                  </p>
+                </div>
+              </div>
+              <div />
+              <Link to="/login" className="link-login">
+                <H2>Har du redan ett konto? Logga in</H2>
+              </Link>
+
+              <div className="pagnation">
+                <div className="dott" onClick={() => reactSwipeEl.slide(0, 300)} />
+                <div className="dott" onClick={() => reactSwipeEl.prev()} />
+                <div className="reddot" />
+                <div className="dott" onClick={() => reactSwipeEl.next()} />
+              </div>
+            </div>
+
+            <div className="content page4">
+              <div className="blobb">
+                <img src={blob4} alt="text" className="blobb-img" />
+                <div className="insindeblob">
+                  <p>Hitta nya vänner med GÅ MAMA! Allt blir roligare tillsammans!</p>
+                </div>
+              </div>
+
+              <div className="buttons">
+                <Link to="/signup">
+                  <Button nature="default" stretch className="landingbutton">
+                    Skapa Konto
+                  </Button>
+                </Link>
+                <Button
+                  nature="default"
+                  stretch
+                  onClick={signInWithGoogle}
+                  className="landingbutton"
+                >
+                  Logga in med Google
+                </Button>
+              </div>
+
+              <Link to="/login" className="link-login">
+                <H2>Har du redan ett konto? Logga in</H2>
+              </Link>
+
+              <div className="pagnation">
+                <div className="dott" onClick={() => reactSwipeEl.slide(0, 300)} />
+                <div className="dott" onClick={() => reactSwipeEl.slide(1, 300)} />
+                <div className="dott" onClick={() => reactSwipeEl.prev()} />
+                <div className="reddot" />
+              </div>
+            </div>
+          </ReactSwipe>
         </StyledContainer>
       </React.Fragment>
     );
@@ -115,8 +223,8 @@ const HomeView = () => {
     <Page
       metadata={{
         // Those metadata are optional: they will be injected in the head thanks to react-helmet
-        description: 'This is our home page',
-        title: 'Home page',
+        description: 'This is our Gå Mama',
+        title: 'Gå Mama',
         lang: 'en'
         // image: {
         //   alt: 'Some image',

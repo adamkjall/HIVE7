@@ -12,15 +12,20 @@ import H1 from 'components/UI/H1';
 import Alert from 'components/UI/Alert';
 import Input from 'components/UI/Input';
 
-import NavBottom from 'components/NavBottom';
-
-import waves from '../../assets/icons/waves.svg';
+import waves from '../../assets/icons/graywaves.svg';
 import avatar from '../../assets/icons/profilepic.svg';
+import searchicon from '../../assets/icons/search.svg';
 
 import { StyledcChooseChatview } from './style';
 
 const ChooseChatPageContent = ({ user, error, isLoading, conversations }) => {
   const [input, setInput] = useState('');
+
+  const filterConversations = conversations => {
+    return conversations.filter(conversation =>
+      conversation.userToChatWith.displayName.toLowerCase().includes(input.trim().toLowerCase())
+    );
+  };
 
   if (isLoading) {
     return <Loader fullScreen />;
@@ -30,24 +35,24 @@ const ChooseChatPageContent = ({ user, error, isLoading, conversations }) => {
     return (
       <React.Fragment>
         <StyledcChooseChatview>
-          <NavBottom />
           <div className="message-head-container">
             <H1>Meddelanden</H1>
             <img src={waves} alt="wave" className="waves" />
           </div>
-          <div className="search">
-            <Input
+          <div className="search-div">
+            <img src={searchicon} alt="sök" />
+            <input
               type="text"
               id="mess"
               placeholder="Sök"
-              inline
+              prop={searchicon}
               name="mess"
               value={input}
               onChange={event => setInput(event.target.value)}
             />
           </div>
           <div className="list-mess">
-            {conversations.map(conversation => {
+            {filterConversations(conversations).map(conversation => {
               const isMessageViewed = conversation.lastMessage.userToNotify !== user.id;
               return (
                 <Link
@@ -126,7 +131,7 @@ const ChooseChatView = () => {
   }, [user]);
 
   return (
-    <Page>
+    <Page metadata={{ title: 'Chat' }} displayNavBottom>
       <ChooseChatPageContent
         user={user}
         conversations={conversations}

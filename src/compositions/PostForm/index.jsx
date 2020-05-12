@@ -1,16 +1,18 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+// import { format, distanceInWordsStrict } from 'date-fns';
+import format from 'date-fns/format';
+import formatDistanceStrict from 'date-fns/formatDistanceStrict';
+import svLocale from 'date-fns/locale/sv';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import { createWalkDocument } from '../../firebase/firebase.utils';
 
 import H1 from 'components/UI/H1';
 import BackButton from 'components/BackButton';
-import Select from 'components/UI/Select';
 import Button from 'components/UI/Button';
 import CheckBox from '../../components/UI/Checkbox';
 import Input from 'components/UI/Input';
-import Textarea from 'components/UI/Textarea';
 import chat from '../../assets/icons/chat.svg';
 import family from '../../assets/icons/family.svg';
 import friends from '../../assets/icons/friends.svg';
@@ -19,8 +21,7 @@ import pets from '../../assets/icons/pets.svg';
 import bringPetsvg from '../../assets/icons/bringPets.svg';
 import walking from '../../assets/icons/walking.svg';
 import time from '../../assets/icons/time.svg';
-import calender from '../../assets/icons/calender.svg';
-import waves from '../../assets/icons/waves.svg';
+import gendericon from '../../assets/icons/gender-icon.svg';
 import graywaves from '../../assets/icons/graywaves.svg';
 
 import { StyledPostForm } from './style';
@@ -34,21 +35,9 @@ const PostForm = () => {
   const [toogleWhere, setToogleWhere] = useState(false);
   const [toogleDuration, setToogleDuration] = useState(false);
 
-  const handleToogleWhen = e => {
-    setToogleWhen(!toogleWhen);
-  };
-
-  const handleToogleWhere = e => {
-    setToogleWhere(!toogleWhere);
-  };
-
-  const handleToogleDuration = e => {
-    setToogleDuration(!toogleDuration);
-  };
-
   const [inputs, setInputs] = useState({
-    date: '',
-    time: '',
+    date: format(new Date(), 'yyyy-MM-dd'),
+    time: format(new Date(), 'HH:mm'),
     where: '',
     timeduration: '',
     allowFriends: 'false',
@@ -108,49 +97,85 @@ const PostForm = () => {
       });
 
       history.push('/feed');
-    } else console.log('Något fick fel, förök igen');
+    } else console.log('Något fick fel, försök igen');
+  };
+
+  const createDateTimeString = () => {
+    const [year_now, month_now, day_now] = format(new Date(), 'yyyy-MM-dd').split('-');
+    const [year, month, day] = inputs.date.split('-');
+
+    const distanceString = formatDistanceStrict(
+      new Date(year_now, month_now - 1, day_now),
+      new Date(year, month - 1, day),
+      { unit: 'day' }
+    );
+
+    const distanceInDays = Number(distanceString.split(' ')[0]);
+    const todayOrTomorrowString =
+      distanceInDays === 0 ? 'Idag, ' : distanceInDays === 1 ? 'Imorgon, ' : '';
+
+    return (
+      todayOrTomorrowString +
+      format(new Date(year, month - 1, day), 'EEEE d MMMM', { locale: svLocale }) +
+      ', ' +
+      inputs.time
+    );
   };
 
   return (
     <StyledPostForm>
       <form name="post-form" onSubmit={onSubmit}>
-        {' '}
         <div className="headcontainer">
           <BackButton />
           <H1>Ny promenad</H1>
         </div>
-        <img src={waves} className="waves green" alt="wave" />
         <img src={graywaves} className="waves gray" alt="wave" />
         <div className="create-new-container">
           <div className="form-box1">
-            <label className="when" onClick={handleToogleWhen}>
+            <label
+              htmlFor="time-and-date"
+              className="when form-box1-div"
+              onClick={() => setToogleWhen(!toogleWhen)}
+              onKeyDown={() => setToogleWhen(!toogleWhen)}
+              role="button"
+              tabIndex="0"
+            >
               <img src={time} alt="time" />
-              <span>När vill du gå?</span>
-            </label>
-            {toogleWhen ? (
-              <div>
+              <span className="container">
+                {toogleWhen ? (
+                  <span className="title">{createDateTimeString()}</span>
+                ) : (
+                  <span className="title">När vill du gå?</span>
+                )}
                 <input
-                  type="time"
+                  type="datetime-local"
                   name="time"
-                  id="time"
-                  value={inputs.time}
-                  onChange={event => onValueChange('time', event.target.value)}
+                  id="time-and-date"
+                  min={format(new Date(), "yyyy-MM-dd'T'HH:mm")}
+                  value={inputs.date + 'T' + inputs.time}
+                  onChange={event => {
+                    const [date, time] = event.target.value.split('T');
+                    onValueChange('time', time);
+                    onValueChange('date', date);
+                    setToogleWhen(true);
+                  }}
                 />
-                <img src={calender} alt="calender" />
-                <input
-                  type="date"
-                  name="date"
-                  id="date"
-                  value={inputs.date}
-                  onChange={event => onValueChange('date', event.target.value)}
-                />
-              </div>
-            ) : null}
-
-            <label className="where" onClick={handleToogleWhere}>
+              </span>
+            </label>
+            <div
+              className="where form-box1-div"
+              onClick={() => {
+                setToogleWhere(!toogleWhere);
+              }}
+              role="button"
+              tabIndex="-1"
+              onKeyDown={() => {
+                setToogleWhere(!toogleWhere);
+              }}
+            >
               <img src={location} alt="where" />
               <span>Var vill du gå?</span>
-            </label>
+            </div>
             {toogleWhere ? (
               <div>
                 <Input
@@ -161,23 +186,57 @@ const PostForm = () => {
                   value={inputs.where}
                   onChange={event => onValueChange('where', event.target.value)}
                 />
-
                 <p className="red">{wheremsg}</p>
               </div>
             ) : null}
-
-            <label className="duration" htmlFor="timeduration" onClick={handleToogleDuration}>
+            <div
+              className="duration form-box1-div"
+              onClick={() => {
+                setToogleDuration(!toogleDuration);
+              }}
+              role="button"
+              tabIndex="-2"
+              onKeyDown={() => {
+                setToogleDuration(!toogleDuration);
+              }}
+            >
               <img src={walking} alt="walk" />
               <span>Hur länge tänker du gå?</span>
-            </label>
+            </div>
+
             {toogleDuration ? (
-              <input
-                type="number"
-                id="timeduration"
-                name="timeduration"
-                value={inputs.timeduration}
-                onChange={event => onValueChange('timeduration', event.target.value)}
-              />
+              <div className="timeduration">
+                <label htmlFor="30min">
+                  <input
+                    type="radio"
+                    id="30min"
+                    name="timeduration"
+                    value="Ungefär 30 minuter"
+                    onChange={event => onValueChange('timeduration', event.target.value)}
+                  />
+                  <span> cirka 30 minuter</span>
+                </label>
+                <label htmlFor="cirka 1 timme">
+                  <input
+                    type="radio"
+                    id="cirka 1 timme"
+                    name="timeduration"
+                    value="Ungefär 1 timme"
+                    onChange={event => onValueChange('timeduration', event.target.value)}
+                  />
+                  <span> cirka 1 timme</span>
+                </label>
+                <label htmlFor="cirka 2 timme">
+                  <input
+                    type="radio"
+                    id="cirka 2 timme"
+                    name="timeduration"
+                    value="Ungefär 2 timme"
+                    onChange={event => onValueChange('timeduration', event.target.value)}
+                  />
+                  <span> cirka 2 timme</span>
+                </label>
+              </div>
             ) : null}
           </div>
           <div className="form-box2">
@@ -205,25 +264,20 @@ const PostForm = () => {
               label="Kommer du ta med husdjur?"
               clickHandler={event => onValueChange('bringPets', event.target.value)}
             />
-            <div>
-              <Select
-                id="filterGender"
-                name="filterGender"
-                label="Vem vill du gå med?"
-                value={inputs.filterGender}
-                onChange={event => onValueChange('filterGender', event.target.value)}
-              >
-                <option value="all">Alla</option>
-                <option value="women">Bara kvinnor</option>
-              </Select>
-            </div>
+            <CheckBox
+              icon={gendericon}
+              id="filterGender"
+              label="Bara promenera med kvinnor?"
+              clickHandler={event => onValueChange('filterGender', event.target.value)}
+            />
           </div>
           <div className="form-box3">
             <img src={chat} alt="chat" />
-            <Textarea
+            <textarea
+              className="greeting"
+              type="text"
               id="introtext"
               name="introtext"
-              label="Hälsning"
               value={inputs.introtext}
               placeholder="Skriv en hälsning"
               onChange={event => onValueChange('introtext', event.target.value)}
@@ -231,7 +285,7 @@ const PostForm = () => {
 
             <p className="red">{msg}</p>
           </div>
-          <Button nature="primary" type="submit">
+          <Button nature="primary" type="submit" className="button-create">
             Skapa{' '}
           </Button>
         </div>

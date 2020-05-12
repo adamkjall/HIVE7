@@ -5,7 +5,7 @@ import spacing from 'tokens/spacing.mjs';
 export const StyledContentWrapper = styled.div`
   padding: 0;
 
-  @media (min-width: 1440px) {
+  @media (min-width: 900px) {
     width: 100%;
     max-width: 414px;
     margin: 0 auto;

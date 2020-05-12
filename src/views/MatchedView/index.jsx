@@ -1,40 +1,40 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
 import Page from 'compositions/Page';
-import Loader from 'compositions/Loader';
 import H1 from 'components/UI/H1';
 import Button from 'components/UI/Button';
-import Alert from 'components/UI/Alert';
 
-import location from '../../assets/icons/location.svg';
 import avatar from '../../assets/icons/profilepic.svg';
-import clock from '../../assets/icons/time.svg';
+import cross from '../../assets/icons/cross.svg';
+import shortWaves from '../../assets/icons/short-waves.svg';
+import buttonMessage from '../../assets/icons/button-message.svg';
 
 import { StyledMatchedwalk } from './style';
 
-const MatchedPageContent = ({ error, isLoading, walk }) => {
+const MatchedPageContent = ({ walk }) => {
   const { user } = useContext(AuthenticationContext);
 
-  if (isLoading) {
-    return <Loader fullScreen />;
-  } else if (error) {
-    return <Alert status="error"></Alert>;
-  } else {
-    return (
-      <React.Fragment>
-        <StyledMatchedwalk>
-          <H1>Full fart framåt!</H1>
+  return (
+    <React.Fragment>
+      <StyledMatchedwalk>
+        <Link className="close-btn" to="/feed">
+          <img src={cross} alt="close window" />
+        </Link>
+
+        <div className="content-container">
+          <H1 className="title">GÅ MAMAS!</H1>
           <p className="gray">
-            Du och
+            Du och{' '}
             <span>
               {walk.user.displayName}
               {walk.user.username}
-            </span>
+            </span>{' '}
             ska gå på promenad tillsammans.
           </p>
+          <img src={shortWaves} />
           <div className="matched-avatars">
             <Link to={{ pathname: '/profile/' + walk.author, state: { walk } }}>
               <img className="avatar" src={walk.user.photoUrl || avatar} alt="avatar" />
@@ -44,47 +44,32 @@ const MatchedPageContent = ({ error, isLoading, walk }) => {
               <img className="avatar" src={user.photoUrl || avatar} alt="avatar" />
             </Link>
           </div>
-          <hr />
-          <div className="date-time">
-            <img src={clock} alt="time" />
-            <span>
-              {walk.date}, {walk.time}
-            </span>
-            <hr />
-            <img src={location} alt="where" />
-            <span>{walk.where}</span>
-          </div>
-          <div className="wrapp-button">
-            <Link
-              to={{
-                pathname: '/chat',
-                state: {
-                  userToChatWith: walk.user
-                }
-              }}
-            >
-              <Button>Säj Hej</Button>
-            </Link>
-          </div>
-        </StyledMatchedwalk>
-      </React.Fragment>
-    );
-  }
+        </div>
+
+        <Link
+          className="hello-btn"
+          to={{
+            pathname: '/chat',
+            state: {
+              userToChatWith: walk.user,
+              walkDateTime: walk.date + 'T' + walk.time
+            }
+          }}
+        >
+          <Button>
+            <img className="icon" src={buttonMessage} />
+            <span>SÄG HEJ</span>
+          </Button>
+        </Link>
+      </StyledMatchedwalk>
+    </React.Fragment>
+  );
 };
 
 const MatchedView = walk => {
-  const [data, setData] = useState(undefined);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
   return (
     <Page>
-      <MatchedPageContent
-        walk={walk.location.state.walk}
-        data={data}
-        error={error}
-        isLoading={isLoading}
-      />
+      <MatchedPageContent walk={walk.location.state.walk} />
     </Page>
   );
 };

@@ -8,8 +8,7 @@ import location from '../../assets/icons/location.svg';
 import avatar from '../../assets/icons/profilepic.svg';
 import walking from '../../assets/icons/walking.svg';
 import clock from '../../assets/icons/time.svg';
-import waves from '../../assets/icons/waves.png';
-import cross from '../../assets/icons/cross.png';
+import cross from '../../assets/icons/cross.svg';
 
 import {
   StyledModal,
@@ -35,7 +34,6 @@ const NotificationModal = ({ notification, removeNotification }) => {
     getUserData(notification.userId).then(data => setUserData(data));
     getWalk(notification.walkId).then(data => setWalkData(data));
   }, [notification]);
-  console.log('walkData', walkData);
 
   return (
     <StyledModal>

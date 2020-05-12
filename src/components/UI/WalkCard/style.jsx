@@ -5,63 +5,90 @@ import colors from 'tokens/colors.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
 
 export const StyledWalkCard = styled.div`
-  padding: 1rem;
-  margin: ${spacing.small};
+  height: 10.5rem;
   background: ${colors.white};
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1.8fr;
 
-  .author-data {
-    display: grid;
-    grid-template-areas: 'avatar author' 'avatar userinfo';
-    grid-auto-columns: 1fr 3fr;
-    grid-auto-rows: 1.4fr 1fr;
-    color: ${colors.black};
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
-    border-bottom: 1.5px solid ${colors.gray4};
-    .avatar {
-      grid-area: avatar;
-      border-radius: 999rem;
-      width: 69px;
-      padding: 0.5rem 0.8rem;
-    }
-    .author {
-      grid-area: author;
-      padding-top: 0.5rem;
-      margin: 0;
-    }
-    .userinfo {
-      grid-area: userinfo;
-      font-size: ${fontSizes.s};
-      .dott {
-        display: inline-block;
-        width: 5px;
-        height: 5px;
-        border-radius: 999rem;
-        background-color: ${colors.greenLight};
-        margin: 0 0.5rem;
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+    background: ${colors.gray5};
+    padding: 1rem 0.5rem 0;
+    font-size: ${fontSizes.s};
+
+    .matched {
+      .avatars {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+        margin-bottom: 0.3rem;
+        padding: 0 0.3rem;
+        &:first-child {
+          margin-right: 1rem;
+        }
       }
+
+      .title {
+        display: block;
+        font-size: ${fontSizes.m};
+        line-height: 1.3rem;
+        margin-bottom: 0.3rem;
+      }
+    }
+
+    & > span {
+      padding: 0.2rem 0;
+    }
+
+    .avatar {
+      border-radius: 999rem;
+      width: 60px;
+      height: 60px;
+      padding: 3px;
+      margin-bottom: 0.2rem;
+
+      &.border {
+        border: 1px solid ${colors.greenDark};
+      }
+
+      &.small {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    .author {
+      text-align: center;
+      font-size: ${fontSizes.m};
+      margin-top: 0;
+    }
+
+    .small-text {
+      font-size: ${fontSizes.microcopy};
+    }
+
+    .dott {
+      display: block;
+      flex-shrink: 1;
+      width: 4px;
+      height: 4px;
+      border-radius: 999rem;
+      background-color: ${colors.green};
     }
   }
 
   .walk-data {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    color: ${colors.gray2};
     font-size: ${fontSizes.s};
-    div {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0 0.5rem 0 0.5rem;
-      img {
-        padding-bottom: 0.5rem;
-      }
-    }
-    .duration {
-      border-left: 1.5px solid ${colors.gray4};
-      border-right: 1.5px solid ${colors.gray4};
-    }
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 30px 3fr;
   }
 `;

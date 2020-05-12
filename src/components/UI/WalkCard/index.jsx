@@ -1,49 +1,90 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 import calculateAge from '../../../helpers/functions/calculateAge.jsx';
+import getDateTimeString from '../../../helpers/functions/getDateTimeString.jsx';
+import { getUserData } from '../../../firebase/firebase.utils';
+
 import H1 from '../H1';
 
 import location from '../../../assets/icons/location.svg';
 import avatar from '../../../assets/icons/profilepic.svg';
 import walking from '../../../assets/icons/walking.svg';
 import clock from '../../../assets/icons/time.svg';
+import citat from '../../../assets/icons/quote.svg';
 
 import { StyledWalkCard } from './style';
 
 const WalkCard = ({ walk }) => {
+  const [userToWalkWith, setUserToWalkWith] = useState(undefined);
+
+  useEffect(() => {
+    if (walk.attendingPeople.length > 0) {
+      const otherUserID = walk.attendingPeople[0];
+      getUserData(otherUserID).then(user => {
+        if (user) setUserToWalkWith(user);
+      });
+    }
+  }, []);
+
+  const formatDateString = () => {
+    const dateTimeString = getDateTimeString(walk.date, walk.time);
+    const dateStringPrepend = dateTimeString.split(',')[0];
+
+    if (['Idag', 'Imorgon'].includes(dateStringPrepend)) {
+      return dateStringPrepend + ', ' + walk.time;
+    } else {
+      return dateTimeString
+        .split(' ')
+        .slice(1, 4)
+        .join(' ');
+    }
+  };
+
+  const sidebarContent = !walk.attendingPeople.length ? (
+    <>
+      <H1 className="author">{walk.user.displayName.split(' ')[0]}</H1>
+      <img className="avatar border" src={walk.user.photoUrl || avatar} alt="avatar" />
+      <span>{calculateAge(walk.user.dateOfBirth)} år</span>
+      <div className="dott" />
+      <span className="small-text">{walk.user.lvlOfSwedish}</span>
+    </>
+  ) : (
+    <div className="matched">
+      <div className="avatars">
+        <img className="avatar small border" src={walk.user.photoUrl || avatar} alt="avatar" />
+        <img
+          className="avatar small"
+          src={(userToWalkWith && userToWalkWith.photoUrl) || avatar}
+          alt="avatar"
+        />
+      </div>
+      <span className="title">
+        Du & <br /> {userToWalkWith && userToWalkWith.displayName.split(' ')[0]}
+      </span>
+      <span className="small-text">ska GÅ tillsammans!</span>
+    </div>
+  );
+
   return (
-    <StyledWalkCard>
-      <Link to={{ pathname: '/selected/' + walk.walkId }}>
-        <div className="author-data">
-          <img className="avatar" src={walk.user.photoUrl || avatar} alt="avatar" />
-          <H1 className="author">
-            {walk.user.displayName} {walk.user.username}
-          </H1>
-          <div className="userinfo">
-            <span>{calculateAge(walk.user.dateOfBirth)} år</span>
-            <div className="dott" />
-            <span>{walk.user.lvlOfSwedish}</span>
-          </div>
-        </div>
+    <Link to={{ pathname: '/selected/' + walk.walkId }} className="walk-card">
+      <StyledWalkCard>
+        <div className="sidebar">{sidebarContent}</div>
         <div className="walk-data">
-          <div className="date">
-            <img src={clock} alt="time" />
-            <span>
-              {walk.date} {walk.time}
-            </span>
-          </div>
-          <div className="duration">
-            <img src={walking} alt="walk" />
-            <span>{walk.timeduration} timmar</span>
-          </div>
-          <div className="where">
-            <img src={location} alt="where" />
-            <span>{walk.where}</span>
-          </div>
+          <img src={clock} alt="time" />
+          <span>{formatDateString()}</span>
+          <img src={walking} alt="walk" />
+          <span>{walk.timeduration}</span>
+          <img src={location} alt="where" />
+          <span>{walk.where}</span>
+          <img src={citat} alt="where" />
+          <span>
+            {walk.introtext.length > 40 ? walk.introtext.slice(0, 40) + '...' : walk.introtext}
+          </span>
         </div>
-      </Link>
-    </StyledWalkCard>
+      </StyledWalkCard>
+    </Link>
   );
 };
 
@@ -55,7 +96,7 @@ WalkCard.propTypes = {
     createdAt: PropTypes.instanceOf(Date),
     date: PropTypes.string,
     filterGender: PropTypes.string,
-    introText: PropTypes.string,
+    introtext: PropTypes.string,
     walkId: PropTypes.string,
     timeduration: PropTypes.string,
     time: PropTypes.string,

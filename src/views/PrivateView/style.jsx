@@ -7,15 +7,14 @@ import fontSizes from 'tokens/fontSizes.mjs';
 
 export const StyledPrivate = styled.div`
   .profilebox-1 {
-    display: grid;
-    grid-template-areas: 'avatar user' 'avatar  usersage' 'changepic .';
-    grid-auto-columns: 1fr 2fr;
-    grid-auto-rows: 0.8fr 0.2fr 0.2fr;
-    padding: ${spacing.tiny} ${spacing.small} 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 3.5rem ${spacing.small} 1rem;
     .avatar {
-      grid-area: avatar;
-      padding: 0.5rem;
-
+      width: 100%;
+      margin-bottom: 1rem;
       img {
         width: 92px;
         height: 92px;
@@ -26,7 +25,6 @@ export const StyledPrivate = styled.div`
       text-align: center;
       font-size: ${fontSizes.s};
       color: ${colors.gray2};
-      grid-area: changepic;
       cursor: pointer;
       color: ${colors.red};
       text-decoration: underline;
@@ -36,34 +34,28 @@ export const StyledPrivate = styled.div`
       background-color: ${colors.white};
     }
     .user {
-      grid-area: user;
       display: flex;
       align-items: flex-end;
       margin: ${spacing.tiny} 10px;
     }
     .usersage {
       margin: 0 10px;
-      grid-area: usersage;
       font-size: ${fontSizes.s};
       color: ${colors.gray2};
     }
   }
 
-  .waves {
-    width: 100%;
-  }
-
   .change-allinfo-wrapper {
-    padding: ${spacing.tiny} ${spacing.small};
+    padding: 0 ${spacing.small};
 
     .bold {
-      font-size: ${fontSizes.m};
+      font-size: ${fontSizes.s};
       font-weight: bold;
     }
     .changecontainer {
       display: flex;
       justify-content: space-between;
-      border-bottom: 1px solid ${colors.gray4};
+      border-bottom: 1px solid ${colors.gray3};
       .display {
         font-size: ${fontSizes.s};
       }
@@ -75,12 +67,18 @@ export const StyledPrivate = styled.div`
         background-color: ${colors.white};
       }
     }
-    .container-logout {
-      height: 250px;
+    .logut-container {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: space-evenly;
+      .logut {
+        padding: 0;
+        font-size: ${fontSizes.s};
+        border: none;
+        background-color: none;
+        background-color: ${colors.white};
+      }
     }
   }
 `;

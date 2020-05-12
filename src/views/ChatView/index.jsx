@@ -1,24 +1,45 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { format, formatDistance, compareAsc, parse, toDate } from 'date-fns';
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
+import format from 'date-fns/format';
+import formatDistanceStrict from 'date-fns/formatDistanceStrict';
+import svLocale from 'date-fns/locale/sv';
 
+import getDateTimeString from '../../helpers/functions/getDateTimeString';
 import { firestore } from '../../firebase/firebase.utils';
-
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
 import Page from 'compositions/Page';
-import Loader from 'compositions/Loader';
-import Alert from 'components/UI/Alert';
-import Input from 'components/UI/Input';
 import avatar from '../../assets/icons/profilepic.svg';
 import back from '../../assets/icons/back.svg';
-import waves from '../../assets/icons/waves.svg';
+import waves from '../../assets/icons/graywaves.svg';
 import sendMessageIcon from '../../assets/icons/sendmess.svg';
 
-import { StyledChatview } from './style';
+import {
+  StyledChatview,
+  StyledMessage,
+  StyledHeader,
+  StyledMessageList,
+  StyledFirstPresentation
+} from './style';
 
-const ChatPageContent = ({ error, isLoading, messages, sendMessage, userToChatWith }) => {
+const ChatPageContent = ({ messages, sendMessage, user, userToChatWith, walkDateTime }) => {
   const [input, setInput] = useState('');
+  const messagesEndRef = useRef(null);
+  const history = useHistory();
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const handleKeyDown = e => {
+    if (e.key === 'Enter') submitMessage();
+  };
+
+  const scrollToBottom = () => {
+    if (messagesEndRef) {
+      messagesEndRef.current.scrollIntoView({ behaviour: 'smooth' });
+    }
+  };
 
   const submitMessage = () => {
     if (input.length > 0) {
@@ -27,62 +48,73 @@ const ChatPageContent = ({ error, isLoading, messages, sendMessage, userToChatWi
     } else return;
   };
 
-  if (isLoading) {
-    return <Loader fullScreen />;
-  } else if (error) {
-    return <Alert status="error"></Alert>;
-  } else {
-    return (
-      <React.Fragment>
-        <StyledChatview>
-          <div className="heigth-countainer">
-            <div className="head-chat-info">
-              <Link to="/feed" className="backbutton">
-                <img src={back} alt="back" />
-              </Link>
-              <img className="avatar" src={userToChatWith.photoUrl || avatar} alt="avatar" />
-              {userToChatWith.displayName}
-              <img src={waves} alt="waves" className="waves" />
-            </div>
-            {messages &&
+  return (
+    <React.Fragment>
+      <StyledChatview>
+        <StyledHeader>
+          <div className="head-chat-info">
+            <span className="backbutton">
+              <img onClick={() => history.goBack()} src={back} alt="back" />
+            </span>
+            <img className="avatar" src={userToChatWith.photoUrl || avatar} alt="avatar" />
+            {userToChatWith.displayName.split(' ')[0]}
+          </div>
+          <img src={waves} alt="waves" className="waves" />
+        </StyledHeader>
+        <StyledMessageList>
+          <div className="messages-container">
+            {messages && messages.length ? (
               messages
                 .sort((a, b) => a.createdAt - b.createdAt)
-                .map((message, index) => (
-                  <div className="chattcountainer" key={index}>
-                    <p className="timeposted">{format(message.createdAt, 'H:m d MMMM')}</p>
-                    <div className="chattbox">
-                      <p className="author">{message.name}</p>
-                      <p className="mess">{message.text}</p>
-                    </div>
-                  </div>
-                ))}
+                .map((message, index) => {
+                  const isUserMessage = user.id === message.id;
+                  return (
+                    <StyledMessage isUserMessage={isUserMessage} key={index}>
+                      {/* <p className="timeposted">{format(message.createdAt, 'H:m d MMMM')}</p> */}
+                      <div className="chat-box">
+                        {/* <p className="author">{message.name}</p> */}
+                        <span className="text">{message.text}</span>
+                      </div>
+                    </StyledMessage>
+                  );
+                })
+            ) : walkDateTime && walkDateTime.length > 1 ? (
+              <StyledFirstPresentation>
+                <img className="avatar" src={userToChatWith.photoUrl || avatar} alt="avatar" />
+                <p>
+                  Bokad promenad tillsammans <br /> {getDateTimeString(...walkDateTime.split('T'))}
+                </p>
+              </StyledFirstPresentation>
+            ) : null}
+            <div className="anchor" style={{ float: 'left', clear: 'both' }} ref={messagesEndRef} />
           </div>
+        </StyledMessageList>
+
+        <div className="sendbox-wrapper">
           <div className="sendbox">
-            <Input
-              className="inputmess"
+            <input
+              className="input-mess"
               type="text"
               id="mess"
-              inline
               name="mess"
               value={input}
               onChange={event => setInput(event.target.value)}
+              onKeyDown={handleKeyDown}
             />
             <button type="submit" onClick={submitMessage}>
               <img src={sendMessageIcon} alt="send" />
             </button>
           </div>
-        </StyledChatview>
-      </React.Fragment>
-    );
-  }
+        </div>
+      </StyledChatview>
+    </React.Fragment>
+  );
 };
 
 const ChatView = () => {
   const { user } = useContext(AuthenticationContext);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [messages, setMessages] = useState([]);
-  const { userToChatWith } = useLocation().state;
+  const { userToChatWith, walkDateTime } = useLocation().state;
 
   useEffect(() => {
     // find chat session id
@@ -92,7 +124,6 @@ const ChatView = () => {
       .doc(chatSessionId)
       .collection(chatSessionId)
       .onSnapshot(snapshot => {
-        setIsLoading(true);
         const fetchedMessages = [];
         snapshot.forEach(doc => {
           const data = doc.data();
@@ -100,23 +131,24 @@ const ChatView = () => {
         });
         setMessages(fetchedMessages);
 
-        firestore
-          .collection('chat')
-          .doc(chatSessionId)
-          .get()
-          .then(res => res.data())
-          .then(data => {
-            // if user to notify is this user
-            if (data.lastMessage.userToNotify === user.id) {
-              // ... mark conversation as read
-              firestore
-                .collection('chat')
-                .doc(chatSessionId)
-                .update({ 'lastMessage.userToNotify': null });
-            }
-          });
-
-        setIsLoading(false);
+        if (fetchedMessages.length !== 0) {
+          //  mark conversation as read
+          firestore
+            .collection('chat')
+            .doc(chatSessionId)
+            .get()
+            .then(res => res.data())
+            .then(data => {
+              // if user to notify is this user
+              if (data.lastMessage.userToNotify === user.id) {
+                // ... mark conversation as read
+                firestore
+                  .collection('chat')
+                  .doc(chatSessionId)
+                  .update({ 'lastMessage.userToNotify': null });
+              }
+            });
+        }
       });
 
     return () => unsubscribe();
@@ -143,15 +175,15 @@ const ChatView = () => {
       .collection('chat')
       .doc(chatSessionId)
       .collection(chatSessionId)
-      .add({ name: user.displayName, text: message, createdAt: new Date() });
+      .add({ id: user.id, name: user.displayName, text: message, createdAt: new Date() });
   };
 
   return (
     <Page>
       <ChatPageContent
+        user={user}
         userToChatWith={userToChatWith}
-        error={error}
-        isLoading={isLoading}
+        walkDateTime={walkDateTime}
         messages={messages}
         sendMessage={sendMessage}
       />

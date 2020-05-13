@@ -31,16 +31,12 @@ export const StyledModalContent = styled.div`
   padding: 0 8%;
   text-align: center;
 
-  .title {
-  }
-
   .notification-text {
     margin: 0 1rem;
   }
 
   .waves {
     margin-left: calc(50% - 50vw);
-    width: 100%;
     max-width: none;
     overflow: hidden;
   }

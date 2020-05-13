@@ -1,7 +1,7 @@
 const fontFamilies = {
-  fontLight: 'Verdana',
-  fontMedium: 'Verdana',
-  fontRegular: 'Londrina Solid'
+  fontLight: 'Londrina Solid',
+  fontMedium: 'Inter',
+  fontRegular: 'Inter'
 };
 
 export default fontFamilies;

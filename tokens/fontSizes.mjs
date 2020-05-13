@@ -6,7 +6,7 @@ const fontSizes = {
   h4: '1.25rem',
   h3: '1.0rem',
   h2: '1.5rem',
-  h1: '1.25rem'
+  h1: '1.5rem'
 };
 
 export default fontSizes;

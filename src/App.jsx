@@ -7,8 +7,6 @@ import GlobalStyle from 'components/GlobalStyle';
 import ScrollToTop from 'components/ScrollToTop';
 import Dialog from 'components/UI/Dialog';
 import NotificationModal from 'compositions/NotificationModal';
-import Nav from 'components/Nav';
-import NavBottom from 'components/NavBottom';
 
 // import InstallBanner from 'compositions/InstallBanner';
 // import CookiesConsentBanner from 'compositions/CookiesConsentBanner';

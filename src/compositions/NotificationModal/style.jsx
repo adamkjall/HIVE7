@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 import colors from 'tokens/colors.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
+import fontWeights from 'tokens/fontWeights.mjs';
+import spacing from 'tokens/spacing.mjs';
 
 export const StyledModal = styled.div`
   position: fixed;
@@ -13,13 +15,32 @@ export const StyledModal = styled.div`
   overflow: hidden;
   color: ${colors.black};
   background-color: ${colors.white};
+  padding: ${spacing.tiny} ${spacing.small} ${spacing.small};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .hello-btn {
+    width: 100%;
+    display: block;
+    margin-top: auto;
+
+    button {
+      width: 100%;
+      text-align: center;
+      font-weight: bold;
+      text-transform: uppercase;
+
+      .icon {
+        margin-right: 0.5rem;
+      }
+    }
+  }
 `;
 
 export const StyledModalHeader = styled.div`
   width: 100%;
   font-size: ${fontSizes.h2};
-  padding: 0 1rem;
-
   .close {
     cursor: pointer;
   }
@@ -28,11 +49,22 @@ export const StyledModalHeader = styled.div`
 export const StyledModalContent = styled.div`
   width: 100%;
   margin: 0 auto;
-  padding: 0 8%;
   text-align: center;
+  flex-grow: 1;
+
+  .content-container {
+  }
+
+  .title {
+    color: ${colors.green};
+    font-weight: ${fontWeights.fontRegular};
+    line-height: 1.2;
+    font-size: 2.5rem;
+    margin-bottom: 0;
+  }
 
   .notification-text {
-    margin: 0 1rem;
+    margin: 1rem 1rem;
   }
 
   .waves {
@@ -48,34 +80,20 @@ export const StyledImageContainer = styled.div`
   justify-items: center;
   align-items: center;
   grid-template-columns: 2fr 1fr 2fr;
-  margin-top: 2.5rem;
+  margin-top: 2.3rem;
   margin-bottom: 1.5rem;
   padding: 0 0.5rem;
 
   .avatar {
     width: 100%;
     border-radius: 50%;
+    min-width: 127px;
   }
 
   .dot {
     width: 0.8rem;
     height: 0.8rem;
-    background-color: ${colors.orange};
+    background-color: ${colors.green};
     border-radius: 50%;
-  }
-`;
-
-export const StyledTimeAndPlace = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  & > * {
-    margin-top: 1rem;
-  }
-
-  .divider {
-    width: 20%;
-    border-bottom: 1px solid #9b9b9b;
   }
 `;

@@ -34,7 +34,7 @@ export const StyledcChooseChatview = styled.div`
     }
 
     input[type='text']{
-      font-family: ${fontFamilies.fontLight};
+      font-family: ${fontFamilies.fontRegular};
       font-size: 1rem;
       outline: none;
       border: none;

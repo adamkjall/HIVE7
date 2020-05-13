@@ -8,6 +8,6 @@ export const StyledH1 = styled.h1`
   font-family: 'Londrina Solid', cursive;
   font-size: ${fontSizes.h1};
   line-height: ${lineHeights.l};
-  font-weight: ${fontWeights.fontLight};
+  font-weight: ${fontWeights.fontRegular};
   text-align: ${({ center }) => (center ? 'center' : 'initial')};
 `;

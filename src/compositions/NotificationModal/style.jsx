@@ -28,11 +28,11 @@ export const StyledModal = styled.div`
     button {
       width: 100%;
       text-align: center;
-      font-weight: bold;
+
       text-transform: uppercase;
 
       .icon {
-        margin-right: 0.5rem;
+        margin-right: 0.7rem;
       }
     }
   }

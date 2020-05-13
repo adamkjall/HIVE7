@@ -8,6 +8,7 @@ import location from '../../assets/icons/location.svg';
 import avatar from '../../assets/icons/profilepic.svg';
 import walking from '../../assets/icons/walking.svg';
 import clock from '../../assets/icons/time.svg';
+import waves from '../../assets/icons/lines.svg';
 import cross from '../../assets/icons/cross.svg';
 import shortWaves from '../../assets/icons/short-waves.svg';
 
@@ -53,6 +54,7 @@ const NotificationModal = ({ notification, removeNotification }) => {
           <p className="notification-text">{`Du och ${
             userData.displayName.split(' ')[0]
           } ska gå på promenad tillsammans.`}</p>
+          <img src={waves} alt="waves" />
           <StyledImageContainer>
             <img className="avatar" src={user.photoUrl || avatar} alt="avatar" />
             <span className="dot"></span>

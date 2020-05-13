@@ -10,8 +10,9 @@ export const StyledcChooseChatview = styled.div`
     height: 98px;
 
     h1 {
+      text-align: center;
       background-color: ${colors.gray5};
-      padding: ${spacing.small} ${spacing.small};
+      padding: ${spacing.tiny} ${spacing.small};
       margin: 0;
     }
 

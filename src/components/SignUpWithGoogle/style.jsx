@@ -22,7 +22,7 @@ export const StyledContainer = styled.div`
   }
 
   .moreinfo {
-    margin: 1.5rem 3rem;
+    margin: 1rem 2.5rem;
   }
 
   .signup-form-container {
@@ -30,17 +30,20 @@ export const StyledContainer = styled.div`
     max-width: 315px;
     display: grid;
     grid-template-columns: 50px 8fr;
-    grid-template-rows: 0.5fr 1px 1fr 1px 0.7fr 1px 0.3fr 1px 0.3fr 1px 0.6fr;
+    grid-template-rows: 1fr 12px 1fr 12px 1fr 12px;
   }
 
   .red {
     font-size: ${fontSizes.microcopy};
     position: relative;
-    top: 0px;
+    top: -25px;
     left: 10px;
     color: red;
     height: 1px;
     margin: 0;
+    &.nr1 {
+      top: 0px;
+    }
   }
 
   label {
@@ -61,23 +64,6 @@ export const StyledContainer = styled.div`
     input[type='radio'] {
       margin: 0 0.5rem 0rem;
     }
-  }
-  .avatar {
-    margin: 1rem;
-    width: 92px;
-    height: 92px;
-    border-radius: 999rem;
-  }
-
-  .changepic {
-    font-size: ${fontSizes.s};
-    color: ${colors.gray2};
-    cursor: pointer;
-    color: ${colors.red};
-    text-decoration: underline;
-    font-size: ${fontSizes.s};
-    text-align: center;
-    border: none;
   }
 
   .reddott {

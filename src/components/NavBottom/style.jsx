@@ -25,15 +25,15 @@ export const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  color: ${colors.black};
+  color: ${colors.gray4};
   text-decoration: none;
   text-align: center;
-  height: 48px;
+  height: 10vh;
   cursor: pointer;
 
   p {
-    margin: 0 0 0.5rem 0;
-    font-size: ${fontSizes.s};
+    margin: 0.1rem 0 0;
+    font-size: ${fontSizes.microcopy};
   }
 
   .avatar {
@@ -42,31 +42,12 @@ export const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
     max-height: 31px;
   }
 
-  .promenad {
-    position: fixed;
-    left: 50%;
-    transform: translate(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 999rem;
-    height: 68px;
-    width: 68px;
-    background: ${colors.white};
-    border: 2px ${colors.red} solid;
-  }
-
   &.${activeClassName} {
-    .promenad {
-      background: ${colors.red};
-    }
-    .avatar {
-      padding: 1px;
-      border: 2px ${colors.red} solid;
+    p {
+      color: ${colors.red};
     }
   }
-
-  .unactive-chat-container {
+  .inactive-chat-container {
     position: relative;
   }
 `;

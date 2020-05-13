@@ -57,7 +57,6 @@ const NotificationModal = ({ notification, removeNotification }) => {
             <span className="dot"></span>
             <img className="avatar" src={userData.photoUrl || avatar} alt="avatar" />
           </StyledImageContainer>
-          <img className="waves" src={waves} alt="" />
           <StyledTimeAndPlace>
             <img className="icon" src={clock} alt="clock" />
             <span>{`${walkData.date}, kl ${walkData.time}`}</span>

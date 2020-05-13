@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import calculateAge from '../../../helpers/functions/calculateAge.jsx';
 import getDateTimeString from '../../../helpers/functions/getDateTimeString.jsx';
 import { getUserData } from '../../../firebase/firebase.utils';
+import { AuthenticationContext } from '../../../contexts/AuthenticationContext';
 
 import H1 from '../H1';
 
@@ -18,15 +19,16 @@ import { StyledWalkCard } from './style';
 
 const WalkCard = ({ walk }) => {
   const [userToWalkWith, setUserToWalkWith] = useState(undefined);
+  const { user } = useContext(AuthenticationContext);
 
   useEffect(() => {
     if (walk.attendingPeople.length > 0) {
       const otherUserID = walk.attendingPeople[0];
-      getUserData(otherUserID).then(user => {
-        if (user) setUserToWalkWith(user);
+      getUserData(otherUserID).then(userData => {
+        if (userData) setUserToWalkWith(userData);
       });
     }
-  }, []);
+  }, [walk]);
 
   const formatDateString = () => {
     const dateTimeString = getDateTimeString(walk.date, walk.time);
@@ -61,7 +63,17 @@ const WalkCard = ({ walk }) => {
         />
       </div>
       <span className="title">
-        Du & <br /> {userToWalkWith && userToWalkWith.displayName.split(' ')[0]}
+        {user === walk.user ? (
+          <>
+            {' '}
+            Du & <br /> {userToWalkWith && userToWalkWith.displayName.split(' ')[0]}
+          </>
+        ) : (
+          <>
+            {' '}
+            Du & <br /> {walk.user && walk.user.displayName.split(' ')[0]}{' '}
+          </>
+        )}
       </span>
       <span className="small-text">ska GÅ tillsammans!</span>
     </div>

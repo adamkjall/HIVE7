@@ -41,6 +41,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     try {
       await userRef.set({
+        id: userRef.id,
         displayName,
         email,
         createdAt,

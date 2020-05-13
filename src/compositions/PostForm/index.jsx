@@ -170,7 +170,7 @@ const PostForm = () => {
               }}
             >
               <img src={location} alt="where" />
-              <span>Var vill du gå?</span>
+              <span>I vilket område vill du gå?</span>
             </div>
             {toogleWhere ? (
               <div>
@@ -178,7 +178,7 @@ const PostForm = () => {
                   id="where"
                   inline
                   name="where"
-                  placeholder="Var vill du gå?"
+                  placeholder="I vilket område vill du gå?"
                   value={inputs.where}
                   onChange={event => onValueChange('where', event.target.value)}
                 />
@@ -245,19 +245,19 @@ const PostForm = () => {
             <CheckBox
               icon={bringPetsvg}
               id="allowPets"
-              label="Får husdjur följa med?"
+              label="Får andra ta med hund?"
               clickHandler={event => onValueChange('allowPets', event.target.value)}
             />
             <CheckBox
               icon={pets}
               id="bringPets"
-              label="Kommer du ta med husdjur?"
+              label="Kommer du ta med hund?"
               clickHandler={event => onValueChange('bringPets', event.target.value)}
             />
             <CheckBox
               icon={gendericon}
               id="filterGender"
-              label="Bara promenera med kvinnor?"
+              label="Bara kvinnor?"
               clickHandler={event => onValueChange('filterGender', event.target.value)}
             />
           </div>

@@ -52,7 +52,6 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
               )}
             </div>
             <img className="avatar" src={walk.user.photoUrl || avatar} alt="avatar" />
-
             <div className="authordata">
               <span className="author">{walk.user.displayName}</span>
               <div className="dott" />

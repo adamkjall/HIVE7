@@ -16,6 +16,7 @@ export const StyledSelectedWalk = styled.div`
     justify-content: center;
     padding: ${spacing.small};
     background-color: ${colors.gray5};
+    width: 100%;
 
     .head-wrapper {
       display: grid;

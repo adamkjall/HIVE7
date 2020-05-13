@@ -4,6 +4,8 @@ import fontFamilies from 'tokens/fontFamilies.mjs';
 import fontWeights from 'tokens/fontWeights.mjs';
 
 export const StyledGlobalStyle = createGlobalStyle`
+ @import url('https://fonts.googleapis.com/css2?family=Londrina+Solid&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
  html {
     min-height: 100vh;
     width: 100vw;
@@ -12,7 +14,14 @@ export const StyledGlobalStyle = createGlobalStyle`
 
   @font-face {
     font-display: ${({ fontDisplay }) => fontDisplay};
-    font-family: "${fontFamilies.light}";
+    font-family: 'Inter', sans-serif;
+    font-weight: ${fontWeights.fontRegular};
+    src: url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+  }
+
+  @font-face {
+    font-display: ${({ fontDisplay }) => fontDisplay};
+    font-family: 'Londrina Solid', cursive;
     font-weight: ${fontWeights.fontLight};
     src: url('https://fonts.googleapis.com/css2?family=Londrina+Solid&display=swap');
   }

@@ -132,7 +132,7 @@ export default {
           'https://fcm.googleapis.com/fcm/notification',
           'https://polyfill.io/'
         ],
-        'style-src': ["'self'", "'unsafe-inline'"],
+        'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com/'],
         'img-src': [
           "'self'",
           'data:',
@@ -147,12 +147,18 @@ export default {
           'https://firestore.googleapis.com',
           'https://firebasestorage.googleapis.com'
         ],
-        'font-src': ["'self'", 'https://fonts.googleapis.com/'],
+        'font-src': [
+          "'self'",
+          'https://fonts.googleapis.com/',
+          'https://fonts.gstatic.com/s/londrinasolid/v9/flUhRq6sw40kQEJxWNgkLuudGfNeKBM.woff2',
+          'https://fonts.gstatic.com/s/inter/v1/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZJhiJ-Ck-_seA.woff2'
+        ],
         'media-src': "'self'",
         'manifest-src': "'self'",
         'worker-src': "'self'",
         'connect-src': [
-          "'self'", 
+          "'self'",
+          'https://fonts.googleapis.com/',
           'https://firestore.googleapis.com/',
           'https://firebasestorage.googleapis.com',
           'https://firestore.googleapis.com/v0/b/hive7-fe724.appspot.com/o',

@@ -74,24 +74,6 @@ const SignUpWithGoogle = () => {
       <form onSubmit={onSubmit}>
         <p className="moreinfo">Vi behöver ytterligare information innan ditt konto är klart.</p>
         <div className="signup-form-container">
-          {inputs.dateOfBirth.length !== 8 ? (
-            <div className="reddott" />
-          ) : (
-            <div className="donedott" />
-          )}
-          <Input
-            type="text"
-            autoComplete="bday"
-            label="Födelsedatum *"
-            id="dateOfBirth"
-            inline
-            name="dateOfBirth"
-            placeholder="ÅÅÅÅMMDD"
-            value={inputs.dateOfBirth}
-            onChange={event => onValueChange('dateOfBirth', event.target.value)}
-          />
-          <div className="redline nr1" />
-          <p className="red">{msgBirth}</p>
           {inputs.lvlOfSwedish.length <= 1 ? (
             <div className="reddott nr2" />
           ) : (
@@ -122,14 +104,12 @@ const SignUpWithGoogle = () => {
             </label>
           </div>
           <div className="redline nr2" />
-          <p className="red">{msglvl}</p>
-
+          <p className="red nr1">{msglvl}</p>
           {inputs.gender.length <= 0 ? (
             <div className="reddott nr3" />
           ) : (
             <div className="donedott nr3" />
           )}
-
           <div className="gender">
             <p>Kön? *</p>
             <label htmlFor="female">
@@ -165,41 +145,35 @@ const SignUpWithGoogle = () => {
           </div>
           <div className="redline nr3" />
           <p className="red">{msgGender}</p>
-          {inputs.gender.length <= 0 ? <div className="reddott" /> : <div className="donedott" />}
-          <div className="profilebox-1">
-            <img className="avatar" src={user.photoUrl} alt="avatar" />
-            <span
-              className="changepic"
-              tabIndex="-5"
-              role="button"
-              aria-label="toogle"
-              onClick={() => {
-                setToogle(!toogle);
-              }}
-              onKeyDown={() => {
-                setToogle(!toogle);
-              }}
-            >
-              {toogle ? 'Klicka här efter laddat upp din nya bild' : 'Byt bild'}
-            </span>
-          </div>
-          <div className="redline nr3" />
-          <p className="red"> {msg} </p>
-          {inputs.gender.length <= 0 ? <div className="reddott" /> : <div className="donedott" />}
-          <p>Jag godkänner allmänna villkoren</p>
+          {inputs.dateOfBirth.length !== 8 ? (
+            <div className="reddott" />
+          ) : (
+            <div className="donedott" />
+          )}
+          <Input
+            type="text"
+            autoComplete="bday"
+            label="Födelsedatum *"
+            id="dateOfBirth"
+            inline
+            name="dateOfBirth"
+            placeholder="ÅÅÅÅMMDD"
+            value={inputs.dateOfBirth}
+            onChange={event => onValueChange('dateOfBirth', event.target.value)}
+          />
           <div />
+          <p className="red">{msgBirth}</p>
+          <p className="red"> {msg} </p>
           <p>* Obligatoriska fält</p>
+          <input type="checkbox" />
+          <p>Jag godkänner allmänna villkoren</p>
         </div>
-        {toogle ? null : (
-          <div className="buttondiv">
-            <Button nature="default" className="nextbutton" stretch type="submit">
-              Skapa konto
-            </Button>
-          </div>
-        )}
+        <div className="buttondiv">
+          <Button nature="default" className="nextbutton" stretch type="submit">
+            Skapa konto
+          </Button>
+        </div>
       </form>
-
-      {toogle ? <UploadFile /> : null}
     </StyledContainer>
   );
 };

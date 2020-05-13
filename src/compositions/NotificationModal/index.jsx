@@ -9,6 +9,7 @@ import avatar from '../../assets/icons/profilepic.svg';
 import walking from '../../assets/icons/walking.svg';
 import clock from '../../assets/icons/time.svg';
 import cross from '../../assets/icons/cross.svg';
+import shortWaves from '../../assets/icons/short-waves.svg';
 
 import {
   StyledModal,
@@ -57,7 +58,7 @@ const NotificationModal = ({ notification, removeNotification }) => {
             <span className="dot"></span>
             <img className="avatar" src={userData.photoUrl || avatar} alt="avatar" />
           </StyledImageContainer>
-          {/* <img className="waves" src={waves} alt="" /> */}
+          <img className="waves" src={shortWaves} alt="" />
           <StyledTimeAndPlace>
             <img className="icon" src={clock} alt="clock" />
             <span>{`${walkData.date}, kl ${walkData.time}`}</span>

@@ -275,9 +275,11 @@ const PostForm = () => {
 
             <p className="red">{msg}</p>
           </div>
-          <Button nature="primary" type="submit" className="button-create">
-            Skapa{' '}
-          </Button>
+          <div className="button-div">
+            <Button type="submit" stretch className="button-create-walk">
+              SKAPA{' '}
+            </Button>
+          </div>
         </div>
       </form>
     </StyledPostForm>

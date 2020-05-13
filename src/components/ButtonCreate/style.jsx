@@ -11,6 +11,7 @@ export const StyledButtonCreate = styled.button`
   background: ${colors.red};
   border-radius: 999rem;
   font-size: ${fontSizes.m};
+  font-family: 'Londrina Solid', cursive;
   text-align: 'center';
   text-decoration: none;
   cursor: pointer;

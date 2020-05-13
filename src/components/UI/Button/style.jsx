@@ -29,6 +29,8 @@ export const StyledButton = styled.button`
   min-height: 3rem;
   border: 0;
   border-radius: 999rem;
+  font-family: 'Londrina Solid', cursive;
+  letter-spacing: 1px;
   font-size: ${fontSizes.m};
   text-align: ${({ stretch }) => (stretch ? 'center' : 'initial')};
   text-decoration: none;

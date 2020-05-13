@@ -34,11 +34,12 @@ export const StyledGlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: ${fontFamilies.fontRegular}, 'Verdana';
+    font-family: ${fontFamilies.fontRegular}, verdana;
     font-weight: ${fontWeights.fontLight};
   }
 
   #root {
+    font-family: ${fontFamilies.fontRegular}, verdana;
   }
 
   img {
@@ -81,4 +82,29 @@ export const StyledGlobalStyle = createGlobalStyle`
     color: black;
     opacity: 1;
   }
+  
+  input[type='radio'] {
+      cursor: pointer;
+      position: relative;
+      display: inline-block;
+      height: 13px;
+      width: 13px;
+      border-radius: 999rem;
+      border: ${colors.red} solid 1px;
+      outline: none !important;
+      background-color: ${colors.red};
+      &::before {
+        position: relative;
+        display: block;
+        content: '';
+        background: white;
+        border: ${colors.red} solid 1px;
+        border-radius: 999rem;
+        height: 15px;
+        width: 15px;
+      }
+      &:checked::before {
+        background: ${colors.red};
+      }
+    }
 `;

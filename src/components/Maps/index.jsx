@@ -34,24 +34,30 @@ const Map = () => {
   }
 
   const showPosition = position => {
-    let latlong = position.coords.latitude + '/' + position.coords.longitude;
+    const latlong = position.coords.latitude + '/' + position.coords.longitude;
     console.log(latlong);
 
     if (latlong.length > 2) {
-      setMapping(true);
       console.log(`https://www.openstreetmap.org/#map=16/` + latlong);
       setImgUrl(`https://www.openstreetmap.org/#map=16/` + latlong);
+      setMapping(true);
     }
   };
 
   return (
     <StyledMap>
-      <button onClick={() => getLocation()}>Ange din Position</button>
-      {mapping ? <img src={imgUrl} alt="karta" /> : null}
-      {messege}
-      <a href="https://www.openstreetmap.org/">
-        <p className="openstreetmap">© OpenStreetMaps bidragsgivare ♥ Donera. </p>
-      </a>
+      <div onClick={() => getLocation()} className="position">
+        Ange din Position
+      </div>
+      <div className="map">
+        {mapping && <img src={imgUrl} alt="karta" />}
+        {messege}
+        {mapping && (
+          <a href={imgUrl}>
+            <p className="openstreetmap">© OpenStreetMaps bidragsgivare ♥ Donera. </p>
+          </a>
+        )}
+      </div>
     </StyledMap>
   );
 };

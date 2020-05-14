@@ -30,30 +30,6 @@ export const StyledPostForm = styled.div`
     justify-content: center;
     margin-left: ${spacing.medium};
 
-    input[type='radio'] {
-      cursor: pointer;
-      position: relative;
-      display: inline-block;
-      height: 13px;
-      width: 13px;
-      border-radius: 999rem;
-      border: black solid 1px;
-      outline: none !important;
-      background-color: ${colors.red};
-      &::before {
-        position: relative;
-        display: block;
-        content: '';
-        background: white;
-        border: black solid 1px;
-        border-radius: 999rem;
-        height: 15px;
-        width: 15px;
-      }
-      &:checked::before {
-        background: ${colors.red};
-      }
-    }
     span {
       padding: 10px;
     }
@@ -163,6 +139,14 @@ export const StyledPostForm = styled.div`
         height: 100px;
         box-sizing: border-box;
         resize: none;
+      }
+    }
+    .button-div {
+      width: 100%;
+      .button-create-walk {
+        width: 90%;
+        position: fixed;
+        bottom: 1rem;
       }
     }
   }

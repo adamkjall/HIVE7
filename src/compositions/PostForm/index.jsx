@@ -14,7 +14,6 @@ import Button from 'components/UI/Button';
 import CheckBox from '../../components/UI/Checkbox';
 import Input from 'components/UI/Input';
 import chat from '../../assets/icons/chat.svg';
-import family from '../../assets/icons/family.svg';
 import friends from '../../assets/icons/friends.svg';
 import location from '../../assets/icons/location.svg';
 import pets from '../../assets/icons/pets.svg';
@@ -41,7 +40,6 @@ const PostForm = () => {
     where: '',
     timeduration: '',
     allowFriends: 'false',
-    allowChildren: 'false',
     allowPets: 'false',
     bringPets: 'false',
     filterGender: 'alla',
@@ -74,7 +72,6 @@ const PostForm = () => {
         where: inputs.where,
         timeduration: inputs.timeduration,
         allowFriends: inputs.allowFriends,
-        allowChildren: inputs.allowChildren,
         allowPets: inputs.allowPets,
         bringPets: inputs.bringPets,
         filterGender: inputs.filterGender,
@@ -89,7 +86,6 @@ const PostForm = () => {
         where: '',
         timeduration: '',
         allowFriends: '',
-        allowChildren: '',
         allowPets: '',
         bringPets: '',
         filterGender: '',
@@ -174,7 +170,7 @@ const PostForm = () => {
               }}
             >
               <img src={location} alt="where" />
-              <span>Var vill du gå?</span>
+              <span>I vilket område vill du gå?</span>
             </div>
             {toogleWhere ? (
               <div>
@@ -182,7 +178,7 @@ const PostForm = () => {
                   id="where"
                   inline
                   name="where"
-                  placeholder="Var vill du gå?"
+                  placeholder="I vilket område vill du gå?"
                   value={inputs.where}
                   onChange={event => onValueChange('where', event.target.value)}
                 />
@@ -247,27 +243,21 @@ const PostForm = () => {
               clickHandler={event => onValueChange('allowFriends', event.target.value)}
             />
             <CheckBox
-              icon={family}
-              id="allowChildren"
-              label="Kan barn följa med?"
-              clickHandler={event => onValueChange('allowChildren', event.target.value)}
-            />
-            <CheckBox
               icon={bringPetsvg}
               id="allowPets"
-              label="Får husdjur följa med?"
+              label="Får andra ta med hund?"
               clickHandler={event => onValueChange('allowPets', event.target.value)}
             />
             <CheckBox
               icon={pets}
               id="bringPets"
-              label="Kommer du ta med husdjur?"
+              label="Kommer du ta med hund?"
               clickHandler={event => onValueChange('bringPets', event.target.value)}
             />
             <CheckBox
               icon={gendericon}
               id="filterGender"
-              label="Bara promenera med kvinnor?"
+              label="Bara kvinnor?"
               clickHandler={event => onValueChange('filterGender', event.target.value)}
             />
           </div>
@@ -285,9 +275,11 @@ const PostForm = () => {
 
             <p className="red">{msg}</p>
           </div>
-          <Button nature="primary" type="submit" className="button-create">
-            Skapa{' '}
-          </Button>
+          <div className="button-div">
+            <Button type="submit" stretch className="button-create-walk">
+              SKAPA{' '}
+            </Button>
+          </div>
         </div>
       </form>
     </StyledPostForm>

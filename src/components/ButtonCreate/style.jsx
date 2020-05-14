@@ -11,13 +11,14 @@ export const StyledButtonCreate = styled.button`
   background: ${colors.red};
   border-radius: 999rem;
   font-size: ${fontSizes.m};
+  font-family: 'Londrina Solid', cursive;
   text-align: 'center';
   text-decoration: none;
   cursor: pointer;
   transition: 0.1s;
   border: none;
   position: fixed;
-  bottom: 4.8rem;
+  bottom: 5rem;
   right: ${spacing.small};
   align-self: flex-end;
 

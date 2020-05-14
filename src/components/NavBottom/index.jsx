@@ -6,8 +6,8 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import chatactive from '../../assets/icons/chatactive.svg';
 import walkingred from '../../assets/icons/walkerred.svg';
-import walkingwhite from '../../assets/icons/walkerwhite.svg';
-import chatunactive from '../../assets/icons/chatunactive.svg';
+import walkinggray from '../../assets/icons/walkergray.svg';
+import chatinactive from '../../assets/icons/chatinactive.svg';
 import { StyledNavBottom, StyledNavLink, StyledMessageNotification } from './style';
 import avatar from '../../assets/icons/profilepic.svg';
 
@@ -51,24 +51,28 @@ const Nav = props => {
         {location.pathname === '/choosechat' ? (
           <img src={chatactive} alt="Chosechat" />
         ) : (
-          <div className="unactive-chat-container">
-            <img src={chatunactive} alt="Chosechat" />
+          <div className="inactive-chat-container">
+            <img src={chatinactive} alt="Chosechat" />
             {newMessageNotification ? <StyledMessageNotification /> : null}
           </div>
         )}
+        <p>Chatt</p>
         {newMessageNotification ? <div className="new-mess" /> : null}
       </StyledNavLink>
       <StyledNavLink as={NavLink} to="/feed">
         <div className="promenad">
           {location.pathname === '/feed' ? (
-            <img src={walkingwhite} alt="promenad" />
-          ) : (
             <img src={walkingred} alt="promenad" />
+          ) : (
+            <img src={walkinggray} alt="promenad" />
           )}
         </div>
+        <p>Promenad</p>
       </StyledNavLink>
       <StyledNavLink as={NavLink} to="/private">
         <img className="avatar" src={user.photoUrl || avatar} alt="avatar" />
+
+        <p>Profil</p>
       </StyledNavLink>
     </StyledNavBottom>
   );

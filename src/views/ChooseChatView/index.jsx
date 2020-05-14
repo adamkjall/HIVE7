@@ -51,35 +51,44 @@ const ChooseChatPageContent = ({ user, error, isLoading, conversations }) => {
               onChange={event => setInput(event.target.value)}
             />
           </div>
-          <div className="list-mess">
-            {filterConversations(conversations).map(conversation => {
-              const isMessageViewed = conversation.lastMessage.userToNotify !== user.id;
-              return (
-                <Link
-                  key={conversation.userToChatWith.id}
-                  to={{ pathname: '/chat', state: { userToChatWith: conversation.userToChatWith } }}
-                >
-                  <div className="comp-mess">
-                    <img
-                      className={`avatar ${isMessageViewed ? '' : 'border'}`}
-                      src={conversation.userToChatWith.photoUrl || avatar}
-                      alt="avatar"
-                    />
-                    <span className={`name  ${isMessageViewed ? '' : 'bold'}`}>
-                      {conversation.userToChatWith.displayName}
-                    </span>
-                    <span className={`date ${isMessageViewed ? '' : 'bold'}`}>
-                      {conversation.lastMessage.date}
-                    </span>
-                    <span className={`mess ${isMessageViewed ? '' : 'bold'}`}>
-                      {conversation.lastMessage.message.length < 28
-                        ? conversation.lastMessage.message
-                        : conversation.lastMessage.message.slice(0, 28) + '...'}
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
+          <div className="list-container">
+            <div className="list-mess">
+              {filterConversations(conversations)
+                .sort((a, b) => a.lastMessage.date - b.lastMessage.date)
+                .sort((a, b) => (a.lastMessage.userToNotify === user.id ? -1 : 1))
+                .map(conversation => {
+                  const isMessageViewed = conversation.lastMessage.userToNotify !== user.id;
+                  return (
+                    <Link
+                      className="message"
+                      key={conversation.userToChatWith.id}
+                      to={{
+                        pathname: '/chat',
+                        state: { userToChatWith: conversation.userToChatWith }
+                      }}
+                    >
+                      <div className="comp-mess">
+                        <img
+                          className={`avatar ${isMessageViewed ? '' : 'border'}`}
+                          src={conversation.userToChatWith.photoUrl || avatar}
+                          alt="avatar"
+                        />
+                        <span className={`name  ${isMessageViewed ? '' : 'bold'}`}>
+                          {conversation.userToChatWith.displayName}
+                        </span>
+                        <span className={`date ${isMessageViewed ? '' : 'bold'}`}>
+                          {conversation.lastMessage.date}
+                        </span>
+                        <span className={`mess ${isMessageViewed ? '' : 'bold'}`}>
+                          {conversation.lastMessage.message.length < 28
+                            ? conversation.lastMessage.message
+                            : conversation.lastMessage.message.slice(0, 28) + '...'}
+                        </span>
+                      </div>
+                    </Link>
+                  );
+                })}
+            </div>
           </div>
         </StyledcChooseChatview>
       </React.Fragment>

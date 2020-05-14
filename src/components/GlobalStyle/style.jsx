@@ -4,6 +4,8 @@ import fontFamilies from 'tokens/fontFamilies.mjs';
 import fontWeights from 'tokens/fontWeights.mjs';
 
 export const StyledGlobalStyle = createGlobalStyle`
+ @import url('https://fonts.googleapis.com/css2?family=Londrina+Solid&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
  html {
     min-height: 100vh;
     width: 100vw;
@@ -12,7 +14,14 @@ export const StyledGlobalStyle = createGlobalStyle`
 
   @font-face {
     font-display: ${({ fontDisplay }) => fontDisplay};
-    font-family: "${fontFamilies.light}";
+    font-family: 'Inter', sans-serif;
+    font-weight: ${fontWeights.fontRegular};
+    src: url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+  }
+
+  @font-face {
+    font-display: ${({ fontDisplay }) => fontDisplay};
+    font-family: 'Londrina Solid', cursive;
     font-weight: ${fontWeights.fontLight};
     src: url('https://fonts.googleapis.com/css2?family=Londrina+Solid&display=swap');
   }
@@ -25,11 +34,12 @@ export const StyledGlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: ${fontFamilies.fontRegular}, 'Verdana';
+    font-family: ${fontFamilies.fontRegular}, verdana;
     font-weight: ${fontWeights.fontLight};
   }
 
   #root {
+    font-family: ${fontFamilies.fontRegular}, verdana;
   }
 
   img {
@@ -72,4 +82,29 @@ export const StyledGlobalStyle = createGlobalStyle`
     color: black;
     opacity: 1;
   }
+  
+  input[type='radio'] {
+      cursor: pointer;
+      position: relative;
+      display: inline-block;
+      height: 13px;
+      width: 13px;
+      border-radius: 999rem;
+      border: ${colors.red} solid 1px;
+      outline: none !important;
+      background-color: ${colors.red};
+      &::before {
+        position: relative;
+        display: block;
+        content: '';
+        background: white;
+        border: ${colors.red} solid 1px;
+        border-radius: 999rem;
+        height: 15px;
+        width: 15px;
+      }
+      &:checked::before {
+        background: ${colors.red};
+      }
+    }
 `;

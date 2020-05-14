@@ -1,26 +1,26 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 import { getUserData, getWalk } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
+
+import H1 from 'components/UI/H1';
+import Button from 'components/UI/Button';
 
 import Dialog from 'components/UI/Dialog';
 import location from '../../assets/icons/location.svg';
 import avatar from '../../assets/icons/profilepic.svg';
 import walking from '../../assets/icons/walking.svg';
 import clock from '../../assets/icons/time.svg';
+import waves from '../../assets/icons/lines.svg';
 import cross from '../../assets/icons/cross.svg';
+import buttonMessage from '../../assets/icons/button-message.svg';
 
-import {
-  StyledModal,
-  StyledModalHeader,
-  StyledModalContent,
-  StyledImageContainer,
-  StyledTimeAndPlace
-} from './style';
+import { StyledModal, StyledModalHeader, StyledModalContent, StyledImageContainer } from './style';
 
 const NotificationModal = ({ notification, removeNotification }) => {
   const [userData, setUserData] = useState(null);
-  const [walkData, setWalkData] = useState(null);
+  const [walk, setWakj] = useState(null);
   const { user } = useContext(AuthenticationContext);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const NotificationModal = ({ notification, removeNotification }) => {
     if (!notification) return;
 
     getUserData(notification.userId).then(data => setUserData(data));
-    getWalk(notification.walkId).then(data => setWalkData(data));
+    getWalk(notification.walkId).then(data => setWakj(data));
   }, [notification]);
 
   return (
@@ -40,32 +40,49 @@ const NotificationModal = ({ notification, removeNotification }) => {
       <StyledModalHeader onClick={() => removeNotification(notification.notificationId)}>
         <img className="close" src={cross} alt="close window" />
       </StyledModalHeader>
-      {!userData || !walkData ? (
-        <h1>Loading</h1>
+      {!userData || !walk ? (
+        <H1 center>Loading</H1>
       ) : (
-        <StyledModalContent>
-          {notification.type === 'left walk' ? (
-            <h1 className="title">{`${userData.displayName} har gett återbud på din promenad.`}</h1>
-          ) : (
-            <h1 className="title">Full fart FRAMÅT!</h1>
-          )}
-          <p className="notification-text">{`Du och ${
-            userData.displayName.split(' ')[0]
-          } ska gå på promenad tillsammans.`}</p>
-          <StyledImageContainer>
-            <img className="avatar" src={user.photoUrl || avatar} alt="avatar" />
-            <span className="dot"></span>
-            <img className="avatar" src={userData.photoUrl || avatar} alt="avatar" />
-          </StyledImageContainer>
-          <img className="waves" src={waves} alt="" />
-          <StyledTimeAndPlace>
-            <img className="icon" src={clock} alt="clock" />
-            <span>{`${walkData.date}, kl ${walkData.time}`}</span>
-            <div className="divider"></div>
-            <img className="icon" src={location} alt="location" />
-            <span>{walkData.where}</span>
-          </StyledTimeAndPlace>
-        </StyledModalContent>
+        <>
+          <StyledModalContent>
+            <div className="content-container">
+              {notification.type === 'left walk' ? (
+                <H1
+                  className="title"
+                  center
+                >{`${userData.displayName} har gett återbud på din promenad.`}</H1>
+              ) : (
+                <H1 className="title" center>
+                  GÅ MAMAS!
+                </H1>
+              )}
+              <p className="notification-text">{`Du och ${
+                userData.displayName.split(' ')[0]
+              } ska gå på promenad tillsammans.`}</p>
+              <img src={waves} alt="waves" />
+              <StyledImageContainer>
+                <img className="avatar" src={user.photoUrl || avatar} alt="avatar" />
+                <span className="dot"></span>
+                <img className="avatar" src={userData.photoUrl || avatar} alt="avatar" />
+              </StyledImageContainer>
+            </div>
+          </StyledModalContent>
+          <Link
+            className="hello-btn"
+            to={{
+              pathname: '/chat',
+              state: {
+                userToChatWith: walk.user,
+                walkDateTime: walk.date + 'T' + walk.time
+              }
+            }}
+          >
+            <Button>
+              <img className="icon" src={buttonMessage} />
+              <span>SÄG HEJ</span>
+            </Button>
+          </Link>
+        </>
       )}
     </StyledModal>
   );

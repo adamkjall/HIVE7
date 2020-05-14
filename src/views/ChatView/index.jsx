@@ -140,7 +140,7 @@ const ChatView = () => {
             .then(res => res.data())
             .then(data => {
               // if user to notify is this user
-              if (data.lastMessage.userToNotify === user.id) {
+              if (data && data.lastMessage.userToNotify === user.id) {
                 // ... mark conversation as read
                 firestore
                   .collection('chat')

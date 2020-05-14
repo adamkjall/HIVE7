@@ -27,12 +27,8 @@ const MatchedPageContent = ({ walk }) => {
         <div className="content-container">
           <H1 className="title">GÅ MAMAS!</H1>
           <p className="gray">
-            Du och{' '}
-            <span>
-              {walk.user.displayName}
-              {walk.user.username}
-            </span>{' '}
-            ska gå på promenad tillsammans.
+            Du och <span>{walk.user.displayName.split(' ')[0]}</span> ska gå på promenad
+            tillsammans.
           </p>
           <img src={shortWaves} />
           <div className="matched-avatars">

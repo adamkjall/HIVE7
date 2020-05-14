@@ -89,5 +89,11 @@ export const StyledWalkCard = styled.div`
     padding: 1rem;
     display: grid;
     grid-template-columns: 30px 3fr;
+    .quote {
+      margin: 3px 5px 0;
+    }
+    .italic {
+      font-style: italic;
+    }
   }
 `;

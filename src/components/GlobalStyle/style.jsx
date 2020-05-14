@@ -68,7 +68,7 @@ export const StyledGlobalStyle = createGlobalStyle`
   hr {
     border: 1.2px solid ${colors.gray4};
   }
-    
+
   .red {
     color: ${colors.red};
   }
@@ -86,13 +86,12 @@ export const StyledGlobalStyle = createGlobalStyle`
   input[type='radio'] {
       cursor: pointer;
       position: relative;
-      display: inline-block;
-      height: 13px;
-      width: 13px;
+      height: 20px;
+      width: 20px;
       border-radius: 999rem;
-      border: ${colors.red} solid 1px;
+      border: ${colors.red} solid 5px;
       outline: none !important;
-      background-color: ${colors.red};
+      
       &::before {
         position: relative;
         display: block;
@@ -100,11 +99,32 @@ export const StyledGlobalStyle = createGlobalStyle`
         background: white;
         border: ${colors.red} solid 1px;
         border-radius: 999rem;
-        height: 15px;
-        width: 15px;
+        height: 20px;
+        width: 20px;
       }
       &:checked::before {
+        content: url("data:image/svg+xml;charset=UTF-8,<svg height='100' width='100'><circle cx='10' cy='10' r='10' stroke='black' stroke-width='3' fill='blue' /></svg>");
         background: ${colors.red};
+        height: 20px;
+        width: 20px;
       }
+
     }
+
+    .reddott {
+      width: 15px;
+      height: 15px;
+      border-radius: 999rem;
+      border: 3px ${colors.red} solid;
+      background-color: white; 
+    }
+
+    .donedott {
+    width: 15px;
+    height: 15px;
+    border-radius: 999rem;
+    border: 3px ${colors.red} solid;
+    background-color: ${colors.red};
+    }
+
 `;

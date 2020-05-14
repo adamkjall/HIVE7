@@ -28,7 +28,7 @@ export const StyledHeader = styled.div`
     h1 {
       text-align: center;
       position: relative;
-      left: 25%;
+      left: 18vw;
       width: 140px;
       padding-top: 1rem;
     }
@@ -40,6 +40,6 @@ export const StyledHeader = styled.div`
     margin: 0;
     padding: 0;
     position: relative;
-    top: -5px;
+    top: -7px;
   }
 `;

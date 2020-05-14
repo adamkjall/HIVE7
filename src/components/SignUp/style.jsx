@@ -75,11 +75,7 @@ export const StyledContainer = styled.div`
     position: relative;
     left: 15px;
     top: 35px;
-    width: 15px;
-    height: 15px;
-    border-radius: 999rem;
-    border: 3px ${colors.red} solid;
-    background-color: white;
+
     &.nr2 {
       top: 15px;
     }
@@ -89,11 +85,6 @@ export const StyledContainer = styled.div`
     position: relative;
     left: 15px;
     top: 35px;
-    width: 15px;
-    height: 15px;
-    border-radius: 999rem;
-    border: 3px ${colors.red} solid;
-    background-color: ${colors.red};
     &.nr2 {
       top: 15px;
     }
@@ -144,7 +135,12 @@ export const StyledContainer = styled.div`
   }
   .the-bottom-line {
     position: relative;
-    top: -40px;
+    top: -70px;
     left: 80px;
+  }
+  .container {
+    max-width: 80vw;
+    position: relative;
+    left: 2rem;
   }
 `;

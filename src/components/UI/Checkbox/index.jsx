@@ -9,28 +9,28 @@ import { StyledCheckBox } from './style';
  * @param {func} clickHandler Func to handle click.
  * */
 
-const CheckBox = ({ label, icon, id, clickHandler }) => (
+const CheckBox = ({ label, icon, id, labelrigth, clickHandler }) => (
   <StyledCheckBox>
     <label htmlFor={id} className="container" onChange={clickHandler}>
-      <img src={icon} alt={label} />
-      {label}
+      {icon && <img src={icon} alt={label} />}
+      {label && label}
       <span className="checkbox-styled">
         <input type="checkbox" id={id} className="checkbox" />
       </span>
+      {labelrigth && labelrigth}
     </label>
   </StyledCheckBox>
 );
 
 CheckBox.propTypes = {
   label: PropTypes.string,
+  labelrigth: PropTypes.node,
   icon: PropTypes.node,
   id: PropTypes.string.isRequired,
   clickHandler: PropTypes.func
 };
 
 CheckBox.defaultProps = {
-  label: 'default',
-  icon: 'default',
   id: 'default',
   clickHandler: null
 };

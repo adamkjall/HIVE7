@@ -135,7 +135,7 @@ const HomePageContent = ({ error, isLoading }) => {
                   onClick={signInWithGoogle}
                   className="landingbutton"
                 >
-                  LOGGA IN MED GOOGLE
+                  SKAPA KONTO MED GOOGLE
                 </Button>
               </div>
 

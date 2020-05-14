@@ -14,7 +14,7 @@ export const StyledNavBottom = styled.nav`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
-  background: ${colors.white};
+  background: ${colors.white2};
   border-top: ${colors.gray4} 0.2px solid;
   margin: 0;
   z-index: 1;

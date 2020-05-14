@@ -4,10 +4,12 @@ import { useHistory } from 'react-router-dom';
 import { storage, auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 import Button from '../UI/Button';
 import H1 from '../UI/H1';
+import Checkbox from '../UI/Checkbox';
 import Input from '../UI/Input';
 import isValidDate from '../../helpers/functions/validDate';
 import makeStringtoBirthDate from '../../helpers/functions/makeStringtoBirthDate';
 import chooseprofilepic from '../../assets/icons/chooseprofilepic.svg';
+
 import { StyledContainer } from './style';
 
 const SignUp = () => {
@@ -317,7 +319,13 @@ const SignUp = () => {
               <div />
             </div>
             <p className="red the-bottom-line">{msg}</p>
-            <div />
+
+            <Checkbox
+              id="rigths"
+              labelrigth="Jag godkänner allmänna villkoren."
+              clickHandler={event => onValueChange('rigths', event.target.value)}
+            />
+
             <div className="buttondiv">
               <Button className="nextbutton" nature="default" stretch type="submit">
                 SKAPA KONTO

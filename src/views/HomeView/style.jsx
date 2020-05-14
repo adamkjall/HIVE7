@@ -44,7 +44,7 @@ export const StyledContainer = styled.div`
           justify-content: center;
           color: ${colors.white};
           position: fixed;
-          top: 20%;
+          top: 18%;
           width: 100%;
           h1 {
             margin: 0;
@@ -73,11 +73,11 @@ export const StyledContainer = styled.div`
           }
           &.nr2 {
             color: ${colors.green};
-            top: 23%;
+            top: 22%;
             left: -20px;
           }
           &.nr3 {
-            top: 22%;
+            top: 20%;
           }
 
           &.nr4 {

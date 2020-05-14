@@ -35,7 +35,9 @@ const SignIn = () => {
   return (
     <StyledContainer>
       <form onSubmit={onSubmit} className="form-in-middle">
+        <div />
         <div className="input-in-middle">
+          {inputs.email.length <= 4 ? <div className="reddott" /> : <div className="donedott" />}
           <Input
             type="email"
             autoComplete="email"
@@ -43,10 +45,12 @@ const SignIn = () => {
             id="email"
             inline
             name="email"
-            placeholder="förnamn.efternamn@mail.com"
             value={inputs.email}
             onChange={event => onValueChange('email', event.target.value)}
           />
+          <div className="redline" />
+          <div />
+          {inputs.password.length <= 5 ? <div className="reddott" /> : <div className="donedott" />}
           <Input
             type="password"
             autoComplete="current-password"
@@ -54,22 +58,32 @@ const SignIn = () => {
             id="password"
             inline
             name="password"
-            placeholder="Lösenord"
             value={inputs.password}
             onChange={event => onValueChange('password', event.target.value)}
           />
         </div>
+
+        {/*         <button
+          className="change"
+          onClick={() => {
+            resetPassword(user.email);
+            alert(
+              `Ett mail med instruktioner för att återställa ditt lösenord är skickat till ${user.email}`
+            );
+          }}
+        > 
+
+          Återställ lösenord
+        </button>*/}
         <div className="buttons">
           <Button type="submit" stretch nature="default">
-            LOGGA IN
+            LOGGA IN MEd E-POST
+          </Button>
+          <Button nature="default" stretch onClick={signInWithGoogle} className="landingbutton">
+            LOGGA IN MED GOOGLE
           </Button>
         </div>
       </form>
-      <div className="buttons">
-        <Button nature="default" stretch onClick={signInWithGoogle} className="landingbutton">
-          LOGGA IN MED GOOGLE
-        </Button>
-      </div>
     </StyledContainer>
   );
 };

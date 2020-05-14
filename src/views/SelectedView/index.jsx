@@ -94,22 +94,28 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
             {user.id === walk.user.id ? (
               <div>
                 <Link to={{ pathname: '/feed/' }}>
-                  <Button onClick={() => deleteWalkDocument(walk.walkId)}>
-                    Ta bort din promenad
+                  <Button stretch onClick={() => deleteWalkDocument(walk.walkId)}>
+                    TA BORT DIN PROMENAD
                   </Button>
                 </Link>
               </div>
             ) : !walk.attendingPeople ? (
               <Link to={{ pathname: '/matched/' + walk.walkId, state: { walk } }}>
-                <Button onClick={() => joinAWalk(user.id, walk.walkId)}>Följ med!</Button>
+                <Button stretch onClick={() => joinAWalk(user.id, walk.walkId)}>
+                  FÖLJ MED!
+                </Button>
               </Link>
             ) : walk.attendingPeople.find(id => id === user.id) ? (
               <Link to={{ pathname: '/feed/' }}>
-                <Button onClick={() => leaveAWalk(user.id, walk.walkId)}>Avboka promenad</Button>
+                <Button stretch onClick={() => leaveAWalk(user.id, walk.walkId)}>
+                  AVBOKA
+                </Button>
               </Link>
             ) : (
               <Link to={{ pathname: '/matched/' + walk.walkId, state: { walk } }}>
-                <Button onClick={() => joinAWalk(user.id, walk.walkId)}>Följ med</Button>
+                <Button stretch onClick={() => joinAWalk(user.id, walk.walkId)}>
+                  FÖLJ MED!
+                </Button>
               </Link>
             )}
           </div>

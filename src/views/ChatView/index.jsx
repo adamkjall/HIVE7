@@ -70,9 +70,10 @@ const ChatPageContent = ({ messages, sendMessage, user, userToChatWith, walkDate
                   const isUserMessage = user.id === message.id;
                   return (
                     <StyledMessage isUserMessage={isUserMessage} key={index}>
-                      {/* <p className="timeposted">{format(message.createdAt, 'H:m d MMMM')}</p> */}
+                      <div className="timebox">
+                        <p className="timeposted">{format(message.createdAt, 'H:m d MMMM')}</p>
+                      </div>
                       <div className="chat-box">
-                        {/* <p className="author">{message.name}</p> */}
                         <span className="text">{message.text}</span>
                       </div>
                     </StyledMessage>

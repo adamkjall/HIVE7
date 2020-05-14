@@ -69,11 +69,18 @@ export const StyledChatview = styled.div`
 export const StyledMessage = styled.div`
   padding: ${spacing.tiny} ${spacing.small} 0;
 
-  .timeposted {
+  .timebox {
     font-size: ${fontSize.microcopy};
-    margin: ${spacing.tiny};
+    width: fit-content;
+    min-width: 20%;
+    max-width: 60%;
+    padding: 0 ${spacing.tiny};
+    margin: 0 ${spacing.tiny};
+    margin-left: ${({ isUserMessage }) => (isUserMessage ? 'auto' : '0')};
+    p {
+      margin: 0;
+    }
   }
-
   .chat-box {
     width: fit-content;
     min-width: 20%;

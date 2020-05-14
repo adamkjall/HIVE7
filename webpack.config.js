@@ -150,8 +150,10 @@ export default {
         'font-src': [
           "'self'",
           'https://fonts.googleapis.com/',
+          'https://themes.googleusercontent.com',
           'https://fonts.gstatic.com/s/londrinasolid/v9/flUhRq6sw40kQEJxWNgkLuudGfNeKBM.woff2',
-          'https://fonts.gstatic.com/s/inter/v1/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZJhiJ-Ck-_seA.woff2'
+          'https://fonts.gstatic.com/s/inter/v1/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZJhiJ-Ck-_seA.woff2',
+          '*'
         ],
         'media-src': "'self'",
         'manifest-src': "'self'",

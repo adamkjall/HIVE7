@@ -4,26 +4,9 @@ import colors from 'tokens/colors.mjs';
 import spacing from 'tokens/spacing.mjs';
 
 export const StyledContainer = styled.div`
-  .headcontainer {
-    background-color: ${colors.gray5};
-    display: grid;
-    grid-template-columns: 50px 8fr;
-    h1 {
-      padding-top: 1rem;
-    }
-    margin: 0;
-  }
-
-  .waves {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    top: -5px;
-  }
-
   .h1-in-center {
     text-align: center;
+    color: ${colors.green};
   }
 
   .signup-form-container {

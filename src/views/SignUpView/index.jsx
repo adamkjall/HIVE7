@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
 import SignUp from '../../components/SignUp';
 import SignUpWithGoogle from '../../components/SignUpWithGoogle';
-
+import Header from '../../components/UI/Header';
 import Page from 'compositions/Page';
 
 import PropTypes from 'prop-types';
@@ -24,6 +23,7 @@ const SignUpView = ({ location }) => {
 
   return (
     <Page metadata={{ title: 'SignUp' }}>
+      <Header headline="Skapa profil" backbutton />
       <SignUp />
     </Page>
   );

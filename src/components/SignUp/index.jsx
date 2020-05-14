@@ -5,10 +5,8 @@ import { storage, auth, createUserProfileDocument } from '../../firebase/firebas
 import Button from '../UI/Button';
 import H1 from '../UI/H1';
 import Input from '../UI/Input';
-import BackButton from '../BackButton';
 import isValidDate from '../../helpers/functions/validDate';
 import makeStringtoBirthDate from '../../helpers/functions/makeStringtoBirthDate';
-import graywaves from '../../assets/icons/graywaves.svg';
 import chooseprofilepic from '../../assets/icons/chooseprofilepic.svg';
 import { StyledContainer } from './style';
 
@@ -120,11 +118,6 @@ const SignUp = () => {
 
   return (
     <StyledContainer>
-      <div className="headcontainer">
-        <BackButton />
-        <H1>Skapa konto</H1>
-      </div>
-      <img src={graywaves} className="waves" alt="wave" />
       <form onSubmit={onSubmit}>
         {!nextquestionens ? (
           <div>
@@ -227,7 +220,7 @@ const SignUp = () => {
             </div>
             <div className="buttondiv">
               <Button className="nextbutton" stretch onClick={onNext}>
-                Nästa
+                NÄSTA
               </Button>
             </div>
           </div>
@@ -327,7 +320,7 @@ const SignUp = () => {
             <div />
             <div className="buttondiv">
               <Button className="nextbutton" nature="default" stretch type="submit">
-                Skapa konto
+                SKAPA KONTO
               </Button>
             </div>
           </div>

@@ -8,8 +8,7 @@ import svLocale from 'date-fns/locale/sv';
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import { createWalkDocument } from '../../firebase/firebase.utils';
 
-import H1 from 'components/UI/H1';
-import BackButton from 'components/BackButton';
+import Header from 'components/UI/Header';
 import Button from 'components/UI/Button';
 import CheckBox from '../../components/UI/Checkbox';
 import Input from 'components/UI/Input';
@@ -120,12 +119,8 @@ const PostForm = () => {
 
   return (
     <StyledPostForm>
+      <Header headline="Ny promenad" backbutton />
       <form name="post-form" onSubmit={onSubmit}>
-        <div className="headcontainer">
-          <BackButton />
-          <H1>Ny promenad</H1>
-        </div>
-        <img src={graywaves} className="waves gray" alt="wave" />
         <div className="create-new-container">
           <div className="form-box1">
             <label

@@ -3,15 +3,12 @@ import { useHistory } from 'react-router-dom';
 
 import { updateUserProfileDocument } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
-import UploadFile from '../../components/UploadFile';
 
-import BackButton from '../BackButton';
+import Header from '../../components/UI/Header';
 import Button from '../UI/Button';
-import H1 from '../UI/H1';
 import Input from '../UI/Input';
 import isValidDate from '../../helpers/functions/validDate';
 import makeStringtoBirthDate from '../../helpers/functions/makeStringtoBirthDate';
-import graywaves from '../../assets/icons/graywaves.svg';
 
 import { StyledContainer } from './style';
 
@@ -22,7 +19,6 @@ const SignUpWithGoogle = () => {
   const [msgBirth, setMsgBirth] = useState('');
   const [msg, setMsg] = useState('');
   const [msglvl, setMsglvl] = useState('');
-  const [toogle, setToogle] = useState(false);
 
   const [inputs, setInputs] = useState({
     dateOfBirth: '',
@@ -66,11 +62,7 @@ const SignUpWithGoogle = () => {
 
   return (
     <StyledContainer>
-      <div className="headcontainer">
-        <BackButton />
-        <H1>Skapa konto</H1>
-      </div>
-      <img src={graywaves} className="waves" alt="wave" />
+      <Header headline="Skapa Profil" backbutton />
       <form onSubmit={onSubmit}>
         <p className="moreinfo">Vi behöver ytterligare information innan ditt konto är klart.</p>
         <div className="signup-form-container">

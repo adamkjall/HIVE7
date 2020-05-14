@@ -8,11 +8,10 @@ import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
-import H1 from 'components/UI/H1';
 import Alert from 'components/UI/Alert';
 import Input from 'components/UI/Input';
+import Header from 'components/UI/Header';
 
-import waves from '../../assets/icons/graywaves.svg';
 import avatar from '../../assets/icons/profilepic.svg';
 import searchicon from '../../assets/icons/search.svg';
 
@@ -35,10 +34,7 @@ const ChooseChatPageContent = ({ user, error, isLoading, conversations }) => {
     return (
       <React.Fragment>
         <StyledcChooseChatview>
-          <div className="message-head-container">
-            <H1>Meddelanden</H1>
-            <img src={waves} alt="wave" className="waves" />
-          </div>
+          <Header headline="Meddelanden" />
           <div className="search-div">
             <img src={searchicon} alt="sök" />
             <input

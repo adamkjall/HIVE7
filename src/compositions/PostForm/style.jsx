@@ -6,24 +6,6 @@ import spacing from 'tokens/spacing.mjs';
 import fontFamilies from 'tokens/fontFamilies.mjs';
 
 export const StyledPostForm = styled.div`
-  .headcontainer {
-    background-color: ${colors.gray5};
-    display: grid;
-    grid-template-columns: 50px 8fr;
-    h1 {
-      padding-top: 1rem;
-    }
-    margin: 0;
-  }
-
-  .waves {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    top: -7px;
-  }
-
   .timeduration {
     display: flex;
     flex-direction: column;

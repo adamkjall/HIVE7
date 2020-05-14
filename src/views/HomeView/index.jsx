@@ -47,9 +47,8 @@ const HomePageContent = ({ error, isLoading }) => {
             <div className="content page1">
               <div className="blobb">
                 <img src={blob1} alt="text" className="blobb-img" />
-
-                <div className="insindeblob">
-                  <H1>Gå Mamma!</H1>
+                <div className="insindeblob nr1">
+                  <H1>GÅ MAMA!</H1>
                   <p>
                     Promenera med mammor från hela världen för att upptäcka, lära och utvecklas
                     tillsammans.
@@ -72,10 +71,10 @@ const HomePageContent = ({ error, isLoading }) => {
             <div className="content page2">
               <div className="blobb">
                 <img src={blob2} alt="text" className="blobb-img" />
-                <div className="insindeblob">
+                <div className="insindeblob nr2">
                   <p>
-                    GÅ MAMA! hjälper dig att upptäcka nya platser tillsammans med andra mammor på
-                    promenader
+                    <span className="h-name">GÅ MAMA!</span>
+                    hjälper dig att upptäcka nya platser tillsammans med andra mammor på promenader
                   </p>
                 </div>
               </div>
@@ -93,10 +92,10 @@ const HomePageContent = ({ error, isLoading }) => {
             <div className="content page3">
               <div className="blobb">
                 <img src={blob3} alt="text" className="blobb-img" />
-                <div className="insindeblob">
+                <div className="insindeblob nr3">
                   <p>
-                    Med GÅ MAMA! får du ett utbyte av språk, erfarenheter och kultur genom att
-                    promenera med mammor från hela världen
+                    Med <span className="h-name">GÅ MAMA!</span> får du ett utbyte av språk,
+                    erfarenheter och kultur genom att promenera med mammor från hela världen
                   </p>
                 </div>
               </div>
@@ -116,15 +115,18 @@ const HomePageContent = ({ error, isLoading }) => {
             <div className="content page4">
               <div className="blobb">
                 <img src={blob4} alt="text" className="blobb-img" />
-                <div className="insindeblob">
-                  <p>Hitta nya vänner med GÅ MAMA! Allt blir roligare tillsammans!</p>
+                <div className="insindeblob nr4">
+                  <p>
+                    Hitta nya vänner med <span className="h-name">GÅ MAMA!</span> Allt blir roligare
+                    tillsammans!
+                  </p>
                 </div>
               </div>
 
               <div className="buttons">
                 <Link to="/signup">
                   <Button nature="default" stretch className="landingbutton">
-                    Skapa Konto
+                    SKAPA KONTO
                   </Button>
                 </Link>
                 <Button
@@ -133,7 +135,7 @@ const HomePageContent = ({ error, isLoading }) => {
                   onClick={signInWithGoogle}
                   className="landingbutton"
                 >
-                  Logga in med Google
+                  LOGGA IN MED GOOGLE
                 </Button>
               </div>
 
@@ -223,9 +225,9 @@ const HomeView = () => {
     <Page
       metadata={{
         // Those metadata are optional: they will be injected in the head thanks to react-helmet
-        description: 'This is our Gå Mama',
+        description: 'Gå Mama - en app för människor som vill träffa nya vänner.',
         title: 'Gå Mama',
-        lang: 'en'
+        lang: 'sv'
         // image: {
         //   alt: 'Some image',
         //   // (You could also inject an imported image here)

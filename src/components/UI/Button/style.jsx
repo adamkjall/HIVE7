@@ -27,6 +27,7 @@ export const StyledButton = styled.button`
   width: ${({ stretch }) => (stretch ? '100%' : 'auto')};
   padding: ${spacing.tiny} ${spacing.small};
   min-height: 3rem;
+  max-width: 400px;
   border: 0;
   border-radius: 999rem;
   font-family: 'Londrina Solid', cursive;

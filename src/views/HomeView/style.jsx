@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import colors from 'tokens/colors.mjs';
 import spacing from 'tokens/spacing.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
+import fontFamilies from 'tokens/fontFamilies.mjs';
 import landingimg1 from '../../assets/images/LANDINGPAGE1.jpg';
 import landingimg2 from '../../assets/images/LANDINGPAGE14.jpg';
 import landingimg3 from '../../assets/images/LANDINGPAGE9.jpg';
@@ -10,9 +11,11 @@ import landingimg4 from '../../assets/images/LANDINGPAGE6.jpg';
 
 export const StyledContainer = styled.div`
   .carousel {
+    width: 100%;
+    max-width: 420px;
     .content {
       height: 100vh;
-      width: 100vw;
+      width: 100%;
       display: grid;
       background-size: cover;
       grid-template-rows: 6fr 2fr 0.8fr 1fr;
@@ -30,6 +33,7 @@ export const StyledContainer = styled.div`
         background-image: url(${landingimg4});
       }
       .blobb {
+        max-width: 420px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -40,12 +44,45 @@ export const StyledContainer = styled.div`
           justify-content: center;
           color: ${colors.white};
           position: fixed;
-          top: 150px;
+          top: 20%;
           width: 100%;
+          h1 {
+            margin: 0;
+            font-size: 3.125rem;
+          }
+          h2 {
+            margin: 0;
+          }
+          .h-name {
+            font-family: ${fontFamilies.fontLight};
+            padding-right: 3px;
+            font-size: 1.13rem;
+          }
           p {
-            font-size: ${fontSizes.s};
-            max-width: 200px;
+            margin: 0;
+            font-size: 0.94rem;
+            max-width: 190px;
             text-align: center;
+          }
+          &.nr1 {
+            color: ${colors.greenLight};
+            p {
+              position: relative;
+              top: -10px;
+            }
+          }
+          &.nr2 {
+            color: ${colors.green};
+            top: 23%;
+            left: -20px;
+          }
+          &.nr3 {
+            top: 22%;
+          }
+
+          &.nr4 {
+            max-width: 160px;
+            top: 25%;
           }
         }
       }
@@ -54,7 +91,6 @@ export const StyledContainer = styled.div`
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 100%;
         a {
           width: 100%;
           display: flex;
@@ -73,7 +109,7 @@ export const StyledContainer = styled.div`
         display: flex;
         justify-content: center;
         h2 {
-          font-size: ${fontSizes.s};
+          font-size: 1rem;
           color: ${colors.white};
         }
       }
@@ -84,7 +120,7 @@ export const StyledContainer = styled.div`
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        width: 100vw;
+        width: 100%;
 
         .reddot {
           height: 10px;

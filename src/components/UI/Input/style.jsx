@@ -12,7 +12,7 @@ export const StyledInput = styled.input`
   width: 100%;
   padding: ${spacing.tiny};
   box-sizing: border-box;
-  font-size: ${fontSizes.body1};
+  font-size: ${fontSizes.s};
   line-height: 1;
   border: 1px solid ${colors.gray3};
   border-radius: 10px;

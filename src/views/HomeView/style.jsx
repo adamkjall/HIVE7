@@ -4,10 +4,10 @@ import colors from 'tokens/colors.mjs';
 import spacing from 'tokens/spacing.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
 import fontFamilies from 'tokens/fontFamilies.mjs';
-import landingimg1 from '../../assets/images/LANDINGPAGE1.jpg';
-import landingimg2 from '../../assets/images/LANDINGPAGE14.jpg';
-import landingimg3 from '../../assets/images/LANDINGPAGE9.jpg';
-import landingimg4 from '../../assets/images/LANDINGPAGE6.jpg';
+import landingimg1 from '../../assets/images/landingpage1.jpg';
+import landingimg2 from '../../assets/images/landingpage2.jpg';
+import landingimg3 from '../../assets/images/landingpage3.jpg';
+import landingimg4 from '../../assets/images/landingpage4.jpg';
 
 export const StyledContainer = styled.div`
   .carousel {

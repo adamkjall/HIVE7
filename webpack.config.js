@@ -128,6 +128,7 @@ export default {
         'default-src': "'self'",
         'script-src': [
           "'self'",
+          'blob:',
           'https://storage.googleapis.com/',
           'https://fcm.googleapis.com/fcm/notification',
           'https://polyfill.io/'
@@ -136,6 +137,7 @@ export default {
         'img-src': [
           "'self'",
           'data:',
+          'blob:',
           'https://google.com/images',
           'http://localhost:3000/favicon.ico',
           'https://*.googleusercontent.com',
@@ -157,7 +159,7 @@ export default {
         ],
         'media-src': "'self'",
         'manifest-src': "'self'",
-        'worker-src': "'self'",
+        'worker-src': ["'self'", 'blob:'],
         'connect-src': [
           "'self'",
           'https://fonts.googleapis.com/',

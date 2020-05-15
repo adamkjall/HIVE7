@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import {
   storage,
@@ -7,18 +6,22 @@ import {
   createUserProfileDocument,
   updateUserProfileDocument
 } from '../../firebase/firebase.utils';
+import makeStringtoBirthDate from '../../helpers/functions/makeStringtoBirthDate';
+import isValidDate from '../../helpers/functions/validDate';
+import imageCompression from 'browser-image-compression';
+
 import Button from '../UI/Button';
 import H1 from '../UI/H1';
 import Checkbox from '../UI/Checkbox';
 import Input from '../UI/Input';
-import isValidDate from '../../helpers/functions/validDate';
-import makeStringtoBirthDate from '../../helpers/functions/makeStringtoBirthDate';
+
+import { CircularProgressbar } from 'react-circular-progressbar';
+
 import chooseprofilepic from '../../assets/icons/chooseprofilepic.svg';
 
-import { StyledContainer } from './style';
+import { StyledContainer, StyledProgress } from './style';
 
-const SignUp = () => {
-  const history = useHistory();
+const SignUp = ({ setIsSignedUp }) => {
   const [nextquestionens, setNextQuestions] = useState(false);
   const [msgName, setMsgName] = useState('');
   const [msgMail, setmsgMail] = useState('');
@@ -28,12 +31,30 @@ const SignUp = () => {
   const [passwordMsg, setPasswordMsg] = useState('');
   const [confirmPasswordMsg, setConfirmPasswordMsg] = useState('');
   const [msg, setMsg] = useState('');
-  const [file, setFile] = useState('');
-  const [filename, setFilename] = useState('');
+  const [file, setFile] = useState(null);
+  const [fileLoading, setFileLoading] = useState({
+    isLoading: false,
+    percent: 0
+  });
+  const [isCreatingAccount, setIsCreatingAccount] = useState(false);
 
-  const onFileChange = e => {
-    setFile(e.target.files[0]);
-    setFilename(e.target.files[0].name);
+  const onFileChange = async e => {
+    setFileLoading({ isLoading: false, percent: 0 });
+    const imageFile = e.target.files[0];
+    const options = {
+      maxWidthOrHeight: 300,
+      maxSizeMB: 0.5,
+      useWebWorker: true,
+      onProgress: percent => setFileLoading({ isLoading: true, percent })
+    };
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setFileLoading({ isLoading: false, percent: 0 });
+      setFile(compressedFile);
+      console.log('comp', compressedFile);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const [inputs, setInputs] = useState({
@@ -75,14 +96,24 @@ const SignUp = () => {
 
   const onSubmit = async event => {
     event.preventDefault();
+    if (isCreatingAccount) return;
 
     if (inputs.gender.length < 1) {
       setGender('Var vänlig fyll kön.');
+      return;
     }
     if (inputs.lvlOfSwedish < 1) {
       setMsglvl('Var vänlig klicka i ett alternativ');
+      return;
     }
+
+    if (!file) {
+      setMsg('Var vänlig välj en profilbild');
+      return;
+    }
+
     try {
+      setIsCreatingAccount(true);
       const { user } = await auth.createUserWithEmailAndPassword(inputs.email, inputs.password);
       await createUserProfileDocument(user, {
         displayName: inputs.username,
@@ -96,9 +127,8 @@ const SignUp = () => {
       uploadTask.on(
         'state_changed',
         snapshot => {
-          //progress function
-          console.log('saker händer.');
-          // set loading
+          //progress
+          const percent = Math.ceil((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         },
         error => {
           console.log(error);
@@ -107,12 +137,14 @@ const SignUp = () => {
           uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
             updateUserProfileDocument(user.uid, { photoUrl: downloadURL });
           });
-          // set not loading
-          history.push('/feed');
+
+          setIsCreatingAccount(false);
+          setIsSignedUp(true);
         }
       );
     } catch (error) {
-      setMsg('Något gick fel. Fyll i fälten och försök igen');
+      setMsg('Email adressen du angav är redan kopplad till ett konto');
+      setIsCreatingAccount(false);
       console.log('Error while sign up', error.message);
     }
   };
@@ -242,7 +274,7 @@ const SignUp = () => {
                 <div className="donedott nr2" />
               )}
               <div className="swedish">
-                <p>Hur är din svenskanivå? *</p>
+                <p className="bold">Hur är din svenskanivå? *</p>
                 <label htmlFor="newSwede">
                   <input
                     type="radio"
@@ -273,7 +305,7 @@ const SignUp = () => {
                 <div className="donedott nr2" />
               )}
               <div className="gender">
-                <p>Kön? *</p>
+                <p className="bold">Kön? *</p>
                 <label htmlFor="female">
                   <input
                     type="radio"
@@ -309,23 +341,45 @@ const SignUp = () => {
               </div>
               <div className="redline2" />
               <p className="red">{msgGender}</p>
-              {filename.length == 0 ? <div className="reddott" /> : <div className="donedott" />}
+              {!file ? <div className="reddott" /> : <div className="donedott" />}
               <div className="uploadfile-wrapper">
-                <input
-                  type="file"
-                  id="file"
-                  onChange={onFileChange}
-                  size="10000000"
-                  accept=".png, .jpg, .jpeg"
-                />
-                <label className="file-upload" htmlFor="file">
-                  Byt profilbild *
-                  {filename.length > 0 ? (
-                    <img src={chooseprofilepic} alt="chooseprofilepic" />
-                  ) : (
-                    <img src={chooseprofilepic} alt="chooseprofilepic" />
-                  )}
-                </label>
+                {fileLoading.isLoading ? (
+                  <StyledProgress>
+                    <CircularProgressbar
+                      percentage={fileLoading.percent}
+                      text={`${fileLoading.percent}%`}
+                    />
+                  </StyledProgress>
+                ) : (
+                  <>
+                    <input
+                      type="file"
+                      id="file"
+                      onChange={onFileChange}
+                      size="10000000"
+                      accept=".png, .jpg, .jpeg"
+                    />
+                    <label className="file-upload" htmlFor="file">
+                      <span className="bold">Välj profilbild *</span>
+                      {file ? (
+                        <>
+                          <img
+                            className="profile-picture cover"
+                            src={URL.createObjectURL(file)}
+                            alt="profile picture"
+                          />
+                          <span className="swap-profile-picture">Byt profilbild</span>
+                        </>
+                      ) : (
+                        <img
+                          className="profile-picture"
+                          src={chooseprofilepic}
+                          alt="profile picture"
+                        />
+                      )}
+                    </label>
+                  </>
+                )}
               </div>
               <div />
             </div>
@@ -336,7 +390,12 @@ const SignUp = () => {
               clickHandler={event => onValueChange('rigths', event.target.value)}
             />
             <div className="buttondiv">
-              <Button className="nextbutton" nature="default" stretch type="submit">
+              <Button
+                className={`nextbutton ${isCreatingAccount ? 'grey' : ''}`}
+                nature="default"
+                stretch
+                type="submit"
+              >
                 SKAPA KONTO
               </Button>
             </div>

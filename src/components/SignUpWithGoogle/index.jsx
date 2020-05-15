@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import { updateUserProfileDocument } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
@@ -12,9 +11,8 @@ import makeStringtoBirthDate from '../../helpers/functions/makeStringtoBirthDate
 
 import { StyledContainer } from './style';
 
-const SignUpWithGoogle = () => {
+const SignUpWithGoogle = ({ setIsSignedUp }) => {
   const { user } = useContext(AuthenticationContext);
-  const history = useHistory();
   const [msgGender, setGender] = useState('');
   const [msgBirth, setMsgBirth] = useState('');
   const [msg, setMsg] = useState('');
@@ -44,8 +42,7 @@ const SignUpWithGoogle = () => {
           lvlOfSwedish: inputs.lvlOfSwedish,
           gender: inputs.gender
         });
-
-        history.push('/feed');
+        setIsSignedUp(true);
       } catch (error) {
         setMsg('Fyll i fälten och försök igen');
         console.log('Error while sign up', error.message);

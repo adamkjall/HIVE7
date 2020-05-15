@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { storage, auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+import {
+  storage,
+  auth,
+  createUserProfileDocument,
+  updateUserProfileDocument
+} from '../../firebase/firebase.utils';
 import Button from '../UI/Button';
 import H1 from '../UI/H1';
 import Checkbox from '../UI/Checkbox';
@@ -77,10 +82,8 @@ const SignUp = () => {
     if (inputs.lvlOfSwedish < 1) {
       setMsglvl('Var vänlig klicka i ett alternativ');
     }
-
     try {
       const { user } = await auth.createUserWithEmailAndPassword(inputs.email, inputs.password);
-
       await createUserProfileDocument(user, {
         displayName: inputs.username,
         dateOfBirth: makeStringtoBirthDate(inputs.dateOfBirth),
@@ -88,23 +91,26 @@ const SignUp = () => {
         gender: inputs.gender
       });
 
-      const uploadTask = await storage.ref(`profile-pictures/${user.id}`).put(file); // set unique path
+      const uploadTask = storage.ref(`profile-pictures/${user.uid}`).put(file); // set unique path
 
-      await uploadTask.on(
+      uploadTask.on(
         'state_changed',
         snapshot => {
           //progress function
+          console.log('saker händer.');
+          // set loading
         },
         error => {
           console.log(error);
         },
         () => {
           uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-            createUserProfileDocument(user.id, { photoUrl: downloadURL });
+            updateUserProfileDocument(user.uid, { photoUrl: downloadURL });
           });
+          // set not loading
+          history.push('/feed');
         }
       );
-      history.push('/feed');
     } catch (error) {
       setMsg('Något gick fel. Fyll i fälten och försök igen');
       console.log('Error while sign up', error.message);
@@ -304,9 +310,14 @@ const SignUp = () => {
               <div className="redline2" />
               <p className="red">{msgGender}</p>
               {filename.length == 0 ? <div className="reddott" /> : <div className="donedott" />}
-              {/* funkar inte då man inte har ett id förren skapa knappen. */}
               <div className="uploadfile-wrapper">
-                <input type="file" id="file" onChange={onFileChange} size="10000000" />
+                <input
+                  type="file"
+                  id="file"
+                  onChange={onFileChange}
+                  size="10000000"
+                  accept=".png, .jpg, .jpeg"
+                />
                 <label className="file-upload" htmlFor="file">
                   Byt profilbild *
                   {filename.length > 0 ? (
@@ -319,13 +330,11 @@ const SignUp = () => {
               <div />
             </div>
             <p className="red the-bottom-line">{msg}</p>
-
             <Checkbox
               id="rigths"
               labelrigth="Jag godkänner allmänna villkoren."
               clickHandler={event => onValueChange('rigths', event.target.value)}
             />
-
             <div className="buttondiv">
               <Button className="nextbutton" nature="default" stretch type="submit">
                 SKAPA KONTO

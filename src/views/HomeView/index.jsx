@@ -61,7 +61,6 @@ const HomePageContent = ({ error, isLoading }) => {
                   Har du redan ett konto? <span>Logga in</span>
                 </H3>
               </Link>
-
               <div className="pagnation">
                 <div className="reddot" />
                 <div className="dott" onClick={() => reactSwipeEl.next()} />
@@ -69,7 +68,6 @@ const HomePageContent = ({ error, isLoading }) => {
                 <div className="dott" onClick={() => reactSwipeEl.slide(3, 300)} />
               </div>
             </div>
-
             <div className="content page2">
               <div className="blobb">
                 <img src={blob2} alt="text" className="blobb-img" />
@@ -109,7 +107,6 @@ const HomePageContent = ({ error, isLoading }) => {
                   Har du redan ett konto? <span>Logga in</span>
                 </H3>
               </Link>
-
               <div className="pagnation">
                 <div className="dott" onClick={() => reactSwipeEl.slide(0, 300)} />
                 <div className="dott" onClick={() => reactSwipeEl.prev()} />
@@ -117,7 +114,6 @@ const HomePageContent = ({ error, isLoading }) => {
                 <div className="dott" onClick={() => reactSwipeEl.next()} />
               </div>
             </div>
-
             <div className="content page4">
               <div className="blobb nr4">
                 <H1>Skapa konto</H1>
@@ -128,7 +124,6 @@ const HomePageContent = ({ error, isLoading }) => {
                   </p>
                 </div>
               </div>
-
               <div className="buttons">
                 <Link to="/signup">
                   <Button nature="default" stretch className="landingbutton">
@@ -144,13 +139,11 @@ const HomePageContent = ({ error, isLoading }) => {
                   SKAPA KONTO MED GOOGLE
                 </Button>
               </div>
-
               <Link to="/login" className="link-login">
                 <H3>
                   Har du redan ett konto? <span>Logga in</span>
                 </H3>
               </Link>
-
               <div className="pagnation">
                 <div className="dott" onClick={() => reactSwipeEl.slide(0, 300)} />
                 <div className="dott" onClick={() => reactSwipeEl.slide(1, 300)} />

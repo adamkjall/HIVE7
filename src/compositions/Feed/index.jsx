@@ -13,7 +13,7 @@ const Feed = ({ walks }) => (
     <StyledGreetingsBox>
       <H1 className="title">Välkommen till GÅ MAMA!</H1>
       <p className="text">Här kan du se tillgängliga promenader att hänga med på.</p>
-      <img className="waves" src={shortWaves} />
+      <img className="waves" src={shortWaves} alt="wave" />
     </StyledGreetingsBox>
     {walks &&
       walks.map((walk, index) => {

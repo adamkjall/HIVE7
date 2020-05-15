@@ -13,6 +13,8 @@ export const StyledPostForm = styled.div`
     margin-left: ${spacing.medium};
 
     span {
+      position: relative;
+      top: -5px;
       padding: 10px;
     }
   }
@@ -31,6 +33,10 @@ export const StyledPostForm = styled.div`
         display: grid;
         grid-template-columns: 50px 1fr;
         margin: ${spacing.tiny} 0;
+
+        img {
+          justify-self: center;
+        }
       }
 
       .when {
@@ -105,14 +111,17 @@ export const StyledPostForm = styled.div`
       }
     }
     .form-box2 {
-      padding: ${spacing.small} 0;
+      padding: ${spacing.small} 0 0;
       border-bottom: 2px solid ${colors.gray4};
     }
     .form-box3 {
       display: grid;
       grid-template-columns: 50px 1fr;
-      margin: ${spacing.tiny} 0;
-      padding: ${spacing.tiny} 0;
+      margin: ${spacing.small} 0;
+      img {
+        justify-self: center;
+        padding-top: 3px;
+      }
       .greeting {
         font-size: ${fontSizes.m};
         font-family: ${fontFamilies.fontRegular}, 'Verdana';
@@ -121,6 +130,7 @@ export const StyledPostForm = styled.div`
         height: 100px;
         box-sizing: border-box;
         resize: none;
+        outline: none;
       }
     }
     .button-div {

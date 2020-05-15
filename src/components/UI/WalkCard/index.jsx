@@ -7,7 +7,7 @@ import getDateTimeString from '../../../helpers/functions/getDateTimeString.jsx'
 import { getUserData } from '../../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../../contexts/AuthenticationContext';
 
-import H1 from '../H1';
+import H3 from '../H3';
 
 import location from '../../../assets/icons/location.svg';
 import avatar from '../../../assets/icons/profilepic.svg';
@@ -46,7 +46,7 @@ const WalkCard = ({ walk }) => {
 
   const sidebarContent = !walk.attendingPeople.length ? (
     <>
-      <H1 className="author">{walk.user.displayName.split(' ')[0]}</H1>
+      <H3 className="author">{walk.user.displayName.split(' ')[0]}</H3>
       <img className="avatar border" src={walk.user.photoUrl || avatar} alt="avatar" />
       <span>{calculateAge(walk.user.dateOfBirth)} år</span>
       <div className="dott" />
@@ -90,8 +90,8 @@ const WalkCard = ({ walk }) => {
           <span>{walk.timeduration}</span>
           <img src={location} alt="where" />
           <span>{walk.where}</span>
-          <img src={citat} alt="where" />
-          <span>
+          <img src={citat} alt="where" className="quote" />
+          <span className="italic">
             {walk.introtext.length > 40 ? walk.introtext.slice(0, 40) + '...' : walk.introtext}
           </span>
         </div>

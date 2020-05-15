@@ -18,14 +18,15 @@ import H3 from 'components/UI/H3';
 import calculateAge from '../../helpers/functions/calculateAge';
 import avatar from '../../assets/icons/profilepic.svg';
 import UploadFile from '../../components/UploadFile';
-
+import Button from '../../components/UI/Button';
 import { StyledPrivate } from './style';
 
 const PrivateView = () => {
-  const [toogle, setToogle] = useState(false);
+  const [toogleChangePic, setToogleChangePic] = useState(false);
   const history = useHistory();
   const { user } = useContext(AuthenticationContext);
-  const [oldName, setOldName] = useState(null);
+  const [toogleReadMore, setToogleReadMore] = useState(false);
+  const [toogleDelete, setToogleDelete] = useState(false);
 
   const handleDeleteAccount = () => {
     () => deleteUserAccount(user.id);
@@ -46,81 +47,58 @@ const PrivateView = () => {
               role="button"
               aria-label="toogle"
               onClick={() => {
-                setToogle(!toogle);
-              }}
-              onKeyDown={() => {
-                setToogle(!toogle);
+                setToogleChangePic(!toogleChangePic);
               }}
             >
-              Byt bild
+              Byt profilbild
             </span>{' '}
-            {toogle ? <UploadFile /> : null}
+            {toogleChangePic && <UploadFile />}
             <H3 className="user">
-              {user.displayName} &#9679; {calculateAge(user.dateOfBirth)} år{' '}
+              {user.displayName.split(' ')[0]} <div className="greendott" />{' '}
+              {calculateAge(user.dateOfBirth)} år{' '}
             </H3>
             <p className="usersage">{user.lvlOfSwedish}</p>
           </div>
 
           <div className="change-allinfo-wrapper">
             <div>
-              <p className="bold">E-postadress:</p>
+              <p className="bold">E-post:</p>
               <div className="changecontainer">
                 <span className="display">{user.email}</span>
-                <button aria-label="ändra e-post" className="change">
-                  Ändra
-                </button>
-              </div>
-            </div>
-            <div>
-              <p className="bold">Användarnamn:</p>
-              <div className="changecontainer">
-                <span className="display">{user.displayName}</span>
-                <button
-                  aria-label="ändra namn"
-                  className="change"
-                  onClick={() => {
-                    if (!oldName) {
-                      setOldName(user.displayName);
-                      updateDisplayName('Boris');
-                    } else {
-                      updateDisplayName(oldName);
-                      setOldName(null);
-                    }
-                  }}
-                >
-                  Ändra
-                </button>
-              </div>
-              <div>
-                <p className="bold">Lösenord:</p>
-                <div className="changecontainer">
-                  <span className="display"> ******</span>
-                  <button
-                    aria-label="ändra lösenord"
-                    className="change"
-                    onClick={() => {
-                      updatePassword('hiveseven');
-                      alert('Ditt lösenord är nu "hiveseven"');
-                    }}
-                  >
-                    Ändra till hiveseven
-                  </button>
-
-                  <button
-                    className="change"
-                    onClick={() => {
-                      resetPassword(user.email);
-                      alert(
-                        `Ett mail med instruktioner för att återställa ditt lösenord är skickat till ${user.email}`
-                      );
-                    }}
-                  >
-                    Återställ lösenord
-                  </button>
-                </div>
               </div>
             </div>
             <div className="logut-container">
+              <button className="logut" onClick={() => setToogleReadMore(!toogleReadMore)}>
+                <p className="bold">Allmänna villkor</p>
+              </button>
+              {toogleReadMore && (
+                <div>
+                  <p>Allmänna villkor</p>
+                </div>
+              )}
+              {/*     
+              <button
+                aria-label="ändra lösenord"
+                className="change"
+                onClick={() => {
+                  updatePassword('hiveseven');
+                  alert('Ditt lösenord är nu "hiveseven"');
+                }}
+              >
+                Ändra till hiveseven
+              </button>
+              <button
+                className="change"
+                onClick={() => {
+                  resetPassword(user.email);
+                  alert(
+                    `Ett mail med instruktioner för att återställa ditt lösenord är skickat till ${user.email}`
+                  );
+                }}
+              >
+                Återställ lösenord
+              </button> 
+*/}
               <button
                 className="logut"
                 aria-label="logga ut"
@@ -128,9 +106,18 @@ const PrivateView = () => {
               >
                 <p className="bold">Logga ut</p>
               </button>
-              <button className="logut delete" onClick={handleDeleteAccount}>
+
+              <button className="logut delete" onClick={() => setToogleDelete(!toogleDelete)}>
                 <p className="bold">Ta bort konto</p>
               </button>
+              {toogleDelete && (
+                <div>
+                  <p>Vill du verkligen ta bort ditt konto?</p>
+                  <Button className="warning" onClick={handleDeleteAccount}>
+                    TA BORT MITT KONTO
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </StyledPrivate>

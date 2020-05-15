@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import colors from 'tokens/colors.mjs';
 import spacing from 'tokens/spacing.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
+import fontFamilies from 'tokens/fontFamilies.mjs';
 
 export const StyledFeedView = styled.div`
   height: calc(100vh - 48px);
@@ -24,6 +25,8 @@ export const StyledNav = styled.nav`
   height: 86px;
 
   button {
+    font-family: ${fontFamilies.fontRegular};
+    letter-spacing: 0.5px;
     display: flex;
     justify-content: center;
     align-items: center;

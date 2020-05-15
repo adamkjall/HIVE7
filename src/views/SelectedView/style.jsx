@@ -14,7 +14,7 @@ export const StyledSelectedWalk = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: ${spacing.small};
+    padding: 0 ${spacing.small};
     background-color: ${colors.gray5};
     width: 100%;
 
@@ -47,6 +47,8 @@ export const StyledSelectedWalk = styled.div`
       height: 5px;
       border-radius: 999rem;
       margin: 0.5rem;
+      position: relative;
+      top: 2px;
     }
     .authordata {
       display: flex;
@@ -59,6 +61,7 @@ export const StyledSelectedWalk = styled.div`
     }
     .quote {
       font-size: ${fontSizes.s};
+      text-align: center;
       margin-bottom: 0.8rem;
       span {
         margin: 0.3rem;
@@ -71,6 +74,9 @@ export const StyledSelectedWalk = styled.div`
     row-gap: 10px;
     width: 300px;
     padding: 1rem 0;
+    img {
+      justify-self: center;
+    }
     p {
       margin: 0;
     }
@@ -83,10 +89,21 @@ export const StyledSelectedWalk = styled.div`
     row-gap: 10px;
     border-top: 1.5px solid ${colors.gray4};
     padding: 1rem 0;
-    margin-bottom: 1.6rem;
+    img {
+      justify-self: center;
+    }
   }
 
-  .buttons-wrapper {
-    display: grid;
+  .buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    button {
+      position: fixed;
+      bottom: 1rem;
+      width: 90%;
+      margin: 5vw;
+    }
   }
 `;

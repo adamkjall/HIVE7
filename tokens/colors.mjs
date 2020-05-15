@@ -14,6 +14,7 @@ const colors = {
   gray2: 'rgba(130, 130, 130, 1)',
   gray1: 'rgba(79, 79, 79, 1)',
   white: 'rgba(255, 255, 255, 1)',
+  white2: 'rgba(251, 251, 251, 1)',
   black: 'rgba(51, 51, 51, 1)'
 };
 

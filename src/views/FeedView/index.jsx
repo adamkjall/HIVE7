@@ -59,7 +59,7 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
           </button>
           <button onClick={() => setActiveTab(1)} className={activeTab === 1 ? 'active' : null}>
             <p>
-              Mina <br /> Promenader
+              Dina <br /> Promenader
             </p>
           </button>
         </StyledNav>

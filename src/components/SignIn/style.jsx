@@ -8,29 +8,53 @@ export const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-
-  label {
-    font-size: ${fontSizes.s};
-  }
 
   .form-in-middle {
     display: flex;
     flex-direction: column;
+    align-items: space-between;
+    justify-content: space-between;
+    height: 80vh;
 
     .input-in-middle {
       width: 90vw;
-      padding: 1rem 0;
+      margin: 0 auto 0;
+      max-width: 315px;
       display: grid;
-      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 50px 8fr;
+      grid-template-rows: 1fr 1px 1fr 1px;
+      label {
+        font-size: ${fontSizes.s};
+      }
+      .reddott {
+        position: relative;
+        left: 15px;
+        top: 32px;
+      }
 
-      .buttons {
-        width: 90vw;
+      .donedott {
+        position: relative;
+        left: 15px;
+        top: 32px;
+      }
+
+      .redline {
+        width: 1px;
+        height: 50px;
+        background-color: ${colors.red};
+        position: relative;
+        left: 21px;
+        top: -24px;
       }
     }
-  }
 
-  .buttons {
-    width: 90vw;
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      button {
+        margin-bottom: 1rem;
+      }
+    }
   }
 `;

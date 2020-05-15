@@ -10,6 +10,7 @@ import { StyledContainer } from './style';
 
 const SignIn = () => {
   const { login } = useContext(AuthenticationContext);
+  const [toogleForgotten, setToogleForgotten] = useState(false);
   const [inputs, setInputs] = useState({
     email: '',
     password: ''
@@ -35,9 +36,7 @@ const SignIn = () => {
   return (
     <StyledContainer>
       <form onSubmit={onSubmit} className="form-in-middle">
-        <div />
         <div className="input-in-middle">
-          {inputs.email.length <= 4 ? <div className="reddott" /> : <div className="donedott" />}
           <Input
             type="email"
             autoComplete="email"
@@ -48,41 +47,48 @@ const SignIn = () => {
             value={inputs.email}
             onChange={event => onValueChange('email', event.target.value)}
           />
-          <div className="redline" />
-          <div />
-          {inputs.password.length <= 5 ? <div className="reddott" /> : <div className="donedott" />}
-          <Input
-            type="password"
-            autoComplete="current-password"
-            label="Lösenord"
-            id="password"
-            inline
-            name="password"
-            value={inputs.password}
-            onChange={event => onValueChange('password', event.target.value)}
-          />
+          {toogleForgotten ? null : (
+            <Input
+              type="password"
+              autoComplete="current-password"
+              label="Lösenord"
+              id="password"
+              inline
+              name="password"
+              value={inputs.password}
+              onChange={event => onValueChange('password', event.target.value)}
+            />
+          )}
+          <div className="forgotten" onClick={() => setToogleForgotten(!toogleForgotten)}>
+            Glömt lösenord
+          </div>
         </div>
-
-        {/*         <button
-          className="change"
-          onClick={() => {
-            resetPassword(user.email);
-            alert(
-              `Ett mail med instruktioner för att återställa ditt lösenord är skickat till ${user.email}`
-            );
-          }}
-        > 
-
-          Återställ lösenord
-        </button>*/}
-        <div className="buttons">
-          <Button type="submit" stretch nature="default">
-            LOGGA IN MEd E-POST
-          </Button>
-          <Button nature="default" stretch onClick={signInWithGoogle} className="landingbutton">
-            LOGGA IN MED GOOGLE
-          </Button>
-        </div>
+        {toogleForgotten ? (
+          <div className="buttons">
+            <Button
+              type="submit"
+              onClick={() => {
+                resetPassword(user.email);
+                alert(
+                  `Ett mail med instruktioner för att återställa ditt lösenord är skickat till ${user.email}`
+                );
+              }}
+              stretch
+              nature="default"
+            >
+              ÅTERSTÄLL LÖSENORD
+            </Button>
+          </div>
+        ) : (
+          <div className="buttons">
+            <Button type="submit" stretch nature="default">
+              LOGGA IN MEd E-POST
+            </Button>
+            <Button nature="default" stretch onClick={signInWithGoogle} className="landingbutton">
+              LOGGA IN MED GOOGLE
+            </Button>
+          </div>
+        )}
       </form>
     </StyledContainer>
   );

@@ -4,10 +4,10 @@ import colors from 'tokens/colors.mjs';
 import spacing from 'tokens/spacing.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
 import fontFamilies from 'tokens/fontFamilies.mjs';
-import landingimg1 from '../../assets/images/LANDINGPAGE1.jpg';
-import landingimg2 from '../../assets/images/LANDINGPAGE14.jpg';
-import landingimg3 from '../../assets/images/LANDINGPAGE9.jpg';
-import landingimg4 from '../../assets/images/LANDINGPAGE6.jpg';
+import landingimg1 from '../../assets/images/landingpage1.jpg';
+import landingimg2 from '../../assets/images/landingpage2.jpg';
+import landingimg3 from '../../assets/images/landingpage3.jpg';
+import landingimg4 from '../../assets/images/landingpage4.jpg';
 
 export const StyledContainer = styled.div`
   .carousel {
@@ -79,10 +79,13 @@ export const StyledContainer = styled.div`
           &.nr3 {
             top: 20%;
           }
-
-          &.nr4 {
-            max-width: 160px;
-            top: 25%;
+        }
+        &.nr4 {
+          flex-direction: column;
+          text-align: center;
+          color: ${colors.white};
+          p {
+          max-width 240px;
           }
         }
       }
@@ -108,9 +111,13 @@ export const StyledContainer = styled.div`
       .link-login {
         display: flex;
         justify-content: center;
-        h2 {
-          font-size: 1rem;
+        h3 {
+          font-size: ${fontSizes.s};
           color: ${colors.white};
+          span {
+            font-weight: bold;
+            text-decoration: underline;
+          }
         }
       }
 

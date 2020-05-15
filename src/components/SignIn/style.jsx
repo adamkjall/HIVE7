@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import spacing from 'tokens/spacing.mjs';
 import colors from 'tokens/colors.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
+import fontFamilies from 'tokens/fontFamilies.mjs';
 
 export const StyledContainer = styled.div`
   display: flex;
@@ -20,31 +21,16 @@ export const StyledContainer = styled.div`
       width: 90vw;
       margin: 0 auto 0;
       max-width: 315px;
-      display: grid;
-      grid-template-columns: 50px 8fr;
-      grid-template-rows: 1fr 1px 1fr 1px;
+
       label {
         font-size: ${fontSizes.s};
       }
-      .reddott {
-        position: relative;
-        left: 15px;
-        top: 32px;
-      }
 
-      .donedott {
-        position: relative;
-        left: 15px;
-        top: 32px;
-      }
-
-      .redline {
-        width: 1px;
-        height: 50px;
-        background-color: ${colors.red};
-        position: relative;
-        left: 21px;
-        top: -24px;
+      .forgotten {
+        font-size: ${fontSizes.s};
+        color: ${colors.red};
+        text-decoration: underline;
+        letter-spacing: 0.3px;
       }
     }
 

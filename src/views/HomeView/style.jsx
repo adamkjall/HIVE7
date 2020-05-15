@@ -79,10 +79,13 @@ export const StyledContainer = styled.div`
           &.nr3 {
             top: 20%;
           }
-
-          &.nr4 {
-            max-width: 160px;
-            top: 25%;
+        }
+        &.nr4 {
+          flex-direction: column;
+          text-align: center;
+          color: ${colors.white};
+          p {
+          max-width 240px;
           }
         }
       }
@@ -108,9 +111,13 @@ export const StyledContainer = styled.div`
       .link-login {
         display: flex;
         justify-content: center;
-        h2 {
-          font-size: 1rem;
+        h3 {
+          font-size: ${fontSizes.s};
           color: ${colors.white};
+          span {
+            font-weight: bold;
+            text-decoration: underline;
+          }
         }
       }
 

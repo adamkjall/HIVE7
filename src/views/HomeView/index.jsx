@@ -8,7 +8,7 @@ import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
 import H1 from 'components/UI/H1';
-import H2 from 'components/UI/H2';
+import H3 from 'components/UI/H3';
 import Alert from 'components/UI/Alert';
 import Paragraph from 'components/UI/Paragraph';
 import Button from 'components/UI/Button';
@@ -57,7 +57,9 @@ const HomePageContent = ({ error, isLoading }) => {
               </div>
               <div />
               <Link to="/login" className="link-login">
-                <H2>Har du redan ett konto? Logga in</H2>
+                <H3>
+                  Har du redan ett konto? <span>Logga in</span>
+                </H3>
               </Link>
 
               <div className="pagnation">
@@ -80,7 +82,9 @@ const HomePageContent = ({ error, isLoading }) => {
               </div>
               <div />
               <Link to="/login" className="link-login">
-                <H2>Har du redan ett konto? Logga in</H2>
+                <H3>
+                  Har du redan ett konto? <span>Logga in</span>
+                </H3>
               </Link>{' '}
               <div className="pagnation">
                 <div className="dott" onClick={() => reactSwipeEl.prev()} />
@@ -101,7 +105,9 @@ const HomePageContent = ({ error, isLoading }) => {
               </div>
               <div />
               <Link to="/login" className="link-login">
-                <H2>Har du redan ett konto? Logga in</H2>
+                <H3>
+                  Har du redan ett konto? <span>Logga in</span>
+                </H3>
               </Link>
 
               <div className="pagnation">
@@ -113,12 +119,12 @@ const HomePageContent = ({ error, isLoading }) => {
             </div>
 
             <div className="content page4">
-              <div className="blobb">
-                <img src={blob4} alt="text" className="blobb-img" />
-                <div className="insindeblob nr4">
+              <div className="blobb nr4">
+                <H1>Skapa konto</H1>
+                <div>
                   <p>
-                    Hitta nya vänner med <span className="h-name">GÅ MAMA!</span> Allt blir roligare
-                    tillsammans!
+                    för att upptäcka alla möjligheter med <span className="h-name">GÅ MAMA!</span>{' '}
+                    Allt börjar med en promenad ...
                   </p>
                 </div>
               </div>
@@ -140,7 +146,9 @@ const HomePageContent = ({ error, isLoading }) => {
               </div>
 
               <Link to="/login" className="link-login">
-                <H2>Har du redan ett konto? Logga in</H2>
+                <H3>
+                  Har du redan ett konto? <span>Logga in</span>
+                </H3>
               </Link>
 
               <div className="pagnation">

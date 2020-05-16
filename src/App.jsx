@@ -1,12 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import { NotificationContext } from 'contexts/NotificationContext';
 
 import ErrorBoundary from 'components/ErrorBoundary';
 import GlobalStyle from 'components/GlobalStyle';
 import ScrollToTop from 'components/ScrollToTop';
-import Dialog from 'components/UI/Dialog';
 import NotificationModal from 'compositions/NotificationModal';
+import OpenStreetMaps from 'components/OpenStreetMaps';
 
 // import InstallBanner from 'compositions/InstallBanner';
 // import CookiesConsentBanner from 'compositions/CookiesConsentBanner';

@@ -5,6 +5,8 @@ import fontSizes from 'tokens/fontSizes.mjs';
 import spacing from 'tokens/spacing.mjs';
 import fontFamilies from 'tokens/fontFamilies.mjs';
 
+import location from '../../assets/icons/location.svg';
+
 export const StyledPostForm = styled.div`
   .timeduration {
     display: flex;
@@ -141,5 +143,14 @@ export const StyledPostForm = styled.div`
         bottom: 1rem;
       }
     }
+  }
+`;
+
+export const StyledAutocompleteList = styled.ul`
+  list-style-image: url(${location});
+  margin: 0;
+
+  li {
+    margin: 0.5rem;
   }
 `;

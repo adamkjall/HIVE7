@@ -89,6 +89,7 @@ export const StyledSelectedWalk = styled.div`
     row-gap: 10px;
     border-top: 1.5px solid ${colors.gray4};
     padding: 1rem 0;
+    margin-bottom: 6rem;
     img {
       justify-self: center;
     }
@@ -104,6 +105,12 @@ export const StyledSelectedWalk = styled.div`
       bottom: 1rem;
       width: 90%;
       margin: 5vw;
+      z-index: 99999999;
     }
   }
+`;
+
+export const StyledMap = styled.div`
+  width: 100%;
+  height: 150px;
 `;

@@ -51,7 +51,6 @@ const SignUp = ({ setIsSignedUp }) => {
       const compressedFile = await imageCompression(imageFile, options);
       setFileLoading({ isLoading: false, percent: 0 });
       setFile(compressedFile);
-      console.log('comp', compressedFile);
     } catch (error) {
       console.log(error);
     }
@@ -352,13 +351,7 @@ const SignUp = ({ setIsSignedUp }) => {
                   </StyledProgress>
                 ) : (
                   <>
-                    <input
-                      type="file"
-                      id="file"
-                      onChange={onFileChange}
-                      size="10000000"
-                      accept=".png, .jpg, .jpeg"
-                    />
+                    <input type="file" id="file" onChange={onFileChange} accept="image/*" />
                     <label className="file-upload" htmlFor="file">
                       <span className="bold">Välj profilbild *</span>
                       {file ? (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import { Map, Marker, TileLayer } from 'react-leaflet';
 import { Icon } from 'leaflet';
 
 import mapIcon from 'assets/icons/map-marker.svg';
@@ -13,6 +13,7 @@ const OpenStreetMaps = ({ position }) => {
     iconAnchor: [30, 30], // point of the icon which will correspond to marker's location
     iconSize: [60, 60]
   });
+
   return (
     <StyledMap>
       <Map center={mapPosition} zoom={12}>
@@ -26,5 +27,4 @@ const OpenStreetMaps = ({ position }) => {
   );
 };
 
-// <Marker position={position} icon={icon} />
 export default OpenStreetMaps;

@@ -169,12 +169,8 @@ const HomeView = () => {
   // checkk if user logged in for the first time with google sign in
   // and redirect user to a new page to add additional data
   useEffect(() => {
-    if (isAuthenticated && user) {
-      history.push('/signup');
-    } else if (isAuthenticated) {
-      history.push('/feed');
-    }
-  }, [user, isAuthenticated, history]);
+    if (isAuthenticated) history.push('/feed');
+  }, [isAuthenticated, history]);
 
   useEffect(() => {
     // const fetchPosts = async () => {

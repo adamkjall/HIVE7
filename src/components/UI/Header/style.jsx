@@ -18,7 +18,7 @@ export const StyledHeader = styled.div`
   margin: 0;
   cursor: pointer;
   transition: 0.1s;
-  width: 100vw;
+  width: 100%;
 
   .headcontainer {
     background-color: ${colors.gray5};

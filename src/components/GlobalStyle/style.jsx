@@ -75,7 +75,7 @@ export const StyledGlobalStyle = createGlobalStyle`
 
   .avatar {
     border-radius: 999rem;
-    max-width: 93px;
+    object-fit: cover;
   }
 
   ::placeholder {

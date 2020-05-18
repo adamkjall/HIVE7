@@ -1,17 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { useHistory, Link as RouterLink } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
-import {
-  deleteAccount,
-  auth,
-  deleteUserAccount,
-  resetPassword,
-  updatePassword,
-  updateEmail,
-  updateDisplayName,
-  updateProfilePicture
-} from '../../firebase/firebase.utils';
+import { deleteUserAccount } from '../../firebase/firebase.utils';
 
 import Page from 'compositions/Page';
 import H3 from 'components/UI/H3';
@@ -29,8 +20,7 @@ const PrivateView = () => {
   const [toogleDelete, setToogleDelete] = useState(false);
 
   const handleDeleteAccount = () => {
-    () => deleteUserAccount(user.id);
-    history.push('/logout');
+    deleteUserAccount(user.id);
   };
 
   return (
@@ -76,29 +66,6 @@ const PrivateView = () => {
                   <p>Allmänna villkor</p>
                 </div>
               )}
-              {/*     
-              <button
-                aria-label="ändra lösenord"
-                className="change"
-                onClick={() => {
-                  updatePassword('hiveseven');
-                  alert('Ditt lösenord är nu "hiveseven"');
-                }}
-              >
-                Ändra till hiveseven
-              </button>
-              <button
-                className="change"
-                onClick={() => {
-                  resetPassword(user.email);
-                  alert(
-                    `Ett mail med instruktioner för att återställa ditt lösenord är skickat till ${user.email}`
-                  );
-                }}
-              >
-                Återställ lösenord
-              </button> 
-*/}
               <button
                 className="logut"
                 aria-label="logga ut"

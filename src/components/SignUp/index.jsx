@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { differenceInYears } from 'date-fns';
 
 import {
   storage,
@@ -78,9 +79,16 @@ const SignUp = ({ setIsSignedUp }) => {
 
   const onNext = async event => {
     event.preventDefault();
+    const year = inputs.dateOfBirth.slice(0, 4);
+    const month = inputs.dateOfBirth.slice(4, 6);
+    const day = inputs.dateOfBirth.slice(6, 8);
+    const diff = differenceInYears(new Date(), new Date(year, month - 1, day));
+
     if (inputs.username.length <= 1) {
       setMsgName('Fyll i Ditt namn.');
     } else if (isValidDate(inputs.dateOfBirth) == 'Not valid date') {
+      setMsgBirth('Fyll i det datum du är född.');
+    } else if (diff > 120) {
       setMsgBirth('Fyll i det datum du är född.');
     } else if (inputs.email.length <= 4) {
       setmsgMail('Fyll i din epost-adress');

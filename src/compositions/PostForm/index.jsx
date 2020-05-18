@@ -175,7 +175,7 @@ const PostForm = () => {
                   id="where"
                   inline
                   name="where"
-                  value={inputs.where}
+                  value={inputs.where.split(',')[0]}
                   onChange={event => onValueChange('where', event.target.value)}
                   autoComplete="off"
                 />

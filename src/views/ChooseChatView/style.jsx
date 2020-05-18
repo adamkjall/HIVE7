@@ -69,7 +69,7 @@ export const StyledcChooseChatview = styled.div`
 
         .avatar {
           grid-area: avatar;
-          height: 100%;
+          height: 45px;
           width: 45px;
 
           &.border {

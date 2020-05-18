@@ -11,7 +11,7 @@ export const StyledModal = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 999;
+  z-index: 999999999;
   overflow: hidden;
   color: ${colors.black};
   background-color: ${colors.white};
@@ -85,9 +85,8 @@ export const StyledImageContainer = styled.div`
   padding: 0 0.5rem;
 
   .avatar {
-    width: 100%;
-    border-radius: 50%;
-    min-width: 127px;
+    width: 127px;
+    height: 127px;
   }
 
   .dot {

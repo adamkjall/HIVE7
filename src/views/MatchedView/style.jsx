@@ -52,7 +52,7 @@ export const StyledMatchedwalk = styled.div`
 
     .avatar {
       width: 127px;
-      border-radius: 999rem;
+      height: 127px;
     }
   }
 

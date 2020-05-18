@@ -43,6 +43,14 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
       });
   }, [walk]);
 
+  const formatWhere = where => {
+    const placeArr = where.split(',');
+    const place = placeArr[0];
+    const zipCode = placeArr[placeArr.length - 2];
+    if (zipCode) return place + ', ' + zipCode;
+    return place;
+  };
+
   if (isLoading) {
     return <Loader fullScreen />;
   } else if (error) {
@@ -88,7 +96,7 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
             <img src={walking} alt="walk" />
             <p>{walk.timeduration}</p>
             <img src={location} alt="where" />
-            <p>{walk.where}</p>
+            <p>{formatWhere(walk.where)}</p>
           </div>
           <StyledMap>
             <OpenStreetMaps position={position} />

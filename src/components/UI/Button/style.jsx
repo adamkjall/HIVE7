@@ -29,6 +29,7 @@ export const StyledButton = styled.button`
   min-height: 3rem;
   max-width: 400px;
   border: 0;
+  outline: none;
   border-radius: 999rem;
   font-family: 'Londrina Solid', cursive;
   letter-spacing: 1px;

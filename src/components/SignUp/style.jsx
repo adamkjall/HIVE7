@@ -95,7 +95,11 @@ export const StyledContainer = styled.div`
     display: flex;
     justify-content: center;
     .nextbutton {
-      margin: 0 1rem;
+      margin: 1rem;
+
+      &.grey {
+        background-color: ${colors.gray4};
+      }
     }
   }
 
@@ -130,17 +134,106 @@ export const StyledContainer = styled.div`
     .file-upload {
       border: none;
       cursor: pointer;
-      max-width: 135px;
+
+      .profile-picture {
+        display: block;
+        width: 60px;
+        height: 60px;
+        border-radius: 999rem;
+        margin: 0.5rem 0;
+      }
+
+      .swap-profile-picture {
+        color: ${colors.red};
+        text-decoration: underline;
+      }
     }
   }
   .the-bottom-line {
     position: relative;
-    top: -70px;
     left: 80px;
   }
   .container {
     max-width: 80vw;
     position: relative;
     left: 2rem;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .cover {
+    object-fit: cover;
+  }
+`;
+
+export const StyledProgress = styled.div`
+  width: 4rem;
+  height: 4rem;
+  /*
+  * react-circular-progressbar styles
+  * All of the styles in this file are configurable!
+  */
+
+  .CircularProgressbar {
+    /*
+    * This fixes an issue where the CircularProgressbar svg has
+    * 0 width inside a "display: flex" container, and thus not visible.
+    */
+    width: 100%;
+    /*
+    * This fixes a centering issue with CircularProgressbarWithChildren:
+    * https://github.com/kevinsqi/react-circular-progressbar/issues/94
+    */
+    vertical-align: middle;
+  }
+
+  .CircularProgressbar .CircularProgressbar-path {
+    stroke: ${colors.red};
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease 0s;
+  }
+
+  .CircularProgressbar .CircularProgressbar-trail {
+    stroke: #d6d6d6;
+    /* Used when trail is not full diameter, i.e. when props.circleRatio is set */
+    stroke-linecap: round;
+  }
+
+  .CircularProgressbar .CircularProgressbar-text {
+    fill: ${colors.red};
+    font-size: 20px;
+    dominant-baseline: middle;
+    text-anchor: middle;
+  }
+
+  .CircularProgressbar .CircularProgressbar-background {
+    fill: #d6d6d6;
+  }
+
+  /*
+  * Sample background styles. Use these with e.g.:
+  *
+  *   <CircularProgressbar
+  *     className="CircularProgressbar-inverted"
+  *     background
+  *     percentage={50}
+  *   />
+  */
+  .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-background {
+    fill: ${colors.red};
+  }
+
+  .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-text {
+    fill: #fff;
+  }
+
+  .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-path {
+    stroke: #fff;
+  }
+
+  .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-trail {
+    stroke: transparent;
   }
 `;

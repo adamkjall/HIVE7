@@ -5,11 +5,13 @@ import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import { deleteWalkDocument, leaveAWalk, joinAWalk, getWalk } from '../../firebase/firebase.utils';
 import calculateAge from '../../helpers/functions/calculateAge.jsx';
 
+import OpenStreetMaps from 'components/OpenStreetMaps';
 import BackButton from 'components/BackButton';
 import Button from 'components/UI/Button';
 import Page from 'compositions/Page';
 import Loader from 'compositions/Loader';
 import Alert from 'components/UI/Alert';
+
 import quote from '../../assets/icons/quote.svg';
 import location from '../../assets/icons/location.svg';
 import avatar from '../../assets/icons/profilepic.svg';
@@ -20,10 +22,26 @@ import pets from '../../assets/icons/pets.svg';
 import bringPetsvg from '../../assets/icons/bringPets.svg';
 import chatbox from '../../assets/icons/chatbox.svg';
 
-import { StyledSelectedWalk } from './style';
+import { StyledSelectedWalk, StyledMap } from './style';
 
 const SelectedPageContent = ({ error, isLoading, walk }) => {
+  const [position, setPosition] = useState(null);
   const { user } = useContext(AuthenticationContext);
+
+  useEffect(() => {
+    if (!walk) return;
+
+    fetch(
+      `https://eu1.locationiq.com/v1/search.php?key=${process.env.LOCATION_IQ_API_KEY}&q=${walk.where}&format=json`
+    )
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.length) {
+          const fetchedPos = data[0];
+          setPosition([fetchedPos.lat, fetchedPos.lon]);
+        }
+      });
+  }, [walk]);
 
   if (isLoading) {
     return <Loader fullScreen />;
@@ -72,6 +90,9 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
             <img src={location} alt="where" />
             <p>{walk.where}</p>
           </div>
+          <StyledMap>
+            <OpenStreetMaps position={position} />
+          </StyledMap>
           <hr />
           <div className="walk-data2">
             <img src={friends} alt="bringfriend" />

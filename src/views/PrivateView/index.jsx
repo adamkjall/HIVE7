@@ -54,7 +54,7 @@ const PrivateView = () => {
             </span>{' '}
             {toogleChangePic && <UploadFile />}
             <H3 className="user">
-              {user.displayName.split(' ')[0]} <div className="greendott" />{' '}
+              {user.displayName ? user.displayName.split(' ')[0] : ''} <div className="greendott" />{' '}
               {calculateAge(user.dateOfBirth)} år{' '}
             </H3>
             <p className="usersage">{user.lvlOfSwedish}</p>

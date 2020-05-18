@@ -128,6 +128,8 @@ export default {
         'default-src': "'self'",
         'script-src': [
           "'self'",
+          "'unsafe-eval'",
+          'blob:',
           'https://storage.googleapis.com/',
           'https://fcm.googleapis.com/fcm/notification',
           'https://polyfill.io/'
@@ -136,6 +138,7 @@ export default {
         'img-src': [
           "'self'",
           'data:',
+          'blob:',
           'https://google.com/images',
           'http://localhost:3000/favicon.ico',
           'https://*.googleusercontent.com',
@@ -145,7 +148,8 @@ export default {
           'https://lh4.googleusercontent.com',
           'https://lh5.googleusercontent.com',
           'https://firestore.googleapis.com',
-          'https://firebasestorage.googleapis.com'
+          'https://firebasestorage.googleapis.com',
+          'https://*.tile.openstreetmap.org'
         ],
         'font-src': [
           "'self'",
@@ -157,7 +161,7 @@ export default {
         ],
         'media-src': "'self'",
         'manifest-src': "'self'",
-        'worker-src': "'self'",
+        'worker-src': ["'self'", 'blob:'],
         'connect-src': [
           "'self'",
           'https://fonts.googleapis.com/',
@@ -168,7 +172,9 @@ export default {
           'https://securetoken.googleapis.com',
           'https://firebaseinstallations.googleapis.com',
           'https://fcmregistrations.googleapis.com',
-          'https://fcm.googleapis.com/fcm/notification'
+          'https://fcm.googleapis.com/fcm/notification',
+          'https://eu1.locationiq.com',
+          'https://api.locationiq.com'
         ],
         'object-src': "'none'",
         'frame-src': ["'self'", 'https://hive7-fe724.firebaseapp.com/'],

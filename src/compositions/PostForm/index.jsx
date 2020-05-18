@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-// import { format, distanceInWordsStrict } from 'date-fns';
+
 import format from 'date-fns/format';
 import formatDistanceStrict from 'date-fns/formatDistanceStrict';
 import svLocale from 'date-fns/locale/sv';
 
+import useAutocomplete from 'hooks/useAutocomplete';
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import { createWalkDocument } from '../../firebase/firebase.utils';
 
@@ -22,7 +23,7 @@ import time from '../../assets/icons/time.svg';
 import gendericon from '../../assets/icons/gender-icon.svg';
 import graywaves from '../../assets/icons/graywaves.svg';
 
-import { StyledPostForm } from './style';
+import { StyledPostForm, StyledAutocompleteList } from './style';
 const PostForm = () => {
   const { user } = useContext(AuthenticationContext);
   const history = useHistory();
@@ -44,6 +45,7 @@ const PostForm = () => {
     filterGender: 'alla',
     introtext: ''
   });
+  const [searchResults, clearResults] = useAutocomplete(inputs.where);
 
   const onValueChange = (name, value) => {
     setInputs(inputs => ({
@@ -168,14 +170,29 @@ const PostForm = () => {
               <span>I vilket område vill du gå?</span>
             </div>
             {toogleWhere ? (
-              <div>
+              <div className="where-container">
                 <Input
                   id="where"
                   inline
                   name="where"
                   value={inputs.where}
                   onChange={event => onValueChange('where', event.target.value)}
+                  autoComplete="off"
                 />
+                <StyledAutocompleteList>
+                  {searchResults &&
+                    searchResults.map((res, i) => (
+                      <li
+                        key={i}
+                        onClick={() => {
+                          setInputs({ ...inputs, where: res.address });
+                          clearResults();
+                        }}
+                      >
+                        {res.address}
+                      </li>
+                    ))}
+                </StyledAutocompleteList>
                 <p className="red">{wheremsg}</p>
               </div>
             ) : null}

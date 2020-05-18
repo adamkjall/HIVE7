@@ -29,8 +29,6 @@ const AuthenticationContextProvider = props => {
           setIsAuthenticated(true);
         });
       } else {
-        //console.log('You are not Authenticated.');
-
         setIsAuthenticated(false);
         setUser(null);
       }
@@ -45,21 +43,12 @@ const AuthenticationContextProvider = props => {
     } catch (error) {
       console.log('Error while sign in', error.message);
     }
-
-    // NOTE: do not save sensitive data such as user personal informations in localStorage!
-    // Storage.set(TOKEN_STORAGE_KEY, parameters.token);
-
-    // setIsAuthenticated(true);
-    // setToken(parameters.token);
-    // setUser(Object.assign({}, parameters.user, user));
   };
 
   const logout = () => {
     auth.signOut();
-    //Storage.remove(TOKEN_STORAGE_KEY);
 
     setIsAuthenticated(false);
-    //setToken(undefined);
     setUser(undefined);
   };
 
@@ -67,11 +56,9 @@ const AuthenticationContextProvider = props => {
     <AuthenticationContext.Provider
       {...props}
       value={{
-        // Make sure to implement everything defined in the context file
         isAuthenticated,
         login,
         logout,
-        //token,
         user
       }}
     />

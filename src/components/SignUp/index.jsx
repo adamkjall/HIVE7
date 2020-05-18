@@ -380,7 +380,7 @@ const SignUp = ({ setIsSignedUp }) => {
             <Checkbox
               id="rigths"
               labelrigth="Jag godkänner allmänna villkoren."
-              clickHandler={event => onValueChange('rigths', event.target.value)}
+              clickHandler={() => onValueChange('rigths', event.target.value)}
             />
             <div className="buttondiv">
               <Button

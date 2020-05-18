@@ -3,7 +3,7 @@ import fontSizes from 'tokens/fontSizes.mjs';
 import colors from 'tokens/colors.mjs';
 import spacing from 'tokens/spacing.mjs';
 
-export const StyledContainer = styled.div`
+export const StyledSignUpContainer = styled.div`
   .h1-in-center {
     text-align: center;
     color: ${colors.green};
@@ -11,7 +11,7 @@ export const StyledContainer = styled.div`
 
   .signup-form-container {
     margin: 1rem auto 0;
-    max-width: 315px;
+    max-width: 420px;
     display: grid;
     grid-template-columns: 50px 8fr;
     grid-template-rows: 1fr 1px 1fr 1px 1fr 1px 1fr 1px 70px 40px;
@@ -19,7 +19,7 @@ export const StyledContainer = styled.div`
 
   .signup-form-container2 {
     margin: 1rem auto 0;
-    max-width: 315px;
+    max-width: 420px;
     display: grid;
     grid-template-columns: 50px 8fr;
     grid-template-rows: 1fr 12px 1fr 12px 1fr 0.6fr;
@@ -154,7 +154,7 @@ export const StyledContainer = styled.div`
     left: 80px;
   }
   .container {
-    max-width: 80vw;
+    max-width: 100vw;
     position: relative;
     left: 2rem;
   }

@@ -22,12 +22,6 @@ const LoadableView = loadable(props => import(`../views/${props.view}`));
 const AppRouter = () => (
   <Switch>
     <Route exact path="/" render={props => <LoadableView {...props} view="HomeView" />} />
-    <Route
-      exact
-      path="/examples"
-      render={props => <LoadableView {...props} view="ExamplesView" />}
-    />
-    <Route exact path="/form" render={props => <LoadableView {...props} view="FormView" />} />
     <Route exact path="/login" render={props => <LoadableView {...props} view="LoginView" />} />
     <Route exact path="/signup" render={props => <LoadableView {...props} view="SignUpView" />} />
     <ProtectedRoute
@@ -40,11 +34,6 @@ const AppRouter = () => (
       exact
       path="/private"
       render={props => <LoadableView {...props} view="PrivateView" />}
-    />
-    <ProtectedRoute
-      exact
-      path="/landing"
-      render={props => <LoadableView {...props} view="LandingView" />}
     />
     <ProtectedRoute
       exact

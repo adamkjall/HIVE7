@@ -13,13 +13,8 @@ const SignUpView = ({ location }) => {
   const [isSignedUp, setIsSignedUp] = useState(false);
   const { isAuthenticated, user } = useContext(AuthenticationContext);
 
-  console.log('inte auth');
-
   if (user) {
-    console.log('har user', user);
     if (!user.dateOfBirth || !user.gender || !user.lvlOfSwedish) {
-      console.log('google');
-
       return <SignUpWithGoogle setIsSignedUp={setIsSignedUp} />;
     }
     // If the user is already authenticated

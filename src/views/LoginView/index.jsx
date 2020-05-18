@@ -23,7 +23,6 @@ const LoginView = ({ location }) => {
   return (
     <Page metadata={{ title: 'Login' }}>
       <StyledContainer>
-        <Header headline="Logga in" backbutton />
         <SignIn />
       </StyledContainer>
     </Page>

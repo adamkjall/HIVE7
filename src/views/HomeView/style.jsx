@@ -31,6 +31,7 @@ export const StyledContainer = styled.div`
       }
       &.page4 {
         background-image: url(${landingimg4});
+        grid-template-rows: 4fr 4fr 0.8fr 1fr;
       }
       .blobb {
         max-width: 420px;
@@ -83,9 +84,10 @@ export const StyledContainer = styled.div`
         &.nr4 {
           flex-direction: column;
           text-align: center;
+          justify-content: flex-end;
           color: ${colors.white};
           p {
-          max-width 240px;
+            max-width: 240px;
           }
         }
       }
@@ -103,8 +105,10 @@ export const StyledContainer = styled.div`
             width: 90%;
           }
         }
-        .landingbutton {
+        .landingbutton.google {
           width: 90%;
+          background: white;
+          color: black;
         }
       }
 
@@ -122,7 +126,6 @@ export const StyledContainer = styled.div`
       }
 
       .pagnation {
-        background: linear-gradient(0deg, #2b5a51 0%, rgba(43, 90, 81, 0) 95.27%);
         background-position: center bottom;
         display: flex;
         justify-content: center;

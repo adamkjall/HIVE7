@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
-
+import { Link } from 'react-router-dom';
 import { signInWithGoogle } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 
 import Input from '../UI/Input';
 import Button from '../UI/Button';
-
+import H1 from '../UI/H1';
 import { StyledContainer } from './style';
 
 const SignIn = () => {
@@ -35,6 +35,7 @@ const SignIn = () => {
 
   return (
     <StyledContainer>
+      <H1>Välkommen tillbaka!</H1>
       <form onSubmit={onSubmit} className="form-in-middle">
         <div className="input-in-middle">
           <Input
@@ -60,7 +61,7 @@ const SignIn = () => {
             />
           )}
           <div className="forgotten" onClick={() => setToogleForgotten(!toogleForgotten)}>
-            Glömt lösenord
+            <p>Glömt lösenord</p>
           </div>
         </div>
         {toogleForgotten ? (
@@ -82,11 +83,22 @@ const SignIn = () => {
         ) : (
           <div className="buttons">
             <Button type="submit" stretch nature="default">
-              LOGGA IN MEd E-POST
+              LOGGA IN
             </Button>
-            <Button nature="default" stretch onClick={signInWithGoogle} className="landingbutton">
+            <p className="white or">eller</p>
+            <Button
+              nature="default"
+              stretch
+              onClick={signInWithGoogle}
+              className="landingbutton google"
+            >
               LOGGA IN MED GOOGLE
             </Button>
+            <Link to="/signup">
+              <p className="white link">
+                Har du inget konto? <span>Skapa konto</span>
+              </p>
+            </Link>
           </div>
         )}
       </form>

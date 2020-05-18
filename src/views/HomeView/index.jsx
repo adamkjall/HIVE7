@@ -134,7 +134,7 @@ const HomePageContent = ({ error, isLoading }) => {
                   nature="default"
                   stretch
                   onClick={signInWithGoogle}
-                  className="landingbutton"
+                  className="landingbutton google"
                 >
                   SKAPA KONTO MED GOOGLE
                 </Button>

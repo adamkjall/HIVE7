@@ -22,7 +22,7 @@ export const StyledNav = styled.nav`
   background: ${colors.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   margin: 0;
-  height: 86px;
+  height: 10vh;
 
   button {
     font-family: ${fontFamilies.fontRegular};
@@ -31,7 +31,6 @@ export const StyledNav = styled.nav`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding-top: ${spacing.tiny};
     color: ${colors.black};
     text-decoration: none;
     text-align: center;
@@ -40,7 +39,7 @@ export const StyledNav = styled.nav`
     background: none;
 
     p {
-      margin: 1.2rem 0 0 0;
+      margin: 0.5rem 0 0.3rem;
       font-size: ${fontSizes.s};
       color: ${colors.red};
     }

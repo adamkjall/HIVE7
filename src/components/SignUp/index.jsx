@@ -19,7 +19,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 
 import chooseprofilepic from '../../assets/icons/chooseprofilepic.svg';
 
-import { StyledContainer, StyledProgress } from './style';
+import { StyledSignUpContainer, StyledProgress } from './style';
 
 const SignUp = ({ setIsSignedUp }) => {
   const [nextquestionens, setNextQuestions] = useState(false);
@@ -156,7 +156,7 @@ const SignUp = ({ setIsSignedUp }) => {
   };
 
   return (
-    <StyledContainer>
+    <StyledSignUpContainer>
       <form onSubmit={onSubmit}>
         {!nextquestionens ? (
           <div>
@@ -380,7 +380,7 @@ const SignUp = ({ setIsSignedUp }) => {
             <Checkbox
               id="rigths"
               labelrigth="Jag godkänner allmänna villkoren."
-              clickHandler={event => onValueChange('rigths', event.target.value)}
+              clickHandler={() => onValueChange('rigths', event.target.value)}
             />
             <div className="buttondiv">
               <Button
@@ -395,7 +395,7 @@ const SignUp = ({ setIsSignedUp }) => {
           </div>
         )}
       </form>
-    </StyledContainer>
+    </StyledSignUpContainer>
   );
 };
 

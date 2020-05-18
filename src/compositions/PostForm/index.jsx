@@ -21,7 +21,6 @@ import bringPetsvg from '../../assets/icons/bringPets.svg';
 import walking from '../../assets/icons/walking.svg';
 import time from '../../assets/icons/time.svg';
 import gendericon from '../../assets/icons/gender-icon.svg';
-import graywaves from '../../assets/icons/graywaves.svg';
 
 import { StyledPostForm, StyledAutocompleteList } from './style';
 const PostForm = () => {
@@ -29,6 +28,8 @@ const PostForm = () => {
   const history = useHistory();
   const [msg, setMsg] = useState('');
   const [wheremsg, setWhereMsg] = useState('');
+  const [msgTime, setMsgTime] = useState('');
+  const [msgDuration, setMsgDuration] = useState('');
 
   const [toogleWhen, setToogleWhen] = useState(false);
   const [toogleWhere, setToogleWhere] = useState(false);
@@ -60,11 +61,17 @@ const PostForm = () => {
     if (inputs.where.length <= 1) {
       setWhereMsg('Glöm inte skriva var ni ska gå.');
     }
-    if (inputs.introtext.length <= 1) {
-      setMsg('Skriv en rad!');
+    if (inputs.introtext.length < 2) {
+      setMsg('Skriv om dig eller din promenad!');
+    }
+    if (inputs.time.length < 1) {
+      setMsgTime('Glöm inte skriva när ni ska gå.');
+    }
+    if (inputs.timeduration.length <= 1) {
+      setMsgDuration('Välj en av alternativen!');
     }
 
-    if (inputs.where.length > 1) {
+    if (inputs.length > 1) {
       const walk = {
         createdAt: new Date(),
         user: user,
@@ -155,6 +162,7 @@ const PostForm = () => {
                 />
               </span>
             </label>
+            <p className="red">{msgTime}</p>
             <div
               className="where form-box1-div"
               onClick={() => {
@@ -193,9 +201,9 @@ const PostForm = () => {
                       </li>
                     ))}
                 </StyledAutocompleteList>
-                <p className="red">{wheremsg}</p>
               </div>
             ) : null}
+            <p className="red">{wheremsg}</p>
             <div
               className="duration form-box1-div"
               onClick={() => {
@@ -245,6 +253,7 @@ const PostForm = () => {
                 </label>
               </div>
             ) : null}
+            <p className="red">{msgDuration}</p>
           </div>
           <div className="form-box2">
             <CheckBox
@@ -283,8 +292,8 @@ const PostForm = () => {
               placeholder="Skriv en hälsning"
               onChange={event => onValueChange('introtext', event.target.value)}
             />
-
-            <p className="red">{msg}</p>
+            <div />
+            <p className="red last">{msg}</p>
           </div>
           <div className="button-div">
             <Button type="submit" stretch className="button-create-walk">

@@ -8,6 +8,17 @@ import fontFamilies from 'tokens/fontFamilies.mjs';
 import location from '../../assets/icons/location.svg';
 
 export const StyledPostForm = styled.div`
+  .red {
+    height: 12px;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    top: -10px;
+    left: 3rem;
+    &.last {
+      left: -1rem;
+    }
+  }
   .timeduration {
     display: flex;
     flex-direction: column;
@@ -133,14 +144,6 @@ export const StyledPostForm = styled.div`
         box-sizing: border-box;
         resize: none;
         outline: none;
-      }
-    }
-    .button-div {
-      width: 100%;
-      .button-create-walk {
-        width: 90%;
-        position: fixed;
-        bottom: 1rem;
       }
     }
   }

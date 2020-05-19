@@ -5,5 +5,6 @@ export default React.createContext({
   login: () => {},
   logout: () => {},
   //token: undefined,
-  user: undefined
+  user: undefined,
+  deleteAccount: () => {}
 });

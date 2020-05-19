@@ -134,6 +134,7 @@ export default {
           'https://fcm.googleapis.com/fcm/notification',
           'https://polyfill.io/'
         ],
+        'child-src': ["'self'", 'https://hive-seven.netlify.app/'],
         'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com/'],
         'img-src': [
           "'self'",

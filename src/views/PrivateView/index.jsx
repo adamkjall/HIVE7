@@ -15,12 +15,12 @@ import { StyledPrivate } from './style';
 const PrivateView = () => {
   const [toogleChangePic, setToogleChangePic] = useState(false);
   const history = useHistory();
-  const { user } = useContext(AuthenticationContext);
+  const { user, deleteAccount } = useContext(AuthenticationContext);
   const [toogleReadMore, setToogleReadMore] = useState(false);
   const [toogleDelete, setToogleDelete] = useState(false);
 
   const handleDeleteAccount = () => {
-    deleteUserAccount(user.id);
+    deleteAccount(user.id);
   };
 
   return (

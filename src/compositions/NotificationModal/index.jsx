@@ -40,7 +40,7 @@ const NotificationModal = ({ notification, removeNotification }) => {
       <StyledModalHeader onClick={() => removeNotification(notification.notificationId)}>
         <img className="close" src={cross} alt="close window" />
       </StyledModalHeader>
-      {!userData || !walk ? (
+      {!userData || !walk || !user ? (
         <H1 center>Loading</H1>
       ) : (
         <>
@@ -57,7 +57,7 @@ const NotificationModal = ({ notification, removeNotification }) => {
                 </H1>
               )}
               <p className="notification-text">{`Du och ${
-                userData.displayName.split(' ')[0]
+                userData.displayName ? userData.displayName.split(' ')[0] : ''
               } ska gå på promenad tillsammans.`}</p>
               <img src={waves} alt="waves" />
               <StyledImageContainer>

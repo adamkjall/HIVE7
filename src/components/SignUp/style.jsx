@@ -11,18 +11,18 @@ export const StyledSignUpContainer = styled.div`
 
   .signup-form-container {
     margin: 1rem auto 0;
-    max-width: 420px;
+    max-width: 300px;
     display: grid;
-    grid-template-columns: 50px 8fr;
+    grid-template-columns: 45px 8fr;
     grid-template-rows: 1fr 1px 1fr 1px 1fr 1px 1fr 1px 70px 40px;
   }
 
   .signup-form-container2 {
     margin: 1rem auto 0;
-    max-width: 420px;
+    max-width: 300px;
     display: grid;
-    grid-template-columns: 50px 8fr;
-    grid-template-rows: 1fr 12px 1fr 12px 1fr 0.6fr;
+    grid-template-columns: 45px 8fr;
+    grid-template-rows: 0.8fr 12px 1.2fr 12px 0.8fr 0.5fr;
   }
 
   .red {
@@ -94,9 +94,9 @@ export const StyledSignUpContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+    padding: 1rem 0;
     .nextbutton {
-      margin: 1rem;
-
+      width: 90%;
       &.grey {
         background-color: ${colors.gray4};
       }
@@ -114,18 +114,22 @@ export const StyledSignUpContainer = styled.div`
 
   .redline2 {
     width: 1px;
-    height: 83px;
+    height: 63px;
     background-color: ${colors.red};
     position: relative;
     left: 21px;
-    top: -75px;
+    top: -50px;
+    &.long {
+      height: 77px;
+      top: -70px;
+    }
   }
 
   .uploadfile-wrapper {
     display: flex;
     flex-direction: column;
     position: relative;
-    top: 33px;
+    top: 13px;
 
     input[type='file'] {
       display: none;
@@ -151,7 +155,7 @@ export const StyledSignUpContainer = styled.div`
   }
   .the-bottom-line {
     position: relative;
-    left: 80px;
+    left: 50px;
   }
   .container {
     max-width: 100vw;
@@ -165,6 +169,10 @@ export const StyledSignUpContainer = styled.div`
 
   .cover {
     object-fit: cover;
+  }
+  .red-underline {
+    color: ${colors.red};
+    text-decoration: underline;
   }
 `;
 

@@ -78,11 +78,6 @@ export const StyledGlobalStyle = createGlobalStyle`
     max-width: 93px;
   }
 
-  ::placeholder {
-    color: black;
-    opacity: 1;
-  }
-  
   input[type='radio'] {
       cursor: pointer;
       position: relative;

@@ -27,6 +27,7 @@ const PrivateView = () => {
   const { user } = useContext(AuthenticationContext);
   const [toogleReadMore, setToogleReadMore] = useState(false);
   const [toogleDelete, setToogleDelete] = useState(false);
+  const [toogleSignOut, setToogleSignOut] = useState(false);
 
   const handleDeleteAccount = () => {
     () => deleteUserAccount(user.id);
@@ -102,20 +103,39 @@ const PrivateView = () => {
               <button
                 className="logut"
                 aria-label="logga ut"
-                onClick={() => history.push('/logout')}
+                onClick={() => setToogleSignOut(!toogleSignOut)}
               >
                 <p className="bold">Logga ut</p>
               </button>
-
+              {toogleSignOut && (
+                <div className="overlay">
+                  <div className="whitebox">
+                    <p className="superbold">Logga ut?</p>
+                    <p>Är du säker på att du vill logga ut? </p>
+                    <Button className="warning" onClick={() => setToogleSignOut(!toogleSignOut)}>
+                      AVBRYT
+                    </Button>
+                    <Button className="warning" onClick={() => history.push('/logout')}>
+                      LOGGA UT
+                    </Button>
+                  </div>
+                </div>
+              )}
               <button className="logut delete" onClick={() => setToogleDelete(!toogleDelete)}>
                 <p className="bold">Ta bort konto</p>
               </button>
               {toogleDelete && (
-                <div>
-                  <p>Vill du verkligen ta bort ditt konto?</p>
-                  <Button className="warning" onClick={handleDeleteAccount}>
-                    TA BORT MITT KONTO
-                  </Button>
+                <div className="overlay">
+                  <div className="whitebox">
+                    <p className="superbold">Ta bort konto?</p>
+                    <p>Är du säker på att du vill ta bort ditt konto? </p>
+                    <Button className="warning" onClick={() => setToogleDelete(!toogleDelete)}>
+                      AVBRYT
+                    </Button>
+                    <Button className="warning" onClick={handleDeleteAccount}>
+                      TA BORT
+                    </Button>
+                  </div>
                 </div>
               )}
             </div>

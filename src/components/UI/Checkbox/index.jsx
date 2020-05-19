@@ -17,8 +17,8 @@ const CheckBox = ({ label, icon, id, labelrigth, clickHandler }) => (
       <span className="checkbox-styled">
         <input type="checkbox" id={id} className="checkbox" />
       </span>
-      {labelrigth && labelrigth}
     </label>
+    {labelrigth && <span className="labelrigth">{labelrigth}</span>}
   </StyledCheckBox>
 );
 

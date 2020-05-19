@@ -97,8 +97,37 @@ export const StyledPrivate = styled.div`
         background-color: ${colors.white};
         outline: none;
       }
-      .warning {
-        border: ${colors.gray1} solid 3px;
+      .overlay {
+        background: rgba(0, 0, 0, 0.5);
+        height: 100vh;
+        width: 100vw;
+        position: fixed;
+        top: 0px;
+        left: 0;
+        z-index: 2;
+        .whitebox {
+          border-radius: 4px;
+          background: white;
+          margin: 60% 10%;
+          padding: 1rem 1rem 0;
+          height: 150px;
+          width: 80%;
+          z-index: 4;
+          font-size: ${fontSizes.s};
+          .superbold {
+            font-weight: bold;
+            font-size: ${fontSizes.m};
+            margin: 0;
+          }
+          .warning {
+            padding: 0;
+            margin: 2px 25px;
+            color: ${colors.red};
+            background: none;
+            font-family: ${fontFamilies.fontRegular};
+            font-size: ${fontSizes.s};
+          }
+        }
       }
     }
   }

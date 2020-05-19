@@ -14,6 +14,7 @@ import Button from '../UI/Button';
 import H1 from '../UI/H1';
 import Checkbox from '../UI/Checkbox';
 import Input from '../UI/Input';
+import TermsCondition from '../TermsCondition';
 
 import { CircularProgressbar } from 'react-circular-progressbar';
 
@@ -23,6 +24,7 @@ import { StyledSignUpContainer, StyledProgress } from './style';
 
 const SignUp = ({ setIsSignedUp }) => {
   const [nextquestionens, setNextQuestions] = useState(false);
+  const [toogleA, setToogleA] = useState(false);
   const [msgName, setMsgName] = useState('');
   const [msgMail, setmsgMail] = useState('');
   const [msgGender, setGender] = useState('');
@@ -31,7 +33,10 @@ const SignUp = ({ setIsSignedUp }) => {
   const [passwordMsg, setPasswordMsg] = useState('');
   const [confirmPasswordMsg, setConfirmPasswordMsg] = useState('');
   const [msg, setMsg] = useState('');
+  const [msgFile, setMsgFile] = useState('');
   const [file, setFile] = useState(null);
+  const [terms, setTerms] = useState(false);
+  const [msgTerms, setMsgTerms] = useState('');
   const [fileLoading, setFileLoading] = useState({
     isLoading: false,
     percent: 0
@@ -66,10 +71,6 @@ const SignUp = ({ setIsSignedUp }) => {
     confirmPassword: ''
   });
 
-  const validateEmail = () => {
-    console.log('validateemail function to server, before submit!');
-  };
-
   const handleValidateBirthday = () => {
     if (isValidDate(inputs.dateOfBirth) == 'Not valid date') {
       setMsgBirth('Fyll i det datum du är född.');
@@ -82,6 +83,8 @@ const SignUp = ({ setIsSignedUp }) => {
       setMsgName('Fyll i Ditt namn.');
     } else if (isValidDate(inputs.dateOfBirth) == 'Not valid date') {
       setMsgBirth('Fyll i det datum du är född.');
+    } else if (isValidDate(inputs.dateOfBirth) == 'Not valid age') {
+      setMsgBirth('Du måste vara 18 år för att få skapa konto.');
     } else if (inputs.email.length <= 4) {
       setmsgMail('Fyll i din epost-adress');
     } else if (inputs.password.length < 6) {
@@ -96,18 +99,20 @@ const SignUp = ({ setIsSignedUp }) => {
   const onSubmit = async event => {
     event.preventDefault();
     if (isCreatingAccount) return;
-
-    if (inputs.gender.length < 1) {
-      setGender('Var vänlig fyll kön.');
-      return;
-    }
     if (inputs.lvlOfSwedish < 1) {
       setMsglvl('Var vänlig klicka i ett alternativ');
       return;
     }
-
+    if (inputs.gender.length < 1) {
+      setGender('Var vänlig fyll kön.');
+      return;
+    }
     if (!file) {
-      setMsg('Var vänlig välj en profilbild');
+      setMsgFile('Var vänlig välj en profilbild');
+      return;
+    }
+    if (!terms) {
+      setMsgTerms('För att komma vidare måste du godkänna allmänna villkor.');
       return;
     }
 
@@ -142,7 +147,9 @@ const SignUp = ({ setIsSignedUp }) => {
         }
       );
     } catch (error) {
-      setMsg('Email adressen du angav är redan kopplad till ett konto');
+      setMsg(
+        'Email adressen är du angav är antingen felformaterad eller redan kopplad till ett konto'
+      );
       setIsCreatingAccount(false);
       console.log('Error while sign up', error.message);
     }
@@ -195,7 +202,6 @@ const SignUp = ({ setIsSignedUp }) => {
                 name="email"
                 placeholder="namn.efternamn@gmail.com"
                 value={inputs.email}
-                onBlur={event => validateEmail('email', event.target.value)}
                 onChange={event => onValueChange('email', event.target.value)}
               />
               <div className="redline" />
@@ -338,9 +344,9 @@ const SignUp = ({ setIsSignedUp }) => {
                   Vill inte ange
                 </label>
               </div>
-              <div className="redline2" />
-              <p className="red">{msgGender}</p>
-              {!file ? <div className="reddott" /> : <div className="donedott" />}
+              <div className="redline2 long" />
+              <p className="redlvl">{msgGender}</p>
+              {!file ? <div className="reddott nr2" /> : <div className="donedott nr2" />}
               <div className="uploadfile-wrapper">
                 {fileLoading.isLoading ? (
                   <StyledProgress>
@@ -359,16 +365,12 @@ const SignUp = ({ setIsSignedUp }) => {
                           <img
                             className="profile-picture cover"
                             src={URL.createObjectURL(file)}
-                            alt="profile picture"
+                            alt="profile"
                           />
                           <span className="swap-profile-picture">Byt profilbild</span>
                         </>
                       ) : (
-                        <img
-                          className="profile-picture"
-                          src={chooseprofilepic}
-                          alt="profile picture"
-                        />
+                        <img className="profile-picture" src={chooseprofilepic} alt="profile" />
                       )}
                     </label>
                   </>
@@ -376,12 +378,34 @@ const SignUp = ({ setIsSignedUp }) => {
               </div>
               <div />
             </div>
-            <p className="red the-bottom-line">{msg}</p>
+            <div>
+              <span className="red the-bottom-line">{msgFile}</span>
+              <span className="red">{msg}</span>
+            </div>
             <Checkbox
-              id="rigths"
-              labelrigth="Jag godkänner allmänna villkoren."
-              clickHandler={() => onValueChange('rigths', event.target.value)}
+              id="terms"
+              clickHandler={() => setTerms(!terms)}
+              labelrigth={
+                <span>
+                  Jag godkänner{' '}
+                  <span
+                    className="red-underline"
+                    role="link"
+                    tabIndex="-5"
+                    onClick={() => setToogleA(!toogleA)}
+                  >
+                    allmänna villkoren.
+                  </span>
+                </span>
+              }
             />
+            <span className="red">{msgTerms}</span>
+            {toogleA && (
+              <div className="overlay">
+                <TermsCondition onClose={() => setToogleA(!toogleA)} />
+              </div>
+            )}
+
             <div className="buttondiv">
               <Button
                 className={`nextbutton ${isCreatingAccount ? 'grey' : ''}`}

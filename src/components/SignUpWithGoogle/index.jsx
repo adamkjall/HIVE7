@@ -8,6 +8,8 @@ import Button from '../UI/Button';
 import Input from '../UI/Input';
 import isValidDate from '../../helpers/functions/validDate';
 import makeStringtoBirthDate from '../../helpers/functions/makeStringtoBirthDate';
+import Checkbox from '../UI/Checkbox';
+import TermsCondition from '../TermsCondition';
 
 import { StyledContainer } from './style';
 
@@ -17,6 +19,9 @@ const SignUpWithGoogle = ({ setIsSignedUp }) => {
   const [msgBirth, setMsgBirth] = useState('');
   const [msg, setMsg] = useState('');
   const [msglvl, setMsglvl] = useState('');
+  const [toogleA, setToogleA] = useState(false);
+  const [terms, setTerms] = useState(false);
+  const [msgTerms, setMsgTerms] = useState('');
 
   const [inputs, setInputs] = useState({
     dateOfBirth: '',
@@ -35,6 +40,10 @@ const SignUpWithGoogle = ({ setIsSignedUp }) => {
     }
     if (inputs.gender.length < 1) {
       setGender('Var vänlig fyll kön.');
+    }
+    if (!terms) {
+      setMsgTerms('För att komma vidare måste du godkänna allmänna villkor.');
+      return;
     } else {
       try {
         updateUserProfileDocument(user.id, {
@@ -154,13 +163,34 @@ const SignUpWithGoogle = ({ setIsSignedUp }) => {
           <p className="red">{msgBirth}</p>
           <p className="red"> {msg} </p>
           <p>* Obligatoriska fält</p>
-          <input type="checkbox" />
-          <p>Jag godkänner allmänna villkoren</p>
-        </div>
-        <div className="buttondiv">
-          <Button nature="default" className="nextbutton" stretch type="submit">
-            Skapa konto
-          </Button>
+          <Checkbox
+            id="terms"
+            clickHandler={() => setTerms(!terms)}
+            labelrigth={
+              <span>
+                Jag godkänner{' '}
+                <span
+                  className="red-underline"
+                  role="link"
+                  tabIndex="-5"
+                  onClick={() => setToogleA(!toogleA)}
+                >
+                  allmänna villkoren.
+                </span>
+              </span>
+            }
+          />
+          <span className="red">{msgTerms}</span>
+          {toogleA && (
+            <div className="overlay">
+              <TermsCondition onClose={() => setToogleA(!toogleA)} />
+            </div>
+          )}
+          <div className="buttondiv">
+            <Button nature="default" className="nextbutton" stretch type="submit">
+              Skapa konto
+            </Button>
+          </div>
         </div>
       </form>
     </StyledContainer>

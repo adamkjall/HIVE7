@@ -13,14 +13,11 @@ export const StyledPrivate = styled.div`
     align-items: center;
     flex-direction: column;
     padding: 3rem 0 1rem;
+
     .avatar {
-      width: 100%;
       margin-bottom: 1rem;
-      img {
-        width: 5.7rem;
-        height: 5.7rem;
-        border-radius: 999rem;
-      }
+      width: 5.7rem;
+      height: 5.7rem;
     }
     .changepic {
       text-align: center;

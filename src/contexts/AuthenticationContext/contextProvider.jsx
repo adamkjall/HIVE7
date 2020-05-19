@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-//import { LocalStorage as Storage } from 'helpers/storage';
 import AuthenticationContext from './context';
 
-import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+import { auth, createUserProfileDocument, deleteUserAccount } from '../../firebase/firebase.utils';
 
 export const TOKEN_STORAGE_KEY = 'authentication.token';
 
@@ -52,6 +51,12 @@ const AuthenticationContextProvider = props => {
     setUser(undefined);
   };
 
+  const deleteAccount = userId => {
+    setIsAuthenticated(false);
+    deleteUserAccount(userId);
+    setUser(undefined);
+  };
+
   return (
     <AuthenticationContext.Provider
       {...props}
@@ -59,7 +64,8 @@ const AuthenticationContextProvider = props => {
         isAuthenticated,
         login,
         logout,
-        user
+        user,
+        deleteAccount
       }}
     />
   );

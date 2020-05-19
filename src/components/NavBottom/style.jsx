@@ -38,8 +38,8 @@ export const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
 
   .avatar {
     align-self: center;
-    max-width: 31px;
-    max-height: 31px;
+    width: 31px;
+    height: 31px;
   }
 
   &.${activeClassName} {

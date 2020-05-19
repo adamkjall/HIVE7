@@ -121,14 +121,19 @@ const ChooseChatView = () => {
         // .. and map the conversation data with the user
         Promise.all(
           conversationsData.map(conversationData =>
-            getUserData(conversationData.toUserId).then(user => ({
-              userToChatWith: { ...user, id: conversationData.toUserId },
-              ...conversationData
-            }))
+            getUserData(conversationData.toUserId).then(user => {
+              if (!user) return null;
+              return {
+                userToChatWith: { ...user, id: conversationData.toUserId },
+                ...conversationData
+              };
+            })
           )
         )
           .then(data => {
-            setConversations(data);
+            // filter out potential nulls / deleted accounts
+            const filteredData = data.filter(entry => entry !== null);
+            setConversations(filteredData);
           })
           .catch(error => console.log('Error', error.message));
       });

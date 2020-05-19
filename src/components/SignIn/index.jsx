@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+
+import { signInWithGoogle, resetPassword } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import H1 from '../UI/H1';
+
 import { StyledContainer } from './style';
 
 const SignIn = () => {
@@ -31,6 +33,17 @@ const SignIn = () => {
       ...inputs,
       [name]: value
     }));
+  };
+
+  const handlePasswordReset = e => {
+    e.preventDefault();
+    if (inputs.email.length > 5) {
+      resetPassword(inputs.email);
+      alert(
+        `Ett mail med instruktioner för att återställa ditt lösenord är skickat till ${inputs.email}`
+      );
+      setToogleForgotten(false);
+    }
   };
 
   return (
@@ -61,22 +74,12 @@ const SignIn = () => {
             />
           )}
           <div className="forgotten" onClick={() => setToogleForgotten(!toogleForgotten)}>
-            <p>Glömt lösenord</p>
+            {!toogleForgotten ? <p>Glömt lösenord?</p> : null}
           </div>
         </div>
         {toogleForgotten ? (
           <div className="buttons">
-            <Button
-              type="submit"
-              onClick={() => {
-                resetPassword(user.email);
-                alert(
-                  `Ett mail med instruktioner för att återställa ditt lösenord är skickat till ${user.email}`
-                );
-              }}
-              stretch
-              nature="default"
-            >
+            <Button type="submit" onClick={handlePasswordReset} stretch nature="default">
               ÅTERSTÄLL LÖSENORD
             </Button>
           </div>

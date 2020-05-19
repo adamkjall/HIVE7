@@ -48,7 +48,6 @@ export const StyledWalkCard = styled.div`
     }
 
     .avatar {
-      border-radius: 999rem;
       width: 60px;
       height: 60px;
       padding: 3px;

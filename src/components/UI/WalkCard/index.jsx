@@ -89,7 +89,7 @@ const WalkCard = ({ walk }) => {
           <img src={walking} alt="walk" />
           <span>{walk.timeduration}</span>
           <img src={location} alt="where" />
-          <span>{walk.where}</span>
+          <span>{walk.where.split(',')[0]}</span>
           <img src={citat} alt="where" className="quote" />
           <span className="italic">
             {walk.introtext.length > 40 ? walk.introtext.slice(0, 40) + '...' : walk.introtext}

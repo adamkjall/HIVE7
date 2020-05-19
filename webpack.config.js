@@ -125,7 +125,7 @@ export default {
     // }),
     new CspHtmlWebpackPlugin(
       {
-        'default-src': "'self'",
+        'default-src': ["'self'", 'https://hive-seven.netlify.app/', 'blob:'],
         'script-src': [
           "'self'",
           "'unsafe-eval'",
@@ -134,6 +134,7 @@ export default {
           'https://fcm.googleapis.com/fcm/notification',
           'https://polyfill.io/'
         ],
+        'child-src': ["'self'", 'https://hive-seven.netlify.app/', 'blob:'],
         'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com/'],
         'img-src': [
           "'self'",

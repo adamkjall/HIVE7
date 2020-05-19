@@ -7,12 +7,11 @@ import fontSizes from 'tokens/fontSizes.mjs';
 export const StyledCheckBox = styled.div`
   font-size: ${fontSizes.m};
   max-height: 50px;
-  width: 280px;
+
   .container {
     display: grid;
     grid-template-columns: 50px auto 23px;
     grid-template-rows: 50px;
-
     img {
       justify-self: center;
     }

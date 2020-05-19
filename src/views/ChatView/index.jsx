@@ -57,7 +57,7 @@ const ChatPageContent = ({ messages, sendMessage, user, userToChatWith, walkDate
               <img onClick={() => history.goBack()} src={back} alt="back" />
             </span>
             <img className="avatar" src={userToChatWith.photoUrl || avatar} alt="avatar" />
-            {userToChatWith.displayName.split(' ')[0]}
+            <p className="displayname">{userToChatWith.displayName.split(' ')[0]}</p>
           </div>
           <img src={waves} alt="waves" className="waves" />
         </StyledHeader>

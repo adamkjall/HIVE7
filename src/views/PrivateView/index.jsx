@@ -10,6 +10,7 @@ import calculateAge from '../../helpers/functions/calculateAge';
 import avatar from '../../assets/icons/profilepic.svg';
 import UploadFile from '../../components/UploadFile';
 import Button from '../../components/UI/Button';
+import TermsCondition from '../../components/TermsCondition';
 import { StyledPrivate } from './style';
 
 const PrivateView = () => {
@@ -63,8 +64,8 @@ const PrivateView = () => {
                 <p className="bold">Allmänna villkor</p>
               </button>
               {toogleReadMore && (
-                <div>
-                  <p>Allmänna villkor</p>
+                <div className="overlay">
+                  <TermsCondition onClose={() => setToogleReadMore(!toogleReadMore)} />
                 </div>
               )}
               <button

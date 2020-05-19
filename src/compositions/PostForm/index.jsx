@@ -57,20 +57,19 @@ const PostForm = () => {
 
   const onSubmit = event => {
     event.preventDefault();
-
+    if (inputs.time.length < 1) {
+      setMsgTime('Glöm inte skriva när ni ska gå.');
+    }
     if (inputs.where.length <= 1) {
       setWhereMsg('Glöm inte skriva var ni ska gå.');
+    }
+
+    if (inputs.timeduration.length <= 1) {
+      setMsgDuration('Välj en av alternativen!');
     }
     if (inputs.introtext.length < 2) {
       setMsg('Skriv om dig eller din promenad!');
     }
-    if (inputs.time.length < 1) {
-      setMsgTime('Glöm inte skriva när ni ska gå.');
-    }
-    if (inputs.timeduration.length <= 1) {
-      setMsgDuration('Välj en av alternativen!');
-    }
-
     if (inputs.length > 1) {
       const walk = {
         createdAt: new Date(),
@@ -128,7 +127,9 @@ const PostForm = () => {
 
   return (
     <StyledPostForm>
-      <Header headline="Ny promenad" backbutton />
+      <div className="new-walk">
+        <Header headline="Ny promenad" backbutton />
+      </div>
       <form name="post-form" onSubmit={onSubmit}>
         <div className="create-new-container">
           <div className="form-box1">

@@ -11,7 +11,7 @@ export const StyledHeader = styled.div`
     padding: ${spacing.tiny} 0;
 
     .backbutton {
-      padding: ${spacing.small};
+      padding: ${spacing.tiny} ${spacing.small};
     }
 
     .avatar {
@@ -19,6 +19,11 @@ export const StyledHeader = styled.div`
       height: 34px;
       margin-right: 1rem;
       object-fit: cover;
+    }
+    .displayname {
+      display: inline-block;
+      padding: 0px;
+      margin: 0.9rem 0 0;
     }
   }
 
@@ -78,7 +83,7 @@ export const StyledMessage = styled.div`
     margin: 0 ${spacing.tiny};
     margin-left: ${({ isUserMessage }) => (isUserMessage ? 'auto' : '0')};
     p {
-      margin: 0;
+      margin: 10px 0 0;
     }
   }
   .chat-box {
@@ -89,7 +94,7 @@ export const StyledMessage = styled.div`
     color: ${({ isUserMessage }) => (isUserMessage ? 'white' : 'black')};
     border-radius: 10px;
     padding: ${spacing.tiny};
-    margin: ${spacing.tiny};
+    margin: 5px ${spacing.tiny};
     margin-left: ${({ isUserMessage }) => (isUserMessage ? 'auto' : '0')};
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 

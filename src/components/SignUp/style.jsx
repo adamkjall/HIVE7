@@ -10,7 +10,7 @@ export const StyledSignUpContainer = styled.div`
   }
 
   .signup-form-container {
-    margin: 1rem;
+    margin: 1rem auto;
     max-width: 300px;
     display: grid;
     grid-template-columns: 45px 8fr;

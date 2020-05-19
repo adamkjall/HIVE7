@@ -8,13 +8,20 @@ import fontFamilies from 'tokens/fontFamilies.mjs';
 import location from '../../assets/icons/location.svg';
 
 export const StyledPostForm = styled.div`
+  .new-walk {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+  }
   .red {
+    font-size: ${fontSizes.microcopy};
     height: 12px;
     padding: 0;
     margin: 0;
     position: relative;
-    top: -10px;
+    top: 0px;
     left: 3rem;
+    max-width: 220px;
     &.last {
       left: -1rem;
     }
@@ -140,6 +147,7 @@ export const StyledPostForm = styled.div`
         font-family: ${fontFamilies.fontRegular}, 'Verdana';
         border: none;
         width: 100%;
+        max-width: 290px;
         height: 100px;
         box-sizing: border-box;
         resize: none;

@@ -66,6 +66,7 @@ export const StyledChatview = styled.div`
         border: none;
         background: none;
         padding: 0;
+        outline: none;
       }
     }
   }

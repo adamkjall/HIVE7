@@ -143,7 +143,6 @@ export const StyledSignUpContainer = styled.div`
         display: block;
         width: 60px;
         height: 60px;
-        border-radius: 999rem;
         margin: 0.5rem 0;
       }
 
@@ -170,6 +169,11 @@ export const StyledSignUpContainer = styled.div`
   .cover {
     object-fit: cover;
   }
+
+  .round {
+    border-radius: 999rem;
+  }
+
   .red-underline {
     color: ${colors.red};
     text-decoration: underline;

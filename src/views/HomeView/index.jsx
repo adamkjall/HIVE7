@@ -130,14 +130,14 @@ const HomePageContent = ({ error, isLoading }) => {
                     SKAPA KONTO
                   </Button>
                 </Link>
-                <Button
+                {/* <Button
                   nature="default"
                   stretch
                   onClick={signInWithGoogle}
                   className="landingbutton google"
                 >
                   SKAPA KONTO MED GOOGLE
-                </Button>
+                </Button> */}
               </div>
               <Link to="/login" className="link-login">
                 <H3>

@@ -371,7 +371,7 @@ const SignUp = ({ setIsSignedUp }) => {
                       {file ? (
                         <>
                           <img
-                            className="profile-picture cover"
+                            className="profile-picture cover round"
                             src={URL.createObjectURL(file)}
                             alt="profile"
                           />

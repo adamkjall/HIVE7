@@ -23,6 +23,7 @@ const PrivateView = () => {
 
   const handleDeleteAccount = () => {
     deleteAccount(user.id);
+    history.push('/');
   };
 
   return (

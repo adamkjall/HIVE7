@@ -88,7 +88,7 @@ const SignIn = () => {
             <Button type="submit" stretch nature="default">
               LOGGA IN
             </Button>
-            <p className="white or">eller</p>
+            {/* <p className="white or">eller</p>
             <Button
               nature="default"
               stretch
@@ -96,7 +96,7 @@ const SignIn = () => {
               className="landingbutton google"
             >
               LOGGA IN MED GOOGLE
-            </Button>
+            </Button> */}
             <Link to="/signup">
               <p className="white link">
                 Har du inget konto? <span>Skapa konto</span>

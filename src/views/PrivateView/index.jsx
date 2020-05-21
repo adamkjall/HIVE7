@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
-import { deleteUserAccount } from '../../firebase/firebase.utils';
+
+import Loader from 'react-loader-spinner';
 
 import Page from 'compositions/Page';
 import H3 from 'components/UI/H3';
@@ -20,10 +21,11 @@ const PrivateView = () => {
   const [toogleReadMore, setToogleReadMore] = useState(false);
   const [toogleDelete, setToogleDelete] = useState(false);
   const [toogleSignOut, setToogleSignOut] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleDeleteAccount = () => {
-    deleteAccount(user.id);
-    history.push('/');
+    setLoading(true);
+    deleteAccount();
   };
 
   return (
@@ -96,14 +98,26 @@ const PrivateView = () => {
               {toogleDelete && (
                 <div className="overlay">
                   <div className="whitebox">
-                    <p className="superbold">Ta bort konto?</p>
-                    <p>Är du säker på att du vill ta bort ditt konto? </p>
-                    <Button className="warning" onClick={() => setToogleDelete(!toogleDelete)}>
-                      AVBRYT
-                    </Button>
-                    <Button className="warning" onClick={handleDeleteAccount}>
-                      TA BORT
-                    </Button>
+                    {loading ? (
+                      <Loader
+                        className="loader"
+                        type="Oval"
+                        color="rgba(242, 112, 99, 1)"
+                        height={80}
+                        width={80}
+                      />
+                    ) : (
+                      <>
+                        <p className="superbold">Ta bort konto?</p>
+                        <p>Är du säker på att du vill ta bort ditt konto?</p>
+                        <Button className="warning" onClick={() => setToogleDelete(!toogleDelete)}>
+                          AVBRYT
+                        </Button>
+                        <Button className="warning" onClick={handleDeleteAccount}>
+                          TA BORT
+                        </Button>
+                      </>
+                    )}
                   </div>
                 </div>
               )}

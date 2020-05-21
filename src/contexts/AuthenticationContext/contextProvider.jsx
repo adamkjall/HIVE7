@@ -18,6 +18,7 @@ const AuthenticationContextProvider = props => {
 
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      console.log('authStateChange', userAuth);
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot(snapshot => {
@@ -37,24 +38,24 @@ const AuthenticationContextProvider = props => {
   }, []);
 
   const login = async (email, password) => {
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-    } catch (error) {
-      console.log('Error while sign in', error.message);
-    }
+    await auth.signInWithEmailAndPassword(email, password);
   };
 
   const logout = () => {
     auth.signOut();
-
     setIsAuthenticated(false);
     setUser(undefined);
   };
 
-  const deleteAccount = userId => {
-    setIsAuthenticated(false);
-    deleteUserAccount(userId);
-    setUser(undefined);
+  const deleteAccount = async () => {
+    try {
+      await deleteUserAccount(user.uid);
+      setIsAuthenticated(false);
+      setUser(undefined);
+      console.log('Delete successful');
+    } catch (err) {
+      console.log('Error deleting account', err);
+    }
   };
 
   return (

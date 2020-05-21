@@ -2,7 +2,7 @@ import React from 'react';
 
 export default React.createContext({
   isAuthenticated: false,
-  login: () => {},
+  login: async () => {},
   logout: () => {},
   //token: undefined,
   user: undefined,

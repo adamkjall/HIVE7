@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { signInWithGoogle, resetPassword } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 
+import Loader from 'react-loader-spinner';
+
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import H1 from '../UI/H1';
@@ -13,19 +15,29 @@ import { StyledContainer } from './style';
 const SignIn = () => {
   const { login } = useContext(AuthenticationContext);
   const [toogleForgotten, setToogleForgotten] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [inputs, setInputs] = useState({
     email: '',
     password: ''
   });
+  const [wrongEmailOrPassword, setWrongEmailOrPassword] = useState(false);
 
-  const onSubmit = event => {
+  const onSubmit = async event => {
     event.preventDefault();
-    login(inputs.email, inputs.password);
-
-    setInputs({
-      email: '',
-      password: ''
-    });
+    if (loading) return;
+    try {
+      setLoading(true);
+      setWrongEmailOrPassword(false);
+      await login(inputs.email, inputs.password);
+      setInputs({
+        email: '',
+        password: ''
+      });
+    } catch (err) {
+      console.log(err);
+      setWrongEmailOrPassword(true);
+      setLoading(false);
+    }
   };
 
   const onValueChange = (name, value) => {
@@ -74,7 +86,12 @@ const SignIn = () => {
             />
           )}
           <div className="forgotten" onClick={() => setToogleForgotten(!toogleForgotten)}>
-            {!toogleForgotten ? <p>Glömt lösenord?</p> : null}
+            {!toogleForgotten ? (
+              <>
+                {wrongEmailOrPassword ? <span>Fel email eller lösenord</span> : null}
+                <p>Glömt lösenord?</p>
+              </>
+            ) : null}
           </div>
         </div>
         {toogleForgotten ? (
@@ -85,8 +102,18 @@ const SignIn = () => {
           </div>
         ) : (
           <div className="buttons">
-            <Button type="submit" stretch nature="default">
-              LOGGA IN
+            <Button className={`${loading ? 'gray' : ''}`} type="submit" stretch nature="default">
+              {loading ? (
+                <Loader
+                  className="loader"
+                  type="Oval"
+                  color="rgba(242, 112, 99, 1)"
+                  height={25}
+                  width={25}
+                />
+              ) : (
+                <span>LOGGA IN</span>
+              )}
             </Button>
             {/* <p className="white or">eller</p>
             <Button

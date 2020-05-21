@@ -18,7 +18,6 @@ const AuthenticationContextProvider = props => {
 
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      console.log('authStateChange', userAuth);
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot(snapshot => {
@@ -49,12 +48,14 @@ const AuthenticationContextProvider = props => {
 
   const deleteAccount = async () => {
     try {
-      await deleteUserAccount(user.uid);
+      await deleteUserAccount(user.id);
       setIsAuthenticated(false);
       setUser(undefined);
       console.log('Delete successful');
     } catch (err) {
-      console.log('Error deleting account', err);
+      if (err === 'User needs to reauthorize') {
+        alert('Logga in igen för att ta bort ditt konto');
+      }
     }
   };
 

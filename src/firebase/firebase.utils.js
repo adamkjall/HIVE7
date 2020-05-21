@@ -193,21 +193,21 @@ export const getBookings = async userId => {
 
 // Account
 
-export const deleteUserAccount = async () => {
-  removeProfilePicture();
+export const deleteUserAccount = async userId => {
+  removeProfilePicture(userId);
 
   // remove user profile document
   await firestore
     .collection('users')
-    .doc(auth.currentUser.uid)
+    .doc(userId)
     .delete()
-    .then(() => console.log('Deleted user: ', auth.currentUser.uid))
+    .then(() => console.log('Deleted user: ', userId))
     .catch(error => console.log('Error while deleting profile document', error));
 
   // remove all users walks
   await firestore
     .collection('walks')
-    .where('user.id', '==', auth.currentUser.uid)
+    .where('user.id', '==', userId)
     .get()
     .then(snapshot => {
       snapshot.forEach(doc => {
@@ -220,12 +220,12 @@ export const deleteUserAccount = async () => {
   // leave all users booked walks
   await firestore
     .collection('walks')
-    .where('attendingPeople', 'array-contains', auth.currentUser.uid)
+    .where('attendingPeople', 'array-contains', userId)
     .get()
     .then(snapshot => {
       snapshot.forEach(doc => {
         const walkData = doc.data();
-        leaveAWalk(auth.currentUser.uid, walkData.walkId);
+        leaveAWalk(userId, walkData.walkId);
       });
     })
     .catch(err => console.log('Error while leaving booked walks', err));
@@ -233,7 +233,7 @@ export const deleteUserAccount = async () => {
   // remove all users chats
   await firestore
     .collection('chat')
-    .where('ids', 'array-contains', auth.currentUser.uid)
+    .where('ids', 'array-contains', userId)
     .get()
     .then(snapshot => {
       snapshot.forEach(doc => {
@@ -247,7 +247,10 @@ export const deleteUserAccount = async () => {
   await auth.currentUser
     .delete()
     .then(() => console.log('Delete user auth'))
-    .catch(err => console.log('Error while deleteing user auth', err));
+    .catch(err => {
+      console.log('Error while deleteing user auth', err);
+      throw 'User needs to reauthorize';
+    });
 };
 
 export const resetPassword = async emailAddress => {
@@ -299,9 +302,9 @@ export const updateDisplayName = async newName => {
 export const storage = firebase.storage();
 var storageRef = storage.ref();
 
-const removeProfilePicture = async () => {
+const removeProfilePicture = async userId => {
   await storageRef
-    .child(`profile-pictures/${auth.currentUser.uid}`)
+    .child(`profile-pictures/${userId}`)
     .delete()
     .then(() => console.log('Deleted profile picture'))
     .catch(err => console.log('Error while deleting profile picture', err));

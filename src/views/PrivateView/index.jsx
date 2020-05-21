@@ -23,9 +23,14 @@ const PrivateView = () => {
   const [toogleSignOut, setToogleSignOut] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleDeleteAccount = () => {
+  const handleDeleteAccount = async () => {
     setLoading(true);
-    deleteAccount();
+    try {
+      await deleteAccount();
+    } catch (err) {
+      console.log('Error deleting accoung', err);
+      setLoading(false);
+    }
   };
 
   return (

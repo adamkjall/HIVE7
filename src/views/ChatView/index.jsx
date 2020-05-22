@@ -54,7 +54,7 @@ const ChatPageContent = ({ messages, sendMessage, user, userToChatWith, walkDate
         <StyledHeader>
           <div className="head-chat-info">
             <span className="backbutton">
-              <img onClick={() => history.goBack()} src={back} alt="back" />
+              <img onClick={() => history.push('/feed')} src={back} alt="back" />
             </span>
             <img className="avatar" src={userToChatWith.photoUrl || avatar} alt="avatar" />
             <p className="displayname">{userToChatWith.displayName.split(' ')[0]}</p>

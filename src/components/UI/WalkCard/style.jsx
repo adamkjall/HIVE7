@@ -11,7 +11,7 @@ export const StyledWalkCard = styled.div`
   border-radius: 10px;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 1fr 1.8fr;
+  grid-template-columns: minmax(122px, 1fr) 1.8fr;
 
   .sidebar {
     display: flex;
@@ -29,9 +29,14 @@ export const StyledWalkCard = styled.div`
         justify-content: space-between;
         margin-top: 1rem;
         margin-bottom: 0.3rem;
-        padding: 0 0.3rem;
-        &:first-child {
-          margin-right: 1rem;
+        /* padding: 0 0.3rem; */
+
+        .avatar {
+          width: 50px;
+          height: 50px;
+          &:first-child {
+            margin-right: 0.5rem;
+          }
         }
       }
 

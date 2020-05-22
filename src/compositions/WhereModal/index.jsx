@@ -26,7 +26,12 @@ const WhereModal = ({ submitWhere, closeModal }) => {
 
   return (
     <StyledModal>
-      <StyledModalHeader onClick={closeModal}>
+      <StyledModalHeader
+        onClick={() => {
+          submitWhere(input);
+          closeModal();
+        }}
+      >
         <H1>I vilket område vill du gå?</H1>
         <img className="close" src={cross} alt="close window" />
       </StyledModalHeader>

@@ -23,7 +23,7 @@ const useAutocomplete = query => {
   const clearResults = () => setSearchResults(null);
 
   useEffect(() => {
-    if (!query || query.length <= 2) return;
+    if (!query || query.length === 0) return;
 
     fetch(
       `https://api.locationiq.com/v1/autocomplete.php?key=${process.env.LOCATION_IQ_API_KEY}&q=${query}&viewbox=${viewbox}&bounded=1&countrycodes=SE`

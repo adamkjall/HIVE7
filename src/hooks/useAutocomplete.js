@@ -26,7 +26,7 @@ const useAutocomplete = query => {
     if (!query || query.length <= 2) return;
 
     fetch(
-      `https://api.locationiq.com/v1/autocomplete.php?key=${process.env.LOCATION_IQ_API_KEY}&q=${query}&viewbox=${viewbox}&bounded=1&countrycodes=SE&limit=5`
+      `https://api.locationiq.com/v1/autocomplete.php?key=${process.env.LOCATION_IQ_API_KEY}&q=${query}&viewbox=${viewbox}&bounded=1&countrycodes=SE`
     )
       .then(res => res.json())
       .then(data => formatData(data))

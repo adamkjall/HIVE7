@@ -32,7 +32,7 @@ const NotificationModal = ({ notification, removeNotification }) => {
     if (!notification) return;
 
     getUserData(notification.userId).then(data => setUserData(data));
-    getWalk(notification.walkId).then(data => setWakj(data));
+    getWalk(notification.walkId).then(data => setWalk(data));
   }, [notification]);
 
   return (

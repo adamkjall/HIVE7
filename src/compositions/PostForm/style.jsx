@@ -5,9 +5,9 @@ import fontSizes from 'tokens/fontSizes.mjs';
 import spacing from 'tokens/spacing.mjs';
 import fontFamilies from 'tokens/fontFamilies.mjs';
 
-import location from '../../assets/icons/location.svg';
-
 export const StyledPostForm = styled.div`
+  position: relative;
+
   .new-walk {
     position: sticky;
     top: 0;
@@ -44,7 +44,6 @@ export const StyledPostForm = styled.div`
     font-size: ${fontSizes.m};
 
     .form-box1 {
-      position: relative;
       padding: 0 0 ${spacing.tiny} 0;
       display: grid;
       grid-template-columns: 1fr;
@@ -94,42 +93,41 @@ export const StyledPostForm = styled.div`
         }
       }
 
-      .when {
-        .container {
-          position: relative;
-          pointer-events: none;
+      .where-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 99999999999999999999;
+        background-color: ${colors.white};
+        overflow-y: hidden;
 
-          /* make the native arrow invisible and stretch it over the whole field so you can click anywhere in the input field to trigger the native datepicker*/
-          input[type='datetime-local']::-webkit-calendar-picker-indicator,
-          input[type='datetime-local']::-webkit-calendar-picker-indicator {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: auto;
-            height: auto;
-            color: transparent;
-            background: transparent;
-          }
-
-          .title {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            pointer-events: none;
-            background-color: white;
-          }
+        .where-header {
+          display: flex;
+          justify-content: space-between;
+          padding: ${spacing.tiny} ${spacing.small};
         }
 
-        #time-and-date {
-          // visibility: hidden;
-          border: none;
-          outline: none;
+        .where-main {
+          padding: 0 ${spacing.small} ${spacing.tiny} ${spacing.small};
+          height: calc(100% - 97px);
+
+          #where {
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-radius: unset;
+          }
+
+          .autocomplete-wrapper {
+            height: calc(100% - 43px);
+            overflow-y: hidden;
+          }
         }
       }
     }
+
     .form-box2 {
       padding: ${spacing.small} 0 0;
       border-bottom: 2px solid ${colors.gray4};
@@ -158,10 +156,28 @@ export const StyledPostForm = styled.div`
 `;
 
 export const StyledAutocompleteList = styled.ul`
-  list-style-image: url(${location});
+  list-style: none;
   margin: 0;
+  padding: 0;
+  /* overflow-y: scroll; */
+  height: 100%;
+  overflow-y: scroll;
 
   li {
+    display: flex;
+    flex-wrap: nowrap;
     margin: 0.5rem;
+
+    img {
+      margin-right: ${spacing.small};
+    }
+
+    .result-container {
+      /* display: block; */
+
+      .gray {
+        color: ${colors.gray3};
+      }
+    }
   }
 `;

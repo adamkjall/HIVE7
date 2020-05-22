@@ -122,4 +122,9 @@ export const StyledGlobalStyle = createGlobalStyle`
     background-color: ${colors.red};
     }
 
+  /* turn off ios auto zoom */
+  input, select { 
+    font-size: 16px !important;
+   }
+
 `;

@@ -47,16 +47,9 @@ const AuthenticationContextProvider = props => {
   };
 
   const deleteAccount = async () => {
-    try {
-      await deleteUserAccount(user.id);
-      setIsAuthenticated(false);
-      setUser(undefined);
-      console.log('Delete successful');
-    } catch (err) {
-      if (err === 'User needs to reauthorize') {
-        alert('Logga in igen för att ta bort ditt konto');
-      }
-    }
+    await deleteUserAccount(user.id);
+    setIsAuthenticated(false);
+    setUser(undefined);
   };
 
   return (

@@ -14,7 +14,6 @@ export const StyledSelectedWalk = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 ${spacing.small};
     background-color: ${colors.gray5};
     width: 100%;
 
@@ -102,7 +101,6 @@ export const StyledSelectedWalk = styled.div`
     button {
       width: 90%;
       margin: 5vw;
-      z-index: 99999999;
     }
   }
 `;

@@ -37,24 +37,26 @@ const AuthenticationContextProvider = props => {
   }, []);
 
   const login = async (email, password) => {
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-    } catch (error) {
-      console.log('Error while sign in', error.message);
-    }
+    await auth.signInWithEmailAndPassword(email, password);
   };
 
   const logout = () => {
     auth.signOut();
-
     setIsAuthenticated(false);
     setUser(undefined);
   };
 
-  const deleteAccount = userId => {
-    setIsAuthenticated(false);
-    deleteUserAccount(userId);
-    setUser(undefined);
+  const deleteAccount = async () => {
+    try {
+      await deleteUserAccount(user.id);
+      setIsAuthenticated(false);
+      setUser(undefined);
+      console.log('Delete successful');
+    } catch (err) {
+      if (err === 'User needs to reauthorize') {
+        alert('Logga in igen för att ta bort ditt konto');
+      }
+    }
   };
 
   return (

@@ -59,18 +59,13 @@ const PostForm = () => {
     event.preventDefault();
     if (inputs.time.length < 1) {
       setMsgTime('Glöm inte skriva när ni ska gå.');
-    }
-    if (inputs.where.length <= 1) {
+    } else if (inputs.where.length <= 1) {
       setWhereMsg('Glöm inte skriva var ni ska gå.');
-    }
-
-    if (inputs.timeduration.length <= 1) {
+    } else if (inputs.timeduration.length <= 1) {
       setMsgDuration('Välj en av alternativen!');
-    }
-    if (inputs.introtext.length < 2) {
+    } else if (inputs.introtext.length < 2) {
       setMsg('Skriv om dig eller din promenad!');
-    }
-    if (inputs.length > 1) {
+    } else if (inputs.where.length > 1) {
       const walk = {
         createdAt: new Date(),
         user: user,

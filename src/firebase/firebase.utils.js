@@ -193,19 +193,64 @@ export const getBookings = async userId => {
 
 // Account
 
-export const deleteUserAccount = async () => {
-  auth.currentUser
-    .delete()
-    .then(() => 'Delete successful')
-    .then(() => {})
-    .catch(err => err.message);
+export const deleteUserAccount = async userId => {
+  removeProfilePicture(userId);
 
-  firestore
+  // remove user profile document
+  await firestore
     .collection('users')
-    .doc(auth.currentUser.uid)
+    .doc(userId)
     .delete()
-    .then(() => console.log('Deleted user: ', auth.currentUser.uid))
-    .catch(error => console.log('Error while deleting.', error));
+    .then(() => console.log('Deleted user: ', userId))
+    .catch(error => console.log('Error while deleting profile document', error));
+
+  // remove all users walks
+  await firestore
+    .collection('walks')
+    .where('user.id', '==', userId)
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        doc.ref.delete();
+        console.log('Deleted walk ', doc.ref.id);
+      });
+    })
+    .catch(err => console.log('Error while deleting walks', err));
+
+  // leave all users booked walks
+  await firestore
+    .collection('walks')
+    .where('attendingPeople', 'array-contains', userId)
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        const walkData = doc.data();
+        leaveAWalk(userId, walkData.walkId);
+      });
+    })
+    .catch(err => console.log('Error while leaving booked walks', err));
+
+  // remove all users chats
+  await firestore
+    .collection('chat')
+    .where('ids', 'array-contains', userId)
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        doc.ref.delete();
+        console.log('Deleted chat', doc.ref.id);
+      });
+    })
+    .catch(err => console.log('Error while deleting users chats', err));
+
+  // remove user auth
+  await auth.currentUser
+    .delete()
+    .then(() => console.log('Delete user auth'))
+    .catch(err => {
+      console.log('Error while deleteing user auth', err);
+      throw 'User needs to reauthorize';
+    });
 };
 
 export const resetPassword = async emailAddress => {
@@ -256,6 +301,13 @@ export const updateDisplayName = async newName => {
 
 export const storage = firebase.storage();
 var storageRef = storage.ref();
-var imagesRef = storageRef.child('profile-pictures');
+
+const removeProfilePicture = async userId => {
+  await storageRef
+    .child(`profile-pictures/${userId}`)
+    .delete()
+    .then(() => console.log('Deleted profile picture'))
+    .catch(err => console.log('Error while deleting profile picture', err));
+};
 
 export default firebase;

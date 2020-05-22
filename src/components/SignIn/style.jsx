@@ -56,12 +56,20 @@ export const StyledContainer = styled.div`
 
       .forgotten {
         font-size: ${fontSizes.s};
-        color: ${colors.red};
-        text-decoration: underline;
         letter-spacing: 0.3px;
         text-align: center;
         position: relative;
         top: -1rem;
+
+        p {
+          text-decoration: underline;
+          color: ${colors.red};
+        }
+
+        span {
+          text-decoration: none !important;
+          color: ${colors.white};
+        }
       }
     }
 
@@ -74,6 +82,9 @@ export const StyledContainer = styled.div`
         &.google {
           background: white;
           color: black;
+        }
+        &.gray {
+          background: ${colors.gray4};
         }
       }
     }

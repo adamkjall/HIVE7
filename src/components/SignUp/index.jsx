@@ -7,9 +7,12 @@ import {
   createUserProfileDocument,
   updateUserProfileDocument
 } from '../../firebase/firebase.utils';
+
 import makeStringtoBirthDate from '../../helpers/functions/makeStringtoBirthDate';
 import isValidDate from '../../helpers/functions/validDate';
 import imageCompression from 'browser-image-compression';
+
+import Loader from 'react-loader-spinner';
 
 import Button from '../UI/Button';
 import H1 from '../UI/H1';
@@ -421,7 +424,17 @@ const SignUp = ({ setIsSignedUp }) => {
                 stretch
                 type="submit"
               >
-                SKAPA KONTO
+                {isCreatingAccount ? (
+                  <Loader
+                    className="loader"
+                    type="Oval"
+                    color="rgba(242, 112, 99, 1)"
+                    height={25}
+                    width={25}
+                  />
+                ) : (
+                  <span>SKAPA KONTO</span>
+                )}
               </Button>
             </div>
           </div>

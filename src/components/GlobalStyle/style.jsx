@@ -79,12 +79,10 @@ export const StyledGlobalStyle = createGlobalStyle`
   }
 
   input[type='radio'] {
-      cursor: pointer;
       position: relative;
-      height: 20px;
-      width: 20px;
+      height: 19px;
+      width: 19px;
       border-radius: 999rem;
-      border: ${colors.red} solid 5px;
       outline: none !important;
       
       &::before {
@@ -98,10 +96,7 @@ export const StyledGlobalStyle = createGlobalStyle`
         width: 20px;
       }
       &:checked::before {
-        content: url("data:image/svg+xml;charset=UTF-8,<svg height='100' width='100'><circle cx='10' cy='10' r='10' stroke='black' stroke-width='3' fill='blue' /></svg>");
         background: ${colors.red};
-        height: 20px;
-        width: 20px;
       }
 
     }

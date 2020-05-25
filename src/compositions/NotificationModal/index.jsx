@@ -16,7 +16,7 @@ import { StyledModal, StyledModalHeader, StyledModalContent, StyledImageContaine
 
 const NotificationModal = ({ notification, removeNotification }) => {
   const [userData, setUserData] = useState(null);
-  const [walk, setWakj] = useState(null);
+  const [walk, setWalk] = useState(null);
   const { user } = useContext(AuthenticationContext);
 
   useEffect(() => {

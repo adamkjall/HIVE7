@@ -41,7 +41,6 @@ export const StyledChatview = styled.div`
   .sendbox-wrapper {
     width: 100%;
     padding: ${spacing.tiny};
-    padding-bottom: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,11 +50,12 @@ export const StyledChatview = styled.div`
     .sendbox {
       width: 100%;
       display: grid;
-      grid-template-columns: 1fr 60px;
+      grid-template-columns: 1fr 50px;
       grid-template-rows: 28px;
+      margin-bottom: 0.6rem;
 
       .input-mess {
-        padding: 0 0.8rem;
+        /* padding: 0 0.8rem; */
         background: ${colors.gray4};
         border-radius: 999rem;
         border: none;
@@ -63,7 +63,7 @@ export const StyledChatview = styled.div`
       }
 
       button {
-        margin-left: 0.5rem;
+        /* margin-left: 0.5rem; */
         border: none;
         background: none;
         padding: 0;

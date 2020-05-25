@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import format from 'date-fns/format';
-import formatDistanceStrict from 'date-fns/formatDistanceStrict';
-import svLocale from 'date-fns/locale/sv';
 
 import getDateTimeString from '../../helpers/functions/getDateTimeString';
 import { firestore } from '../../firebase/firebase.utils';

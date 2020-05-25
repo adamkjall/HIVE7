@@ -5,14 +5,14 @@ import format from 'date-fns/format';
 import formatDistanceStrict from 'date-fns/formatDistanceStrict';
 import svLocale from 'date-fns/locale/sv';
 
-import useAutocomplete from 'hooks/useAutocomplete';
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
 import { createWalkDocument } from '../../firebase/firebase.utils';
 
 import Header from 'components/UI/Header';
 import Button from 'components/UI/Button';
 import CheckBox from '../../components/UI/Checkbox';
-import Input from 'components/UI/Input';
+import WhereModal from 'compositions/WhereModal';
+
 import chat from '../../assets/icons/chat.svg';
 import friends from '../../assets/icons/friends.svg';
 import location from '../../assets/icons/location.svg';
@@ -22,7 +22,8 @@ import walking from '../../assets/icons/walking.svg';
 import time from '../../assets/icons/time.svg';
 import gendericon from '../../assets/icons/gender-icon.svg';
 
-import { StyledPostForm, StyledAutocompleteList } from './style';
+import { StyledPostForm } from './style';
+
 const PostForm = () => {
   const { user } = useContext(AuthenticationContext);
   const history = useHistory();
@@ -46,8 +47,6 @@ const PostForm = () => {
     filterGender: 'alla',
     introtext: ''
   });
-  const [searchResults, clearResults] = useAutocomplete(inputs.where);
-
   const onValueChange = (name, value) => {
     setInputs(inputs => ({
       ...inputs,
@@ -120,6 +119,13 @@ const PostForm = () => {
     );
   };
 
+  const submitWhere = where => {
+    setInputs({ ...inputs, where });
+  };
+
+  if (toogleWhere)
+    return <WhereModal submitWhere={submitWhere} closeModal={() => setToogleWhere(false)} />;
+
   return (
     <StyledPostForm>
       <div className="new-walk">
@@ -171,34 +177,12 @@ const PostForm = () => {
               }}
             >
               <img src={location} alt="where" />
-              <span>I vilket område vill du gå?</span>
+              {inputs.where.length ? (
+                <span>{inputs.where.split(',')[0]}</span>
+              ) : (
+                <span>I vilket område vill du gå?</span>
+              )}
             </div>
-            {toogleWhere ? (
-              <div className="where-container">
-                <Input
-                  id="where"
-                  inline
-                  name="where"
-                  value={inputs.where.split(',')[0]}
-                  onChange={event => onValueChange('where', event.target.value)}
-                  autoComplete="off"
-                />
-                <StyledAutocompleteList>
-                  {searchResults &&
-                    searchResults.map((res, i) => (
-                      <li
-                        key={i}
-                        onClick={() => {
-                          setInputs({ ...inputs, where: res.address });
-                          clearResults();
-                        }}
-                      >
-                        {res.address}
-                      </li>
-                    ))}
-                </StyledAutocompleteList>
-              </div>
-            ) : null}
             <p className="red">{wheremsg}</p>
             <div
               className="duration form-box1-div"

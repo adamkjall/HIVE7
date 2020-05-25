@@ -62,8 +62,20 @@ export const StyledSelectedWalk = styled.div`
       font-size: ${fontSizes.s};
       text-align: center;
       margin-bottom: 0.8rem;
-      span {
-        margin: 0.3rem;
+      width: 80%;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      margin: 0.3rem;
+
+      img {
+        align-self: start;
+        margin-top: 0.6rem;
+        margin-right: 0.3rem;
+      }
+      p {
+        display: inline-block;
+        margin-top: 0.5rem;
       }
     }
   }

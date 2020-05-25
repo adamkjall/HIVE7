@@ -22,7 +22,7 @@ const Nav = props => {
     const unsubscribe = firestore
       .collection('chat')
       // filter out our conversations
-      .where('ids', 'array-contains-any', [user.id])
+      .where('ids', 'array-contains', user.id)
       .onSnapshot(snapshot => {
         const conversationsData = [];
         snapshot.forEach(doc => {
@@ -36,6 +36,9 @@ const Nav = props => {
 
         conversationsData.forEach(conversation => {
           if (!conversation.lastMessage) return;
+          console.log('user', user);
+
+          console.log('conv', conversation);
 
           const isMessagedNotViewed = conversation.lastMessage.userToNotify === user.id;
           if (isMessagedNotViewed) setNewMessageNotification(true);

@@ -85,7 +85,7 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
             </div>
             <div className="quote">
               <img src={quote} alt="intro" />
-              <span>{walk.introtext}</span>
+              <p>{walk.introtext}</p>
             </div>
           </div>
           <div className="walk-data">

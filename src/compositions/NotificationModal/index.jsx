@@ -7,11 +7,7 @@ import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 import H1 from 'components/UI/H1';
 import Button from 'components/UI/Button';
 
-import Dialog from 'components/UI/Dialog';
-import location from '../../assets/icons/location.svg';
 import avatar from '../../assets/icons/profilepic.svg';
-import walking from '../../assets/icons/walking.svg';
-import clock from '../../assets/icons/time.svg';
 import waves from '../../assets/icons/lines.svg';
 import cross from '../../assets/icons/cross.svg';
 import buttonMessage from '../../assets/icons/button-message.svg';
@@ -31,8 +27,21 @@ const NotificationModal = ({ notification, removeNotification }) => {
   useEffect(() => {
     if (!notification) return;
 
-    getUserData(notification.userId).then(data => setUserData(data));
-    getWalk(notification.walkId).then(data => setWakj(data));
+    const hasError = false;
+
+    getUserData(notification.userId)
+      .then(data => setUserData(data))
+      .catch(err => {
+        hasError = true;
+      });
+    getWalk(notification.walkId)
+      .then(data => setWalk(data))
+      .then(() => {
+        if (hasError) removeNotification(notification.notificationId);
+      })
+      .catch(err => {
+        removeNotification(notification.notificationId);
+      });
   }, [notification]);
 
   return (

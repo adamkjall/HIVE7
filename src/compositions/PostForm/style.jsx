@@ -83,13 +83,14 @@ export const StyledPostForm = styled.div`
             left: 0;
             width: 100%;
             pointer-events: none;
-            background-color: white;
+            background-color: ${colors.white};
           }
         }
 
         #time-and-date {
           border: none;
           outline: none;
+          opacity: 0;
         }
       }
 

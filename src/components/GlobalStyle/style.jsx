@@ -123,7 +123,7 @@ export const StyledGlobalStyle = createGlobalStyle`
     }
 
   /* turn off ios auto zoom */
-  input, select { 
+  input, select, textarea { 
     font-size: 16px !important;
    }
 

@@ -41,6 +41,7 @@ export const StyledChatview = styled.div`
   .sendbox-wrapper {
     width: 100%;
     padding: ${spacing.tiny};
+    padding-bottom: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;

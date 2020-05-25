@@ -53,6 +53,9 @@ export const StyledModalContent = styled.div`
   flex-grow: 1;
 
   .content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .title {
@@ -76,17 +79,15 @@ export const StyledModalContent = styled.div`
 
 export const StyledImageContainer = styled.div`
   width: 100%;
-  display: grid;
-  justify-items: center;
+  max-width: 17rem;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  grid-template-columns: 2fr 1fr 2fr;
-  margin-top: 2.3rem;
-  margin-bottom: 1.5rem;
-  padding: 0 0.5rem;
+  margin-top: 2rem;
 
   .avatar {
-    width: 127px;
-    height: 127px;
+    width: 115px;
+    height: 115px;
   }
 
   .dot {

@@ -7,7 +7,7 @@ import colors from 'tokens/colors.mjs';
 export const StyledHeader = styled.div`
   padding: ${spacing.tiny} ${spacing.small};
   min-height: 3rem;
-  max-width: 420px;
+  /* max-width: 420px; */
   border: 0;
   border-radius: 999rem;
   font-family: 'Londrina Solid', cursive;

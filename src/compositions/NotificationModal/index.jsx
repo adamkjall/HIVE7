@@ -85,6 +85,7 @@ const NotificationModal = ({ notification, removeNotification }) => {
                 walkDateTime: walk.date + 'T' + walk.time
               }
             }}
+            onClick={() => removeNotification(notification.notificationId)}
           >
             <Button>
               <img className="icon" src={buttonMessage} />

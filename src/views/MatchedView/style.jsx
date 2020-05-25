@@ -20,6 +20,7 @@ export const StyledMatchedwalk = styled.div`
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+
     align-items: center;
     margin-top: 2rem;
 
@@ -39,20 +40,22 @@ export const StyledMatchedwalk = styled.div`
       background-color: ${colors.green};
       width: 12px;
       height: 12px;
-      margin: 0 1rem;
+      /* margin: 0 1rem; */
       border-radius: 999rem;
     }
 
     .matched-avatars {
+      width: 100%;
+      max-width: 17rem;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       margin-top: 2rem;
     }
 
     .avatar {
-      width: 127px;
-      height: 127px;
+      width: 115px;
+      height: 115px;
     }
   }
 

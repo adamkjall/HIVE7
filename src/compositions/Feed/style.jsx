@@ -10,6 +10,7 @@ export const StyledFeed = styled.div`
   gap: 1rem;
   padding: 1rem;
   overflow-y: scroll;
+  justify-items: center;
 
   .walk-card:last-child {
     margin-bottom: 5.5rem;

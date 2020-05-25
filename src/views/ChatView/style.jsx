@@ -30,7 +30,7 @@ export const StyledHeader = styled.div`
   img.waves {
     z-index: 3;
     position: relative;
-    top: -8px;
+    top: -10px;
     width: 100%;
   }
 `;

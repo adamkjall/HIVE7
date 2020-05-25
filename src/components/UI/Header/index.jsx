@@ -7,11 +7,13 @@ import graywaves from '../../../assets/icons/graywaves.svg';
 
 import { StyledHeader } from './style';
 
-const Header = ({ backbutton, headline }) => (
+const Header = ({ backbutton, backbuttoncross, headline }) => (
   <StyledHeader>
     <div className="headcontainer">
-      {backbutton ? <BackButton /> : <div />}
+      {backbutton && <BackButton />}
+      {backbuttoncross && <BackButton showcross />}
       <H1>{headline}</H1>
+      {!backbutton || !backbuttoncross ? <div /> : <div />}
     </div>
     <img src={graywaves} className="waves" alt="wave" />
   </StyledHeader>
@@ -19,11 +21,13 @@ const Header = ({ backbutton, headline }) => (
 
 Header.propTypes = {
   backbutton: PropTypes.bool,
+  backbuttoncross: PropTypes.bool,
   headline: PropTypes.string
 };
 
 Header.defaultProps = {
-  backbutton: false
+  backbutton: false,
+  backbuttoncross: false
 };
 
 export default Header;

@@ -25,6 +25,7 @@ export const StyledModalHeader = styled.div`
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
+  align-items: center;
   font-size: ${fontSizes.h2};
 
   h1 {

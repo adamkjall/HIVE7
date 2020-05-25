@@ -44,18 +44,16 @@ export const StyledChatview = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 56px;
     background: ${colors.gray5};
 
     .sendbox {
       width: 100%;
       display: grid;
       grid-template-columns: 1fr 50px;
-      grid-template-rows: 28px;
       margin-bottom: 0.6rem;
 
       .input-mess {
-        /* padding: 0 0.8rem; */
+        padding: 0.5rem;
         background: ${colors.gray4};
         border-radius: 999rem;
         border: none;
@@ -114,13 +112,17 @@ export const StyledMessage = styled.div`
 `;
 
 export const StyledMessageList = styled.div`
-  height: calc(100vh - 65px - 56px);
+  height: calc(100vh - 69px - 67px);
   position: relative;
   overflow-y: hidden;
 
   .messages-container {
     height: inherit;
     overflow-y: scroll;
+
+    &:last-child {
+      padding-bottom: 1.8rem;
+    }
   }
 `;
 

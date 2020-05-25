@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { getUserData, getWalk } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 
+import Loader from 'react-loader-spinner';
+
 import H1 from 'components/UI/H1';
 import Button from 'components/UI/Button';
 
@@ -12,11 +14,18 @@ import waves from '../../assets/icons/lines.svg';
 import cross from '../../assets/icons/cross.svg';
 import buttonMessage from '../../assets/icons/button-message.svg';
 
-import { StyledModal, StyledModalHeader, StyledModalContent, StyledImageContainer } from './style';
+import {
+  StyledModal,
+  StyledModalHeader,
+  StyledModalContent,
+  StyledImageContainer,
+  StyledCancelModal
+} from './style';
 
 const NotificationModal = ({ notification, removeNotification }) => {
   const [userData, setUserData] = useState(null);
   const [walk, setWalk] = useState(null);
+  const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthenticationContext);
 
   useEffect(() => {
@@ -31,6 +40,7 @@ const NotificationModal = ({ notification, removeNotification }) => {
 
     getUserData(notification.userId)
       .then(data => setUserData(data))
+      .then(() => setLoading(false))
       .catch(err => {
         hasError = true;
       });
@@ -44,27 +54,55 @@ const NotificationModal = ({ notification, removeNotification }) => {
       });
   }, [notification]);
 
+  if (notification.type === 'left walk') {
+    return (
+      <StyledCancelModal>
+        <div className="whitebox">
+          {loading ? (
+            <Loader
+              className="loader"
+              type="Oval"
+              color="rgba(242, 112, 99, 1)"
+              height={80}
+              width={80}
+            />
+          ) : (
+            <>
+              <p className="superbold">Promenad avbokad</p>
+              <p>{`Din promenad med ${userData.displayName} har tyvärr blivit avbokad.`}</p>
+              <Button
+                className="warning"
+                onClick={() => removeNotification(notification.notificationId)}
+              >
+                Stäng
+              </Button>
+            </>
+          )}
+        </div>
+      </StyledCancelModal>
+    );
+  }
+
   return (
     <StyledModal>
       <StyledModalHeader onClick={() => removeNotification(notification.notificationId)}>
         <img className="close" src={cross} alt="close window" />
       </StyledModalHeader>
       {!userData || !walk || !user ? (
-        <H1 center>Loading</H1>
+        <Loader
+          className="loader"
+          type="Oval"
+          color="rgba(242, 112, 99, 1)"
+          height={80}
+          width={80}
+        />
       ) : (
         <>
           <StyledModalContent>
             <div className="content-container">
-              {notification.type === 'left walk' ? (
-                <H1
-                  className="title"
-                  center
-                >{`${userData.displayName} har gett återbud på din promenad.`}</H1>
-              ) : (
-                <H1 className="title" center>
-                  GÅ MAMAS!
-                </H1>
-              )}
+              <H1 className="title" center>
+                GÅ MAMAS!
+              </H1>
               <p className="notification-text">{`Du och ${
                 userData.displayName ? userData.displayName.split(' ')[0] : ''
               } ska gå på promenad tillsammans.`}</p>
@@ -76,22 +114,25 @@ const NotificationModal = ({ notification, removeNotification }) => {
               </StyledImageContainer>
             </div>
           </StyledModalContent>
-          <Link
-            className="hello-btn"
-            to={{
-              pathname: '/chat',
-              state: {
-                userToChatWith: walk.user,
-                walkDateTime: walk.date + 'T' + walk.time
-              }
-            }}
-            onClick={() => removeNotification(notification.notificationId)}
-          >
-            <Button>
-              <img className="icon" src={buttonMessage} />
-              <span>SÄG HEJ</span>
-            </Button>
-          </Link>
+          {notification.type !== 'left walk' && (
+            <Link
+              className="hello-btn"
+              to={{
+                pathname: '/chat',
+                state: {
+                  userToChatWith: userData,
+                  walkDateTime: walk.date + 'T' + walk.time,
+                  prevPath: location.pathname
+                }
+              }}
+              onClick={() => removeNotification(notification.notificationId)}
+            >
+              <Button>
+                <img className="icon" src={buttonMessage} />
+                <span>SÄG HEJ</span>
+              </Button>
+            </Link>
+          )}
         </>
       )}
     </StyledModal>

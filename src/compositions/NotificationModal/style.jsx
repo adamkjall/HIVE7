@@ -4,6 +4,7 @@ import colors from 'tokens/colors.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
 import fontWeights from 'tokens/fontWeights.mjs';
 import spacing from 'tokens/spacing.mjs';
+import fontFamilies from 'tokens/fontFamilies.mjs';
 
 export const StyledModal = styled.div`
   position: fixed;
@@ -95,5 +96,50 @@ export const StyledImageContainer = styled.div`
     height: 0.8rem;
     background-color: ${colors.green};
     border-radius: 50%;
+  }
+`;
+
+export const StyledCancelModal = styled.div`
+  background: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0px;
+  left: 0;
+  z-index: 3;
+
+  .whitebox {
+    border-radius: 4px;
+    background: white;
+    margin: 60% 10%;
+    padding: 1rem 1rem 0;
+    height: 150px;
+    width: 80%;
+    z-index: 4;
+    font-size: ${fontSizes.s};
+    display: flex;
+    flex-direction: column;
+
+    .superbold {
+      font-weight: bold;
+      font-size: ${fontSizes.m};
+      margin: 0;
+    }
+    .warning {
+      padding: 0;
+      margin-left: auto;
+      margin-right: 9px;
+      color: ${colors.red};
+      background: none;
+      font-family: ${fontFamilies.fontRegular};
+      font-size: ${fontSizes.s};
+    }
+
+    .loader {
+      height: 100%;
+      width: 100%;
+      display: grid;
+      place-items: center;
+    }
   }
 `;

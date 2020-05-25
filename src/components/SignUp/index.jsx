@@ -390,8 +390,8 @@ const SignUp = ({ setIsSignedUp }) => {
               <div />
             </div>
             <div>
-              <span className="red the-bottom-line">{msgFile}</span>
-              <span className="red">{msg}</span>
+              <p className="red the-bottom-line">{msgFile}</p>
+              <p className="red">{msg}</p>
             </div>
             <Checkbox
               id="terms"

@@ -69,6 +69,8 @@ export const StyledAutocompleteList = styled.ul`
 
     img {
       margin-right: ${spacing.small};
+      max-width: 30px;
+      max-height: 30px;
     }
 
     .result {

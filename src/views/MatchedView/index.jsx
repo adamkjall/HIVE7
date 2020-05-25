@@ -48,7 +48,8 @@ const MatchedPageContent = ({ walk }) => {
             pathname: '/chat',
             state: {
               userToChatWith: walk.user,
-              walkDateTime: walk.date + 'T' + walk.time
+              walkDateTime: walk.date + 'T' + walk.time,
+              prevPath: location.pathname
             }
           }}
         >

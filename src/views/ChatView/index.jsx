@@ -22,10 +22,18 @@ import {
   StyledFirstPresentation
 } from './style';
 
-const ChatPageContent = ({ messages, sendMessage, user, userToChatWith, walkDateTime }) => {
+const ChatPageContent = ({
+  messages,
+  sendMessage,
+  user,
+  userToChatWith,
+  walkDateTime,
+  prevPath
+}) => {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
   const history = useHistory();
+  console.log('prevPath', prevPath);
 
   useEffect(() => {
     scrollToBottom();
@@ -48,13 +56,21 @@ const ChatPageContent = ({ messages, sendMessage, user, userToChatWith, walkDate
     } else return;
   };
 
+  const handleGoBack = () => {
+    if (prevPath) {
+      history.push('/feed');
+    } else {
+      history.goBack();
+    }
+  };
+
   return (
     <React.Fragment>
       <StyledChatview>
         <StyledHeader>
           <div className="head-chat-info">
             <span className="backbutton">
-              <img onClick={() => history.push('/feed')} src={back} alt="back" />
+              <img onClick={handleGoBack} src={back} alt="back" />
             </span>
             <img className="avatar" src={userToChatWith.photoUrl || avatar} alt="avatar" />
             <p className="displayname">{userToChatWith.displayName.split(' ')[0]}</p>
@@ -69,7 +85,7 @@ const ChatPageContent = ({ messages, sendMessage, user, userToChatWith, walkDate
                 .map((message, index) => {
                   const isUserMessage = user.id === message.id;
                   return (
-                    <StyledMessage isUserMessage={isUserMessage} key={index}>
+                    <StyledMessage className="message" isUserMessage={isUserMessage} key={index}>
                       <div className="timebox">
                         <p className="timeposted">{format(message.createdAt, 'H:m d MMMM')}</p>
                       </div>
@@ -115,7 +131,7 @@ const ChatPageContent = ({ messages, sendMessage, user, userToChatWith, walkDate
 const ChatView = () => {
   const { user } = useContext(AuthenticationContext);
   const [messages, setMessages] = useState([]);
-  const { userToChatWith, walkDateTime } = useLocation().state;
+  const { userToChatWith, walkDateTime, prevPath } = useLocation().state;
 
   useEffect(() => {
     // find chat session id
@@ -185,6 +201,7 @@ const ChatView = () => {
         user={user}
         userToChatWith={userToChatWith}
         walkDateTime={walkDateTime}
+        prevPath={prevPath}
         messages={messages}
         sendMessage={sendMessage}
       />

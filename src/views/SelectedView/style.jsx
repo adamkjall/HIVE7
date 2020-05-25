@@ -22,6 +22,11 @@ export const StyledSelectedWalk = styled.div`
       grid-template-columns: 1fr 1fr;
       width: 100%;
 
+      .wrapbackbutton {
+        display: flex;
+        width: 50px;
+        height: 50px;
+      }
       .chatbox {
         display: flex;
         justify-content: center;
@@ -55,14 +60,13 @@ export const StyledSelectedWalk = styled.div`
       justify-content: center;
       padding-bottom: 0.1rem;
       margin: ${spacing.tiny} 0 0 0;
-      width: 300px;
-      border-bottom: solid 1px ${colors.gray3};
+      width: 85%;
     }
     .quote {
       font-size: ${fontSizes.s};
       text-align: center;
       margin-bottom: 0.8rem;
-      width: 80%;
+      width: 85%;
       display: flex;
       flex-wrap: nowrap;
       justify-content: center;
@@ -83,7 +87,7 @@ export const StyledSelectedWalk = styled.div`
     display: grid;
     grid-template-columns: 50px 1fr;
     row-gap: 10px;
-    width: 300px;
+    width: 85%;
     padding: 1rem 0;
     img {
       justify-self: center;
@@ -96,7 +100,7 @@ export const StyledSelectedWalk = styled.div`
   .walk-data2 {
     display: grid;
     grid-template-columns: 50px 1fr 40px;
-    width: 300px;
+    width: 80%;
     row-gap: 10px;
     border-top: 1.5px solid ${colors.gray4};
     padding: 1rem 0;

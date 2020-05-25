@@ -6,12 +6,11 @@ import colors from 'tokens/colors.mjs';
 export const StyledBack = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   border: none;
   background: none;
 
   .back {
-    padding: ${spacing.small} ${spacing.small} 0;
     border: none;
     background: none;
   }

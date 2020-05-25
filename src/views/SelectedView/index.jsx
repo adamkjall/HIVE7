@@ -61,7 +61,9 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
         <StyledSelectedWalk>
           <div className="gray-wrapper">
             <div className="head-wrapper">
-              <BackButton />
+              <div className="wrapbackbutton">
+                <BackButton showcross />
+              </div>
               {walk.attendingPeople.find(id => id === user.id) && (
                 <Link
                   className="chatbox"

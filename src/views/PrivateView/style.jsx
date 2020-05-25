@@ -123,7 +123,6 @@ export const StyledPrivate = styled.div`
             background: none;
             font-family: ${fontFamilies.fontRegular};
             font-size: ${fontSizes.s};
-
             &:hover {
               box-shadow: none;
               transition: 0;

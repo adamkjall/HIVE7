@@ -112,7 +112,7 @@ export const StyledMessage = styled.div`
 `;
 
 export const StyledMessageList = styled.div`
-  height: calc(100vh - 69px - 67px);
+  height: calc(100vh - 69px - 64px);
   position: relative;
   overflow-y: hidden;
 

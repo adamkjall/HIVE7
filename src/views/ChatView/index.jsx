@@ -33,7 +33,6 @@ const ChatPageContent = ({
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
   const history = useHistory();
-  console.log('prevPath', prevPath);
 
   useEffect(() => {
     scrollToBottom();

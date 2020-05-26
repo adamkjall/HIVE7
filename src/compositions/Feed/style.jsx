@@ -26,7 +26,7 @@ export const StyledGreetingsBox = styled.div`
 
   .title {
     color: ${colors.red};
-    margin-bottom: 0.5rem;
+    margin: 0;
   }
 
   .text {

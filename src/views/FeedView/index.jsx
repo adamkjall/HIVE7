@@ -44,9 +44,7 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
       return true;
     });
 
-  if (isLoading) {
-    return <Loader fullScreen />;
-  } else if (error) {
+  if (error) {
     return <Alert status="error"></Alert>;
   } else {
     return (
@@ -68,7 +66,13 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
         <ButtonCreate />
 
         <StyledFeedContainer>
-          {activeTab === 0 ? <Feed walks={availableWalks} /> : <Feed walks={bookedWalks} />}
+          {isLoading ? (
+            <Loader fullScreen />
+          ) : activeTab === 0 ? (
+            <Feed walks={availableWalks} showWelcome={true} />
+          ) : (
+            <Feed walks={bookedWalks} showWelcome={false} />
+          )}
         </StyledFeedContainer>
       </StyledFeedView>
     );

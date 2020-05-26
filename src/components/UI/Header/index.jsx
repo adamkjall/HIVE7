@@ -9,11 +9,10 @@ import { StyledHeader } from './style';
 
 const Header = ({ backbutton, backbuttoncross, headline }) => (
   <StyledHeader>
-    <div className="headcontainer">
+    <div className={!backbutton && !backbuttoncross ? 'headcontainermess' : 'headcontainer'}>
       {backbutton && <BackButton />}
       {backbuttoncross && <BackButton showcross />}
       <H1>{headline}</H1>
-      {!backbutton || !backbuttoncross ? <div /> : <div />}
     </div>
     <img src={graywaves} className="waves" alt="wave" />
   </StyledHeader>

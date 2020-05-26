@@ -80,10 +80,11 @@ export const StyledGlobalStyle = createGlobalStyle`
 
   input[type='radio'] {
       position: relative;
-      height: 19px;
-      width: 19px;
+      height: 20px;
+      width: 20px;
       border-radius: 999rem;
       outline: none !important;
+      appearance: none;
       
       &::before {
         position: relative;

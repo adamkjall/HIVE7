@@ -29,19 +29,23 @@ export const StyledCheckBox = styled.div`
     background-color: ${colors.white};
     border: 2px ${colors.gray2} solid;
     border-radius: 3px;
+    z-index: 2;
   }
 
   .checkbox {
-    height: 20px;
-    width: 20px;
+    height: 23px;
+    width: 23px;
     content: '';
     appearance: none !important;
     outline: none !important;
+    z-index: 0;
     &:before {
       content: '';
-      width: 20px;
-      height: 20px;
+      width: 23px;
+      height: 23px;
       outline: none !important;
+      appearance: none !important;
+      z-index: 0;
     }
 
     &:checked {
@@ -60,6 +64,7 @@ export const StyledCheckBox = styled.div`
       padding: 2px;
       outline: none !important;
       border-radius: 3px;
+      z-index: 3;
     }
   }
 `;

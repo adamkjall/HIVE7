@@ -35,6 +35,17 @@ export const StyledHeader = styled.div`
     margin: 0;
   }
 
+  .headcontainermess {
+    background-color: ${colors.gray5};
+    display: grid;
+    height: 84px;
+    h1 {
+      text-align: center;
+      padding-top: 1rem;
+    }
+    margin: 0;
+  }
+
   .waves {
     width: 100%;
     margin: 0;

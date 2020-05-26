@@ -9,7 +9,7 @@ export const StyledCheckBox = styled.div`
   max-height: 50px;
 
   .container {
-    width: 320px;
+    width: 100%;
     display: grid;
     grid-template-columns: 50px auto 23px;
     grid-template-rows: 50px;

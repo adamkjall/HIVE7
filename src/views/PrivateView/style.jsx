@@ -106,8 +106,8 @@ export const StyledPrivate = styled.div`
           border-radius: 4px;
           background: white;
           margin: 60% 10%;
-          padding: 1rem 1rem 0;
-          height: 150px;
+          padding: 1rem;
+
           width: 80%;
           z-index: 4;
           font-size: ${fontSizes.s};
@@ -116,16 +116,34 @@ export const StyledPrivate = styled.div`
             font-size: ${fontSizes.m};
             margin: 0;
           }
-          .warning {
-            padding: 0;
-            margin: 2px 25px;
-            color: ${colors.red};
-            background: none;
-            font-family: ${fontFamilies.fontRegular};
-            font-size: ${fontSizes.s};
-            &:hover {
-              box-shadow: none;
-              transition: 0;
+
+          input {
+            padding: 8px;
+          }
+
+          .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 2.5rem;
+
+            .warning {
+              padding: 0;
+              margin-left: 1rem;
+              min-height: 2rem;
+              color: ${colors.red};
+              background: none;
+              font-family: ${fontFamilies.fontRegular};
+              font-size: ${fontSizes.s};
+              font-weight: bold;
+
+              &:hover {
+                box-shadow: none;
+                transition: 0;
+              }
+
+              &.gray {
+                color: ${colors.gray2};
+              }
             }
           }
 

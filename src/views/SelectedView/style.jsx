@@ -122,6 +122,6 @@ export const StyledSelectedWalk = styled.div`
 `;
 
 export const StyledMap = styled.div`
-  width: 100%;
+  width: 85%;
   height: auto;
 `;

@@ -381,7 +381,11 @@ const SignUp = ({ setIsSignedUp }) => {
                           <span className="swap-profile-picture">Byt profilbild</span>
                         </>
                       ) : (
-                        <img className="profile-picture" src={chooseprofilepic} alt="profile" />
+                        <img
+                          className="profile-picture default"
+                          src={chooseprofilepic}
+                          alt="profile"
+                        />
                       )}
                     </label>
                   </>

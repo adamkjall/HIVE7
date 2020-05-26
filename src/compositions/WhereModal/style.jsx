@@ -29,7 +29,7 @@ export const StyledModalHeader = styled.div`
   font-size: ${fontSizes.h2};
 
   h1 {
-    margin: 0;
+    margin: 0.5rem 0;
   }
 
   .close {

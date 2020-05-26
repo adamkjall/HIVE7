@@ -19,8 +19,9 @@ export const StyledMap = styled.div`
   }
   .leaflet-container {
     width: 100%;
-    height: 25vh;
+    height: 30vh;
     overflow: hidden;
+    border-radius: 5px;
   }
   .leaflet-tile,
   .leaflet-marker-icon,
@@ -142,6 +143,7 @@ export const StyledMap = styled.div`
   /* control positioning */
 
   .leaflet-control {
+    display: none;
     position: relative;
     z-index: 800;
     pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */

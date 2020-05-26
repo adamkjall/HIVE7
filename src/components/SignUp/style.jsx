@@ -144,6 +144,10 @@ export const StyledSignUpContainer = styled.div`
         width: 60px;
         height: 60px;
         margin: 0.5rem 0;
+
+        &.default {
+          width: 65px;
+        }
       }
 
       .swap-profile-picture {

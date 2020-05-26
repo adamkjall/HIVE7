@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { AuthenticationContext } from 'contexts/AuthenticationContext';
-
 import Loader from 'react-loader-spinner';
+
+import { AuthenticationContext } from 'contexts/AuthenticationContext';
 
 import Page from 'compositions/Page';
 import H3 from 'components/UI/H3';
@@ -11,22 +11,27 @@ import calculateAge from '../../helpers/functions/calculateAge';
 import avatar from '../../assets/icons/profilepic.svg';
 import UploadFile from '../../components/UploadFile';
 import Button from '../../components/UI/Button';
+import Input from '../../components/UI/Input';
 import TermsCondition from '../../components/TermsCondition';
+
 import { StyledPrivate } from './style';
 
 const PrivateView = () => {
-  const [toogleChangePic, setToogleChangePic] = useState(false);
   const history = useHistory();
   const { user, deleteAccount } = useContext(AuthenticationContext);
+  const [toogleChangePic, setToogleChangePic] = useState(false);
   const [toogleReadMore, setToogleReadMore] = useState(false);
   const [toogleDelete, setToogleDelete] = useState(false);
   const [toogleSignOut, setToogleSignOut] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [inputs, setInputs] = useState({ email: '', password: '' });
 
   const handleDeleteAccount = async () => {
+    if (!(inputs.email.length && inputs.password.length)) return;
     setLoading(true);
+
     try {
-      await deleteAccount();
+      await deleteAccount(inputs.email, inputs.password);
     } catch (err) {
       console.log('Error deleting accoung', err);
       setLoading(false);
@@ -88,12 +93,14 @@ const PrivateView = () => {
                   <div className="whitebox">
                     <p className="superbold">Logga ut?</p>
                     <p>Är du säker på att du vill logga ut? </p>
-                    <Button className="warning" onClick={() => setToogleSignOut(!toogleSignOut)}>
-                      AVBRYT
-                    </Button>
-                    <Button className="warning" onClick={() => history.push('/logout')}>
-                      LOGGA UT
-                    </Button>
+                    <div className="button-container">
+                      <Button className="warning" onClick={() => setToogleSignOut(!toogleSignOut)}>
+                        AVBRYT
+                      </Button>
+                      <Button className="warning" onClick={() => history.push('/logout')}>
+                        LOGGA UT
+                      </Button>
+                    </div>
                   </div>
                 </div>
               )}
@@ -114,13 +121,43 @@ const PrivateView = () => {
                     ) : (
                       <>
                         <p className="superbold">Ta bort konto?</p>
-                        <p>Är du säker på att du vill ta bort ditt konto?</p>
-                        <Button className="warning" onClick={() => setToogleDelete(!toogleDelete)}>
-                          AVBRYT
-                        </Button>
-                        <Button className="warning" onClick={handleDeleteAccount}>
-                          TA BORT
-                        </Button>
+                        <p>Ange e-post & lösenord för att ta bort ditt konto.</p>
+                        <Input
+                          type="email"
+                          autoComplete="email"
+                          placeholder="E-post"
+                          id="email"
+                          inline
+                          name="email"
+                          value={inputs.email}
+                          onChange={event => setInputs({ ...inputs, email: event.target.value })}
+                        />
+                        <Input
+                          type="password"
+                          autoComplete="current-password"
+                          placeholder="Lösenord"
+                          id="password"
+                          inline
+                          name="password"
+                          value={inputs.password}
+                          onChange={event => setInputs({ ...inputs, password: event.target.value })}
+                        />
+                        <div className="button-container">
+                          <Button
+                            className="warning"
+                            onClick={() => setToogleDelete(!toogleDelete)}
+                          >
+                            AVBRYT
+                          </Button>
+                          <Button
+                            className={`warning ${
+                              inputs.email.length && inputs.password.length ? '' : 'gray'
+                            }`}
+                            onClick={handleDeleteAccount}
+                          >
+                            TA BORT
+                          </Button>
+                        </div>
                       </>
                     )}
                   </div>

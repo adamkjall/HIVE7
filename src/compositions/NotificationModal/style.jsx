@@ -192,6 +192,7 @@ export const StyledCancelModal = styled.div`
       font-size: ${fontSizes.m};
       margin: 0;
     }
+
     .warning {
       padding: 0;
       margin-left: auto;

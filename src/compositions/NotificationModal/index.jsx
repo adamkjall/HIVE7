@@ -23,10 +23,11 @@ import {
 } from './style';
 
 const NotificationModal = ({ notification, removeNotification }) => {
+  const { user } = useContext(AuthenticationContext);
   const [userData, setUserData] = useState(null);
   const [walk, setWalk] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { user } = useContext(AuthenticationContext);
+  const [isRemoving, setIsRemoving] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -35,7 +36,7 @@ const NotificationModal = ({ notification, removeNotification }) => {
 
   useEffect(() => {
     if (!notification) return;
-
+    setIsRemoving(false);
     const hasError = false;
 
     getUserData(notification.userId)
@@ -44,6 +45,7 @@ const NotificationModal = ({ notification, removeNotification }) => {
       .catch(err => {
         hasError = true;
       });
+
     getWalk(notification.walkId)
       .then(data => setWalk(data))
       .then(() => {
@@ -54,10 +56,18 @@ const NotificationModal = ({ notification, removeNotification }) => {
       });
   }, [notification]);
 
+  const handleRemoveNotification = () => {
+    setIsRemoving(true);
+    setTimeout(() => {
+      removeNotification(notification.notificationId);
+      // setIsRemoving(false);
+    }, 300);
+  };
+
   if (notification.type === 'left walk') {
     return (
       <StyledCancelModal>
-        <div className="whitebox">
+        <div className={`whitebox ${isRemoving ? 'removing' : ''}`}>
           {loading ? (
             <Loader
               className="loader"
@@ -70,10 +80,7 @@ const NotificationModal = ({ notification, removeNotification }) => {
             <>
               <p className="superbold">Promenad avbokad</p>
               <p>{`Din promenad med ${userData.displayName} har tyvärr blivit avbokad.`}</p>
-              <Button
-                className="warning"
-                onClick={() => removeNotification(notification.notificationId)}
-              >
+              <Button className="warning" onClick={handleRemoveNotification}>
                 Stäng
               </Button>
             </>
@@ -84,57 +91,59 @@ const NotificationModal = ({ notification, removeNotification }) => {
   }
 
   return (
-    <StyledModal>
-      <StyledModalHeader onClick={() => removeNotification(notification.notificationId)}>
-        <img className="close" src={cross} alt="close window" />
-      </StyledModalHeader>
-      {!userData || !walk || !user ? (
-        <Loader
-          className="loader"
-          type="Oval"
-          color="rgba(242, 112, 99, 1)"
-          height={80}
-          width={80}
-        />
-      ) : (
-        <>
-          <StyledModalContent>
-            <div className="content-container">
-              <H1 className="title" center>
-                GÅ MAMAS!
-              </H1>
-              <p className="notification-text">{`Du och ${
-                userData.displayName ? userData.displayName.split(' ')[0] : ''
-              } ska gå på promenad tillsammans.`}</p>
-              <img src={waves} alt="waves" />
-              <StyledImageContainer>
-                <img className="avatar" src={user.photoUrl || avatar} alt="avatar" />
-                <span className="dot"></span>
-                <img className="avatar" src={userData.photoUrl || avatar} alt="avatar" />
-              </StyledImageContainer>
-            </div>
-          </StyledModalContent>
-          {notification.type !== 'left walk' && (
-            <Link
-              className="hello-btn"
-              to={{
-                pathname: '/chat',
-                state: {
-                  userToChatWith: userData,
-                  walkDateTime: walk.date + 'T' + walk.time,
-                  prevPath: location.pathname
-                }
-              }}
-              onClick={() => removeNotification(notification.notificationId)}
-            >
-              <Button>
-                <img className="icon" src={buttonMessage} />
-                <span>SÄG HEJ</span>
-              </Button>
-            </Link>
-          )}
-        </>
-      )}
+    <StyledModal className={isRemoving ? 'removing' : ''}>
+      <div className="container">
+        <StyledModalHeader onClick={handleRemoveNotification}>
+          <img className="close" src={cross} alt="close window" />
+        </StyledModalHeader>
+        {!userData || !walk || !user ? (
+          <Loader
+            className="loader"
+            type="Oval"
+            color="rgba(242, 112, 99, 1)"
+            height={80}
+            width={80}
+          />
+        ) : (
+          <>
+            <StyledModalContent>
+              <div className="content-container">
+                <H1 className="title" center>
+                  GÅ MAMAS!
+                </H1>
+                <p className="notification-text">{`Du och ${
+                  userData.displayName ? userData.displayName.split(' ')[0] : ''
+                } ska gå på promenad tillsammans.`}</p>
+                <img src={waves} alt="waves" />
+                <StyledImageContainer>
+                  <img className="avatar" src={user.photoUrl || avatar} alt="avatar" />
+                  <span className="dot"></span>
+                  <img className="avatar" src={userData.photoUrl || avatar} alt="avatar" />
+                </StyledImageContainer>
+              </div>
+            </StyledModalContent>
+            {notification.type !== 'left walk' && (
+              <Link
+                className="hello-btn"
+                to={{
+                  pathname: '/chat',
+                  state: {
+                    userToChatWith: userData,
+                    walkDateTime: walk.date + 'T' + walk.time,
+                    prevPath: location.pathname
+                  }
+                }}
+                onClick={handleRemoveNotification}
+              >
+                <Button>
+                  <img className="icon" src={buttonMessage} />
+                  <span>SÄG HEJ</span>
+                </Button>
+              </Link>
+            )}
+          </>
+        )}
+      </div>
     </StyledModal>
   );
 };

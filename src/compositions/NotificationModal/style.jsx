@@ -17,9 +17,43 @@ export const StyledModal = styled.div`
   color: ${colors.black};
   background-color: ${colors.white};
   padding: ${spacing.tiny} ${spacing.small} ${spacing.small};
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+
+  .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    animation: scaleUp 0.3s ease-out;
+    -webkit-animation: scaleUp 0.3s ease-out;
+
+    @keyframes scaleUp {
+      0% {
+        transform: scale(0.3);
+        -webkit-transform: scale(0.3);
+      }
+      100% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+      }
+    }
+  }
+
+  &.removing {
+    animation: scaleDown 0.3s ease-out;
+    -webkit-animation: scaleDown 0.3s ease-out;
+
+    @keyframes scaleDown {
+      0% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+      }
+      100% {
+        transform: scale(0.4);
+        -webkit-transform: scale(0.4);
+      }
+    }
+  }
 
   .hello-btn {
     width: 100%;
@@ -106,7 +140,7 @@ export const StyledCancelModal = styled.div`
   position: fixed;
   top: 0px;
   left: 0;
-  z-index: 3;
+  z-index: 9999999999999999;
 
   .whitebox {
     border-radius: 4px;
@@ -119,6 +153,36 @@ export const StyledCancelModal = styled.div`
     font-size: ${fontSizes.s};
     display: flex;
     flex-direction: column;
+
+    animation: scaleUp 0.3s ease-out;
+    -webkit-animation: scaleUp 0.3s ease-out;
+
+    @keyframes scaleUp {
+      0% {
+        transform: scale(0.3);
+        -webkit-transform: scale(0.3);
+      }
+      100% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+      }
+    }
+
+    &.removing {
+      animation: scaleDown 0.3s ease-out;
+      -webkit-animation: scaleDown 0.3s ease-out;
+
+      @keyframes scaleDown {
+        0% {
+          transform: scale(1);
+          -webkit-transform: scale(1);
+        }
+        100% {
+          transform: scale(0.1);
+          -webkit-transform: scale(0.1);
+        }
+      }
+    }
 
     .superbold {
       font-weight: bold;

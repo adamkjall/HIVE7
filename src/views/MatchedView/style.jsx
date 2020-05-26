@@ -11,6 +11,19 @@ export const StyledMatchedwalk = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: ${spacing.tiny} ${spacing.small} ${spacing.small};
+  animation: animate 0.5s ease-out;
+  -webkit-animation: animate 0.5s ease-out;
+
+  @keyframes animate {
+    0% {
+      transform: scale(0.3);
+      -webkit-transform: scale(0.3);
+    }
+    100% {
+      transform: scale(1);
+      -webkit-transform: scale(1);
+    }
+  }
 
   .close-btn {
     align-self: flex-start;

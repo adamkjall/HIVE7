@@ -18,48 +18,45 @@ const MatchedPageContent = ({ walk }) => {
   const { user } = useContext(AuthenticationContext);
 
   return (
-    <React.Fragment>
-      <StyledMatchedwalk>
-        <Link className="close-btn" to="/feed">
-          <img src={cross} alt="close window" />
-        </Link>
+    <StyledMatchedwalk>
+      <Link className="close-btn" to="/feed">
+        <img src={cross} alt="close window" />
+      </Link>
 
-        <div className="content-container">
-          <H1 className="title">GÅ MAMAS!</H1>
-          <p className="gray">
-            Du och <span>{walk.user.displayName.split(' ')[0]}</span> ska gå på promenad
-            tillsammans.
-          </p>
-          <img src={shortWaves} alt="shortwavw" />
-          <div className="matched-avatars">
-            <Link to={{ pathname: '/profile/' + walk.author, state: { walk } }}>
-              <img className="avatar" src={walk.user.photoUrl || avatar} alt="avatar" />
-            </Link>
-            <div className="dott" />
-            <Link to={{ pathname: '/profile/' + user.displayName, state: { walk } }}>
-              <img className="avatar" src={user.photoUrl || avatar} alt="avatar" />
-            </Link>
-          </div>
+      <div className="content-container">
+        <H1 className="title">GÅ MAMAS!</H1>
+        <p className="gray">
+          Du och <span>{walk.user.displayName.split(' ')[0]}</span> ska gå på promenad tillsammans.
+        </p>
+        <img src={shortWaves} alt="shortwavw" />
+        <div className="matched-avatars">
+          <Link to={{ pathname: '/profile/' + walk.author, state: { walk } }}>
+            <img className="avatar" src={walk.user.photoUrl || avatar} alt="avatar" />
+          </Link>
+          <div className="dott" />
+          <Link to={{ pathname: '/profile/' + user.displayName, state: { walk } }}>
+            <img className="avatar" src={user.photoUrl || avatar} alt="avatar" />
+          </Link>
         </div>
+      </div>
 
-        <Link
-          className="hello-btn"
-          to={{
-            pathname: '/chat',
-            state: {
-              userToChatWith: walk.user,
-              walkDateTime: walk.date + 'T' + walk.time,
-              prevPath: location.pathname
-            }
-          }}
-        >
-          <Button>
-            <img className="icon" src={buttonMessage} />
-            <span>SÄG HEJ</span>
-          </Button>
-        </Link>
-      </StyledMatchedwalk>
-    </React.Fragment>
+      <Link
+        className="hello-btn"
+        to={{
+          pathname: '/chat',
+          state: {
+            userToChatWith: walk.user,
+            walkDateTime: walk.date + 'T' + walk.time,
+            prevPath: location.pathname
+          }
+        }}
+      >
+        <Button>
+          <img className="icon" src={buttonMessage} />
+          <span>SÄG HEJ</span>
+        </Button>
+      </Link>
+    </StyledMatchedwalk>
   );
 };
 

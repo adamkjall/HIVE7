@@ -105,7 +105,7 @@ const FeedView = () => {
   }, []);
 
   return (
-    <Page metadata={{ title: 'Feed' }} displayNavBottom>
+    <Page metadata={{ title: 'Promenader' }} displayNavBottom>
       <FeedPageContent user={user} walks={walks} error={error} isLoading={isLoading} />
     </Page>
   );

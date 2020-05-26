@@ -30,7 +30,7 @@ const MatchedPageContent = ({ walk }) => {
             Du och <span>{walk.user.displayName.split(' ')[0]}</span> ska gå på promenad
             tillsammans.
           </p>
-          <img src={shortWaves} />
+          <img src={shortWaves} alt="shortwavw" />
           <div className="matched-avatars">
             <Link to={{ pathname: '/profile/' + walk.author, state: { walk } }}>
               <img className="avatar" src={walk.user.photoUrl || avatar} alt="avatar" />
@@ -65,7 +65,7 @@ const MatchedPageContent = ({ walk }) => {
 
 const MatchedView = walk => {
   return (
-    <Page>
+    <Page metadata={{ title: 'Matchad' }}>
       <MatchedPageContent walk={walk.location.state.walk} />
     </Page>
   );

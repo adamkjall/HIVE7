@@ -34,7 +34,7 @@ const PrivateView = () => {
   };
 
   return (
-    <Page metadata={{ title: 'Private view' }} displayNavBottom>
+    <Page metadata={{ title: 'Profilsida' }} displayNavBottom>
       {!user ? (
         <div></div>
       ) : (

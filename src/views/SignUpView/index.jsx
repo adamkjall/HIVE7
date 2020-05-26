@@ -25,7 +25,7 @@ const SignUpView = ({ location }) => {
   }
 
   return (
-    <Page metadata={{ title: 'SignUp' }}>
+    <Page metadata={{ title: 'Skapa profil' }}>
       <Header headline="Skapa profil" backbutton />
       <SignUp setIsSignedUp={setIsSignedUp} />
     </Page>

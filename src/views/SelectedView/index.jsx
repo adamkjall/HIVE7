@@ -174,7 +174,7 @@ const SelectedView = props => {
   }, [walkId]);
 
   return (
-    <Page>
+    <Page metadata={{ title: 'Vald promenad' }}>
       <SelectedPageContent walk={walk} data={data} error={error} isLoading={isLoading} />
     </Page>
   );

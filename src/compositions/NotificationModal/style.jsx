@@ -141,14 +141,17 @@ export const StyledCancelModal = styled.div`
   top: 0px;
   left: 0;
   z-index: 9999999999999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .whitebox {
     border-radius: 4px;
     background: white;
-    margin: 60% 10%;
     padding: 1rem 1rem 0;
-    height: 150px;
+    min-height: 180px;
     width: 80%;
+    max-width: 25rem;
     z-index: 4;
     font-size: ${fontSizes.s};
     display: flex;

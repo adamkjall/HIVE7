@@ -132,13 +132,17 @@ export const StyledPrivate = styled.div`
         top: 0px;
         left: 0;
         z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         .whitebox {
           border-radius: 4px;
           background: white;
-          margin: 60% 10%;
           padding: 1rem;
-
           width: 80%;
+          max-width: 25rem;
+          min-height: 180px;
           z-index: 4;
           font-size: ${fontSizes.s};
           .superbold {

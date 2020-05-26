@@ -88,7 +88,7 @@ export const StyledMessage = styled.div`
   }
   .chat-box {
     width: fit-content;
-    min-width: 20%;
+    min-width: 35%;
     max-width: 60%;
     background: ${({ isUserMessage }) => (isUserMessage ? colors.green : colors.gray5)};
     color: ${({ isUserMessage }) => (isUserMessage ? 'white' : 'black')};

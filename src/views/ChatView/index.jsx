@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+
 import format from 'date-fns/format';
+import formatDistanceStrict from 'date-fns/formatDistanceStrict';
+import svLocale from 'date-fns/locale/sv';
 
 import getDateTimeString from '../../helpers/functions/getDateTimeString';
 import { firestore } from '../../firebase/firebase.utils';
@@ -61,6 +64,29 @@ const ChatPageContent = ({
     }
   };
 
+  const createDateTimeString = date => {
+    const [year_now, month_now, day_now] = format(new Date(), 'yyyy-MM-dd').split('-');
+
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const time = date.toTimeString().slice(0, 5);
+
+    const distanceString = formatDistanceStrict(
+      new Date(+year_now, +month_now, +day_now),
+      new Date(year, month, day),
+      { unit: 'day' }
+    );
+
+    const distanceInDays = Number(distanceString.split(' ')[0]);
+    const todayOrTomorrowString =
+      distanceInDays === 0 ? 'Idag, ' : distanceInDays === 1 ? 'Igår, ' : '';
+
+    return todayOrTomorrowString.length
+      ? todayOrTomorrowString + time
+      : format(new Date(year, month - 1, day), 'EEEE d MMMM', { locale: svLocale }) + ', ' + time;
+  };
+
   return (
     <React.Fragment>
       <StyledChatview>
@@ -84,7 +110,7 @@ const ChatPageContent = ({
                   return (
                     <StyledMessage className="message" isUserMessage={isUserMessage} key={index}>
                       <div className="timebox">
-                        <p className="timeposted">{format(message.createdAt, 'H:m d MMMM')}</p>
+                        <p className="timeposted">{createDateTimeString(message.createdAt)}</p>
                       </div>
                       <div className="chat-box">
                         <span className="text">{message.text}</span>

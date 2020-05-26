@@ -34,6 +34,7 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
   const availableWalks = sortedWalks
     .filter(walk => !bookedWalks.includes(walk))
     .filter(walk => walk.attendingPeople.length === 0)
+    .filter(walk => walk.filterGender === 'on' && user.gender === 'female')
     .filter(walk => {
       const d = new Date();
       const [timeNow, dateNow] = d.toISOString().split('T');
@@ -79,7 +80,6 @@ const FeedView = () => {
   const [error, setError] = useState(null);
   const [walks, setWalks] = useState([]);
   const { user } = useContext(AuthenticationContext);
-  //console.log('walks', walks);
 
   useEffect(() => {
     setIsLoading(true);

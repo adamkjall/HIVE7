@@ -46,7 +46,8 @@ const AuthenticationContextProvider = props => {
     setUser(undefined);
   };
 
-  const deleteAccount = async () => {
+  const deleteAccount = async (email, password) => {
+    await auth.signInWithEmailAndPassword(email, password);
     await deleteUserAccount(user.id);
     setIsAuthenticated(false);
     setUser(undefined);

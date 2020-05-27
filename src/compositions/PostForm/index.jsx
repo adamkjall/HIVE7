@@ -268,6 +268,7 @@ const PostForm = () => {
               type="text"
               id="introtext"
               name="introtext"
+              maxLength="200"
               value={inputs.introtext}
               placeholder="Skriv en hälsning"
               onChange={event => onValueChange('introtext', event.target.value)}

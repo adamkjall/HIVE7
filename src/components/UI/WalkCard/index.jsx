@@ -80,7 +80,11 @@ const WalkCard = ({ walk }) => {
   );
 
   return (
-    <Link to={{ pathname: '/selected/' + walk.walkId }} className="walk-card">
+    <Link
+      to={{ pathname: '/selected/' + walk.walkId }}
+      className="walk-card"
+      style={{ maxWidth: '520px', width: '100%' }}
+    >
       <StyledWalkCard>
         <div className="sidebar">{sidebarContent}</div>
         <div className="walk-data">

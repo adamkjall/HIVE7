@@ -36,9 +36,6 @@ const Nav = props => {
 
         conversationsData.forEach(conversation => {
           if (!conversation.lastMessage) return;
-          console.log('user', user);
-
-          console.log('conv', conversation);
 
           const isMessagedNotViewed = conversation.lastMessage.userToNotify === user.id;
           if (isMessagedNotViewed) setNewMessageNotification(true);

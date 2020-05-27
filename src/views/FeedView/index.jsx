@@ -34,6 +34,10 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
   const availableWalks = sortedWalks
     .filter(walk => !bookedWalks.includes(walk))
     .filter(walk => walk.attendingPeople.length === 0)
+    .filter(
+      walk =>
+        (walk.filterGender === 'on' && user.gender === 'female') || walk.filterGender === 'alla'
+    )
     .filter(walk => {
       const d = new Date();
       const [timeNow, dateNow] = d.toISOString().split('T');
@@ -43,9 +47,7 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
       return true;
     });
 
-  if (isLoading) {
-    return <Loader fullScreen />;
-  } else if (error) {
+  if (error) {
     return <Alert status="error"></Alert>;
   } else {
     return (
@@ -67,7 +69,13 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
         <ButtonCreate />
 
         <StyledFeedContainer>
-          {activeTab === 0 ? <Feed walks={availableWalks} /> : <Feed walks={bookedWalks} />}
+          {isLoading ? (
+            <Loader fullScreen />
+          ) : activeTab === 0 ? (
+            <Feed walks={availableWalks} showWelcome={true} />
+          ) : (
+            <Feed walks={bookedWalks} showWelcome={false} />
+          )}
         </StyledFeedContainer>
       </StyledFeedView>
     );
@@ -79,7 +87,6 @@ const FeedView = () => {
   const [error, setError] = useState(null);
   const [walks, setWalks] = useState([]);
   const { user } = useContext(AuthenticationContext);
-  //console.log('walks', walks);
 
   useEffect(() => {
     setIsLoading(true);
@@ -105,7 +112,7 @@ const FeedView = () => {
   }, []);
 
   return (
-    <Page metadata={{ title: 'Feed' }} displayNavBottom>
+    <Page metadata={{ title: 'Promenader' }} displayNavBottom>
       <FeedPageContent user={user} walks={walks} error={error} isLoading={isLoading} />
     </Page>
   );

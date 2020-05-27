@@ -30,7 +30,7 @@ export const StyledHeader = styled.div`
   img.waves {
     z-index: 3;
     position: relative;
-    top: -8px;
+    top: -10px;
     width: 100%;
   }
 `;
@@ -44,17 +44,16 @@ export const StyledChatview = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 56px;
     background: ${colors.gray5};
 
     .sendbox {
       width: 100%;
       display: grid;
-      grid-template-columns: 1fr 60px;
-      grid-template-rows: 28px;
+      grid-template-columns: 1fr 50px;
+      margin-bottom: 0.6rem;
 
       .input-mess {
-        padding: 0 0.8rem;
+        padding: 0.5rem;
         background: ${colors.gray4};
         border-radius: 999rem;
         border: none;
@@ -62,7 +61,7 @@ export const StyledChatview = styled.div`
       }
 
       button {
-        margin-left: 0.5rem;
+        /* margin-left: 0.5rem; */
         border: none;
         background: none;
         padding: 0;
@@ -89,7 +88,7 @@ export const StyledMessage = styled.div`
   }
   .chat-box {
     width: fit-content;
-    min-width: 20%;
+    min-width: 35%;
     max-width: 60%;
     background: ${({ isUserMessage }) => (isUserMessage ? colors.green : colors.gray5)};
     color: ${({ isUserMessage }) => (isUserMessage ? 'white' : 'black')};
@@ -113,13 +112,17 @@ export const StyledMessage = styled.div`
 `;
 
 export const StyledMessageList = styled.div`
-  height: calc(100vh - 65px - 56px);
+  height: calc(100vh - 69px - 64px);
   position: relative;
   overflow-y: hidden;
 
   .messages-container {
     height: inherit;
     overflow-y: scroll;
+
+    &:last-child {
+      padding-bottom: 1.8rem;
+    }
   }
 `;
 

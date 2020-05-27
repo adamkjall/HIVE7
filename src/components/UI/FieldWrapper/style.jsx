@@ -14,7 +14,7 @@ export const StyledFieldWrapper = styled.div`
     margin-bottom: 0.5em;
   }
 
-  @media screen and (min-width: ${breakpoints.tablet}) {
+  /* @media screen and (min-width: ${breakpoints.tablet}) {
     ${({ inline }) =>
       inline
         ? css`
@@ -31,5 +31,5 @@ export const StyledFieldWrapper = styled.div`
             }
           `
         : null};
-  }
+  } */
 `;

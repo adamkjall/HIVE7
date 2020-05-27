@@ -223,7 +223,7 @@ const HomeView = () => {
       metadata={{
         // Those metadata are optional: they will be injected in the head thanks to react-helmet
         description: 'Gå Mama - en app för människor som vill träffa nya vänner.',
-        title: 'Gå Mama',
+        title: 'Gå Mama!',
         lang: 'sv'
         // image: {
         //   alt: 'Some image',

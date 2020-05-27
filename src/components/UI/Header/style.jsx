@@ -7,7 +7,7 @@ import colors from 'tokens/colors.mjs';
 export const StyledHeader = styled.div`
   padding: ${spacing.tiny} ${spacing.small};
   min-height: 3rem;
-  max-width: 420px;
+  /* max-width: 420px; */
   border: 0;
   border-radius: 999rem;
   font-family: 'Londrina Solid', cursive;
@@ -30,6 +30,17 @@ export const StyledHeader = styled.div`
       position: relative;
       left: 18vw;
       width: 140px;
+      padding-top: 1rem;
+    }
+    margin: 0;
+  }
+
+  .headcontainermess {
+    background-color: ${colors.gray5};
+    display: grid;
+    height: 84px;
+    h1 {
+      text-align: center;
       padding-top: 1rem;
     }
     margin: 0;

@@ -22,18 +22,25 @@ const useNotifications = () => {
             ...data
           });
         });
-        setNotifications(fetchedNotifications);
+
+        const sortedNotifications = fetchedNotifications.sort(
+          (a, b) => a.time.toDate() - b.time.toDate()
+        );
+        setNotifications(sortedNotifications);
       });
 
     return () => unsubscribe();
   }, [user]);
 
   const removeNotification = async notificationId => {
+    const updatedNotifications = notifications.filter(
+      noti => noti.notificationId !== notificationId
+    );
+    setNotifications(updatedNotifications);
     firestore
       .collection(`users/${user.id}/notifications`)
       .doc(notificationId)
       .delete()
-      .then(() => console.log('Deleted notification:', notificationId))
       .catch(error => console.log('Error while deleting notification', error));
   };
 

@@ -40,7 +40,7 @@ export const StyledTermsConditionContent = styled.div`
   }
   .text {
     width: 100%;
-    max-width: 420px;
+    /* max-width: 420px; */
     padding: 0 1rem;
     margin: 0 auto;
   }

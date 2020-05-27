@@ -8,11 +8,15 @@ import shortWaves from '../../assets/icons/short-waves.svg';
 
 import { StyledFeed, StyledGreetingsBox } from './style';
 
-const Feed = ({ walks }) => (
+const Feed = ({ walks, showWelcome }) => (
   <StyledFeed>
     <StyledGreetingsBox>
       <H1 className="title">Välkommen till GÅ MAMA!</H1>
-      <p className="text">Här kan du se tillgängliga promenader att hänga med på.</p>
+      {showWelcome ? (
+        <p className="text">Här kan du se tillgängliga promenader att hänga med på.</p>
+      ) : (
+        <p className="text">Här kan du se dina egna promenader, och de du ska följa med på.</p>
+      )}
       <img className="waves" src={shortWaves} alt="wave" />
     </StyledGreetingsBox>
     {walks &&

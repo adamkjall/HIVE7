@@ -6,11 +6,11 @@ import fontSizes from 'tokens/fontSizes.mjs';
 import fontFamilies from 'tokens/fontFamilies.mjs';
 
 export const StyledFeedView = styled.div`
-  height: calc(100vh - 48px);
+  height: 90vh;
 `;
 
 export const StyledFeedContainer = styled.div`
-  height: calc(100% - 49px);
+  height: 80vh;
 `;
 
 export const StyledNav = styled.nav`

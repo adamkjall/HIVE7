@@ -4,6 +4,7 @@ import colors from 'tokens/colors.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
 import fontWeights from 'tokens/fontWeights.mjs';
 import spacing from 'tokens/spacing.mjs';
+import fontFamilies from 'tokens/fontFamilies.mjs';
 
 export const StyledModal = styled.div`
   position: fixed;
@@ -16,9 +17,43 @@ export const StyledModal = styled.div`
   color: ${colors.black};
   background-color: ${colors.white};
   padding: ${spacing.tiny} ${spacing.small} ${spacing.small};
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+
+  .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    animation: scaleUp 0.3s ease-out;
+    -webkit-animation: scaleUp 0.3s ease-out;
+
+    @keyframes scaleUp {
+      0% {
+        transform: scale(0.3);
+        -webkit-transform: scale(0.3);
+      }
+      100% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+      }
+    }
+  }
+
+  &.removing {
+    animation: scaleDown 0.3s ease-out;
+    -webkit-animation: scaleDown 0.3s ease-out;
+
+    @keyframes scaleDown {
+      0% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+      }
+      100% {
+        transform: scale(0.4);
+        -webkit-transform: scale(0.4);
+      }
+    }
+  }
 
   .hello-btn {
     width: 100%;
@@ -53,6 +88,9 @@ export const StyledModalContent = styled.div`
   flex-grow: 1;
 
   .content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .title {
@@ -76,17 +114,15 @@ export const StyledModalContent = styled.div`
 
 export const StyledImageContainer = styled.div`
   width: 100%;
-  display: grid;
-  justify-items: center;
+  max-width: 17rem;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  grid-template-columns: 2fr 1fr 2fr;
-  margin-top: 2.3rem;
-  margin-bottom: 1.5rem;
-  padding: 0 0.5rem;
+  margin-top: 2rem;
 
   .avatar {
-    width: 127px;
-    height: 127px;
+    width: 115px;
+    height: 115px;
   }
 
   .dot {
@@ -94,5 +130,84 @@ export const StyledImageContainer = styled.div`
     height: 0.8rem;
     background-color: ${colors.green};
     border-radius: 50%;
+  }
+`;
+
+export const StyledCancelModal = styled.div`
+  background: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0px;
+  left: 0;
+  z-index: 9999999999999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .whitebox {
+    border-radius: 4px;
+    background: white;
+    padding: 1rem 1rem 0;
+    min-height: 180px;
+    width: 80%;
+    max-width: 25rem;
+    z-index: 4;
+    font-size: ${fontSizes.s};
+    display: flex;
+    flex-direction: column;
+
+    animation: scaleUp 0.3s ease-out;
+    -webkit-animation: scaleUp 0.3s ease-out;
+
+    @keyframes scaleUp {
+      0% {
+        transform: scale(0.3);
+        -webkit-transform: scale(0.3);
+      }
+      100% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+      }
+    }
+
+    &.removing {
+      animation: scaleDown 0.3s ease-out;
+      -webkit-animation: scaleDown 0.3s ease-out;
+
+      @keyframes scaleDown {
+        0% {
+          transform: scale(1);
+          -webkit-transform: scale(1);
+        }
+        100% {
+          transform: scale(0.1);
+          -webkit-transform: scale(0.1);
+        }
+      }
+    }
+
+    .superbold {
+      font-weight: bold;
+      font-size: ${fontSizes.m};
+      margin: 0;
+    }
+
+    .warning {
+      padding: 0;
+      margin-left: auto;
+      margin-right: 9px;
+      color: ${colors.red};
+      background: none;
+      font-family: ${fontFamilies.fontRegular};
+      font-size: ${fontSizes.s};
+    }
+
+    .loader {
+      height: 100%;
+      width: 100%;
+      display: grid;
+      place-items: center;
+    }
   }
 `;

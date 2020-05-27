@@ -4,13 +4,11 @@ import colors from 'tokens/colors.mjs';
 import spacing from 'tokens/spacing.mjs';
 import fontSizes from 'tokens/fontSizes.mjs';
 
-import breakpoints from 'helpers/constants/breakpoints.mjs';
-
 export const StyledInput = styled.input`
   appearance: none;
   flex: 1;
   width: 100%;
-  padding: ${spacing.tiny};
+  padding: 0.6rem;
   box-sizing: border-box;
   font-size: ${fontSizes.s};
   line-height: 1;
@@ -20,9 +18,5 @@ export const StyledInput = styled.input`
 
   &:focus {
     outline: 0;
-  }
-
-  @media screen and (min-width: ${breakpoints.tablet}) {
-    padding: ${spacing.small};
   }
 `;

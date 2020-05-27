@@ -28,6 +28,7 @@ export const StyledcChooseChatview = styled.div`
     border: ${colors.gray4} solid 1px;
     border-radius: 10px;
     padding: 10px;
+    display: flex;
 
     img {
       padding: 0 10px 3px 0;

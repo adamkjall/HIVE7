@@ -12,7 +12,7 @@ import landingimg4 from '../../assets/images/landingpage4.jpg';
 export const StyledContainer = styled.div`
   .carousel {
     width: 100%;
-    max-width: 420px;
+    /* max-width: 420px; */
     .content {
       height: 100vh;
       width: 100%;
@@ -34,7 +34,7 @@ export const StyledContainer = styled.div`
         grid-template-rows: 4fr 4fr 0.8fr 1fr;
       }
       .blobb {
-        max-width: 420px;
+        /* max-width: 420px; */
         display: flex;
         align-items: center;
         justify-content: center;

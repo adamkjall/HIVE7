@@ -25,10 +25,11 @@ export const StyledModalHeader = styled.div`
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
+  align-items: center;
   font-size: ${fontSizes.h2};
 
   h1 {
-    margin: 0;
+    margin: 0.5rem 0;
   }
 
   .close {
@@ -69,6 +70,8 @@ export const StyledAutocompleteList = styled.ul`
 
     img {
       margin-right: ${spacing.small};
+      max-width: 30px;
+      max-height: 30px;
     }
 
     .result {

@@ -11,6 +11,19 @@ export const StyledMatchedwalk = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: ${spacing.tiny} ${spacing.small} ${spacing.small};
+  animation: animate 0.5s ease-out;
+  -webkit-animation: animate 0.5s ease-out;
+
+  @keyframes animate {
+    0% {
+      transform: scale(0.3);
+      -webkit-transform: scale(0.3);
+    }
+    100% {
+      transform: scale(1);
+      -webkit-transform: scale(1);
+    }
+  }
 
   .close-btn {
     align-self: flex-start;
@@ -20,6 +33,7 @@ export const StyledMatchedwalk = styled.div`
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+
     align-items: center;
     margin-top: 2rem;
 
@@ -39,20 +53,22 @@ export const StyledMatchedwalk = styled.div`
       background-color: ${colors.green};
       width: 12px;
       height: 12px;
-      margin: 0 1rem;
+      /* margin: 0 1rem; */
       border-radius: 999rem;
     }
 
     .matched-avatars {
+      width: 100%;
+      max-width: 17rem;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       margin-top: 2rem;
     }
 
     .avatar {
-      width: 127px;
-      height: 127px;
+      width: 115px;
+      height: 115px;
     }
   }
 

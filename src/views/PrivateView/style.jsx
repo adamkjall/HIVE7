@@ -12,10 +12,35 @@ export const StyledPrivate = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 3rem 0 1rem;
+    padding: 1.8rem 0 1rem;
+
+    .uploadfile-wrapper {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      top: 13px;
+
+      input[type='file'] {
+        display: none;
+      }
+
+      .file-upload {
+        border: none;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+
+        .swap-profile-picture {
+          color: ${colors.red};
+          text-decoration: underline;
+          font-size: 12px;
+          text-align: center;
+        }
+      }
+    }
 
     .avatar {
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       width: 5.7rem;
       height: 5.7rem;
     }
@@ -35,7 +60,8 @@ export const StyledPrivate = styled.div`
     .user {
       display: flex;
       align-items: flex-end;
-      margin: ${spacing.tiny} 10px;
+      margin: ${spacing.small} 0 ${spacing.tiny};
+      letter-spacing: 0.12rem;
     }
     .greendott {
       height: 4px;
@@ -68,7 +94,7 @@ export const StyledPrivate = styled.div`
       justify-content: space-between;
       border-bottom: 1px solid ${colors.gray3};
       .display {
-        padding: 2px 0 9px;
+        padding: 2px 0 6px;
         font-size: ${fontSizes.s};
       }
       .change {
@@ -84,7 +110,11 @@ export const StyledPrivate = styled.div`
       flex-direction: column;
       align-items: flex-start;
       justify-content: space-evenly;
-      .logut {
+      .menu-btn {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         padding: 0;
         font-size: ${fontSizes.s};
         font-family: ${fontFamilies.fontRegular};
@@ -102,13 +132,17 @@ export const StyledPrivate = styled.div`
         top: 0px;
         left: 0;
         z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         .whitebox {
           border-radius: 4px;
           background: white;
-          margin: 60% 10%;
-          padding: 1rem 1rem 0;
-          height: 150px;
+          padding: 1rem;
           width: 80%;
+          max-width: 25rem;
+          min-height: 180px;
           z-index: 4;
           font-size: ${fontSizes.s};
           .superbold {
@@ -116,13 +150,39 @@ export const StyledPrivate = styled.div`
             font-size: ${fontSizes.m};
             margin: 0;
           }
-          .warning {
-            padding: 0;
-            margin: 2px 25px;
-            color: ${colors.red};
-            background: none;
-            font-family: ${fontFamilies.fontRegular};
-            font-size: ${fontSizes.s};
+
+          .remove-acc-input {
+            padding: 8px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-radius: unset;
+          }
+
+          .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 2.5rem;
+
+            .warning {
+              padding: 0;
+              margin-left: 1rem;
+              min-height: 2rem;
+              color: ${colors.red};
+              background: none;
+              font-family: ${fontFamilies.fontRegular};
+              font-size: ${fontSizes.s};
+              font-weight: bold;
+
+              &:hover {
+                box-shadow: none;
+                transition: 0;
+              }
+
+              &.gray {
+                color: ${colors.gray2};
+              }
+            }
           }
 
           .loader {
@@ -134,5 +194,87 @@ export const StyledPrivate = styled.div`
         }
       }
     }
+  }
+
+  .cover {
+    object-fit: cover;
+  }
+
+  .round {
+    border-radius: 999rem;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+`;
+
+export const StyledProgress = styled.div`
+  width: 5.7rem;
+  height: 5.7rem;
+  /*
+  * react-circular-progressbar styles
+  * All of the styles in this file are configurable!
+  */
+
+  .CircularProgressbar {
+    /*
+    * This fixes an issue where the CircularProgressbar svg has
+    * 0 width inside a "display: flex" container, and thus not visible.
+    */
+    width: 100%;
+    /*
+    * This fixes a centering issue with CircularProgressbarWithChildren:
+    * https://github.com/kevinsqi/react-circular-progressbar/issues/94
+    */
+    vertical-align: middle;
+  }
+
+  .CircularProgressbar .CircularProgressbar-path {
+    stroke: ${colors.red};
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease 0s;
+  }
+
+  .CircularProgressbar .CircularProgressbar-trail {
+    stroke: #d6d6d6;
+    /* Used when trail is not full diameter, i.e. when props.circleRatio is set */
+    stroke-linecap: round;
+  }
+
+  .CircularProgressbar .CircularProgressbar-text {
+    fill: ${colors.red};
+    font-size: 20px;
+    dominant-baseline: middle;
+    text-anchor: middle;
+  }
+
+  .CircularProgressbar .CircularProgressbar-background {
+    fill: #d6d6d6;
+  }
+
+  /*
+  * Sample background styles. Use these with e.g.:
+  *
+  *   <CircularProgressbar
+  *     className="CircularProgressbar-inverted"
+  *     background
+  *     percentage={50}
+  *   />
+  */
+  .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-background {
+    fill: ${colors.red};
+  }
+
+  .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-text {
+    fill: #fff;
+  }
+
+  .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-path {
+    stroke: #fff;
+  }
+
+  .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-trail {
+    stroke: transparent;
   }
 `;

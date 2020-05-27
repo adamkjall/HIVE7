@@ -12,7 +12,7 @@ import H3 from 'components/UI/H3';
 import Alert from 'components/UI/Alert';
 import Paragraph from 'components/UI/Paragraph';
 import Button from 'components/UI/Button';
-import blob1 from '../../assets/icons/blob1.svg';
+import blob1 from '../../assets/images/landing-blob-1.svg';
 import blob2 from '../../assets/icons/blob2.svg';
 import blob3 from '../../assets/icons/blob3.svg';
 import blob4 from '../../assets/icons/blob4.svg';
@@ -48,11 +48,11 @@ const HomePageContent = ({ error, isLoading }) => {
               <div className="blobb">
                 <img src={blob1} alt="text" className="blobb-img" />
                 <div className="insindeblob nr1">
-                  <H1>GÅ MAMA!</H1>
+                  {/* <H1>GÅ MAMA!</H1>
                   <p>
-                    Promenera med mammor från hela världen för att upptäcka, lära och utvecklas
-                    tillsammans.
-                  </p>
+                    Träffa nya mammakompisar från hela världen för att upptäcka och lära tillsammans
+                    på promenader
+                  </p> */}
                 </div>
               </div>
               <div />
@@ -73,8 +73,8 @@ const HomePageContent = ({ error, isLoading }) => {
                 <img src={blob2} alt="text" className="blobb-img" />
                 <div className="insindeblob nr2">
                   <p>
-                    <span className="h-name">GÅ MAMA!</span>
-                    hjälper dig att upptäcka nya platser tillsammans med andra mammor på promenader
+                    Med <span className="h-name">GÅ MAMA!</span> får du ett utbyte av språk,
+                    erfarenheter och kultur genom att promenera med mammor
                   </p>
                 </div>
               </div>
@@ -96,8 +96,8 @@ const HomePageContent = ({ error, isLoading }) => {
                 <img src={blob3} alt="text" className="blobb-img" />
                 <div className="insindeblob nr3">
                   <p>
-                    Med <span className="h-name">GÅ MAMA!</span> får du ett utbyte av språk,
-                    erfarenheter och kultur genom att promenera med mammor från hela världen
+                    <span className="h-name">GÅ MAMA!</span> Inspirerar dig till upptäcka nya
+                    platser och skapa en gemenskap
                   </p>
                 </div>
               </div>
@@ -119,9 +119,9 @@ const HomePageContent = ({ error, isLoading }) => {
                 <H1>Skapa konto</H1>
                 <div>
                   <p>
-                    för att upptäcka alla möjligheter med <span className="h-name">GÅ MAMA!</span>{' '}
-                    Allt börjar med en promenad ...
+                    för att upptäcka nya möjligheter med <span className="h-name">GÅ MAMA!</span>{' '}
                   </p>
+                  <p>... allt börjar med en promenad</p>
                 </div>
               </div>
               <div className="buttons">

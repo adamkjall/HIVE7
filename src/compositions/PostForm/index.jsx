@@ -88,10 +88,10 @@ const PostForm = () => {
         time: '',
         where: '',
         timeduration: '',
-        allowFriends: '',
-        allowPets: '',
-        bringPets: '',
-        filterGender: '',
+        allowFriends: false,
+        allowPets: false,
+        bringPets: false,
+        filterGender: false,
         introtext: ''
       });
 

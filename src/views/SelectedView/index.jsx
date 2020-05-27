@@ -106,15 +106,15 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
         <div className="walk-data2">
           <img src={friends} alt="bringfriend" />
           <span>Kan vänner följa med?</span>
-          <span className="post">{walk.allowFriends == 'on' ? 'Ja' : 'Nej'} </span>
+          <span className="post">{walk.allowFriends ? 'Ja' : 'Nej'} </span>
 
           <img src={bringPetsvg} alt="bring dog" />
           <span>Finns det husdjur?</span>
-          <span className="user">{walk.bringPets == 'on' ? 'Ja' : 'Nej'} </span>
+          <span className="user">{walk.bringPets ? 'Ja' : 'Nej'} </span>
 
           <img src={pets} alt="bring pet" />
           <span>Kan husdjur följa med?</span>
-          <span className="post">{walk.allowPets == 'on' ? 'Ja' : 'Nej'} </span>
+          <span className="post">{walk.allowPets ? 'Ja' : 'Nej'} </span>
         </div>
         <div className="buttons">
           {/*  a conditional render that show cancel walk if your the poster, also need confirmation

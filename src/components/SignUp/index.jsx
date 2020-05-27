@@ -400,6 +400,7 @@ const SignUp = ({ setIsSignedUp }) => {
             <Checkbox
               id="terms"
               clickHandler={() => setTerms(!terms)}
+              isChecked={terms}
               labelrigth={
                 <span>
                   Jag godkänner{' '}

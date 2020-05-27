@@ -111,7 +111,7 @@ WalkCard.propTypes = {
     bringPets: PropTypes.boolean,
     createdAt: PropTypes.instanceOf(Date),
     date: PropTypes.string,
-    filterGender: PropTypes.string,
+    filterGender: PropTypes.boolean,
     introtext: PropTypes.string,
     walkId: PropTypes.string,
     timeduration: PropTypes.string,

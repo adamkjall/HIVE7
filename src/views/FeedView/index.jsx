@@ -34,10 +34,7 @@ const FeedPageContent = ({ error, isLoading, walks, user }) => {
   const availableWalks = sortedWalks
     .filter(walk => !bookedWalks.includes(walk))
     .filter(walk => walk.attendingPeople.length === 0)
-    .filter(
-      walk =>
-        (walk.filterGender === 'on' && user.gender === 'female') || walk.filterGender === 'alla'
-    )
+    .filter(walk => (walk.filterGender && user.gender === 'female') || !walk.filterGender)
     .filter(walk => {
       const d = new Date();
       const [timeNow, dateNow] = d.toISOString().split('T');
@@ -122,12 +119,12 @@ FeedView.propTypes = {
   isLoading: PropTypes.bool,
   walks: PropTypes.arrayOf(
     PropTypes.shape({
-      allowChildren: PropTypes.string,
-      allowPets: PropTypes.string,
-      bringPets: PropTypes.string,
+      allowChildren: PropTypes.boolean,
+      allowPets: PropTypes.boolean,
+      bringPets: PropTypes.boolean,
       createdAt: PropTypes.instanceOf(Date),
       date: PropTypes.string,
-      filterGender: PropTypes.string,
+      filterGender: PropTypes.boolean,
       introText: PropTypes.string,
       walkId: PropTypes.string,
       time: PropTypes.string,

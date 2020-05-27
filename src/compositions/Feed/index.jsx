@@ -34,7 +34,7 @@ Feed.propTypes = {
       bringPets: PropTypes.boolean,
       createdAt: PropTypes.instanceOf(Date),
       date: PropTypes.string,
-      filterGender: PropTypes.string,
+      filterGender: PropTypes.boolean,
       introText: PropTypes.string,
       walkId: PropTypes.string,
       timeduration: PropTypes.string,

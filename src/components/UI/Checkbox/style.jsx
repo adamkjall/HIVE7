@@ -30,15 +30,31 @@ export const StyledCheckBox = styled.div`
     border: 2px ${colors.gray2} solid;
     border-radius: 3px;
     z-index: 2;
+
+    &.checked {
+      background-color: ${colors.red};
+      background-image: url(${bock});
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      border: 2px ${colors.red} solid;
+      padding: 2px;
+      border-radius: 3px;
+    }
+
   }
 
+
+
   .checkbox {
-    height: 23px;
+    position: absolute;
+    left: -9999px; 
+    /* height: 23px;
     width: 23px;
     content: '';
     appearance: none !important;
     outline: none !important;
-    z-index: 0;
+    z-index: -1;
 
     &:before {
       content: '';
@@ -46,7 +62,7 @@ export const StyledCheckBox = styled.div`
       height: 23px;
       outline: none !important;
       appearance: none !important;
-      z-index: 0;
+      z-index: -1;
     }
 
     &:checked {
@@ -66,7 +82,7 @@ export const StyledCheckBox = styled.div`
       appearance: none !important;
       outline: none !important;
       border-radius: 3px;
-      z-index: 3;
-    }
+      z-index: -1;
+    } */
   }
 `;

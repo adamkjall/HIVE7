@@ -41,10 +41,10 @@ const PostForm = () => {
     time: format(new Date(), 'HH:mm'),
     where: '',
     timeduration: '',
-    allowFriends: 'false',
-    allowPets: 'false',
-    bringPets: 'false',
-    filterGender: 'alla',
+    allowFriends: false,
+    allowPets: false,
+    bringPets: false,
+    filterGender: false,
     introtext: ''
   });
   const onValueChange = (name, value) => {
@@ -53,6 +53,8 @@ const PostForm = () => {
       [name]: value
     }));
   };
+
+  console.log('inputs', inputs);
 
   const onSubmit = event => {
     event.preventDefault();
@@ -240,25 +242,29 @@ const PostForm = () => {
               icon={friends}
               id="allowFriends"
               label="Kan vänner följa med?"
-              clickHandler={event => onValueChange('allowFriends', event.target.value)}
+              isChecked={inputs.allowFriends}
+              clickHandler={() => onValueChange('allowFriends', !inputs.allowFriends)}
             />
             <CheckBox
               icon={bringPetsvg}
               id="allowPets"
               label="Får andra ta med hund?"
-              clickHandler={event => onValueChange('allowPets', event.target.value)}
+              isChecked={inputs.allowPets}
+              clickHandler={() => onValueChange('allowPets', !inputs.allowPets)}
             />
             <CheckBox
               icon={pets}
               id="bringPets"
               label="Kommer du ta med hund?"
-              clickHandler={event => onValueChange('bringPets', event.target.value)}
+              isChecked={inputs.bringPets}
+              clickHandler={() => onValueChange('bringPets', !inputs.bringPets)}
             />
             <CheckBox
               icon={gendericon}
               id="filterGender"
               label="Bara kvinnor?"
-              clickHandler={event => onValueChange('filterGender', event.target.value)}
+              isChecked={inputs.filterGender}
+              clickHandler={() => onValueChange('filterGender', !inputs.filterGender)}
             />
           </div>
           <div className="form-box3">

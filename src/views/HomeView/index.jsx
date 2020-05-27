@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import ReactSwipe from 'react-swipe';
 
-import { firestore, signInWithGoogle } from '../../firebase/firebase.utils';
+import { firestore } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 
 import Page from 'compositions/Page';
@@ -10,9 +10,8 @@ import Loader from 'compositions/Loader';
 import H1 from 'components/UI/H1';
 import H3 from 'components/UI/H3';
 import Alert from 'components/UI/Alert';
-import Paragraph from 'components/UI/Paragraph';
 import Button from 'components/UI/Button';
-import blob1 from '../../assets/images/landing-blob-1.svg';
+import blob1 from '../../assets/icons/blob1.svg';
 import blob2 from '../../assets/icons/blob2.svg';
 import blob3 from '../../assets/icons/blob3.svg';
 import blob4 from '../../assets/icons/blob4.svg';
@@ -48,11 +47,11 @@ const HomePageContent = ({ error, isLoading }) => {
               <div className="blobb">
                 <img src={blob1} alt="text" className="blobb-img" />
                 <div className="insindeblob nr1">
-                  {/* <H1>GÅ MAMA!</H1>
+                  <H1>GÅ MAMA!</H1>
                   <p>
-                    Träffa nya mammakompisar från hela världen för att upptäcka och lära tillsammans
-                    på promenader
-                  </p> */}
+                    Promenera med mammor från hela världen för att upptäcka, lära och utvecklas
+                    tillsammans.
+                  </p>
                 </div>
               </div>
               <div />
@@ -73,8 +72,8 @@ const HomePageContent = ({ error, isLoading }) => {
                 <img src={blob2} alt="text" className="blobb-img" />
                 <div className="insindeblob nr2">
                   <p>
-                    Med <span className="h-name">GÅ MAMA!</span> får du ett utbyte av språk,
-                    erfarenheter och kultur genom att promenera med mammor
+                    <span className="h-name">GÅ MAMA!</span>
+                    hjälper dig att upptäcka nya platser tillsammans med andra mammor på promenader
                   </p>
                 </div>
               </div>
@@ -96,8 +95,8 @@ const HomePageContent = ({ error, isLoading }) => {
                 <img src={blob3} alt="text" className="blobb-img" />
                 <div className="insindeblob nr3">
                   <p>
-                    <span className="h-name">GÅ MAMA!</span> Inspirerar dig till upptäcka nya
-                    platser och skapa en gemenskap
+                    Med <span className="h-name">GÅ MAMA!</span> får du ett utbyte av språk,
+                    erfarenheter och kultur genom att promenera med mammor från hela världen
                   </p>
                 </div>
               </div>
@@ -119,9 +118,9 @@ const HomePageContent = ({ error, isLoading }) => {
                 <H1>Skapa konto</H1>
                 <div>
                   <p>
-                    för att upptäcka nya möjligheter med <span className="h-name">GÅ MAMA!</span>{' '}
+                    för att upptäcka alla möjligheter med <span className="h-name">GÅ MAMA!</span>{' '}
+                    Allt börjar med en promenad ...
                   </p>
-                  <p>... allt börjar med en promenad</p>
                 </div>
               </div>
               <div className="buttons">
@@ -223,7 +222,7 @@ const HomeView = () => {
       metadata={{
         // Those metadata are optional: they will be injected in the head thanks to react-helmet
         description: 'Gå Mama - en app för människor som vill träffa nya vänner.',
-        title: 'Gå Mama!',
+        title: 'Gå Mama',
         lang: 'sv'
         // image: {
         //   alt: 'Some image',

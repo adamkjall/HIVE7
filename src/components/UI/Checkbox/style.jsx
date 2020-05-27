@@ -39,6 +39,7 @@ export const StyledCheckBox = styled.div`
     appearance: none !important;
     outline: none !important;
     z-index: 0;
+
     &:before {
       content: '';
       width: 23px;
@@ -62,6 +63,7 @@ export const StyledCheckBox = styled.div`
       top: -2px;
       left: -2px;
       padding: 2px;
+      appearance: none !important;
       outline: none !important;
       border-radius: 3px;
       z-index: 3;

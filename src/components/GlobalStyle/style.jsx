@@ -95,9 +95,14 @@ export const StyledGlobalStyle = createGlobalStyle`
         border-radius: 999rem;
         height: 20px;
         width: 20px;
+        appearance: none;
       }
       &:checked::before {
         background: ${colors.red};
+      }
+      &:checked {
+        appearance: none;
+
       }
 
     }

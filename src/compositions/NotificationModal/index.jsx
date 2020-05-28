@@ -26,7 +26,6 @@ const NotificationModal = ({ notification, removeNotification }) => {
   const { user } = useContext(AuthenticationContext);
   const [userData, setUserData] = useState(null);
   const [walk, setWalk] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [isRemoving, setIsRemoving] = useState(false);
 
   useEffect(() => {
@@ -37,19 +36,26 @@ const NotificationModal = ({ notification, removeNotification }) => {
   useEffect(() => {
     if (!notification) return;
     setIsRemoving(false);
-    const hasError = false;
 
     getUserData(notification.userId)
-      .then(data => setUserData(data))
-      .then(() => setLoading(false))
+      .then(data => {
+        if (!data) {
+          removeNotification(notification.notificationId);
+          return;
+        }
+        setUserData(data);
+      })
       .catch(err => {
-        hasError = true;
+        removeNotification(notification.notificationId);
       });
 
     getWalk(notification.walkId)
-      .then(data => setWalk(data))
-      .then(() => {
-        if (hasError) removeNotification(notification.notificationId);
+      .then(data => {
+        if (!data) {
+          removeNotification(notification.notificationId);
+          return;
+        }
+        setWalk(data);
       })
       .catch(err => {
         removeNotification(notification.notificationId);
@@ -68,7 +74,7 @@ const NotificationModal = ({ notification, removeNotification }) => {
     return (
       <StyledCancelModal>
         <div className={`whitebox ${isRemoving ? 'removing' : ''}`}>
-          {loading ? (
+          {!userData || !walk ? (
             <Loader
               className="loader"
               type="Oval"
@@ -97,13 +103,15 @@ const NotificationModal = ({ notification, removeNotification }) => {
           <img className="close" src={cross} alt="close window" />
         </StyledModalHeader>
         {!userData || !walk || !user ? (
-          <Loader
-            className="loader"
-            type="Oval"
-            color="rgba(242, 112, 99, 1)"
-            height={80}
-            width={80}
-          />
+          <div className="loader-container">
+            <Loader
+              className="loader"
+              type="Oval"
+              color="rgba(242, 112, 99, 1)"
+              height={80}
+              width={80}
+            />
+          </div>
         ) : (
           <>
             <StyledModalContent>

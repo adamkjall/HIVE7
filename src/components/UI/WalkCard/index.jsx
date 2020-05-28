@@ -63,7 +63,7 @@ const WalkCard = ({ walk }) => {
         />
       </div>
       <span className="title">
-        {user === walk.user ? (
+        {user.id === walk.user.id ? (
           <>
             {' '}
             Du & <br /> {userToWalkWith && userToWalkWith.displayName.split(' ')[0]}

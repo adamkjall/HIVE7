@@ -132,9 +132,10 @@ const HomePageContent = ({ error, isLoading }) => {
                 <H1>Skapa konto</H1>
                 <div>
                   <p>
-                    för att upptäcka alla möjligheter med <span className="h-name">GÅ MAMA!</span>{' '}
-                    <p className="italic">... allt börjar med en promenad </p>
+                    för att upptäcka alla möjligheter med <br />
+                    GÅ MAMA!
                   </p>
+                  <em>... allt börjar med en promenad </em>
                 </div>
               </div>
               <div className="buttons">
@@ -174,62 +175,13 @@ const HomePageContent = ({ error, isLoading }) => {
 const HomeView = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [walks, setWalks] = useState([]);
 
-  const { user, isAuthenticated } = useContext(AuthenticationContext);
+  const { isAuthenticated } = useContext(AuthenticationContext);
   const history = useHistory();
 
-  // checkk if user logged in for the first time with google sign in
-  // and redirect user to a new page to add additional data
   useEffect(() => {
     if (isAuthenticated) history.push('/feed');
   }, [isAuthenticated, history]);
-
-  useEffect(() => {
-    // const fetchPosts = async () => {
-    //   setIsLoading(true);
-
-    //   const result = await getAllPosts();
-    //   console.log(result);
-
-    //   setPosts(result);
-    //   setIsLoading(false);
-    // };
-
-    const unsubscribe = firestore.collection('walks').onSnapshot(querySnapshot => {
-      const newWalks = [];
-      querySnapshot.forEach(doc => {
-        if (!doc.exists) return;
-
-        const data = doc.data();
-        newWalks.push({
-          ...data,
-          createdAt: data.createdAt.toDate()
-        });
-      });
-      setWalks([...newWalks]);
-    });
-
-    // fetchPosts();
-    // const handleLoadingStatus = (data, error, isLoading) => {
-    //   setData(data);
-    //   setError(error);
-    //   setIsLoading(isLoading);
-    // };
-
-    // setIsLoading(true);
-    // try {
-    //   const data = fetchContent({ foo: 'bar' });
-
-    //   handleLoadingStatus(data, null, false);
-    // } catch (error) {
-    //   /* eslint-disable-next-line no-console */
-    //   console.error('Unable to load data', error.message);
-    //   handleLoadingStatus(undefined, 'Unable to load content', false);
-    // }
-
-    return () => unsubscribe();
-  }, []);
 
   return (
     <Page
@@ -247,7 +199,7 @@ const HomeView = () => {
         // }
       }}
     >
-      <HomePageContent error={error} isLoading={isLoading} walks={walks} />
+      <HomePageContent error={error} isLoading={isLoading} />
     </Page>
   );
 };

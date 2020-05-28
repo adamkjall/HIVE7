@@ -114,13 +114,19 @@ export const StyledContainer = styled.div`
           color: ${colors.white};
           h1 {
             font-size: 2.5rem;
+            margin: 0;
           }
           p {
             max-width: 300px;
+            font-size: 14px;
+            margin: 0;
+            margin-bottom: 0.8rem;
+            font-weight: 400;
           }
-          .italic {
-            font-style: italic;
+          em {
+            display: block;
             font-size: ${fontSizes.l};
+            letter-spacing: 2px;
           }
         }
       }
@@ -128,7 +134,8 @@ export const StyledContainer = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
+        padding-top: 1.5rem;
         a {
           width: 100%;
           display: flex;

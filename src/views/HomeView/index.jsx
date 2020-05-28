@@ -44,6 +44,10 @@ const HomePageContent = ({ error, isLoading }) => {
             childCount={count}
           >
             <div className="content page1">
+              <p className="jump" onClick={() => reactSwipeEl.slide(3, 300)}>
+                Hoppa över
+              </p>
+
               <div className="blobb">
                 <div className="blob-container">
                   <img src={blob1} alt="text" className="blobb-img" />
@@ -71,12 +75,15 @@ const HomePageContent = ({ error, isLoading }) => {
               </div>
             </div>
             <div className="content page2">
+              <p className="jump" onClick={() => reactSwipeEl.slide(3, 300)}>
+                Hoppa över
+              </p>
               <div className="blobb">
-                <img src={blob2} alt="text" className="blobb-img" />
+                <img src={blob2} alt="text" className="blobb-img-2" />
                 <div className="insindeblob nr2">
                   <p>
-                    <span className="h-name">GÅ MAMA!</span>
-                    hjälper dig att upptäcka nya platser tillsammans med andra mammor på promenader
+                    Med <span className="h-name">GÅ MAMA!</span> får du ett utbyte av språk,
+                    erfarenheter och kultur genom att promenera med mammor{' '}
                   </p>
                 </div>
               </div>
@@ -94,12 +101,16 @@ const HomePageContent = ({ error, isLoading }) => {
               </div>
             </div>
             <div className="content page3">
+              {' '}
+              <p className="jump" onClick={() => reactSwipeEl.slide(3, 300)}>
+                Hoppa över
+              </p>
               <div className="blobb">
-                <img src={blob3} alt="text" className="blobb-img" />
+                <img src={blob3} alt="text" className="blobb-img-2" />
                 <div className="insindeblob nr3">
                   <p>
-                    Med <span className="h-name">GÅ MAMA!</span> får du ett utbyte av språk,
-                    erfarenheter och kultur genom att promenera med mammor från hela världen
+                    <span className="h-name">GÅ MAMA!</span> Inspirerar dig till att upptäcka nya
+                    platser och skapa en gemenskap{' '}
                   </p>
                 </div>
               </div>
@@ -122,7 +133,7 @@ const HomePageContent = ({ error, isLoading }) => {
                 <div>
                   <p>
                     för att upptäcka alla möjligheter med <span className="h-name">GÅ MAMA!</span>{' '}
-                    Allt börjar med en promenad ...
+                    <p className="italic">... allt börjar med en promenad </p>
                   </p>
                 </div>
               </div>

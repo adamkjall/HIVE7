@@ -18,7 +18,7 @@ export const StyledContainer = styled.div`
       width: 100%;
       display: grid;
       background-size: cover;
-      grid-template-rows: 6fr 2fr 0.8fr 1fr;
+      grid-template-rows: 0.8fr 6fr 2fr 0.8fr 1fr;
 
       &.page1 {
         background-image: url(${landingimg1});
@@ -33,11 +33,22 @@ export const StyledContainer = styled.div`
         background-image: url(${landingimg4});
         grid-template-rows: 4fr 4fr 0.8fr 1fr;
       }
+      .jump {
+        text-align: right;
+        color: white;
+        text-decoration: underline;
+        padding-right: 10px;
+        font-size: ${fontSizes.s};
+        font-weight: bold;
+      }
       .blobb {
-        /* max-width: 420px; */
         display: flex;
         align-items: center;
         justify-content: center;
+        .blobb-img-2 {
+          width: 85%;
+          max-width: 300px;
+        }
 
         .blob-container {
           position: relative;
@@ -86,12 +97,14 @@ export const StyledContainer = styled.div`
             }
           }
           &.nr2 {
-            color: ${colors.green};
-            top: 22%;
-            left: -20px;
+            top: 28%;
           }
           &.nr3 {
-            top: 20%;
+            p {
+              color: ${colors.green};
+            }
+            left: -5%;
+            top: 28%;
           }
         }
         &.nr4 {
@@ -99,8 +112,15 @@ export const StyledContainer = styled.div`
           text-align: center;
           justify-content: flex-end;
           color: ${colors.white};
+          h1 {
+            font-size: 2.5rem;
+          }
           p {
-            max-width: 240px;
+            max-width: 300px;
+          }
+          .italic {
+            font-style: italic;
+            font-size: ${fontSizes.l};
           }
         }
       }

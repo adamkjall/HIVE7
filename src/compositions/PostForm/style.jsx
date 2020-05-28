@@ -32,6 +32,16 @@ export const StyledPostForm = styled.div`
     justify-content: center;
     margin-left: ${spacing.medium};
 
+    label {
+      display: flex;
+      align-items: center;
+      margin: 0.3rem 0;
+
+      &:first-of-type {
+        margin-top: 1rem;
+      }
+    }
+
     .radio-button {
       display: inline-block;
       height: 20px;
@@ -39,6 +49,7 @@ export const StyledPostForm = styled.div`
       border-radius: 999rem;
       background: white;
       border: ${colors.red} solid 1px;
+      margin-right: 0.5rem;
 
       &::before {
         content: ' ';
@@ -77,7 +88,7 @@ export const StyledPostForm = styled.div`
       .form-box1-div {
         display: grid;
         grid-template-columns: 50px 1fr;
-        margin: ${spacing.tiny} 0;
+        margin: 0.3rem 0;
 
         img {
           justify-self: center;

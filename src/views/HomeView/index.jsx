@@ -11,10 +11,10 @@ import H1 from 'components/UI/H1';
 import H3 from 'components/UI/H3';
 import Alert from 'components/UI/Alert';
 import Button from 'components/UI/Button';
-import blob1 from '../../assets/icons/blob1.svg';
+import blob1 from '../../assets/icons/blub-dark-green.svg';
 import blob2 from '../../assets/icons/blob2.svg';
-import blob3 from '../../assets/icons/blob3.svg';
-import blob4 from '../../assets/icons/blob4.svg';
+import blob3 from '../../assets/icons/blub-green.svg';
+import blobLines from '../../assets/icons/blob-lines.svg';
 
 import { StyledContainer } from './style';
 
@@ -45,13 +45,16 @@ const HomePageContent = ({ error, isLoading }) => {
           >
             <div className="content page1">
               <div className="blobb">
-                <img src={blob1} alt="text" className="blobb-img" />
-                <div className="insindeblob nr1">
-                  <H1>GÅ MAMA!</H1>
-                  <p>
-                    Promenera med mammor från hela världen för att upptäcka, lära och utvecklas
-                    tillsammans.
-                  </p>
+                <div className="blob-container">
+                  <img src={blob1} alt="text" className="blobb-img" />
+                  <div className="insindeblob nr1">
+                    <H1>GÅ MAMA!</H1>
+                    <img className="blob-lines" src={blobLines} alt="" />
+                    <p>
+                      Träffa nya mammakompisar från hela världen för att upptäcka och lära
+                      tillsammans på promenader
+                    </p>
+                  </div>
                 </div>
               </div>
               <div />

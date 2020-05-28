@@ -38,18 +38,30 @@ export const StyledContainer = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
+
+        .blob-container {
+          position: relative;
+        }
+
         .insindeblob {
           display: flex;
           align-items: center;
           flex-direction: column;
           justify-content: center;
           color: ${colors.white};
-          position: fixed;
-          top: 18%;
+          position: absolute;
+          top: 32%;
+          left: -2%;
           width: 100%;
+
           h1 {
             margin: 0;
-            font-size: 3.125rem;
+            font-size: 42px;
+            line-height: 3.6rem;
+          }
+
+          .blob-lines {
+            margin-bottom: 0.5rem;
           }
           h2 {
             margin: 0;
@@ -61,15 +73,16 @@ export const StyledContainer = styled.div`
           }
           p {
             margin: 0;
-            font-size: 0.94rem;
-            max-width: 190px;
+            font-weight: 300;
+            font-size: 11px;
+            width: 170px;
+            color: ${colors.white};
             text-align: center;
           }
           &.nr1 {
             color: ${colors.greenLight};
             p {
               position: relative;
-              top: -10px;
             }
           }
           &.nr2 {

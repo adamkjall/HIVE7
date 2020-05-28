@@ -292,24 +292,36 @@ const SignUp = ({ setIsSignedUp }) => {
               <div className="swedish">
                 <p className="bold">Hur är din svenskanivå? *</p>
                 <label htmlFor="newSwede">
-                  <input
-                    type="radio"
-                    id="newSwede"
-                    name="swedelvl"
-                    value="Jag vill lära mig mer svenska"
-                    onChange={event => onValueChange('lvlOfSwedish', event.target.value)}
-                  />
+                  <span
+                    className={`radio-button ${
+                      inputs.lvlOfSwedish === 'Jag vill lära mig mer svenska' ? 'checked' : ''
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      id="newSwede"
+                      name="swedelvl"
+                      value="Jag vill lära mig mer svenska"
+                      onChange={event => onValueChange('lvlOfSwedish', event.target.value)}
+                    />
+                  </span>
                   Jag vill lära mig mer svenska
                 </label>
                 <br />
                 <label htmlFor="establish">
-                  <input
-                    type="radio"
-                    id="establish"
-                    name="swedelvl"
-                    value="Jag pratar flytande svenska"
-                    onChange={event => onValueChange('lvlOfSwedish', event.target.value)}
-                  />
+                  <span
+                    className={`radio-button ${
+                      inputs.lvlOfSwedish === 'Jag pratar flytande svenska' ? 'checked' : ''
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      id="establish"
+                      name="swedelvl"
+                      value="Jag pratar flytande svenska"
+                      onChange={event => onValueChange('lvlOfSwedish', event.target.value)}
+                    />
+                  </span>
                   Jag pratar flytande svenska
                 </label>
               </div>
@@ -323,35 +335,41 @@ const SignUp = ({ setIsSignedUp }) => {
               <div className="gender">
                 <p className="bold">Kön? *</p>
                 <label htmlFor="female">
-                  <input
-                    type="radio"
-                    id="female"
-                    name="gender"
-                    value="female"
-                    onChange={event => onValueChange('gender', event.target.value)}
-                  />
+                  <span className={`radio-button ${inputs.gender === 'female' ? 'checked' : ''}`}>
+                    <input
+                      type="radio"
+                      id="female"
+                      name="gender"
+                      value="female"
+                      onChange={event => onValueChange('gender', event.target.value)}
+                    />
+                  </span>
                   Kvinna
                 </label>
                 <br />
                 <label htmlFor="male">
-                  <input
-                    type="radio"
-                    id="male"
-                    name="gender"
-                    value="male"
-                    onChange={event => onValueChange('gender', event.target.value)}
-                  />
+                  <span className={`radio-button ${inputs.gender === 'male' ? 'checked' : ''}`}>
+                    <input
+                      type="radio"
+                      id="male"
+                      name="gender"
+                      value="male"
+                      onChange={event => onValueChange('gender', event.target.value)}
+                    />
+                  </span>
                   Man
                 </label>
                 <br />
                 <label htmlFor="other">
-                  <input
-                    type="radio"
-                    id="other"
-                    name="gender"
-                    value="other"
-                    onChange={event => onValueChange('gender', event.target.value)}
-                  />
+                  <span className={`radio-button ${inputs.gender === 'other' ? 'checked' : ''}`}>
+                    <input
+                      type="radio"
+                      id="other"
+                      name="gender"
+                      value="other"
+                      onChange={event => onValueChange('gender', event.target.value)}
+                    />
+                  </span>
                   Vill inte ange
                 </label>
               </div>

@@ -32,10 +32,36 @@ export const StyledPostForm = styled.div`
     justify-content: center;
     margin-left: ${spacing.medium};
 
-    span {
-      position: relative;
-      top: -5px;
-      padding: 10px;
+    .radio-button {
+      display: inline-block;
+      height: 20px;
+      width: 20px;
+      border-radius: 999rem;
+      background: white;
+      border: ${colors.red} solid 1px;
+
+      &::before {
+        content: ' ';
+      }
+
+      &::after {
+        content: ' ';
+      }
+
+      &.checked {
+        background: ${colors.red};
+      }
+
+      input[type='radio'] {
+        position: absolute;
+        left: -9999px;
+      }
+
+      .radio-label {
+        position: relative;
+        top: -5px;
+        padding: 10px;
+      }
     }
   }
 

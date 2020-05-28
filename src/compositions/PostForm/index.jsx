@@ -54,8 +54,6 @@ const PostForm = () => {
     }));
   };
 
-  console.log('inputs', inputs);
-
   const onSubmit = event => {
     event.preventDefault();
     if (inputs.time.length < 1) {
@@ -204,34 +202,52 @@ const PostForm = () => {
             {toogleDuration ? (
               <div className="timeduration">
                 <label htmlFor="30min">
-                  <input
-                    type="radio"
-                    id="30min"
-                    name="timeduration"
-                    value="Ungefär 30 minuter"
-                    onChange={event => onValueChange('timeduration', event.target.value)}
-                  />
-                  <span> Ungefär 30 minuter</span>
+                  <span
+                    className={`radio-button ${
+                      inputs.timeduration === 'Ungefär 30 minuter' ? 'checked' : ''
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      id="30min"
+                      name="timeduration"
+                      value="Ungefär 30 minuter"
+                      onChange={event => onValueChange('timeduration', event.target.value)}
+                    />
+                  </span>
+                  <span className="radio-label"> Ungefär 30 minuter</span>
                 </label>
                 <label htmlFor="Ungefär 1 timme">
-                  <input
-                    type="radio"
-                    id="Ungefär 1 timme"
-                    name="timeduration"
-                    value="Ungefär 1 timme"
-                    onChange={event => onValueChange('timeduration', event.target.value)}
-                  />
-                  <span> Ungefär 1 timme</span>
+                  <span
+                    className={`radio-button ${
+                      inputs.timeduration === 'Ungefär 1 timme' ? 'checked' : ''
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      id="Ungefär 1 timme"
+                      name="timeduration"
+                      value="Ungefär 1 timme"
+                      onChange={event => onValueChange('timeduration', event.target.value)}
+                    />
+                  </span>
+                  <span className="radio-label"> Ungefär 1 timme</span>
                 </label>
-                <label htmlFor="cirka 2 timme">
-                  <input
-                    type="radio"
-                    id="Ungefär 2 timme"
-                    name="timeduration"
-                    value="Ungefär 2 timme"
-                    onChange={event => onValueChange('timeduration', event.target.value)}
-                  />
-                  <span> Ungefär 2 timme</span>
+                <label htmlFor="Ungefär 2 timme">
+                  <span
+                    className={`radio-button ${
+                      inputs.timeduration === 'Ungefär 2 timmar' ? 'checked' : ''
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      id="Ungefär 2 timme"
+                      name="timeduration"
+                      value="Ungefär 2 timmar"
+                      onChange={event => onValueChange('timeduration', event.target.value)}
+                    />
+                  </span>
+                  <span className="radio-label"> Ungefär 2 timmar</span>
                 </label>
               </div>
             ) : null}

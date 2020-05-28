@@ -4,9 +4,11 @@ import { useHistory } from 'react-router-dom';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import Loader from 'react-loader-spinner';
 import imageCompression from 'browser-image-compression';
-import calculateAge from '../../helpers/functions/calculateAge';
 
+import { storage, updateUserProfileDocument } from '../../firebase/firebase.utils';
 import { AuthenticationContext } from 'contexts/AuthenticationContext';
+
+import calculateAge from '../../helpers/functions/calculateAge';
 
 import Page from 'compositions/Page';
 import H3 from 'components/UI/H3';
@@ -58,6 +60,24 @@ const PrivateView = () => {
       const compressedFile = await imageCompression(imageFile, options);
       setFileLoading({ isLoading: false, percent: 0 });
       setFile(compressedFile);
+
+      const uploadTask = storage.ref(`profile-pictures/${user.id}`).put(compressedFile); // set unique path
+
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          //progress
+          // const percent = Math.ceil((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+            updateUserProfileDocument(user.uid, { photoUrl: downloadURL });
+          });
+        }
+      );
     } catch (error) {
       console.log(error);
     }

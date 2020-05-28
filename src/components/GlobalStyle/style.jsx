@@ -78,7 +78,7 @@ export const StyledGlobalStyle = createGlobalStyle`
     object-fit: cover;
   }
 
-  input[type='radio'] {
+  /* input[type='radio'] {
       position: relative;
       height: 20px;
       width: 20px;
@@ -105,7 +105,7 @@ export const StyledGlobalStyle = createGlobalStyle`
 
       }
 
-    }
+    } */
 
     .reddott {
       width: 15px;

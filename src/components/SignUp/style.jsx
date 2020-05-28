@@ -45,11 +45,25 @@ export const StyledSignUpContainer = styled.div`
 
   label {
     font-size: ${fontSizes.s};
+    display: inline-block;
+    margin: 0.3rem 0;
   }
 
-  .swedish {
+  .radio-button {
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    border-radius: 999rem;
+    background: white;
+    border: ${colors.red} solid 1px;
+    margin-right: .8rem;
+
+    &.checked {
+      background: ${colors.red};
+    }
+
     input[type='radio'] {
-      margin: 0 0.5rem 0.5rem 0rem;
+      opacity: 0;
     }
   }
 
@@ -57,10 +71,7 @@ export const StyledSignUpContainer = styled.div`
     font-size: ${fontSizes.s};
   }
 
-  .gender {
-    input[type='radio'] {
-      margin: 0 0.5rem 0rem;
-    }
+
   }
   .profilebox-1 {
     .changepic {

@@ -75,6 +75,7 @@ const PrivateView = () => {
         () => {
           uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
             updateUserProfileDocument(user.uid, { photoUrl: downloadURL });
+            user.photoUrl = downloadURL;
           });
         }
       );

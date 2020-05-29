@@ -109,11 +109,11 @@ const SelectedPageContent = ({ error, isLoading, walk }) => {
           <span className="post">{walk.allowFriends ? 'Ja' : 'Nej'} </span>
 
           <img src={bringPetsvg} alt="bring dog" />
-          <span>Finns det husdjur?</span>
+          <span>{`Har ${walk.user.displayName.split(' ')[0]} med sig hund?`}</span>
           <span className="user">{walk.bringPets ? 'Ja' : 'Nej'} </span>
 
           <img src={pets} alt="bring pet" />
-          <span>Kan husdjur följa med?</span>
+          <span>Kan hundar följa med?</span>
           <span className="post">{walk.allowPets ? 'Ja' : 'Nej'} </span>
         </div>
         <div className="buttons">
